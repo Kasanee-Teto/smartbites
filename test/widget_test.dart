@@ -1,6 +1,8 @@
 import 'package:budget_bites/app.dart';
+import 'package:budget_bites/widgets/app_bar.dart';
 import 'package:budget_bites/widgets/app_logo.dart';
 import 'package:budget_bites/widgets/section_title.dart';
+import 'package:budget_bites/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -19,6 +21,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(TempStep1bPreviewPage), findsOneWidget);
+    expect(find.byType(SmartBitesAppBar), findsOneWidget);
+    expect(find.byType(StatusBadge), findsAtLeastNWidgets(4));
     expect(find.byType(AppLogo), findsAtLeastNWidgets(1));
     expect(find.byType(SectionTitle), findsAtLeastNWidgets(1));
     expect(find.byType(Card), findsAtLeastNWidgets(2));

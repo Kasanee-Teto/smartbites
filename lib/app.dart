@@ -4,9 +4,10 @@ import 'package:budget_bites/theme/app_theme.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
-import 'package:budget_bites/widgets/app_logo.dart';
+import 'package:budget_bites/widgets/app_bar.dart';
 import 'package:budget_bites/widgets/responsive_layout.dart';
 import 'package:budget_bites/widgets/section_title.dart';
+import 'package:budget_bites/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 
 class SmartBitesApp extends StatefulWidget {
@@ -82,12 +83,14 @@ class _TempStep1bPreviewPageState extends State<TempStep1bPreviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SmartBites Theme Preview (390px)'),
-        leading: const Padding(
-          padding: EdgeInsets.all(AppConstants.spaceSm),
-          child: AppLogo(size: 32),
-        ),
+      appBar: SmartBitesAppBar(
+        subtitle: 'Theme Preview (390px)',
+        streakDays: 7,
+        onNotificationTap: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Notifikasi dibuka!')),
+          );
+        },
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _navIndex,
@@ -217,35 +220,15 @@ class _TempStep1bPreviewPageState extends State<TempStep1bPreviewPage> {
                     spacing: AppConstants.spaceSm,
                     runSpacing: AppConstants.spaceXs,
                     children: [
-                      Chip(
-                        backgroundColor: theme.colorScheme.surfaceContainerLow,
-                        label: Text(
-                          'Hemat',
-                          style: TextStyle(color: theme.colorScheme.primary),
-                        ),
+                      StatusBadge.hemat(),
+                      const StatusBadge(
+                        label: '7 Hari Streak 🔥',
+                        icon: Icons.local_fire_department,
+                        type: StatusBadgeType.warning,
                       ),
-                      Chip(
-                        backgroundColor: theme.colorScheme.secondaryContainer.withAlpha(50),
-                        label: Text(
-                          '7 Hari Streak 🔥',
-                          style: TextStyle(color: theme.colorScheme.secondary),
-                        ),
-                      ),
-                      Chip(
-                        backgroundColor: theme.colorScheme.errorContainer,
-                        avatar: Icon(
-                          Icons.warning_amber_rounded,
-                          size: 16.0,
-                          color: theme.colorScheme.onErrorContainer,
-                        ),
-                        label: Text(
-                          'Alergen Kacang',
-                          style: TextStyle(
-                            color: theme.colorScheme.onErrorContainer,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                      StatusBadge.pas(),
+                      StatusBadge.melebihi(),
+                      StatusBadge.alergen(name: 'Alergen Kacang'),
                     ],
                   ),
                 ],
