@@ -47,9 +47,9 @@ class _SmartBitesAppState extends State<SmartBitesApp> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,
-      // TEMP: Temporary debug page for Step 1 foundation validation.
-      // Akan diganti dengan WelcomeScreen/MainNavigation pada Step 2.
-      home: TempStep1DebugPage(
+      // TEMP: Temporary preview page (Step 1b) for comparing with HTML at 390 px.
+      // Dihapus pada Step 2 saat rute WelcomeScreen dan MainNavigation dipasang.
+      home: TempStep1bPreviewPage(
         themeMode: _themeMode,
         onThemeModeChanged: _handleThemeModeChanged,
       ),
@@ -58,45 +58,91 @@ class _SmartBitesAppState extends State<SmartBitesApp> {
 }
 
 // ============================================================================
-// TEMP: Step 1 Debug Page (Dihapus pada Step 2)
-// Menampilkan validasi 3 window sizes, 2 themes, AppLogo, dan SectionTitle.
+// TEMP: Step 1b Theme & Component Preview Page (Dihapus pada Step 2)
+// Menampilkan Card, Chip, FilledButton, NavigationBar, Slider, dan SnackBar pada 390px.
 // ============================================================================
-class TempStep1DebugPage extends StatelessWidget {
+class TempStep1bPreviewPage extends StatefulWidget {
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
 
-  const TempStep1DebugPage({
+  const TempStep1bPreviewPage({
     super.key,
     required this.themeMode,
     required this.onThemeModeChanged,
   });
 
   @override
+  State<TempStep1bPreviewPage> createState() => _TempStep1bPreviewPageState();
+}
+
+class _TempStep1bPreviewPageState extends State<TempStep1bPreviewPage> {
+  double _sliderValue = 78.0; // 78% matching HTML budget progress bar
+  int _navIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SmartBites Foundation'),
+        title: const Text('SmartBites Theme Preview (390px)'),
         leading: const Padding(
           padding: EdgeInsets.all(AppConstants.spaceSm),
           child: AppLogo(size: 32),
         ),
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: AppConstants.maxContentWidth,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _navIndex,
+        onDestinationSelected: (index) => setState(() => _navIndex = index),
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: 'Beranda',
           ),
-          child: ResponsiveLayout(
-            compact: (context) => _buildContent(context, WindowSize.compact),
-            medium: (context) => _buildContent(context, WindowSize.medium),
-            expanded: (context) => _buildContent(context, WindowSize.expanded),
+          NavigationDestination(
+            icon: Icon(Icons.restaurant_menu_outlined),
+            selectedIcon: Icon(Icons.restaurant_menu),
+            label: 'Menu',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.shopping_bag_outlined),
+            selectedIcon: Icon(Icons.shopping_bag),
+            label: 'Belanja',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.water_drop_outlined),
+            selectedIcon: Icon(Icons.water_drop),
+            label: 'Air & Waste',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.person_outline),
+            selectedIcon: Icon(Icons.person),
+            label: 'Profil',
+          ),
+        ],
+      ),
+      body: ResponsiveLayout(
+        compact: (context) => _buildPreviewContent(context, WindowSize.compact),
+        medium: (context) => Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: AppConstants.mobileTargetWidth, // 390px preview target
+            ),
+            child: _buildPreviewContent(context, WindowSize.medium),
+          ),
+        ),
+        expanded: (context) => Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: AppConstants.mobileTargetWidth, // 390px preview target
+            ),
+            child: _buildPreviewContent(context, WindowSize.expanded),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, WindowSize windowSize) {
+  Widget _buildPreviewContent(BuildContext context, WindowSize windowSize) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
@@ -105,34 +151,11 @@ class TempStep1DebugPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // 1. Theme Switcher Section
           SectionTitle(
-            title: 'Window Size Status',
+            title: 'Mode Tema M3',
             trailing: Chip(
               label: Text(windowSize.name.toUpperCase()),
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(AppConstants.spaceMd),
-              child: Text(
-                'Layout aktif: ${windowSize.name} (${windowSize == WindowSize.compact ? "<600dp" : windowSize == WindowSize.medium ? "600-839dp" : ">=840dp"})',
-                style: theme.textTheme.bodyMedium,
-              ),
-            ),
-          ),
-          const SizedBox(height: AppConstants.spaceMd),
-          SectionTitle(
-            title: 'Pengaturan Tema (M3)',
-            trailing: IconButton(
-              tooltip: 'Tampilkan info SnackBar',
-              icon: const Icon(Icons.info_outline),
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Tema Material 3 aktif dan responsif!'),
-                  ),
-                );
-              },
             ),
           ),
           Card(
@@ -153,46 +176,133 @@ class TempStep1DebugPage extends StatelessWidget {
                       ),
                       const SizedBox(width: AppConstants.spaceSm),
                       Text(
-                        'Mode: ${isDark ? "Gelap" : "Terang"}',
+                        isDark ? 'Mode Gelap' : 'Mode Terang',
                         style: theme.textTheme.bodyMedium,
                       ),
                     ],
                   ),
                   FilledButton(
                     onPressed: () {
-                      onThemeModeChanged(
+                      widget.onThemeModeChanged(
                         isDark ? ThemeMode.light : ThemeMode.dark,
                       );
                     },
-                    child: Text(isDark ? 'Ganti ke Terang' : 'Ganti ke Gelap'),
+                    child: Text(isDark ? 'Beralih ke Terang' : 'Beralih ke Gelap'),
                   ),
                 ],
               ),
             ),
           ),
           const SizedBox(height: AppConstants.spaceMd),
-          const SectionTitle(title: 'Komponen & Formatter'),
+
+          // 2. Plain Card & Chips
+          const SectionTitle(title: 'Komponen Card & Chip'),
           Card(
             child: Padding(
               padding: const EdgeInsets.all(AppConstants.spaceMd),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Text(
+                    'Budget Makan Minggu Ini',
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: AppConstants.spaceXs),
+                  Text(
+                    'Sisa budget: ${formatRupiah(65000)} dari ${formatRupiah(300000)}',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: AppConstants.spaceSm),
+                  Wrap(
+                    spacing: AppConstants.spaceSm,
+                    runSpacing: AppConstants.spaceXs,
                     children: [
-                      AppLogo(size: 40),
-                      SizedBox(width: AppConstants.spaceMd),
-                      Expanded(
-                        child: Text('AppLogo dengan fallback icon Icons.eco'),
+                      Chip(
+                        backgroundColor: theme.colorScheme.surfaceContainerLow,
+                        label: Text(
+                          'Hemat',
+                          style: TextStyle(color: theme.colorScheme.primary),
+                        ),
+                      ),
+                      Chip(
+                        backgroundColor: theme.colorScheme.secondaryContainer.withAlpha(50),
+                        label: Text(
+                          '7 Hari Streak 🔥',
+                          style: TextStyle(color: theme.colorScheme.secondary),
+                        ),
+                      ),
+                      Chip(
+                        backgroundColor: theme.colorScheme.errorContainer,
+                        avatar: Icon(
+                          Icons.warning_amber_rounded,
+                          size: 16.0,
+                          color: theme.colorScheme.onErrorContainer,
+                        ),
+                        label: Text(
+                          'Alergen Kacang',
+                          style: TextStyle(
+                            color: theme.colorScheme.onErrorContainer,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppConstants.spaceSm),
-                  Text('Uji formatRupiah: ${formatRupiah(25000)} | Negatif: ${formatRupiah(-15000)}'),
-                  Text('Uji dateOnly: ${dateOnly(DateTime.now())}'),
                 ],
               ),
             ),
+          ),
+          const SizedBox(height: AppConstants.spaceMd),
+
+          // 3. Slider (8px Gauge)
+          SectionTitle(
+            title: 'Slider Gauge (${_sliderValue.round()}%)',
+            trailing: Text(
+              '${_sliderValue.round()}%',
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: theme.colorScheme.primary,
+              ),
+            ),
+          ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(AppConstants.spaceMd),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Penggunaan Anggaran Mingguan',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: AppConstants.spaceSm),
+                  Slider(
+                    value: _sliderValue,
+                    min: 0.0,
+                    max: 100.0,
+                    onChanged: (val) => setState(() => _sliderValue = val),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: AppConstants.spaceMd),
+
+          // 4. SnackBar Test Action
+          const SectionTitle(title: 'Floating SnackBar'),
+          FilledButton.tonal(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text('Catatan berhasil diperbarui!'),
+                  action: SnackBarAction(
+                    label: 'Batalkan',
+                    onPressed: () {},
+                  ),
+                ),
+              );
+            },
+            child: const Text('Tampilkan SnackBar (Floating)'),
           ),
         ],
       ),
