@@ -7,11 +7,27 @@ class DailyLog {
   final bool wasteLogged;
   final bool noWasteMarked;
 
-  const DailyLog({
-    required this.date,
+  DailyLog({
+    required DateTime date,
     required this.waterMl,
     required this.mealsEaten,
     required this.wasteLogged,
     required this.noWasteMarked,
-  });
+  }) : date = DateTime(date.year, date.month, date.day);
+
+  DailyLog copyWith({
+    DateTime? date,
+    int? waterMl,
+    List<String>? mealsEaten,
+    bool? wasteLogged,
+    bool? noWasteMarked,
+  }) {
+    return DailyLog(
+      date: date ?? this.date,
+      waterMl: waterMl ?? this.waterMl,
+      mealsEaten: mealsEaten ?? List<String>.from(this.mealsEaten),
+      wasteLogged: wasteLogged ?? this.wasteLogged,
+      noWasteMarked: noWasteMarked ?? this.noWasteMarked,
+    );
+  }
 }
