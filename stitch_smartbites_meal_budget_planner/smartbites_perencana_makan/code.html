@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary-container": "#fc820c", "outline-variant": "#bfcaba", "on-background": "#171d17", "on-primary-fixed": "#002204", "surface-dim": "#d6dcd2", "on-secondary-container": "#5e2c00", "primary-container": "#2e7d32", "surface-container-lowest": "#ffffff", "inverse-primary": "#88d982", "secondary-fixed-dim": "#ffb786", "primary-fixed": "#a3f69c", "secondary": "#964900", "surface-bright": "#f5fbf1", "error": "#ba1a1a", "inverse-surface": "#2c322b", "surface-variant": "#dee4da", "on-primary-container": "#cbffc2", "surface-container-highest": "#dee4da", "on-error": "#ffffff", "tertiary-fixed-dim": "#96ccff", "on-secondary-fixed": "#311300", "secondary-fixed": "#ffdcc6", "outline": "#707a6c", "on-secondary-fixed-variant": "#723600", "surface-container": "#e9f0e5", "surface": "#f5fbf1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "surface-container-low": "#eff6eb", "on-tertiary-container": "#e9f2ff", "on-primary": "#ffffff", "on-primary-fixed-variant": "#005312", "surface-tint": "#1b6d24", "on-tertiary": "#ffffff", "on-surface-variant": "#40493d", "surface-container-high": "#e4eae0", "primary": "#0d631b", "on-tertiary-fixed": "#001d32", "inverse-on-surface": "#ecf3e8", "tertiary": "#005a8c", "tertiary-container": "#0073b2", "primary-fixed-dim": "#88d982", "on-tertiary-fixed-variant": "#004a75", "tertiary-fixed": "#cee5ff", "error-container": "#ffdad6", "background": "#f5fbf1", "on-surface": "#171d17" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1rem", "gutter": "1rem", "space-sm": "0.5rem", "margin": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-xs": "0.25rem" }, fontFamily: { "title-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "numeric-currency": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "numeric-stat": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"] }, fontSize: { "title-lg": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "numeric-currency": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "numeric-stat": ["18px", { "lineHeight": "24px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f5fbf1;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="SmartBites Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_xEY_4COTQLNKdaiU10w2-xwXmgNNSFIWk2q5RjKbazMiE_XySsJEDyvqFN6iLln06mgVq_4tk80E8WBeL39aJUTuzKqI5GNrkkP9gZILEudBKh6bwd2hhExm41mT4-myPLKEWrwYGT4qyaJ4W3ZhRhkaS9Zq7WoAgWY3XUk0dlf0nmX88o6I6CDGfhDaYceKoH6sj8cJ6hTGx41qGsLckYC-COsmV376luTGdxSIs9QCk3Dkibvs"/><div class="flex flex-col"><div class="flex items-center gap-1.5"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">SmartBites</span><span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">SDG 3 &amp; 12.3</span></div><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Menu</span></div></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1 px-2 py-1 rounded-full bg-secondary-fixed/50 text-secondary"><span class="material-symbols-outlined text-title-md">local_fire_department</span><span class="font-label-md text-label-md text-on-secondary-fixed">7</span></div><button aria-label="Notifikasi" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined">notifications</span></button><div class="relative flex items-center justify-center w-11 h-11"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbGRje60ra31FJDqB7CfJwnQzyStR_sGfOSkWgr-eF6wgDa1vl0mpHwvjhPjDrjArEwVZL7bi4ESWQi6QmARbL8RG0x6WI0BmBRxvJNu73UUcWYjRP3wiPBBnJI-eynPxrjG96QWZ6WoxEb38_qD_Sn8T_0DBA-m8pL-ikWbt0Gwm76ib3wHZw-k9fMwGBdFp_rVWK1rB0iytcS2e7IV5IBt-wSQ7Ac517-Q6ZHtZdx1KzpnBezwq"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface min-h-screen"><div class="flex flex-col w-full pb-6">
+<!-- Day Selector Bar (Horizontal Scrollable ChoiceChips) -->
+<div class="w-full overflow-x-auto no-scrollbar px-margin pt-2 pb-3">
+<div class="flex items-center gap-space-xs min-w-max" id="day-selector-group">
+<!-- Senin: Active ChoiceChip -->
+<button class="day-chip active flex flex-col items-center justify-center px-4 py-2 rounded-full bg-primary text-on-primary shadow-sm transition-all transform active:scale-95" data-day="senin" type="button">
+<span class="font-label-sm text-label-sm opacity-90">Hari 1</span>
+<span class="font-title-md text-title-md font-bold">Senin</span>
+</button>
+<!-- Selasa -->
+<button class="day-chip flex flex-col items-center justify-center px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" data-day="selasa" type="button">
+<span class="font-label-sm text-label-sm opacity-70">Hari 2</span>
+<span class="font-title-md text-title-md">Selasa</span>
+</button>
+<!-- Rabu -->
+<button class="day-chip flex flex-col items-center justify-center px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" data-day="rabu" type="button">
+<span class="font-label-sm text-label-sm opacity-70">Hari 3</span>
+<span class="font-title-md text-title-md">Rabu</span>
+</button>
+<!-- Kamis -->
+<button class="day-chip flex flex-col items-center justify-center px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" data-day="kamis" type="button">
+<span class="font-label-sm text-label-sm opacity-70">Hari 4</span>
+<span class="font-title-md text-title-md">Kamis</span>
+</button>
+<!-- Jumat -->
+<button class="day-chip flex flex-col items-center justify-center px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" data-day="jumat" type="button">
+<span class="font-label-sm text-label-sm opacity-70">Hari 5</span>
+<span class="font-title-md text-title-md">Jumat</span>
+</button>
+<!-- Sabtu -->
+<button class="day-chip flex flex-col items-center justify-center px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" data-day="sabtu" type="button">
+<span class="font-label-sm text-label-sm opacity-70">Hari 6</span>
+<span class="font-title-md text-title-md">Sabtu</span>
+</button>
+<!-- Minggu -->
+<button class="day-chip flex flex-col items-center justify-center px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" data-day="minggu" type="button">
+<span class="font-label-sm text-label-sm opacity-70">Hari 7</span>
+<span class="font-title-md text-title-md">Minggu</span>
+</button>
+</div>
+</div>
+<!-- Weekly Budget Mini-Card (FR-13, FR-04) -->
+<div class="px-margin mb-3">
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2.5">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">account_balance_wallet</span>
+            Total Rencana Mingguan
+          </span>
+<span class="font-numeric-currency text-numeric-currency text-on-surface mt-0.5 tracking-tight">Rp 235.000</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="font-label-sm text-label-sm font-bold">Hemat (Di Bawah Target)</span>
+</div>
+</div>
+<!-- Linear Visual Gauge / Progress Bar -->
+<div class="w-full flex flex-col gap-1.5">
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 78.3%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Terpakai 78%</span>
+<span>Budget Maks: <strong class="text-on-surface font-semibold">Rp 300.000</strong></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter Chips Row (FR-08) -->
+<div class="w-full overflow-x-auto no-scrollbar px-margin mb-4">
+<div class="flex items-center gap-space-xs min-w-max" id="category-filter-group">
+<button class="filter-pill active px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-colors" type="button">
+        Semua
+      </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md transition-colors" type="button">
+        Sarapan
+      </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md transition-colors" type="button">
+        Siang
+      </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md transition-colors" type="button">
+        Malam
+      </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md transition-colors" type="button">
+        Hemat
+      </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-variant font-label-md text-label-md transition-colors" type="button">
+        Tinggi Protein
+      </button>
+</div>
+</div>
+<!-- Day Subhead & Daily Calories Tracker -->
+<div class="px-margin flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<h2 class="font-title-lg text-title-lg text-on-surface font-bold">Menu Hari Senin</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">3 Waktu Makan</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">local_fire_department</span>
+<span class="font-bold text-on-surface">1.000</span>
+<span>/ 1.800 kkal</span>
+</div>
+</div>
+<!-- 3 Meal Slots Container (FR-09, FR-10, FR-12) -->
+<div class="px-margin flex flex-col gap-3" id="meal-slots-container">
+<!-- SLOT 1: SARAPAN -->
+<div class="relative rounded-xl bg-surface-container-lowest p-3.5 shadow-sm transition-all duration-300" id="meal-card-breakfast">
+<!-- Slot Label Header -->
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-secondary">wb_sunny</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold">Sarapan • 07:30</span>
+</div>
+<div class="flex items-center gap-1">
+<!-- Ganti/Swap button -->
+<button aria-label="Ganti Menu Sarapan" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" onclick="openBottomSheet('Sarapan')" type="button">
+<span class="material-symbols-outlined text-[18px]">sync_alt</span>
+</button>
+<!-- Delete button -->
+<button aria-label="Hapus Menu Sarapan" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error transition-colors active:scale-90" onclick="deleteMeal('breakfast')" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<img class="w-[72px] h-[72px] rounded-lg object-cover flex-shrink-0" data-alt="A warm, appetizing ceramic bowl of creamy banana cinnamon oatmeal topped with sliced fresh banana rounds, toasted chia seeds, and dusted with fragrant ground cinnamon on a soft sage surface with natural morning studio light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8tt3BH7M3dugNsdwakVoiHcOCv-vue1z-JagzHTHFT-MQvzD02dJWpNkCYwfdMyx6qbe_d0XmYHT9E_vgb-ArVN2MlJVLkvsZDCMS1E81Xpsd53qpjEb-e6KsQACwz6Zj1F_qnZL6o55DaObZhzxMnQN5AuUp1-v_e7Q_bFBztbniu0fsz6zuK-JmpecY6np2Vd9SZlZOZSr6pRM_1C0UFDl80k2-xd2WVqPWS1HJ43Xh54eGAAw_"/>
+<div class="flex flex-col flex-1 min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate leading-snug">Oatmeal Pisang Kayu Manis</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-title-md text-title-md text-primary font-bold">Rp 8.000</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">310 kkal</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">timer</span>8 mnt
+            </span>
+</div>
+<!-- Bottom micro-actions (Sudah Dimakan FR-32) -->
+<div class="flex items-center gap-2 mt-2">
+<label class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm cursor-pointer select-none">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" onchange="toggleMealEaten(this, 'breakfast')" type="checkbox"/>
+<span>Sudah dimakan</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- SLOT 2: SIANG (With prominent Allergy Indicator FR-12) -->
+<div class="relative rounded-xl bg-surface-container-lowest p-3.5 shadow-sm transition-all duration-300" id="meal-card-lunch">
+<!-- Slot Label Header -->
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-secondary">wb_twilight</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold">Makan Siang • 12:30</span>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Ganti Menu Siang" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" onclick="openBottomSheet('Makan Siang')" type="button">
+<span class="material-symbols-outlined text-[18px]">sync_alt</span>
+</button>
+<button aria-label="Hapus Menu Siang" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error transition-colors active:scale-90" onclick="deleteMeal('lunch')" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<img class="w-[72px] h-[72px] rounded-lg object-cover flex-shrink-0 mt-0.5" data-alt="Traditional Indonesian Gado-Gado salad with crisp blanched water spinach, bean sprouts, boiled egg slices, cubes of firm fried tofu, and emping crackers drizzled generously with thick savory peanut dressing on an earthen plate with tropical natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJZBSOI-p1whSdXZA6BeCyyPcupN252IkIdpx0GQs0DKxznAVzWDm9DW8-xXSUqbScW_yJcc1QzDolV_6zH15X2eoVu8hwGYMO2KA6_gvkHsKzkCa7r4irjisoaOcMhBEPtGc8o8x2vHchQULtID53SN8auufT3mJeKTumKwHIJjhmxQZC1zMIxvBlv_v9oGJIIEANsH5gIT31W36ZHz8-QNm_l3RqwPZqxo7xBpXjzqU2ud5_3Ytd"/>
+<div class="flex flex-col flex-1 min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate leading-snug">Gado-Gado Komplit</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-title-md text-title-md text-primary font-bold">Rp 15.000</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">380 kkal</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">timer</span>20 mnt
+            </span>
+</div>
+<!-- Allergy Warning Callout (FR-12 based on user allergy profile) -->
+<div class="mt-2.5 px-2.5 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-error">warning</span>
+<span class="font-label-sm text-label-sm font-bold">⚠️ Mengandung Kacang (Alergi Rani)</span>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<label class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm cursor-pointer select-none">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" onchange="toggleMealEaten(this, 'lunch')" type="checkbox"/>
+<span>Sudah dimakan</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- SLOT 3: MALAM -->
+<div class="relative rounded-xl bg-surface-container-lowest p-3.5 shadow-sm transition-all duration-300" id="meal-card-dinner">
+<!-- Slot Label Header -->
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary">bedtime</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-tertiary font-bold">Makan Malam • 19:00</span>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Ganti Menu Malam" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" onclick="openBottomSheet('Makan Malam')" type="button">
+<span class="material-symbols-outlined text-[18px]">sync_alt</span>
+</button>
+<button aria-label="Hapus Menu Malam" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error transition-colors active:scale-90" onclick="deleteMeal('dinner')" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<img class="w-[72px] h-[72px] rounded-lg object-cover flex-shrink-0" data-alt="A comforting bowl of Indonesian Sayur Lodeh coconut milk soup filled with tender chayote squash slices, fried tofu cubes, long beans, and melinjo leaves with subtle chili oil droplets in a rustic ceramic tableware setting with soft evening tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAttnWQqXo8kki7bQwm5thSqYy0T0_zBv-u5iHbE2238mnoSfOwNS5tlKz48P51fjUYhTHp2Et8YeASVQT6_fwaBsgOj_LS7gnDERn7aZ5LZzt-ADonYY7OxNC0RytddTUSoV10BJx7yave2k-GzjjMRu_NY53BBLKybWdHj2S7l6oBzlINsYdoXzzWBR2ffyDUd0CDpfHhUHd_Yijt97d-NIfnCQtqWgQ4C3ciyfabKFgXs1IiXnX7"/>
+<div class="flex flex-col flex-1 min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate leading-snug">Sayur Lodeh Labu Tahu</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-title-md text-title-md text-primary font-bold">Rp 11.000</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">310 kkal</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">timer</span>20 mnt
+            </span>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<label class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm cursor-pointer select-none">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" onchange="toggleMealEaten(this, 'dinner')" type="checkbox"/>
+<span>Sudah dimakan</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline / Action Bar: Tambah Menu Baru Button (FR-10) -->
+<div class="px-margin mt-4">
+<button class="w-full h-12 rounded-full bg-surface-container-high text-primary hover:bg-surface-variant flex items-center justify-center gap-2 font-label-lg text-label-lg font-bold transition-all active:scale-98" onclick="openBottomSheet('Menu Tambahan')" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>Tambah Menu ke Hari Ini</span>
+</button>
+</div>
+<!-- Bottom Sheet Overlay / Modal (FR-10 Recipe Selection with Indonesian Local Cheap Dishes) -->
+<div class="fixed inset-0 bg-on-surface/40 z-50 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none" id="recipe-bottom-sheet-scrim" onclick="closeBottomSheet()"></div>
+<div class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest rounded-t-3xl shadow-[0_-8px_24px_-4px_rgba(18,24,18,0.18)] max-h-[751px] flex flex-col transform translate-y-full transition-transform duration-300 ease-out" id="recipe-bottom-sheet">
+<!-- Sheet Drag Pill -->
+<div class="w-full flex items-center justify-center pt-3 pb-2 cursor-pointer" onclick="closeBottomSheet()">
+<div class="w-10 h-1 rounded-full bg-surface-variant"></div>
+</div>
+<!-- Sheet Header -->
+<div class="px-margin pb-3 flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Pilih Resep Sehat &amp; Hemat</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" id="sheet-target-slot">Katalog Resep Ramah Kantong Kos</p>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface" onclick="closeBottomSheet()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Search in Sheet -->
+<div class="px-margin mb-3">
+<div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">search</span>
+<input class="bg-transparent text-on-surface font-body-md text-body-md focus:outline-none w-full placeholder:text-outline" placeholder="Cari resep telur, tempe, tahu..." type="text"/>
+</div>
+</div>
+<!-- Sheet Scrollable List of Indonesian Recipes -->
+<div class="px-margin flex flex-col gap-2.5 overflow-y-auto pb-8">
+<!-- Recipe Option 1: Tempe Orek -->
+<div class="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center justify-between gap-3 cursor-pointer" onclick="selectRecipe('Tempe Orek Basah', 'Rp 7.000', '220 kkal', '15 mnt', 'https://placeholder.svg')">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-14 h-14 rounded-lg object-cover flex-shrink-0" data-alt="Glazed sweet and savory Indonesian Tempe Orek diced small with sweet soy sauce, red chilies, galangal, and kaffir lime leaves served in a neat bowl with crisp clean lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9jEpvcOJqyNcx_vRgCS3t2iWIGAjbojJ3CYUQpCiBKJnK0tEKrkOuxRz10Ynapb9EsZrZxJhZY-pkheqmTJXTIfkYPZVj2EQacjW1FgxeVsZypd4fd0g8E1CC4Pw132ASkQUHOjwQQALaATt7TGDyq92YlXk-FTd44Eh69eGH3tIRySVy5xfUea0q1wphlllW1pIWdsVULjYYx6TmQQytvenlzs-MZh_WcZWRluld2vL-DbWFIlpe"/>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface font-semibold truncate">Tempe Orek Basah</span>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-primary font-bold">Rp 7.000</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">220 kkal</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">15 mnt</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="px-1.5 py-0.2 rounded bg-primary-fixed text-on-primary-fixed font-label-sm text-[10px]">Tinggi Protein</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-[10px]">Bebas Alergen</span>
+</div>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-sm active:scale-90 transition-transform" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Recipe Option 2: Sup Ayam Jagung -->
+<div class="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center justify-between gap-3 cursor-pointer" onclick="selectRecipe('Sup Ayam Jagung Segar', 'Rp 18.000', '290 kkal', '25 mnt', 'https://placeholder.svg')">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-14 h-14 rounded-lg object-cover flex-shrink-0" data-alt="Steaming bowl of clear Indonesian chicken soup with sweet corn kernels, diced carrots, celery leaves, and shredded chicken breast in a bright domestic kitchen background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeqdupqGC6w52HTc-fSxKpJJJwS_nuoF0hqPhAXCRoS66mVyPMB87CmWGeup1kkqG0OpN3S9a5vIn1M0RS7woArCTfpJcIlWCpKnWdxEMBDzdlVQl-8VJSzmsG127tdgvIx8t1mTZ_NlN5jy-IcwIS4mLEba4IJouTIPOM-8dUeWVkPoKuQVyLqP6hr88t9b5pznmOC5kr8IMokvCU_L7-EY1HTi-dShriOiWZAZC5Y6OptxSbjgsh"/>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface font-semibold truncate">Sup Ayam Jagung Segar</span>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-primary font-bold">Rp 18.000</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">290 kkal</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">25 mnt</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-[10px]">Pilihan Hangat</span>
+</div>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-sm active:scale-90 transition-transform" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Recipe Option 3: Pecel Sayur Madiun (Contains Nut Allergen) -->
+<div class="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center justify-between gap-3 cursor-pointer" onclick="selectRecipe('Pecel Sayur Madiun', 'Rp 14.000', '340 kkal', '15 mnt', 'https://placeholder.svg')">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-14 h-14 rounded-lg object-cover flex-shrink-0" data-alt="Traditional East Javanese Pecel Sayur with steamed cassava leaves, papaya flowers, long beans, and bean sprouts topped with fragrant aromatic peanut sauce with kaffir lime leaf." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9LOElXxLyvspYGt6re13njErE1aH8UrEmq_0HPL4t9jRCYWOd70DDxBM9m8isRG29_heTNRzdCGSbuVliIxaN_Ku_tQ3HMi8anCded_DP8-WuKLQiQ1hQWhfVK_ZINeyl65K3uWMooq2HTvM6VGq95i97pbw0lz0aye8DjaKeuUgoubXEQ26Jx4QuhLhoGkFxai3JzM66JI3-rYiWuT6t7MRelzChkInhn7vTsZ_U1AC1lOkXtPn3"/>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface font-semibold truncate">Pecel Sayur Madiun</span>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-primary font-bold">Rp 14.000</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">340 kkal</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">15 mnt</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-[10px] flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px] text-error">warning</span>
+<span>Mengandung Kacang</span>
+</span>
+</div>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-sm active:scale-90 transition-transform" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Undo SnackBar Notification (FR-35) -->
+<div class="fixed bottom-24 left-margin right-margin z-50 bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-xl shadow-lg flex items-center justify-between transition-all duration-300 opacity-0 pointer-events-none translate-y-4" id="undo-snackbar">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary-fixed">info</span>
+<span class="font-body-sm text-body-sm" id="snackbar-message">Menu berhasil dihapus.</span>
+</div>
+<button class="font-label-lg text-label-lg text-primary-fixed hover:text-inverse-primary font-bold uppercase tracking-wider ml-3" onclick="undoLastAction()" type="button">
+      Batal (Undo)
+    </button>
+</div>
+</div>
+<script>
+  // State for last deleted card for Undo capability (FR-35)
+  let lastDeletedMeal = null;
+  let undoTimeout = null;
+
+  // Day Selector Chip Switching
+  document.querySelectorAll('#day-selector-group .day-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#day-selector-group .day-chip').forEach(c => {
+        c.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm', 'active');
+        c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+      });
+      chip.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+      chip.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'active');
+      
+      const dayName = chip.querySelector('span:last-child').textContent;
+      const subhead = document.querySelector('h2');
+      if (subhead) subhead.textContent = `Menu Hari ${dayName}`;
+    });
+  });
+
+  // Filter Pills Selection
+  document.querySelectorAll('#category-filter-group .filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('#category-filter-group .filter-pill').forEach(p => {
+        p.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm', 'active');
+        p.classList.add('bg-surface-container', 'text-on-surface-variant');
+      });
+      pill.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      pill.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'active');
+    });
+  });
+
+  // Bottom Sheet Controls (FR-10)
+  function openBottomSheet(slotName) {
+    const sheet = document.getElementById('recipe-bottom-sheet');
+    const scrim = document.getElementById('recipe-bottom-sheet-scrim');
+    const slotSub = document.getElementById('sheet-target-slot');
+    if (slotSub && slotName) slotSub.textContent = `Pilih resep pengganti untuk: ${slotName}`;
+
+    scrim.classList.remove('opacity-0', 'pointer-events-none');
+    scrim.classList.add('opacity-100');
+    sheet.classList.remove('translate-y-full');
+    sheet.classList.add('translate-y-0');
+  }
+
+  function closeBottomSheet() {
+    const sheet = document.getElementById('recipe-bottom-sheet');
+    const scrim = document.getElementById('recipe-bottom-sheet-scrim');
+
+    scrim.classList.add('opacity-0', 'pointer-events-none');
+    scrim.classList.remove('opacity-100');
+    sheet.classList.add('translate-y-full');
+    sheet.classList.remove('translate-y-0');
+  }
+
+  function selectRecipe(title, price, calories, cookTime, imgSrc) {
+    closeBottomSheet();
+    showSnackbar(`Resep "${title}" berhasil ditambahkan ke jadwal.`);
+  }
+
+  // Delete Meal Slot with Undo Toast (FR-35)
+  function deleteMeal(slotId) {
+    const card = document.getElementById(`meal-card-${slotId}`);
+    if (!card) return;
+
+    lastDeletedMeal = {
+      slotId: slotId,
+      element: card,
+      parent: card.parentNode,
+      nextSibling: card.nextSibling
+    };
+
+    // Animate out
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      card.classList.add('hidden');
+    }, 250);
+
+    showSnackbar(`Menu telah dihapus.`);
+  }
+
+  function undoLastAction() {
+    if (lastDeletedMeal) {
+      const card = lastDeletedMeal.element;
+      card.classList.remove('hidden');
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'scale(1)';
+      }, 50);
+      lastDeletedMeal = null;
+      hideSnackbar();
+    }
+  }
+
+  function showSnackbar(msg) {
+    const bar = document.getElementById('undo-snackbar');
+    const msgEl = document.getElementById('snackbar-message');
+    if (msgEl) msgEl.textContent = msg;
+
+    bar.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+    bar.classList.add('opacity-100', 'translate-y-0');
+
+    if (undoTimeout) clearTimeout(undoTimeout);
+    undoTimeout = setTimeout(() => {
+      hideSnackbar();
+    }, 4500);
+  }
+
+  function hideSnackbar() {
+    const bar = document.getElementById('undo-snackbar');
+    bar.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+    bar.classList.remove('opacity-100', 'translate-y-0');
+  }
+
+  // Already Eaten Checkbox behavior (FR-32)
+  function toggleMealEaten(checkbox, slotId) {
+    const card = document.getElementById(`meal-card-${slotId}`);
+    if (!card) return;
+    if (checkbox.checked) {
+      card.classList.add('opacity-60');
+      showSnackbar("Menu ditandai sudah dimakan. Kalori harian diperbarui!");
+    } else {
+      card.classList.remove('opacity-60');
+    }
+  }
+</script></main><div class="fixed bottom-20 right-margin z-50"><a class="inline-flex items-center gap-2 h-12 px-space-md rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_4px_16px_-2px_rgba(18,24,18,0.18)] active:scale-95 transition-all" data-path="catat-cepat" href="#"><span class="material-symbols-outlined text-title-lg">bolt</span><span>Catat Cepat</span></a></div><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-primary font-label-md"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="beranda" href="#"><span class="material-symbols-outlined text-title-lg">home</span><span class="font-label-sm text-label-sm">Beranda</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 transition-colors text-primary font-label-md" data-path="menu" href="#"><span class="material-symbols-outlined text-title-lg">restaurant_menu</span><span class="font-label-sm text-label-sm">Menu</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="belanja" href="#"><span class="material-symbols-outlined text-title-lg">shopping_bag</span><span class="font-label-sm text-label-sm">Belanja</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="air-dan-waste" href="#"><span class="material-symbols-outlined text-title-lg">water_drop</span><span class="font-label-sm text-label-sm">Air &amp; Waste</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="profil" href="#"><span class="material-symbols-outlined text-title-lg">person</span><span class="font-label-sm text-label-sm">Profil</span></a></div></nav></body></html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<meta content="mobile_stack" name="shell-type"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "#f5fbf1",
+            "inverse-on-surface": "#ecf3e8",
+            "tertiary-container": "#0073b2",
+            "inverse-primary": "#88d982",
+            "on-surface": "#171d17",
+            "secondary": "#964900",
+            "on-secondary-container": "#5e2c00",
+            "primary": "#0d631b",
+            "error": "#ba1a1a",
+            "on-error-container": "#93000a",
+            "tertiary-fixed": "#cee5ff",
+            "primary-fixed": "#a3f69c",
+            "tertiary-fixed-dim": "#96ccff",
+            "on-background": "#171d17",
+            "surface-container-low": "#eff6eb",
+            "secondary-fixed-dim": "#ffb786",
+            "surface-bright": "#f5fbf1",
+            "inverse-surface": "#2c322b",
+            "on-primary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#e4eae0",
+            "surface-tint": "#1b6d24",
+            "outline": "#707a6c",
+            "on-primary-container": "#cbffc2",
+            "on-primary-fixed": "#002204",
+            "outline-variant": "#bfcaba",
+            "on-secondary-fixed": "#311300",
+            "secondary-fixed": "#ffdcc6",
+            "on-tertiary-fixed-variant": "#004a75",
+            "on-primary-fixed-variant": "#005312",
+            "secondary-container": "#fc820c",
+            "primary-container": "#2e7d32",
+            "on-secondary": "#ffffff",
+            "surface-variant": "#dee4da",
+            "primary-fixed-dim": "#88d982",
+            "on-tertiary-container": "#e9f2ff",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#001d32",
+            "on-surface-variant": "#40493d",
+            "surface-container": "#e9f0e5",
+            "surface": "#f5fbf1",
+            "tertiary": "#005a8c",
+            "surface-dim": "#d6dcd2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#dee4da",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#723600"
+          },
+          fontFamily: {
+            headline: ["Plus Jakarta Sans"],
+            display: ["Plus Jakarta Sans"],
+            body: ["Plus Jakarta Sans"],
+            label: ["Plus Jakarta Sans"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 16px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 12px);
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased relative h-screen w-full flex flex-col justify-end overflow-hidden select-none">
+<!-- ================= BACKGROUND HOME DASHBOARD CONTEXT ================= -->
+<div class="absolute inset-0 z-0 flex flex-col bg-surface overflow-hidden pointer-events-none">
+<!-- Header simulation -->
+<header class="pt-safe px-4 pb-3 flex items-center justify-between border-b border-outline-variant/30 bg-surface/90">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+          🌱
+        </div>
+<div>
+<p class="text-[11px] text-on-surface-variant leading-none">Halo Anak Kos,</p>
+<h1 class="text-base font-headline font-bold text-on-surface leading-tight">Dashboard Hari Ini</h1>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+</div>
+</header>
+<!-- Dashboard Content Preview -->
+<div class="p-4 space-y-3.5">
+<!-- Budget Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-primary/15 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-medium">Sisa Budget Hari Ini</p>
+<p class="text-xl font-headline font-extrabold text-on-surface">Rp 34.500</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary">
+          Hemat
+        </span>
+</div>
+<!-- Quick Stats Row -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-lowest p-3.5 rounded-xl border border-outline-variant/20 shadow-sm">
+<span class="text-xs text-on-surface-variant font-medium">Target Air Minum</span>
+<div class="text-base font-bold text-tertiary mt-1">750 / 2.000 ml</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-tertiary-container h-full w-[38%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-3.5 rounded-xl border border-outline-variant/20 shadow-sm">
+<span class="text-xs text-on-surface-variant font-medium">Kalori Harian</span>
+<div class="text-base font-bold text-primary mt-1">1.120 / 1.850 kkal</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full w-[60%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= REALISTIC DARKENED BACKDROP ================= -->
+<div class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-10 transition-opacity" onclick="history.back()"></div>
+<!-- ================= MATERIAL DESIGN 3 BOTTOM SHEET (OCCUPIES ~75% OF SCREEN) ================= -->
+<section aria-labelledby="quick-log-title" class="relative z-20 w-full h-[78vh] max-h-[720px] bg-surface-container-lowest rounded-t-[28px] shadow-[0_-8px_36px_rgba(0,0,0,0.22)] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300">
+<!-- 1. Handle Drag Bar Pill -->
+<div class="w-full pt-3 pb-1 flex justify-center items-center shrink-0">
+<div class="w-10 h-1.5 rounded-full bg-outline-variant/80"></div>
+</div>
+<!-- 2. Header with '⚡ Catat Cepat' & Subtitle & Close Button -->
+<div class="px-5 pt-1.5 pb-2.5 flex items-start justify-between shrink-0">
+<div class="flex items-start gap-2.5">
+<div class="w-9 h-9 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h2 class="text-lg font-headline font-bold text-on-surface tracking-tight flex items-center gap-1.5" id="quick-log-title">
+            ⚡ Catat Cepat
+          </h2>
+<p class="text-xs text-on-surface-variant font-medium">Pencatatan harian cepat ≤ 2 ketukan</p>
+</div>
+</div>
+<button aria-label="Tutup modal" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-variant active:scale-90 transition-all shrink-0" onclick="history.back()" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- 3. Tab Switcher: [💧 Minum (+ml)] [🍽️ Makan] [🗑️ Food Waste (SDG 12.3)] -->
+<div class="px-5 pb-2 shrink-0">
+<div class="grid grid-cols-3 gap-1.5 p-1 bg-surface-container rounded-full text-xs font-semibold">
+<button class="quick-tab-btn flex items-center justify-center gap-1 py-1.5 px-2 rounded-full transition-all bg-surface-container-lowest text-primary shadow-sm font-bold" id="tab-btn-water" onclick="switchQuickTab('water')" type="button">
+<span>💧</span>
+<span class="truncate">Minum (+ml)</span>
+</button>
+<button class="quick-tab-btn flex items-center justify-center gap-1 py-1.5 px-2 rounded-full transition-all text-on-surface-variant hover:text-on-surface" id="tab-btn-meal" onclick="switchQuickTab('meal')" type="button">
+<span>🍽️</span>
+<span class="truncate">Makan</span>
+</button>
+<button class="quick-tab-btn flex items-center justify-center gap-1 py-1.5 px-2 rounded-full transition-all text-on-surface-variant hover:text-on-surface text-[11px]" id="tab-btn-waste" onclick="switchQuickTab('waste')" type="button">
+<span>🗑️</span>
+<span class="truncate">Food Waste</span>
+</button>
+</div>
+</div>
+<!-- Scrollable Body Content -->
+<div class="flex-1 px-5 py-1.5 overflow-y-auto space-y-3 min-h-0">
+<!-- ================= 4. MINUM AIR SECTION ================= -->
+<div class="tab-pane space-y-2" id="pane-water">
+<div class="flex items-center justify-between text-xs">
+<span class="font-bold text-on-surface-variant tracking-wide">PILIHAN 1-KETUKAN CEPAT</span>
+<span class="text-tertiary font-bold"><span id="water-current-count">750</span> / 2000 ml</span>
+</div>
+<div class="space-y-2">
+<!-- Card 1: +150 ml Cangkir -->
+<button class="w-full flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container active:scale-[0.98] transition-all text-left border border-outline-variant/20" onclick="logWater(150, 'Cangkir')" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-tertiary shadow-xs">
+<span class="material-symbols-outlined text-[19px]">coffee</span>
+</div>
+<div>
+<span class="text-sm font-bold text-on-surface block">+150 ml</span>
+<span class="text-[11px] text-on-surface-variant">Cangkir / Kopi Pagi</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[22px]">add_circle</span>
+</button>
+<!-- Card 2: +250 ml Gelas (Terakhir Digunakan Highlight) -->
+<button class="w-full flex items-center justify-between p-2.5 rounded-xl bg-tertiary-container/10 border-2 border-tertiary/30 hover:bg-tertiary-container/20 active:scale-[0.98] transition-all text-left relative overflow-hidden" onclick="logWater(250, 'Gelas')" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-tertiary text-on-tertiary flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[19px]">local_drink</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-sm font-bold text-on-surface block">+250 ml (Gelas)</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-extrabold bg-secondary text-on-secondary">Terakhir</span>
+</div>
+<span class="text-[11px] text-on-surface-variant">Paling sering dicatat anak kos</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[22px]">add_circle</span>
+</button>
+<!-- Card 3: +500 ml Botol -->
+<button class="w-full flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container active:scale-[0.98] transition-all text-left border border-outline-variant/20" onclick="logWater(500, 'Botol')" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-tertiary shadow-xs">
+<span class="material-symbols-outlined text-[19px]">sports_bar</span>
+</div>
+<div>
+<span class="text-sm font-bold text-on-surface block">+500 ml</span>
+<span class="text-[11px] text-on-surface-variant">Botol / Tumbler kos</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[22px]">add_circle</span>
+</button>
+</div>
+</div>
+<!-- ================= 5. MAKAN SECTION ================= -->
+<div class="tab-pane hidden space-y-2.5" id="pane-meal">
+<div class="flex items-center justify-between text-xs">
+<span class="font-bold text-on-surface-variant tracking-wide">JADWAL MAKAN HARI INI</span>
+<span class="text-primary font-semibold">1 dari 3 Selesai</span>
+</div>
+<!-- Completed item -->
+<div class="p-2.5 rounded-xl bg-surface-container-low flex items-center justify-between opacity-70">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<div>
+<p class="text-xs font-semibold text-on-surface-variant">Sarapan (07:30 WIB)</p>
+<h4 class="text-sm font-bold text-on-surface line-through">Oatmeal Pisang &amp; Madu</h4>
+</div>
+</div>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant">Selesai</span>
+</div>
+<!-- Checkbox item: Makan Siang: Gado-Gado Komplit -->
+<div class="p-3 rounded-xl bg-surface-container-low border border-primary/25 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3">
+<label class="relative flex items-center cursor-pointer">
+<input checked="" class="w-5 h-5 rounded text-primary focus:ring-primary/20 accent-primary cursor-pointer" id="meal-checkbox" onchange="toggleMealCheck(this)" type="checkbox"/>
+</label>
+<div>
+<span class="text-[11px] font-bold text-secondary">Makan Siang (Aktif)</span>
+<h4 class="text-sm font-bold text-on-surface" id="meal-title">Makan Siang: Gado-Gado Komplit</h4>
+<p class="text-[11px] text-on-surface-variant">480 kkal • Rp 15.000</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-full text-xs font-bold bg-primary text-on-primary active:scale-95 transition-all shadow-xs" id="meal-btn-done" onclick="markMealDone()" type="button">
+            Tandai Selesai
+          </button>
+</div>
+<!-- Planned dinner -->
+<div class="p-2.5 rounded-xl bg-surface-container-low flex items-center justify-between opacity-80">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">schedule</span>
+<div>
+<p class="text-xs font-semibold text-on-surface-variant">Makan Malam (19:00 WIB)</p>
+<h4 class="text-sm font-bold text-on-surface">Tempe Orek &amp; Sayur Sop</h4>
+</div>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant">Rencana</span>
+</div>
+</div>
+<!-- ================= 6. FOOD WASTE QUICK CHIPS SECTION (SDG 12.3) ================= -->
+<div class="tab-pane hidden space-y-2.5" id="pane-waste">
+<!-- Hero Button: Tidak ada makanan terbuang hari ini -->
+<button class="w-full p-2.5 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-between shadow-xs active:scale-[0.98] transition-transform text-left" onclick="logZeroWaste()" type="button">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-sm">
+              🌟
+            </div>
+<div>
+<div class="text-xs font-headline font-bold text-on-primary-container">
+                Tidak ada makanan terbuang hari ini
+              </div>
+<p class="text-[10px] text-on-primary-container/80">
+                Piring bersih • SDG 12.3 (+1 Streak Hari Ini)
+              </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</button>
+<!-- Quick Chips: [Susu Kedelai] [Bayam] [Tahu] -->
+<div>
+<span class="text-[11px] font-bold text-on-surface-variant block mb-1.5 uppercase tracking-wide">Pilih Sisa Bahan Kulkas:</span>
+<div class="flex flex-wrap gap-1.5">
+<button class="waste-chip px-3 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface border border-outline-variant/30 active:scale-95 transition-all" onclick="selectWaste(this, 'Susu Kedelai')" type="button">
+              Susu Kedelai
+            </button>
+<button class="waste-chip active-chip px-3 py-1 rounded-full text-xs font-bold bg-secondary text-on-secondary shadow-xs active:scale-95 transition-all" onclick="selectWaste(this, 'Bayam')" type="button">
+              Bayam
+            </button>
+<button class="waste-chip px-3 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface border border-outline-variant/30 active:scale-95 transition-all" onclick="selectWaste(this, 'Tahu')" type="button">
+              Tahu
+            </button>
+</div>
+</div>
+<!-- Portion Chips: [Sedikit] [Setengah] [Semua] -->
+<div>
+<span class="text-[11px] font-bold text-on-surface-variant block mb-1.5 uppercase tracking-wide">Porsi Terbuang:</span>
+<div class="grid grid-cols-3 gap-1.5">
+<button class="portion-chip py-1.5 px-2 rounded-lg text-xs font-semibold bg-surface-container text-on-surface active:scale-95 transition-all text-center" onclick="selectPortion(this, 'Sedikit')" type="button">
+              Sedikit
+            </button>
+<button class="portion-chip active-portion py-1.5 px-2 rounded-lg text-xs font-bold bg-secondary text-on-secondary shadow-xs active:scale-95 transition-all text-center" onclick="selectPortion(this, 'Setengah')" type="button">
+              Setengah
+            </button>
+<button class="portion-chip py-1.5 px-2 rounded-lg text-xs font-semibold bg-surface-container text-on-surface active:scale-95 transition-all text-center" onclick="selectPortion(this, 'Semua')" type="button">
+              Semua
+            </button>
+</div>
+</div>
+<div class="p-2 rounded-lg bg-error-container/40 flex items-center justify-between text-xs">
+<span class="text-[11px] font-semibold text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-[16px]">eco</span>
+            Estimasi Terbuang: <strong class="text-error" id="waste-estimate-txt">Bayam (Setengah) ~ Rp 2.000</strong>
+</span>
+<span class="text-[10px] font-bold text-error bg-error-container px-1.5 py-0.5 rounded">SDG 12.3</span>
+</div>
+</div>
+</div>
+<!-- 7. SnackBar Feedback at Bottom & 8. FilledButton: 'Simpan Catatan' -->
+<div class="px-5 pt-2 pb-safe bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col gap-2 shrink-0">
+<!-- 7. SnackBar feedback -->
+<div class="p-2.5 rounded-xl bg-inverse-surface text-inverse-on-surface shadow-sm flex items-center justify-between" id="quicklog-snackbar">
+<div class="flex items-center gap-2 min-w-0 pr-2">
+<span class="material-symbols-outlined text-inverse-primary text-[18px] shrink-0">check_circle</span>
+<span class="text-xs font-medium text-inverse-on-surface truncate" id="snackbar-msg">
+            ✓ Minum 250 ml berhasil dicatat!
+          </span>
+</div>
+<button class="px-2 py-0.5 rounded text-xs font-bold text-inverse-primary hover:bg-inverse-surface/80 active:scale-95 transition-transform shrink-0" onclick="undoLastAction()" type="button">
+          Batal (Undo)
+        </button>
+</div>
+<!-- 8. FilledButton -->
+<button class="w-full py-3 px-4 rounded-full bg-primary text-on-primary font-headline font-bold text-sm tracking-wide shadow-md hover:bg-primary/95 active:scale-[0.98] transition-all flex items-center justify-center gap-2" onclick="submitQuickLog()" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+        Simpan Catatan
+      </button>
+<p class="text-[10px] text-center text-on-surface-variant pb-1">
+        Otomatis memperbarui ringkasan nutrisi &amp; budget harian
+      </p>
+</div>
+</section>
+<!-- Interactive Logic for Tab Switching, Tapping & SnackBar -->
+<script>
+    let selectedWasteItem = 'Bayam';
+    let selectedPortion = 'Setengah';
+
+    function switchQuickTab(tab) {
+      const panes = {
+        water: document.getElementById('pane-water'),
+        meal: document.getElementById('pane-meal'),
+        waste: document.getElementById('pane-waste')
+      };
+      const tabs = {
+        water: document.getElementById('tab-btn-water'),
+        meal: document.getElementById('tab-btn-meal'),
+        waste: document.getElementById('tab-btn-waste')
+      };
+
+      Object.keys(panes).forEach(k => {
+        if (k === tab) {
+          panes[k].classList.remove('hidden');
+          tabs[k].className = 'quick-tab-btn flex items-center justify-center gap-1 py-1.5 px-2 rounded-full transition-all bg-surface-container-lowest text-primary shadow-sm font-bold';
+        } else {
+          panes[k].classList.add('hidden');
+          tabs[k].className = 'quick-tab-btn flex items-center justify-center gap-1 py-1.5 px-2 rounded-full transition-all text-on-surface-variant hover:text-on-surface font-semibold';
+        }
+      });
+    }
+
+    function logWater(ml, type) {
+      const counter = document.getElementById('water-current-count');
+      let current = parseInt(counter.innerText) || 750;
+      current += ml;
+      counter.innerText = current;
+      showToast('✓ Minum ' + ml + ' ml (' + type + ') berhasil dicatat!');
+    }
+
+    function markMealDone() {
+      const btn = document.getElementById('meal-btn-done');
+      const chk = document.getElementById('meal-checkbox');
+      chk.checked = true;
+      btn.innerText = 'Tersimpan';
+      btn.classList.add('opacity-70');
+      showToast('✓ Makan Siang: Gado-Gado Komplit ditandai selesai!');
+    }
+
+    function toggleMealCheck(chk) {
+      if (chk.checked) {
+        showToast('✓ Makan Siang ditandai selesai!');
+      } else {
+        showToast('Catatan makan siang dibatalkan.');
+      }
+    }
+
+    function selectWaste(chip, name) {
+      document.querySelectorAll('.waste-chip').forEach(c => {
+        c.className = 'waste-chip px-3 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface border border-outline-variant/30 active:scale-95 transition-all';
+      });
+      chip.className = 'waste-chip active-chip px-3 py-1 rounded-full text-xs font-bold bg-secondary text-on-secondary shadow-xs active:scale-95 transition-all';
+      selectedWasteItem = name;
+      updateWasteDisplay();
+    }
+
+    function selectPortion(btn, portion) {
+      document.querySelectorAll('.portion-chip').forEach(b => {
+        b.className = 'portion-chip py-1.5 px-2 rounded-lg text-xs font-semibold bg-surface-container text-on-surface active:scale-95 transition-all text-center';
+      });
+      btn.className = 'portion-chip active-portion py-1.5 px-2 rounded-lg text-xs font-bold bg-secondary text-on-secondary shadow-xs active:scale-95 transition-all text-center';
+      selectedPortion = portion;
+      updateWasteDisplay();
+    }
+
+    function updateWasteDisplay() {
+      const txt = document.getElementById('waste-estimate-txt');
+      if (txt) {
+        txt.innerText = selectedWasteItem + ' (' + selectedPortion + ') ~ Rp 2.000';
+      }
+      showToast('Pilihan: ' + selectedWasteItem + ' (' + selectedPortion + ')');
+    }
+
+    function logZeroWaste() {
+      showToast('🌟 Hebat! Tidak ada sisa makanan hari ini (+1 Streak SDG 12.3)');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('quicklog-snackbar');
+      const textEl = document.getElementById('snackbar-msg');
+      if (toast && textEl) {
+        textEl.innerText = msg;
+        toast.classList.add('scale-[1.01]');
+        setTimeout(() => toast.classList.remove('scale-[1.01]'), 180);
+      }
+    }
+
+    function undoLastAction() {
+      showToast('Perubahan terakhir berhasil dibatalkan.');
+    }
+
+    function submitQuickLog() {
+      showToast('✓ Semua catatan berhasil disimpan ke dashboard!');
+      setTimeout(() => {
+        history.back();
+      }, 600);
+    }
+  </script>
+</body></html>

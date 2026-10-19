@@ -1,11 +1,13 @@
 import 'package:budget_bites/app.dart';
+import 'package:budget_bites/widgets/app_bar.dart';
 import 'package:budget_bites/widgets/app_logo.dart';
 import 'package:budget_bites/widgets/section_title.dart';
+import 'package:budget_bites/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('SmartBites Step 1 debug page renders and toggles theme',
+  testWidgets('SmartBites Step 1b preview page renders and toggles theme',
       (WidgetTester tester) async {
     ThemeMode? capturedMode;
 
@@ -18,13 +20,17 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.byType(TempStep1DebugPage), findsOneWidget);
+    expect(find.byType(TempStep1bPreviewPage), findsOneWidget);
+    expect(find.byType(SmartBitesAppBar), findsOneWidget);
+    expect(find.byType(StatusBadge), findsAtLeastNWidgets(4));
     expect(find.byType(AppLogo), findsAtLeastNWidgets(1));
     expect(find.byType(SectionTitle), findsAtLeastNWidgets(1));
+    expect(find.byType(Card), findsAtLeastNWidgets(2));
+    expect(find.byType(Slider), findsOneWidget);
+    expect(find.byType(NavigationBar), findsOneWidget);
 
     // Tap theme toggle button
-    final toggleButton = find.byType(FilledButton);
-    expect(toggleButton, findsOneWidget);
+    final toggleButton = find.byType(FilledButton).first;
     await tester.tap(toggleButton);
     await tester.pumpAndSettle();
 
