@@ -1,8 +1,8 @@
 // Owner: Louis | FR: FR-01, FR-03
 
+import 'package:budget_bites/screens/welcome_screen.dart';
 import 'package:budget_bites/theme/app_theme.dart';
 import 'package:budget_bites/utils/app_constants.dart';
-import 'package:budget_bites/widgets/main_navigation.dart';
 import 'package:flutter/material.dart';
 
 class SmartBitesApp extends StatefulWidget {
@@ -43,7 +43,7 @@ class _SmartBitesAppState extends State<SmartBitesApp> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,
-      home: const MainNavigation(),
+      home: const WelcomeScreen(),
     );
   }
 }
