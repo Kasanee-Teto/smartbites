@@ -1,6 +1,9 @@
 // Owner: Gilbert | FR: FR-18, FR-19, FR-20, FR-21
+// Design: stitch_smartbites_meal_budget_planner/smartbites_belanja_pantry/code.html
 
 import 'package:budget_bites/models/pantry_item.dart';
+import 'package:budget_bites/utils/app_colors.dart';
+import 'package:budget_bites/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
 /// Enum representing the freshness status of a pantry item based on expiry date.
@@ -57,7 +60,20 @@ String _formatQuantity(double quantity) {
   return quantity.toString();
 }
 
-/// A reusable widget representing a single pantry item row.
+/// Maps a pantry category name to a representative Material icon.
+IconData _iconForCategory(String category) {
+  return switch (category.toLowerCase()) {
+    'protein' => Icons.egg_outlined,
+    'sayuran' => Icons.eco_outlined,
+    'bumbu' => Icons.spa_outlined,
+    'pokok' => Icons.rice_bowl_outlined,
+    'minuman' => Icons.local_drink_outlined,
+    _ => Icons.kitchen_outlined,
+  };
+}
+
+/// A reusable widget representing a single pantry item row matching the
+/// Stitch HTML design (`smartbites_belanja_pantry/code.html`).
 class PantryItemTile extends StatelessWidget {
   final PantryItem item;
   final ValueChanged<double> onQuantityChanged;
@@ -86,29 +102,31 @@ class PantryItemTile extends StatelessWidget {
         break;
       case ExpiryStatus.expiringSoon:
         backgroundColor = isDark
-            ? Colors.amber.withValues(alpha: 0.25)
-            : Colors.amber.shade100;
-        textColor = isDark ? Colors.amber.shade300 : Colors.amber.shade900;
+            ? AppColors.harvestAmber.withValues(alpha: 0.35)
+            : AppColors.harvestAmberContainer;
+        textColor = isDark
+            ? AppColors.harvestAmberContainer
+            : AppColors.harvestAmber;
         label = 'Segera habis';
         break;
       case ExpiryStatus.expired:
-        backgroundColor = colorScheme.errorContainer;
-        textColor = colorScheme.onErrorContainer;
+        backgroundColor = colorScheme.error;
+        textColor = colorScheme.onError;
         label = 'Kedaluwarsa';
         break;
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppConstants.radiusFull),
       ),
       child: Text(
         label,
         style: theme.textTheme.labelSmall?.copyWith(
           color: textColor,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );
@@ -120,142 +138,132 @@ class PantryItemTile extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    // Stock progress calculations
-    final double maxQuantity = item.minQuantity > 0 ? item.minQuantity * 2 : 1.0;
+    final status = getExpiryStatus(item.expiryDate);
+    final double maxQuantity =
+        item.minQuantity > 0 ? item.minQuantity * 2 : 1.0;
     final double progressValue = (item.quantity / maxQuantity).clamp(0.0, 1.0);
     final bool isLowStock = item.quantity <= item.minQuantity;
+    final Color warningColor = AppColors.alertTerracotta;
 
-    // Warning color for low stock
-    final Color warningColor = Colors.amber.shade800;
+    final (Color iconBoxBg, Color iconBoxFg) = switch (status) {
+      ExpiryStatus.expired => (
+          colorScheme.errorContainer.withValues(alpha: 0.6),
+          colorScheme.error,
+        ),
+      ExpiryStatus.expiringSoon => (
+          AppColors.harvestAmberContainer.withValues(alpha: 0.6),
+          AppColors.harvestAmber,
+        ),
+      ExpiryStatus.safe => (
+          colorScheme.primaryContainer.withValues(alpha: 0.4),
+          colorScheme.primary,
+        ),
+    };
 
     return Card(
       elevation: 0,
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      color: colorScheme.surfaceContainerLowest,
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppConstants.spaceMd,
+        vertical: 5,
+      ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppConstants.radiusMd),
         side: BorderSide(
-          color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+          color: colorScheme.outlineVariant.withValues(alpha: 0.4),
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Row 1: Item Name, Expiry Date & Expiry Badge
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // Leading category icon box (40x40 rounded-xl from HTML)
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: iconBoxBg,
+                    borderRadius: BorderRadius.circular(AppConstants.radiusMd),
+                  ),
+                  child: Icon(
+                    _iconForCategory(item.category),
+                    color: iconBoxFg,
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                // Center item details + inline expiry badge
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        item.name,
-                        style: textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
+                      Wrap(
+                        spacing: 6,
+                        runSpacing: 4,
+                        crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
-                          Icon(
-                            Icons.event_outlined,
-                            size: 14,
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                          const SizedBox(width: 4),
                           Text(
-                            'Kedaluwarsa: ${formatExpiryDate(item.expiryDate)}',
-                            style: textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
+                            item.name,
+                            style: textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: colorScheme.onSurface,
                             ),
                           ),
+                          _buildExpiryBadge(context, item.expiryDate),
                         ],
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        status == ExpiryStatus.expired
+                            ? 'Kedaluwarsa ${formatExpiryDate(item.expiryDate)} • Buang via Waste'
+                            : 'Exp: ${formatExpiryDate(item.expiryDate)} • ${item.category}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: textTheme.bodySmall?.copyWith(
+                          color: status == ExpiryStatus.expired
+                              ? colorScheme.error
+                              : colorScheme.onSurfaceVariant,
+                          fontWeight: status == ExpiryStatus.expired
+                              ? FontWeight.w600
+                              : FontWeight.w400,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(width: 8),
-                _buildExpiryBadge(context, item.expiryDate),
-              ],
-            ),
-            const SizedBox(height: 12),
-            // Row 2: Stock Level / Low stock indicator and Quantity Stepper
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Left: Quantity with Unit & Progress Indicator
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            '${_formatQuantity(item.quantity)} ${item.unit}',
-                            style: textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: isLowStock ? warningColor : colorScheme.onSurface,
-                            ),
-                          ),
-                          if (isLowStock) ...[
-                            const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6,
-                                vertical: 2,
-                              ),
-                              decoration: BoxDecoration(
-                                color: warningColor.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Text(
-                                'Stok menipis',
-                                style: textTheme.labelSmall?.copyWith(
-                                  color: warningColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: LinearProgressIndicator(
-                          value: progressValue,
-                          minHeight: 6,
-                          backgroundColor: colorScheme.surfaceContainerHighest,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            isLowStock ? warningColor : colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 16),
-                // Right: Stepper (FR-21)
+                // Right: Circular Stepper Pill (FR-21 from HTML)
                 Container(
+                  padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-                    borderRadius: BorderRadius.circular(24),
+                    color: colorScheme.surfaceContainerLow,
+                    borderRadius:
+                        BorderRadius.circular(AppConstants.radiusFull),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.remove, size: 18),
+                        icon: const Icon(Icons.remove, size: 16),
                         visualDensity: VisualDensity.compact,
+                        constraints: const BoxConstraints(
+                          minWidth: 28,
+                          minHeight: 28,
+                        ),
+                        padding: EdgeInsets.zero,
+                        style: IconButton.styleFrom(
+                          backgroundColor: colorScheme.surfaceContainerLowest,
+                          foregroundColor: colorScheme.onSurface,
+                        ),
                         tooltip: 'Kurangi',
                         onPressed: item.quantity > 0
                             ? () {
-                                final double next =
-                                    (item.quantity - 1.0).clamp(0.0, double.infinity);
+                                final double next = (item.quantity - 1.0)
+                                    .clamp(0.0, double.infinity);
                                 onQuantityChanged(next);
                               }
                             : null,
@@ -265,21 +273,81 @@ class PantryItemTile extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           _formatQuantity(item.quantity),
-                          style: textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
+                          style: textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
                             color: colorScheme.onSurface,
                           ),
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.add, size: 18),
+                        icon: const Icon(Icons.add, size: 16),
                         visualDensity: VisualDensity.compact,
+                        constraints: const BoxConstraints(
+                          minWidth: 28,
+                          minHeight: 28,
+                        ),
+                        padding: EdgeInsets.zero,
+                        style: IconButton.styleFrom(
+                          backgroundColor: colorScheme.primary,
+                          foregroundColor: colorScheme.onPrimary,
+                        ),
                         tooltip: 'Tambah',
                         onPressed: () {
                           onQuantityChanged(item.quantity + 1.0);
                         },
                       ),
                     ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            // Stock gauge & low-stock label (FR-19)
+            Row(
+              children: [
+                Text(
+                  '${_formatQuantity(item.quantity)} ${item.unit}',
+                  style: textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color:
+                        isLowStock ? warningColor : colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                if (isLowStock) ...[
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: warningColor.withValues(alpha: 0.14),
+                      borderRadius:
+                          BorderRadius.circular(AppConstants.radiusSm),
+                    ),
+                    child: Text(
+                      'Stok menipis',
+                      style: textTheme.labelSmall?.copyWith(
+                        color: warningColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ],
+                const SizedBox(width: 10),
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(AppConstants.radiusFull),
+                    child: LinearProgressIndicator(
+                      value: progressValue,
+                      minHeight: 6,
+                      backgroundColor: colorScheme.surfaceContainerHighest,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        isLowStock ? warningColor : colorScheme.primary,
+                      ),
+                    ),
                   ),
                 ),
               ],

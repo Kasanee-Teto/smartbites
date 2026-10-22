@@ -10,7 +10,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: PantryScreen(initialItems: []),
+            body: PantryScreen(items: []),
           ),
         ),
       );
@@ -59,17 +59,27 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: PantryScreen(initialItems: items),
+            body: PantryScreen(items: items),
           ),
         ),
       );
 
-      // Summary Card
+      // Summary Card (first Card in the list) — scoped so stepper values don't collide
+      final summary = find.byType(Card).first;
       expect(find.text('Total Bahan'), findsOneWidget);
-      expect(find.text('3'), findsOneWidget); // 3 items total
+      expect(
+        find.descendant(of: summary, matching: find.text('3')),
+        findsOneWidget,
+      ); // 3 items total
       expect(find.text('Stok Menipis'), findsOneWidget);
-      expect(find.text('1'), findsNWidgets(2)); // 1 low stock (Telur), 1 expired (Bayam)
-      expect(find.text('Kedaluwarsa'), findsOneWidget);
+      expect(
+        find.descendant(of: summary, matching: find.text('1')),
+        findsNWidgets(2),
+      ); // 1 low stock (Telur), 1 expired (Bayam)
+      expect(
+        find.descendant(of: summary, matching: find.text('Kedaluwarsa')),
+        findsOneWidget,
+      );
 
       // Category Headers sorted alphabetically: Bumbu, Protein, Sayuran
       expect(find.text('Bumbu'), findsOneWidget);
@@ -103,10 +113,16 @@ void main() {
         ),
       ];
 
+      // PantryScreen is stateless; host the state like MainNavigation does.
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: PantryScreen(initialItems: items),
+            body: StatefulBuilder(
+              builder: (context, setState) => PantryScreen(
+                items: items,
+                onUpdateItem: (updated) => setState(() => items[0] = updated),
+              ),
+            ),
           ),
         ),
       );

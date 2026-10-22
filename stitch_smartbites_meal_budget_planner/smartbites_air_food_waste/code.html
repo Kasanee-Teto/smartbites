@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary-container": "#fc820c", "outline-variant": "#bfcaba", "on-background": "#171d17", "on-primary-fixed": "#002204", "surface-dim": "#d6dcd2", "on-secondary-container": "#5e2c00", "primary-container": "#2e7d32", "surface-container-lowest": "#ffffff", "inverse-primary": "#88d982", "secondary-fixed-dim": "#ffb786", "primary-fixed": "#a3f69c", "secondary": "#964900", "surface-bright": "#f5fbf1", "error": "#ba1a1a", "inverse-surface": "#2c322b", "surface-variant": "#dee4da", "on-primary-container": "#cbffc2", "surface-container-highest": "#dee4da", "on-error": "#ffffff", "tertiary-fixed-dim": "#96ccff", "on-secondary-fixed": "#311300", "secondary-fixed": "#ffdcc6", "outline": "#707a6c", "on-secondary-fixed-variant": "#723600", "surface-container": "#e9f0e5", "surface": "#f5fbf1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "surface-container-low": "#eff6eb", "on-tertiary-container": "#e9f2ff", "on-primary": "#ffffff", "on-primary-fixed-variant": "#005312", "surface-tint": "#1b6d24", "on-tertiary": "#ffffff", "on-surface-variant": "#40493d", "surface-container-high": "#e4eae0", "primary": "#0d631b", "on-tertiary-fixed": "#001d32", "inverse-on-surface": "#ecf3e8", "tertiary": "#005a8c", "tertiary-container": "#0073b2", "primary-fixed-dim": "#88d982", "on-tertiary-fixed-variant": "#004a75", "tertiary-fixed": "#cee5ff", "error-container": "#ffdad6", "background": "#f5fbf1", "on-surface": "#171d17" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1rem", "gutter": "1rem", "space-sm": "0.5rem", "margin": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-xs": "0.25rem" }, fontFamily: { "title-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "numeric-currency": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "numeric-stat": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"] }, fontSize: { "title-lg": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "numeric-currency": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "numeric-stat": ["18px", { "lineHeight": "24px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f5fbf1;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="SmartBites Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_xEY_4COTQLNKdaiU10w2-xwXmgNNSFIWk2q5RjKbazMiE_XySsJEDyvqFN6iLln06mgVq_4tk80E8WBeL39aJUTuzKqI5GNrkkP9gZILEudBKh6bwd2hhExm41mT4-myPLKEWrwYGT4qyaJ4W3ZhRhkaS9Zq7WoAgWY3XUk0dlf0nmX88o6I6CDGfhDaYceKoH6sj8cJ6hTGx41qGsLckYC-COsmV376luTGdxSIs9QCk3Dkibvs"/><div class="flex flex-col"><div class="flex items-center gap-1.5"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">SmartBites</span><span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">SDG 3 &amp; 12.3</span></div><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Beranda</span></div></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1 px-2 py-1 rounded-full bg-secondary-fixed/50 text-secondary"><span class="material-symbols-outlined text-title-md">local_fire_department</span><span class="font-label-md text-label-md text-on-secondary-fixed">7</span></div><button aria-label="Notifikasi" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined">notifications</span></button><div class="relative flex items-center justify-center w-11 h-11"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbGRje60ra31FJDqB7CfJwnQzyStR_sGfOSkWgr-eF6wgDa1vl0mpHwvjhPjDrjArEwVZL7bi4ESWQi6QmARbL8RG0x6WI0BmBRxvJNu73UUcWYjRP3wiPBBnJI-eynPxrjG96QWZ6WoxEb38_qD_Sn8T_0DBA-m8pL-ikWbt0Gwm76ib3wHZw-k9fMwGBdFp_rVWK1rB0iytcS2e7IV5IBt-wSQ7Ac517-Q6ZHtZdx1KzpnBezwq"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface min-h-screen"><div class="flex flex-col w-full pb-8">
+<!-- Segmented Control Bar -->
+<div class="px-margin pt-space-sm pb-space-xs">
+<div class="bg-surface-container-high p-1 rounded-full flex items-center shadow-sm">
+<button class="flex-1 py-2 rounded-full font-label-md text-label-md text-center transition-all bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-1.5" id="tabWaterBtn" onclick="switchTrackerTab('water')" type="button">
+<span class="material-symbols-outlined text-[18px]">water_drop</span>
+<span>Air (750/2000 ml)</span>
+</button>
+<button class="flex-1 py-2 rounded-full font-label-md text-label-md text-center transition-all text-on-surface-variant flex items-center justify-center gap-1.5" id="tabWasteBtn" onclick="switchTrackerTab('waste')" type="button">
+<span class="material-symbols-outlined text-[18px]">eco</span>
+<span>Waste (SDG 12.3)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-[10px] leading-tight">2</span>
+</button>
+</div>
+</div>
+<!-- SECTION 1: WATER TRACKER -->
+<div class="flex flex-col space-y-space-md px-margin pt-space-xs transition-opacity duration-300" id="waterTrackerView">
+<!-- Motivational Banner Mini -->
+<div class="bg-surface-container-low rounded-xl p-space-sm flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-title-md">wb_sunny</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-1">
+        Cuaca kosan cukup terik! Jaga fokus belajar dengan hidrasi teratur hari ini.
+      </p>
+</div>
+<!-- Hero Water Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider">Target SDG 3 • Kesehatan</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">Target Hidrasi Harian</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-body-sm">check</span> 38%
+        </span>
+</div>
+<!-- Water Gauge Graphic & Stats -->
+<div class="flex items-center gap-space-md my-space-xs">
+<!-- Circular Progress Graphic -->
+<div class="relative w-32 h-32 flex-shrink-0 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background circle track -->
+<circle class="text-surface-container" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="9"></circle>
+<!-- Water Progress fill: 38% of 251.2 = 95.45 -->
+<circle class="text-tertiary-container transition-all duration-700 ease-out" cx="50" cy="50" fill="transparent" id="waterRingProgress" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="155.75" stroke-linecap="round" stroke-width="9"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-tertiary text-title-md -mb-1">water_drop</span>
+<span class="font-numeric-currency text-numeric-currency text-on-surface tracking-tight" id="currentWaterAmount">750</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant -mt-1">/ 2.000 ml</span>
+</div>
+</div>
+<!-- Metric Details -->
+<div class="flex flex-col justify-center flex-1 space-y-space-xs">
+<div class="bg-surface-container rounded-lg p-2.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Sisa Kebutuhan:</span>
+<span class="font-numeric-stat text-numeric-stat text-tertiary font-bold leading-tight block">1.250 ml lagi</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">sekitar 5 gelas sedang</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm pt-1">
+<span class="material-symbols-outlined text-title-md text-primary">schedule</span>
+<span>Jadwal minum berikut: 14:30</span>
+</div>
+</div>
+</div>
+<!-- Quick Action 1-Tap Log Buttons -->
+<div class="mt-space-md pt-space-xs border-t-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant block mb-2 font-medium">Catat Cepat 1-Ketukan:</span>
+<div class="grid grid-cols-3 gap-2">
+<!-- +150 ml -->
+<button class="bg-surface-container hover:bg-surface-container-high active:scale-95 transition-all rounded-xl p-2.5 flex flex-col items-center text-center" onclick="logWater(150, '1 Cangkir / Teh')" type="button">
+<span class="material-symbols-outlined text-tertiary text-title-md mb-0.5">local_cafe</span>
+<span class="font-label-md text-label-md text-on-surface">+150 ml</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant truncate w-full">Cangkir / Teh</span>
+</button>
+<!-- +250 ml (Highlighted / Last used) -->
+<button class="bg-tertiary-fixed text-on-tertiary-fixed ring-0 shadow-sm active:scale-95 transition-all rounded-xl p-2.5 flex flex-col items-center text-center relative overflow-hidden" onclick="logWater(250, 'Gelas Sedang')" type="button">
+<span class="absolute top-0 right-0 bg-tertiary text-on-tertiary font-label-sm text-[8px] px-1 py-0.2 rounded-bl">TERAKHIR</span>
+<span class="material-symbols-outlined text-tertiary text-title-md mb-0.5">local_drink</span>
+<span class="font-label-md text-label-md font-bold text-on-tertiary-fixed">+250 ml</span>
+<span class="font-body-sm text-[10px] text-on-tertiary-fixed truncate w-full">Gelas Sedang</span>
+</button>
+<!-- +500 ml -->
+<button class="bg-surface-container hover:bg-surface-container-high active:scale-95 transition-all rounded-xl p-2.5 flex flex-col items-center text-center" onclick="logWater(500, 'Botol Sedang')" type="button">
+<span class="material-symbols-outlined text-tertiary text-title-md mb-0.5">sports_bar</span>
+<span class="font-label-md text-label-md text-on-surface">+500 ml</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant truncate w-full">Botol Sedang</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Riwayat Minum Hari Ini -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-title-md text-title-md text-on-surface">Riwayat Minum Hari Ini</h3>
+<span class="font-label-sm text-label-sm text-tertiary">3 Catatan</span>
+</div>
+<div class="flex flex-col space-y-2" id="waterLogList">
+<!-- Entry 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">water_drop</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">250 ml • Makan Siang</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">12:45 WIB</span>
+</div>
+</div>
+<button aria-label="Hapus catatan" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-all" onclick="this.parentElement.remove()" type="button">
+<span class="material-symbols-outlined text-[20px]">delete_outline</span>
+</button>
+</div>
+<!-- Entry 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">water_drop</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">250 ml • Setelah Kuliah Pagi</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">10:30 WIB</span>
+</div>
+</div>
+<button aria-label="Hapus catatan" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-all" onclick="this.parentElement.remove()" type="button">
+<span class="material-symbols-outlined text-[20px]">delete_outline</span>
+</button>
+</div>
+<!-- Entry 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">water_drop</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">250 ml • Bangun Tidur</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">07:15 WIB</span>
+</div>
+</div>
+<button aria-label="Hapus catatan" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-all" onclick="this.parentElement.remove()" type="button">
+<span class="material-symbols-outlined text-[20px]">delete_outline</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: FOOD WASTE & FINANSIAL (SDG 12.3) -->
+<div class="flex flex-col space-y-space-md px-margin pt-space-xs transition-opacity duration-300" id="foodWasteSection">
+<!-- Header of Section 2 -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">SDG Target 12.3 • Food Waste</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">Dampak Makanan &amp; Dompet</h2>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">local_police</span> Pahlawan Anti-Waste 🌿
+      </span>
+</div>
+<!-- Food Waste Summary Card Bento -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Terbuang Bulan Ini</span>
+<span class="font-numeric-currency text-numeric-currency text-secondary mt-1 block">Rp 34.000</span>
+</div>
+<div class="flex items-center gap-1 text-primary font-label-sm text-label-sm mt-space-sm pt-1">
+<span class="material-symbols-outlined text-body-sm">trending_down</span>
+<span>Hemat 45% vs lalu!</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Status Dapur Kos</span>
+<span class="font-title-md text-title-md text-primary mt-1 block font-semibold">Terkendali</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm mt-space-sm pt-1">
+<span class="material-symbols-outlined text-body-sm text-secondary">inventory_2</span>
+<span>2 Bahan perlu dimasak</span>
+</div>
+</div>
+</div>
+<!-- Interactive Actions: Daily Celebration & Log Waste -->
+<div class="flex flex-col space-y-2.5">
+<!-- Big Checkmark Action -->
+<button class="w-full py-3.5 px-space-md rounded-2xl bg-primary-fixed/40 hover:bg-primary-fixed/60 active:scale-[0.99] transition-all flex items-center justify-between text-left group" id="zeroWasteBtn" onclick="celebrateZeroWaste()" type="button">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-headline-sm">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface font-bold leading-tight">Tidak Ada Makanan Terbuang Hari Ini</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Pertahankan streak &amp; raih badge mingguan!</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-title-lg">arrow_forward</span>
+</button>
+<!-- Log Wasted Food Button -->
+<button class="w-full py-3 px-space-md rounded-xl bg-surface-container-high hover:bg-surface-variant active:scale-[0.99] transition-all flex items-center justify-center gap-2 text-on-surface-variant" onclick="toggleWasteDrawer()" type="button">
+<span class="material-symbols-outlined text-title-md text-secondary">add_circle_outline</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">+ Catat Bahan / Makanan Terbuang</span>
+</button>
+</div>
+<!-- Friendly Cosy Tip Card -->
+<div class="bg-secondary-fixed/30 rounded-2xl p-space-md flex items-center gap-space-sm">
+<img class="w-14 h-14 rounded-xl object-cover flex-shrink-0" data-alt="An adorable minimalist organic illustration of a smiling bento lunchbox and cute vegetable friends promoting zero food waste in modern flat pastel colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQMvdd6cYhrdn5MktoiQpDfHXBoot72j9NzhVBGfY_JChgigaBfM31aOnmBq8LOhf4_arH-hudjLNIAo3mX-OlGQqTu92joRG6y6KeB3lRdMiW1Rl5rR-LyMNUqBlOkyY3j25OOCVMmcoIFJMAWhUpg2Y2Sm8AWQOJJcPRcD8Jz2nWcI0Ntn0_qu2iOJ0pRolAwYMtv2ybiydYcKKVl1xzdKEr_ihd_kv3WOkLx8YwJ9oAEq6tZ3-z"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-secondary-fixed font-bold">Tips Cerdas Anak Kos 💡</span>
+<p class="font-body-sm text-body-sm text-on-secondary-fixed-variant leading-snug">
+          "Anak kos bijak, kulkas bersih dompet aman! Olah sisa sayuran jadi nasi goreng atau omelet praktis sebelum malam."
+        </p>
+</div>
+</div>
+<!-- Riwayat Makanan Terbuang Terbaru -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-title-md text-title-md text-on-surface">Catatan Terbuang Terbaru</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bulan Ini</span>
+</div>
+<div class="flex flex-col space-y-space-sm">
+<!-- Item 1: Susu Kedelai Kotak -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-start gap-space-sm relative">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-secondary flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-title-md">water_bottle</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Susu Kedelai Kotak</h4>
+<span class="font-label-md text-label-md font-bold text-error">-Rp 7.500</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5 text-on-surface-variant font-body-sm text-body-sm">
+<span>Porsi: 1 Kotak</span>
+<span>•</span>
+<span class="text-error">Lewat Kedaluwarsa</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant mt-1">Kemarin • Catatan otomatis dari Pantry</span>
+</div>
+</div>
+<!-- Item 2: Sayur Bayam Sisa Siang -->
+<div class="p-3 rounded-xl bg-surface-container-low flex items-start gap-space-sm relative">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-on-surface-variant flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-title-md">restaurant</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Sayur Bayam Sisa Siang</h4>
+<span class="font-label-md text-label-md font-bold text-error">-Rp 3.000</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5 text-on-surface-variant font-body-sm text-body-sm">
+<span>Porsi: Setengah</span>
+<span>•</span>
+<span class="text-error">Basi/Lupa Disimpan</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant mt-1">2 hari lalu • Makan Siang Warteg</span>
+</div>
+</div>
+</div>
+<!-- Insight Bottom Banner -->
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+<span>Target SDG 12.3: Kurangi 50% limbah</span>
+</span>
+<button class="text-primary font-label-sm text-label-sm hover:underline" type="button">Lihat Analisis</button>
+</div>
+</div>
+<!-- Visual Meal Photo Card to delight -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-sm shadow-sm overflow-hidden flex items-center gap-space-sm">
+<img class="w-16 h-16 rounded-xl object-cover flex-shrink-0" data-alt="Warm top-down photo of fresh home-cooked tumis tempe and steamed rice in a student lunchbox container with natural bright kitchen lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG4pX46pEr2_QGwI-SyjNeZq-CIDQY4Jdg6dy-E-kEn5amwrs90_JJ4fsp7Gen23bijg4zt1pxo3VMxX2sUjhlaDIgUgVHnyHUvLhlU8Jrd4VznpkXvJek_pcyXjhWpKTyVyb9OqS2G9PZUKQaSWLDQjHqVqSX-4da-wC5Q2PNXNYmtagg2zM8hOFmqwHYBZnErQvrwq5yXu0iyJvqqanv5cBb8Lcb5OqIgqSDaKUHeYXNtB4h5jDZ"/>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-label-sm text-label-sm text-primary font-semibold">Inspirasi Masak Dari Kulkas</span>
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Tumis Tempe &amp; Telur Orak-Arik</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Bahan siap olah sebelum layu • Estimasi Rp 6.000</span>
+</div>
+<button aria-label="Lihat Resep" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary active:scale-95 transition-transform flex-shrink-0" type="button">
+<span class="material-symbols-outlined text-title-md">menu_book</span>
+</button>
+</div>
+</div>
+<!-- Inline Script for Delightful Micro-Interactions -->
+<script>
+    let currentWater = 750;
+    const maxWater = 2000;
+
+    function switchTrackerTab(target) {
+      const waterView = document.getElementById('waterTrackerView');
+      const wasteSection = document.getElementById('foodWasteSection');
+      const tabWaterBtn = document.getElementById('tabWaterBtn');
+      const tabWasteBtn = document.getElementById('tabWasteBtn');
+
+      if (target === 'water') {
+        waterView.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        tabWaterBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        tabWaterBtn.classList.remove('text-on-surface-variant');
+        tabWasteBtn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        tabWasteBtn.classList.add('text-on-surface-variant');
+      } else {
+        wasteSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        tabWasteBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        tabWasteBtn.classList.remove('text-on-surface-variant');
+        tabWaterBtn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        tabWaterBtn.classList.add('text-on-surface-variant');
+      }
+    }
+
+    function logWater(amount, label) {
+      currentWater = Math.min(maxWater, currentWater + amount);
+      const amountEl = document.getElementById('currentWaterAmount');
+      if (amountEl) {
+        amountEl.textContent = currentWater.toLocaleString('id-ID');
+      }
+
+      // Update ring animation
+      const ring = document.getElementById('waterRingProgress');
+      if (ring) {
+        const totalLength = 251.2;
+        const fraction = currentWater / maxWater;
+        const offset = totalLength - (totalLength * fraction);
+        ring.style.strokeDashoffset = offset;
+      }
+
+      // Prepend to Riwayat
+      const logList = document.getElementById('waterLogList');
+      if (logList) {
+        const now = new Date();
+        const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ' WIB';
+        const newEntry = document.createElement('div');
+        newEntry.className = 'flex items-center justify-between p-2.5 rounded-xl bg-tertiary-fixed/30 transition-all transform scale-98';
+        newEntry.innerHTML = `
+          <div class="flex items-center gap-space-sm min-w-0">
+            <div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container flex-shrink-0">
+              <span class="material-symbols-outlined text-[18px]">water_drop</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <span class="font-label-md text-label-md text-on-surface font-semibold truncate">+${amount} ml • ${label}</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">${timeStr}</span>
+            </div>
+          </div>
+          <button type="button" aria-label="Hapus catatan" onclick="this.parentElement.remove()" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-all">
+            <span class="material-symbols-outlined text-[20px]">delete_outline</span>
+          </button>
+        `;
+        logList.insertBefore(newEntry, logList.firstChild);
+        setTimeout(() => newEntry.classList.remove('scale-98'), 50);
+      }
+    }
+
+    function celebrateZeroWaste() {
+      const btn = document.getElementById('zeroWasteBtn');
+      if (btn) {
+        btn.classList.add('bg-primary', 'text-on-primary');
+        btn.innerHTML = `
+          <div class="flex items-center gap-space-sm min-w-0">
+            <div class="w-10 h-10 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-headline-sm">workspace_premium</span>
+            </div>
+            <div class="flex flex-col min-w-0 text-white">
+              <span class="font-label-lg text-label-lg font-bold leading-tight">Luar Biasa! +20 Poin SDG 12.3</span>
+              <span class="font-body-sm text-body-sm opacity-90 truncate">Tercatat untuk rekor hari ini. Bersih!</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-white text-title-lg">done_all</span>
+        `;
+      }
+    }
+
+    function toggleWasteDrawer() {
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm flex items-end justify-center transition-opacity';
+      modal.innerHTML = `
+        <div class="bg-surface-container-lowest w-full max-w-md rounded-t-3xl p-space-md shadow-xl flex flex-col space-y-space-md">
+          <div class="w-10 h-1 bg-surface-container-highest rounded-full mx-auto"></div>
+          <div class="flex items-center justify-between">
+            <h3 class="font-title-lg text-title-lg text-on-surface font-semibold">Catat Makanan Terbuang</h3>
+            <button onclick="this.closest('.fixed').remove()" class="w-8 h-8 flex items-center justify-center text-on-surface-variant">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div class="flex flex-col space-y-3">
+            <div>
+              <label class="font-label-sm text-label-sm text-on-surface-variant block mb-1">Nama Makanan / Bahan</label>
+              <input type="text" placeholder="Misal: Nasi putih sisa, Roti tawar" class="w-full bg-surface-container px-3.5 py-2.5 rounded-xl font-body-md text-on-surface outline-none" />
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="font-label-sm text-label-sm text-on-surface-variant block mb-1">Porsi</label>
+                <input type="text" placeholder="1 porsi / 200 gr" class="w-full bg-surface-container px-3.5 py-2.5 rounded-xl font-body-md text-on-surface outline-none" />
+              </div>
+              <div>
+                <label class="font-label-sm text-label-sm text-on-surface-variant block mb-1">Estimasi Rugi (Rp)</label>
+                <input type="number" placeholder="5000" class="w-full bg-surface-container px-3.5 py-2.5 rounded-xl font-body-md text-on-surface outline-none" />
+              </div>
+            </div>
+            <div>
+              <label class="font-label-sm text-label-sm text-on-surface-variant block mb-1">Alasan Terbuang</label>
+              <select class="w-full bg-surface-container px-3.5 py-2.5 rounded-xl font-body-md text-on-surface outline-none">
+                <option>Basi / Lupa Disimpan</option>
+                <option>Lewat Tanggal Kedaluwarsa</option>
+                <option>Porsi Terlalu Banyak</option>
+                <option>Rasa Kurang Cocok</option>
+              </select>
+            </div>
+          </div>
+          <button onclick="this.closest('.fixed').remove()" class="w-full py-3 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-semibold active:scale-95 transition-all">
+            Simpan Catatan
+          </button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+  </script>
+</div></main><div class="fixed bottom-20 right-margin z-50"><a class="inline-flex items-center gap-2 h-12 px-space-md rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_4px_16px_-2px_rgba(18,24,18,0.18)] active:scale-95 transition-all" data-path="catat-cepat" href="#"><span class="material-symbols-outlined text-title-lg">bolt</span><span>Catat Cepat</span></a></div><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-primary font-label-md"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="beranda" href="#"><span class="material-symbols-outlined text-title-lg">home</span><span class="font-label-sm text-label-sm">Beranda</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="menu" href="#"><span class="material-symbols-outlined text-title-lg">restaurant_menu</span><span class="font-label-sm text-label-sm">Menu</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="belanja" href="#"><span class="material-symbols-outlined text-title-lg">shopping_bag</span><span class="font-label-sm text-label-sm">Belanja</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="air-dan-waste" href="#"><span class="material-symbols-outlined text-title-lg">water_drop</span><span class="font-label-sm text-label-sm">Air &amp; Waste</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="profil" href="#"><span class="material-symbols-outlined text-title-lg">person</span><span class="font-label-sm text-label-sm">Profil</span></a></div></nav></body></html>

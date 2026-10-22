@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary-container": "#fc820c", "outline-variant": "#bfcaba", "on-background": "#171d17", "on-primary-fixed": "#002204", "surface-dim": "#d6dcd2", "on-secondary-container": "#5e2c00", "primary-container": "#2e7d32", "surface-container-lowest": "#ffffff", "inverse-primary": "#88d982", "secondary-fixed-dim": "#ffb786", "primary-fixed": "#a3f69c", "secondary": "#964900", "surface-bright": "#f5fbf1", "error": "#ba1a1a", "inverse-surface": "#2c322b", "surface-variant": "#dee4da", "on-primary-container": "#cbffc2", "surface-container-highest": "#dee4da", "on-error": "#ffffff", "tertiary-fixed-dim": "#96ccff", "on-secondary-fixed": "#311300", "secondary-fixed": "#ffdcc6", "outline": "#707a6c", "on-secondary-fixed-variant": "#723600", "surface-container": "#e9f0e5", "surface": "#f5fbf1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "surface-container-low": "#eff6eb", "on-tertiary-container": "#e9f2ff", "on-primary": "#ffffff", "on-primary-fixed-variant": "#005312", "surface-tint": "#1b6d24", "on-tertiary": "#ffffff", "on-surface-variant": "#40493d", "surface-container-high": "#e4eae0", "primary": "#0d631b", "on-tertiary-fixed": "#001d32", "inverse-on-surface": "#ecf3e8", "tertiary": "#005a8c", "tertiary-container": "#0073b2", "primary-fixed-dim": "#88d982", "on-tertiary-fixed-variant": "#004a75", "tertiary-fixed": "#cee5ff", "error-container": "#ffdad6", "background": "#f5fbf1", "on-surface": "#171d17" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1rem", "gutter": "1rem", "space-sm": "0.5rem", "margin": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-xs": "0.25rem" }, fontFamily: { "title-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "numeric-currency": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "numeric-stat": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"] }, fontSize: { "title-lg": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "numeric-currency": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "numeric-stat": ["18px", { "lineHeight": "24px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f5fbf1;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="Kembali" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-title-lg">arrow_back</span></button><img alt="SmartBites Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_xEY_4COTQLNKdaiU10w2-xwXmgNNSFIWk2q5RjKbazMiE_XySsJEDyvqFN6iLln06mgVq_4tk80E8WBeL39aJUTuzKqI5GNrkkP9gZILEudBKh6bwd2hhExm41mT4-myPLKEWrwYGT4qyaJ4W3ZhRhkaS9Zq7WoAgWY3XUk0dlf0nmX88o6I6CDGfhDaYceKoH6sj8cJ6hTGx41qGsLckYC-COsmV376luTGdxSIs9QCk3Dkibvs"/><h1 class="font-title-lg text-title-lg text-on-surface tracking-tight">Detail Resep</h1></div><div class="flex items-center"><div class="relative flex items-center justify-center w-11 h-11"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbGRje60ra31FJDqB7CfJwnQzyStR_sGfOSkWgr-eF6wgDa1vl0mpHwvjhPjDrjArEwVZL7bi4ESWQi6QmARbL8RG0x6WI0BmBRxvJNu73UUcWYjRP3wiPBBnJI-eynPxrjG96QWZ6WoxEb38_qD_Sn8T_0DBA-m8pL-ikWbt0Gwm76ib3wHZw-k9fMwGBdFp_rVWK1rB0iytcS2e7IV5IBt-wSQ7Ac517-Q6ZHtZdx1KzpnBezwq"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Hero Meal Media Frame -->
+<div class="relative w-full h-72 overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A vibrant, mouth-watering close-up of Indonesian Gado-Gado Komplit. Steaming fresh water spinach, crunchy bean sprouts, golden pan-fried tofu cubes, crispy artisanal tempeh, and a hard-boiled egg cut in half, lavishly drizzled with thick, glossy peanut sauce and garnished with crispy fried shallots on a traditional rustic clay plate, warm organic ambient lighting, clean food editorial photography, sage green and earthy warm tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkdVkYG_Q9toZcaGHu0ZnCOBoTMWfKeUANJ28t0_Cv_LUJSmJl4IzuLp9n2GA0eVuJBdXZHglsE8S850wPbehc3RqXjai1NirRgjmRSWjZtBVNJck_kzSusvYoP6WyzEpUosfx3HW--NhMJRprYb9RWfPCesEebimEk8P2m38xZGh4sGfbzHYEIJBHosQS7W5Gj-gdfEjJOeT1F1nmwOqdmd6yWG8SZlp-2fUE55ZMPYNcQ1oywhYw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"></div>
+<!-- Floating Top Actions Inside Hero Image -->
+<div class="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+<div class="flex gap-space-xs pointer-events-auto">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+          Hemat
+        </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm text-primary-container font-label-md text-label-md">
+<span class="material-symbols-outlined text-[15px]">psychiatry</span>
+          Vegetarian
+        </span>
+</div>
+<button aria-label="Simpan ke Favorit" class="pointer-events-auto w-10 h-10 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm flex items-center justify-center text-secondary transition-transform active:scale-90" id="favorite-btn">
+<span class="material-symbols-outlined text-title-lg" id="favorite-icon">favorite_border</span>
+</button>
+</div>
+<!-- Title and Subtitle floating on hero base -->
+<div class="absolute bottom-4 left-4 right-4 text-surface-container-lowest">
+<div class="flex items-center gap-1.5 mb-1 text-primary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm">restaurant</span>
+<span>Menu Kos Pilihan • Tinggi Serat</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile leading-tight drop-shadow-sm text-surface-container-lowest font-bold">
+        Gado-Gado Komplit
+      </h2>
+</div>
+</div>
+<div class="flex flex-col p-margin gap-space-lg">
+<!-- Allergy Warning Banner (PRD FR-12 Crucial Element) -->
+<div class="relative overflow-hidden rounded-xl bg-error-container p-space-md shadow-sm text-on-error-container">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-error flex items-center justify-center shrink-0 text-on-error shadow-sm mt-0.5">
+<span class="material-symbols-outlined text-headline-sm" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between gap-1">
+<span class="font-title-md text-title-md font-bold tracking-tight text-on-error-container">
+              PERINGATAN ALERGI
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-error/15 text-error font-label-sm text-label-sm uppercase tracking-wider font-bold">
+              Profil Rani
+            </span>
+</div>
+<p class="font-body-md text-body-md mt-1 text-on-error-container leading-relaxed">
+            Menu ini mengandung <strong>Kacang</strong> yang ada di daftar pantanganmu! Harap ganti saus dengan kecap sambal atau hindari.
+          </p>
+</div>
+</div>
+</div>
+<!-- Recipe Key Metrics (Bento Mosaic) -->
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Price Card -->
+<div class="rounded-xl bg-surface-container-low p-space-md flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm">Estimasi Biaya</span>
+<span class="material-symbols-outlined text-lg text-primary">payments</span>
+</div>
+<div class="mt-2">
+<span class="font-numeric-currency text-numeric-currency text-primary block tracking-tight">
+            Rp 15.000
+          </span>
+<span class="font-label-sm text-label-sm text-outline">Ramah kantong kos</span>
+</div>
+</div>
+<!-- Calories Card -->
+<div class="rounded-xl bg-surface-container-low p-space-md flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm">Kandungan Energi</span>
+<span class="material-symbols-outlined text-lg text-secondary-container">local_fire_department</span>
+</div>
+<div class="mt-2">
+<span class="font-numeric-stat text-numeric-stat text-on-surface block">
+            380 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">kkal</span>
+</span>
+<span class="font-label-sm text-label-sm text-outline">Energi seimbang</span>
+</div>
+</div>
+<!-- Cook Time Card -->
+<div class="rounded-xl bg-surface-container-low p-space-md flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm">Waktu Siap</span>
+<span class="material-symbols-outlined text-lg text-tertiary">schedule</span>
+</div>
+<div class="mt-2">
+<span class="font-numeric-stat text-numeric-stat text-on-surface block">
+            20 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">menit</span>
+</span>
+<span class="font-label-sm text-label-sm text-outline">Praktis tanpa ribet</span>
+</div>
+</div>
+<!-- Portion Card -->
+<div class="rounded-xl bg-surface-container-low p-space-md flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm">Takaran</span>
+<span class="material-symbols-outlined text-lg text-primary-container">room_service</span>
+</div>
+<div class="mt-2">
+<span class="font-numeric-stat text-numeric-stat text-on-surface block truncate">
+            1 Porsi
+          </span>
+<span class="font-label-sm text-label-sm text-outline">Porsi kenyang pas</span>
+</div>
+</div>
+</div>
+<!-- Ingredients Section (FR-11) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold">Daftar Bahan Baku</h3>
+</div>
+<span class="font-label-sm text-label-sm text-outline">5 Bahan Segar</span>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Item 1: Tahu Goreng -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">breakfast_dining</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Tahu goreng</span>
+<span class="font-body-sm text-body-sm text-outline">Potong kotak dadu</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container font-label-md text-label-md text-on-surface-variant font-semibold">
+            1 potong
+          </span>
+</div>
+<!-- Item 2: Tempe Goreng -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">lunch_dining</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Tempe goreng gurih</span>
+<span class="font-body-sm text-body-sm text-outline">Sumber protein nabati</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container font-label-md text-label-md text-on-surface-variant font-semibold">
+            1 potong
+          </span>
+</div>
+<!-- Item 3: Bayam Rebus -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">nutrition</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Bayam rebus segar</span>
+<span class="font-body-sm text-body-sm text-outline">Kaya zat besi &amp; serat</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container font-label-md text-label-md text-on-surface-variant font-semibold">
+            1 ikat kecil
+          </span>
+</div>
+<!-- Item 4: Tauge Seduh -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">spa</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Tauge seduh renyah</span>
+<span class="font-body-sm text-body-sm text-outline">Tekstur segar kriuk</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container font-label-md text-label-md text-on-surface-variant font-semibold">
+            50g
+          </span>
+</div>
+<!-- Item 5: Saus Kacang (Allergen Trigger Highlight) -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-error-container/60 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-error text-on-error flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-lg">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-error-container font-bold">Saus kacang kental</span>
+<span class="font-label-sm text-label-sm text-error font-semibold">⚠️ Mengandung Kacang</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest font-label-md text-label-md text-error font-bold">
+            3 sdm
+          </span>
+</div>
+</div>
+</div>
+<!-- Quick Cooking Steps (FR-11 Anak Kos Friendly) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold">Langkah Memasak Singkat</h3>
+</div>
+<span class="font-label-sm text-label-sm text-outline">3 Langkah Mudah</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Step 1 -->
+<div class="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-7 h-7 rounded-full bg-primary-fixed text-on-primary-fixed font-title-md text-title-md font-bold flex items-center justify-center shrink-0">
+            1
+          </div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold mb-0.5">Rebus Sayuran</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Rebus bayam dan tauge dalam air mendidih selama 2 menit, lalu tiriskan agar tetap renyah.
+            </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-7 h-7 rounded-full bg-primary-fixed text-on-primary-fixed font-title-md text-title-md font-bold flex items-center justify-center shrink-0">
+            2
+          </div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold mb-0.5">Potong Tahu &amp; Tempe</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Potong tahu dan tempe dadu sesuai selera ukuran suapan kosan yang pas.
+            </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-7 h-7 rounded-full bg-primary-fixed text-on-primary-fixed font-title-md text-title-md font-bold flex items-center justify-center shrink-0">
+            3
+          </div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold mb-0.5">Campur &amp; Sajikan</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Campur semua sayuran dan siram dengan saus kacang hangat (atau alternatif saus bebas alergen).
+            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Medical & Nutrition Disclaimer (FR-11 Out of Scope Note) -->
+<div class="flex items-center gap-2.5 p-3 rounded-lg bg-surface-container-high/60 text-outline">
+<span class="material-symbols-outlined text-base shrink-0">info</span>
+<p class="font-label-sm text-label-sm leading-snug">
+        Estimasi kalori dan nutrisi bersifat perkiraan, bukan saran medis. Sesuaikan konsumsi dengan anjuran tenaga kesehatan Anda.
+      </p>
+</div>
+<!-- Dual Action CTA Group (Usability Task T2 & PR-10) -->
+<div class="flex flex-col gap-3 pt-space-xs pb-space-lg">
+<button class="w-full h-12 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-md hover:bg-primary-container active:scale-[0.98] transition-all" id="add-meal-plan-btn">
+<span class="material-symbols-outlined text-title-md">calendar_month</span>
+<span>Tambah ke Rencana Makan</span>
+</button>
+<button class="w-full h-12 rounded-full bg-surface-container-highest text-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-sm hover:bg-surface-dim active:scale-[0.98] transition-all" id="add-grocery-btn">
+<span class="material-symbols-outlined text-title-md">shopping_cart</span>
+<span>Masukkan Bahan ke Belanja</span>
+</button>
+</div>
+</div>
+<!-- Micro-feedback Toast Snackbar (FR-35) -->
+<div class="fixed bottom-6 left-4 right-4 max-w-sm mx-auto bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-xl shadow-xl flex items-center justify-between opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4 z-50" id="toast">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary-fixed" id="toast-icon">check_circle</span>
+<span class="font-body-sm text-body-sm font-semibold" id="toast-text">Tersimpan</span>
+</div>
+<button class="font-label-md text-label-md text-secondary-fixed font-bold hover:underline" id="toast-undo">
+      Batal
+    </button>
+</div>
+</div>
+<script>
+  (function () {
+    const favoriteBtn = document.getElementById('favorite-btn');
+    const favoriteIcon = document.getElementById('favorite-icon');
+    const addMealBtn = document.getElementById('add-meal-plan-btn');
+    const addGroceryBtn = document.getElementById('add-grocery-btn');
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+    const toastUndo = document.getElementById('toast-undo');
+    let toastTimeout;
+    let isFavorited = false;
+
+    function showToast(message) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastText.textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }, 3500);
+    }
+
+    if (toastUndo) {
+      toastUndo.addEventListener('click', () => {
+        toast.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      });
+    }
+
+    if (favoriteBtn && favoriteIcon) {
+      favoriteBtn.addEventListener('click', () => {
+        isFavorited = !isFavorited;
+        if (isFavorited) {
+          favoriteIcon.textContent = 'favorite';
+          favoriteIcon.style.fontVariationSettings = "'FILL' 1";
+          favoriteBtn.classList.add('text-error');
+          showToast('Menu disimpan ke daftar favorit');
+        } else {
+          favoriteIcon.textContent = 'favorite_border';
+          favoriteIcon.style.fontVariationSettings = "'FILL' 0";
+          favoriteBtn.classList.remove('text-error');
+          showToast('Dihapus dari daftar favorit');
+        }
+      });
+    }
+
+    if (addMealBtn) {
+      addMealBtn.addEventListener('click', () => {
+        showToast('Gado-Gado Komplit ditambahkan ke Meal Plan');
+      });
+    }
+
+    if (addGroceryBtn) {
+      addGroceryBtn.addEventListener('click', () => {
+        showToast('5 bahan dimasukkan ke Grocery List');
+      });
+    }
+  })();
+</script></main></body></html>
