@@ -42,8 +42,11 @@ Mengikuti prinsip PRD dan batasan teknis proyek:
 | **SectionTitle** | Louis | `HomeScreen`, `MealPlanScreen`, `ProfileScreen`, dsb. | Header judul section berstandar typography M3 dengan aksi trailing opsional. |
 | **StatusBadge** | Louis | `BudgetCard`, `MealCard`, `GroceryItemTile`, `PantryItemTile` | Badge status seragam: `.hemat()`, `.pas()`, `.melebihi()`, dan `.alergen()`. |
 | **ResponsiveLayout** | Louis | Seluruh root container layar | LayoutBuilder adaptive breakpoint: compact (<600dp), medium (600-839dp), dan expanded (≥840dp). |
-| **BudgetCard** | Louis (Step 3) | `HomeScreen`, `MealPlanScreen` | Kartu ringkasan anggaran mingguan dengan gauge bar linier dan badge status. |
-| **StreakCard** | Louis (Step 3) | `HomeScreen`, `AchievementsScreen` | Kartu streak beruntun dengan icon api, milestone level, dan navigasi ke pencapaian. |
+| **PageDots** | Louis (Step 3) | `OnboardingScreen`, `HealthTipCard` (Step 10) | Indikator dot paginasi Material 3 dengan accessibility Semantics dan animasi transisi halus (penambahan PRD 9.1). |
+| **SdgBadge** | Louis (Step 3) | `WelcomeScreen`, `OnboardingScreen`, `SmartBitesAppBar` | Badge representasi misi dampak SDG 3 (Kehidupan Sehat) dan SDG 12.3 (Nol Sampah Pangan) mode reguler dan compact. |
+| **AssetImageWithFallback** | Louis (Step 3) | `OnboardingScreen`, `HomeScreen`, `MealCard` | Komponen visualizer gambar aset lokal dengan *errorBuilder* aman berbasis tema jika file gambar belum diunduh. |
+| **BudgetCard** | Louis (Step 5) | `HomeScreen`, `MealPlanScreen` | Kartu ringkasan anggaran mingguan dengan gauge bar linier dan badge status. |
+| **StreakCard** | Louis (Step 5) | `HomeScreen`, `AchievementsScreen` | Kartu streak beruntun dengan icon api, milestone level, dan navigasi ke pencapaian. |
 | **QuickLogSheet** | Louis (Step 4) | FAB Global (`Catat Cepat`) | Bottom sheet modal multi-aksi untuk log air, centang makan siang, dan catat sisa makanan 1-ketuk. |
 | **MealCard** | Jesseca (Step 6)| `HomeScreen`, `MealPlanScreen` | Kartu item makanan dengan foto, kalori, harga, tag alergen, dan checkbox selesai makan. |
 | **GroceryItemTile** | Gilbert (Step 7)| `GroceryScreen` | List item belanja dengan checkbox, kuantitas, estimasi harga, dan swipe-to-delete. |
