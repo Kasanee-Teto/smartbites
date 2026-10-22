@@ -1,6 +1,7 @@
 // Owner: Louis | Tests: WelcomeScreen, OnboardingScreen, MainNavigation, adaptive layouts, and overflow
 
 import 'package:budget_bites/app.dart';
+import 'package:budget_bites/screens/grocery_screen.dart';
 import 'package:budget_bites/screens/onboarding_screen.dart';
 import 'package:budget_bites/screens/welcome_screen.dart';
 import 'package:budget_bites/theme/app_theme.dart';
@@ -123,10 +124,16 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('MealPlanScreen - Jesseca (Menu)'), findsOneWidget);
 
-    // Tab 2: Belanja
-    await tester.tap(find.text('Belanja'));
+    // Tab 2: Belanja ('Belanja' also appears as a TabBar label inside the screen)
+    await tester.tap(
+      find.descendant(
+        of: find.byType(NavigationBar),
+        matching: find.text('Belanja'),
+      ),
+    );
     await tester.pumpAndSettle();
-    expect(find.text('GroceryScreen - Gilbert (Belanja)'), findsOneWidget);
+    expect(find.byType(GroceryScreen), findsOneWidget);
+    expect(find.text('Pindahkan 3 item ke Pantry'), findsOneWidget);
 
     // Tab 3: Air & Waste
     await tester.tap(find.text('Air & Waste'));

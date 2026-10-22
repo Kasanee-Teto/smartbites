@@ -12,6 +12,7 @@ import 'package:budget_bites/models/water_record.dart';
 import 'package:budget_bites/screens/grocery_screen.dart';
 import 'package:budget_bites/screens/home_screen.dart';
 import 'package:budget_bites/screens/meal_plan_screen.dart';
+import 'package:budget_bites/screens/pantry_screen.dart';
 import 'package:budget_bites/screens/profile_screen.dart';
 import 'package:budget_bites/screens/water_tracker_screen.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
@@ -309,6 +310,68 @@ class _MainNavigationState extends State<MainNavigation> {
             );
           }
         },
+        onAddItem: (item) {
+          _applyWithUndo(
+            '${item.name} ditambahkan ke daftar belanja',
+            () => setState(() => _grocery.add(item)),
+            () => setState(() => _grocery.removeWhere((g) => g.id == item.id)),
+          );
+        },
+        onDeleteItem: (id) {
+          final index = _grocery.indexWhere((item) => item.id == id);
+          if (index == -1) return;
+          final removed = _grocery[index];
+          _applyWithUndo(
+            '${removed.name} dihapus',
+            () => setState(() => _grocery.removeAt(index)),
+            () => setState(
+              () => _grocery.insert(index.clamp(0, _grocery.length), removed),
+            ),
+          );
+        },
+        // FR-17: move checked grocery items into the pantry.
+        onClearChecked: () {
+          final prevGrocery = List<GroceryItem>.from(_grocery);
+          final prevPantry = List<PantryItem>.from(_pantry);
+          final checked = _grocery.where((g) => g.isChecked).toList();
+          if (checked.isEmpty) return;
+          final now = DateTime.now();
+          _applyWithUndo(
+            '${checked.length} item dipindahkan ke Pantry',
+            () => setState(() {
+              _grocery.removeWhere((g) => g.isChecked);
+              _pantry.addAll(
+                checked.map(
+                  (g) => PantryItem(
+                    id: 'p_${g.id}_${now.millisecondsSinceEpoch}',
+                    name: g.name,
+                    category: 'Lainnya',
+                    quantity: g.quantity,
+                    minQuantity: 0,
+                    unit: g.unit,
+                    expiryDate: now.add(const Duration(days: 7)),
+                  ),
+                ),
+              );
+            }),
+            () => setState(() {
+              _grocery
+                ..clear()
+                ..addAll(prevGrocery);
+              _pantry
+                ..clear()
+                ..addAll(prevPantry);
+            }),
+          );
+        },
+        pantryView: PantryScreen(
+          items: _pantry,
+          onUpdateItem: (updated) {
+            final index = _pantry.indexWhere((p) => p.id == updated.id);
+            if (index == -1) return;
+            setState(() => _pantry[index] = updated);
+          },
+        ),
       ),
       WaterTrackerScreen(
         dailyTargetMl: _profile.waterTargetMl,
