@@ -10,6 +10,7 @@ import 'package:budget_bites/widgets/page_dots.dart';
 import 'package:budget_bites/widgets/sdg_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:budget_bites/screens/water_tracker_screen.dart';
 
 void main() {
   testWidgets(
@@ -131,7 +132,7 @@ void main() {
     // Tab 3: Air & Waste
     await tester.tap(find.text('Air & Waste'));
     await tester.pumpAndSettle();
-    expect(find.text('WaterTrackerScreen - Edbert (Air)'), findsOneWidget);
+    expect(find.byType(WaterTrackerScreen), findsOneWidget);
 
     // Tab 4: Profil
     await tester.tap(find.text('Profil'));
