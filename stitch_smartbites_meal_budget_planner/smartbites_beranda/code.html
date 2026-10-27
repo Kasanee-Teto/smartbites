@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary-container": "#fc820c", "outline-variant": "#bfcaba", "on-background": "#171d17", "on-primary-fixed": "#002204", "surface-dim": "#d6dcd2", "on-secondary-container": "#5e2c00", "primary-container": "#2e7d32", "surface-container-lowest": "#ffffff", "inverse-primary": "#88d982", "secondary-fixed-dim": "#ffb786", "primary-fixed": "#a3f69c", "secondary": "#964900", "surface-bright": "#f5fbf1", "error": "#ba1a1a", "inverse-surface": "#2c322b", "surface-variant": "#dee4da", "on-primary-container": "#cbffc2", "surface-container-highest": "#dee4da", "on-error": "#ffffff", "tertiary-fixed-dim": "#96ccff", "on-secondary-fixed": "#311300", "secondary-fixed": "#ffdcc6", "outline": "#707a6c", "on-secondary-fixed-variant": "#723600", "surface-container": "#e9f0e5", "surface": "#f5fbf1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "surface-container-low": "#eff6eb", "on-tertiary-container": "#e9f2ff", "on-primary": "#ffffff", "on-primary-fixed-variant": "#005312", "surface-tint": "#1b6d24", "on-tertiary": "#ffffff", "on-surface-variant": "#40493d", "surface-container-high": "#e4eae0", "primary": "#0d631b", "on-tertiary-fixed": "#001d32", "inverse-on-surface": "#ecf3e8", "tertiary": "#005a8c", "tertiary-container": "#0073b2", "primary-fixed-dim": "#88d982", "on-tertiary-fixed-variant": "#004a75", "tertiary-fixed": "#cee5ff", "error-container": "#ffdad6", "background": "#f5fbf1", "on-surface": "#171d17" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1rem", "gutter": "1rem", "space-sm": "0.5rem", "margin": "1rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-xs": "0.25rem" }, fontFamily: { "title-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "numeric-currency": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "numeric-stat": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"] }, fontSize: { "title-lg": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "numeric-currency": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "numeric-stat": ["18px", { "lineHeight": "24px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#f5fbf1;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="SmartBites Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_xEY_4COTQLNKdaiU10w2-xwXmgNNSFIWk2q5RjKbazMiE_XySsJEDyvqFN6iLln06mgVq_4tk80E8WBeL39aJUTuzKqI5GNrkkP9gZILEudBKh6bwd2hhExm41mT4-myPLKEWrwYGT4qyaJ4W3ZhRhkaS9Zq7WoAgWY3XUk0dlf0nmX88o6I6CDGfhDaYceKoH6sj8cJ6hTGx41qGsLckYC-COsmV376luTGdxSIs9QCk3Dkibvs"/><div class="flex flex-col"><div class="flex items-center gap-1.5"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">SmartBites</span><span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">SDG 3 &amp; 12.3</span></div><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Beranda</span></div></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1 px-2 py-1 rounded-full bg-secondary-fixed/50 text-secondary"><span class="material-symbols-outlined text-title-md">local_fire_department</span><span class="font-label-md text-label-md text-on-secondary-fixed">7</span></div><button aria-label="Notifikasi" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined">notifications</span></button><div class="relative flex items-center justify-center w-11 h-11"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjbGRje60ra31FJDqB7CfJwnQzyStR_sGfOSkWgr-eF6wgDa1vl0mpHwvjhPjDrjArEwVZL7bi4ESWQi6QmARbL8RG0x6WI0BmBRxvJNu73UUcWYjRP3wiPBBnJI-eynPxrjG96QWZ6WoxEb38_qD_Sn8T_0DBA-m8pL-ikWbt0Gwm76ib3wHZw-k9fMwGBdFp_rVWK1rB0iytcS2e7IV5IBt-wSQ7Ac517-Q6ZHtZdx1KzpnBezwq"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive Toast Notification (Snackbar) with Undo Action -->
+<div class="fixed top-20 left-4 right-4 z-50 transform -translate-y-28 opacity-0 transition-all duration-300 pointer-events-none flex items-center justify-between px-space-md py-space-sm bg-inverse-surface text-inverse-on-surface rounded-xl shadow-lg" id="toast-undo">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-title-md">check_circle</span>
+<span class="font-body-sm text-body-sm" id="toast-message">Catatan berhasil diperbarui!</span>
+</div>
+<button class="font-label-md text-label-md text-inverse-primary hover:underline px-2 py-1 active:scale-95 transition-transform pointer-events-auto" id="toast-undo-btn" type="button">
+      Batalkan
+    </button>
+</div>
+<div class="flex flex-col gap-space-lg px-margin pb-6">
+<!-- 1. Warm Greeting & Daily Insight Header -->
+<section class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Halo, Rani! 👋</h1>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">20 thn • Mahasiswa Kost Aktif</p>
+</div>
+<button aria-label="Lihat Insight Nutrisi &amp; Hemat" class="flex items-center justify-center w-11 h-11 rounded-full bg-surface-container-high text-primary hover:bg-surface-variant active:scale-95 transition-all" id="insight-btn" type="button">
+<span class="material-symbols-outlined text-title-lg">tips_and_updates</span>
+</button>
+</div>
+<!-- Compact Inspirational Daily Micro-Banner -->
+<div class="flex items-center justify-between px-space-md py-2.5 rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-secondary text-title-md shrink-0">spa</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Pilihan Bijak Hari Ini: Sayur segar lebih hemat 35% di pasar pagi!</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-body-sm shrink-0 ml-1">arrow_forward</span>
+</div>
+</section>
+<!-- 2. BudgetCard (Weekly Budget Summary - PRD FR-04, FR-13) -->
+<section class="flex flex-col p-space-md rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(18,24,18,0.06)] relative overflow-hidden">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-title-md">account_balance_wallet</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface leading-tight">Budget Makan Minggu Ini</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Target Senin – Minggu</p>
+</div>
+</div>
+<!-- Status Badge: 'Hemat' -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low text-primary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary inline-block animate-pulse"></span>
+          Hemat
+        </span>
+</div>
+<div class="flex items-baseline justify-between mt-1 mb-2">
+<div class="flex items-baseline gap-1">
+<span class="font-numeric-currency text-numeric-currency text-on-surface tracking-tight">Rp 235.000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ Rp 300.000</span>
+</div>
+<span class="font-numeric-stat text-numeric-stat text-primary">78%</span>
+</div>
+<!-- Smooth Linear Progress Indicator Bar -->
+<div class="w-full h-2.5 rounded-full bg-surface-container-highest overflow-hidden mb-3">
+<div class="h-full bg-primary rounded-full transition-all duration-700 ease-out" style="width: 78%;"></div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-body-md">savings</span>
+<span class="font-label-md text-label-md text-on-surface">Sisa uang makan: <strong class="text-primary font-title-md">Rp 65.000</strong></span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tersisa 3 hari</span>
+</div>
+</section>
+<!-- 3. StreakCard (Gamification - PRD FR-36, FR-38) -->
+<a class="group flex items-center justify-between p-space-md rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(18,24,18,0.06)] active:scale-[0.99] transition-all" data-path="achievements" href="#" id="streak-card">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-headline-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-title-lg text-title-lg text-on-surface tracking-tight">5 Hari Beruntun 🔥</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high text-on-secondary-fixed font-label-sm text-label-sm">Level 2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Pertahankan kebiasaan sehat dan hematmu!</p>
+</div>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-on-primary transition-colors shrink-0">
+<span class="material-symbols-outlined text-title-md">chevron_right</span>
+</div>
+</a>
+<!-- 4. WaterProgressCard (Hydration Tracker - PRD FR-22, FR-31) -->
+<section class="flex flex-col p-space-md rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(18,24,18,0.06)]">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-title-md" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Konsumsi Air Hari Ini</h2>
+</div>
+<span class="font-numeric-stat text-numeric-stat text-tertiary" id="water-percentage-label">38%</span>
+</div>
+<div class="flex items-baseline gap-1 my-1">
+<span class="font-numeric-currency text-numeric-currency text-on-surface tracking-tight" id="current-water-val">750</span>
+<span class="font-title-md text-title-md text-on-surface-variant">ml</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1">/ 2000 ml target harian</span>
+</div>
+<!-- Sky Blue Progress Bar -->
+<div class="w-full h-3 rounded-full bg-tertiary-fixed/30 overflow-hidden my-2">
+<div class="h-full bg-tertiary rounded-full transition-all duration-500 ease-out" id="water-progress-fill" style="width: 37.5%;"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-body-sm text-tertiary">info</span>
+        Catat cepat 1-ketuk tanpa pindah halaman:
+      </p>
+<!-- Quick one-tap log buttons: '+150 ml', '+250 ml', '+500 ml' -->
+<div class="grid grid-cols-3 gap-space-sm">
+<button class="water-log-btn flex flex-col items-center justify-center py-2 px-1 rounded-full bg-surface-container hover:bg-tertiary-fixed text-on-surface active:scale-95 transition-all" data-water="150" type="button">
+<span class="font-label-lg text-label-lg font-bold text-tertiary">+150 ml</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1 Cangkir</span>
+</button>
+<button class="water-log-btn flex flex-col items-center justify-center py-2 px-1 rounded-full bg-surface-container hover:bg-tertiary-fixed text-on-surface active:scale-95 transition-all" data-water="250" type="button">
+<span class="font-label-lg text-label-lg font-bold text-tertiary">+250 ml</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1 Gelas</span>
+</button>
+<button class="water-log-btn flex flex-col items-center justify-center py-2 px-1 rounded-full bg-surface-container hover:bg-tertiary-fixed text-on-surface active:scale-95 transition-all" data-water="500" type="button">
+<span class="font-label-lg text-label-lg font-bold text-tertiary">+500 ml</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1 Botol</span>
+</button>
+</div>
+</section>
+<!-- 5. Menu Hari Ini (Today's Meals - Monday - PRD FR-05, FR-12, FR-32) -->
+<section class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h2 class="font-title-lg text-title-lg text-on-surface">Menu Hari Ini</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Senin</span>
+</div>
+<a class="font-label-md text-label-md text-primary flex items-center gap-0.5 hover:underline" data-path="menu" href="#">
+          Lihat Rencana
+          <span class="material-symbols-outlined text-body-sm">chevron_right</span>
+</a>
+</div>
+<!-- Meal 1: Sarapan (Checked) -->
+<article class="flex items-center gap-3 p-space-sm rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(18,24,18,0.06)] relative overflow-hidden transition-all duration-300" id="meal-card-1">
+<div class="w-1.5 self-stretch rounded-full bg-primary shrink-0"></div>
+<img class="w-16 h-16 rounded-lg object-cover shrink-0" data-alt="A warm wholesome bowl of cinnamon oatmeal garnished with fresh sliced bananas, chia seeds, and honey in a ceramic bowl, soft morning lighting, clean aesthetic, natural green accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlrbSyWufsLY19QZNXv96Rz0ZV4nirbH38Ubdnhrg2N0JdE-cWMVPQdq5pxluTEnk8iQpn4tmz4xBC2XKT8ZghEkUAN0QuyZKysp1sTcVTw06dbMZvQkdZ7E90hHtnNWJkBHe8Hyjg0k7CvVpoO7WrJyT6JC9Kg-mBKqzGkpWAXDqlfGgenUnFYHYzh_i7IypSrsBBfqOzFdYoWLhNbYPKvemfrqAFNkjUNmXheoI1l3fZbUycCG_Q"/>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Sarapan</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• 07:30</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface truncate">Oatmeal Pisang Kayu Manis</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Rp 8.000 • 310 kkal</p>
+</div>
+<label class="flex items-center justify-center p-2 cursor-pointer shrink-0">
+<input checked="" class="meal-checkbox w-6 h-6 rounded-lg accent-primary cursor-pointer transition-transform active:scale-90" data-meal-name="Sarapan: Oatmeal Pisang" type="checkbox"/>
+<span class="sr-only">Centang Oatmeal Pisang Kayu Manis</span>
+</label>
+</article>
+<!-- Meal 2: Makan Siang with Allergy Alert (Unchecked) -->
+<article class="flex flex-col gap-2 p-space-sm rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(18,24,18,0.06)] relative overflow-hidden transition-all duration-300" id="meal-card-2">
+<div class="flex items-center gap-3">
+<div class="w-1.5 self-stretch rounded-full bg-secondary shrink-0"></div>
+<img class="w-16 h-16 rounded-lg object-cover shrink-0" data-alt="Indonesian fresh Gado-Gado salad with steamed vegetables, boiled egg halves, tofu cubes, rice cakes, and rich aromatic peanut sauce poured on top, vibrant high contrast food photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYuNJW_RWg_AoIjDLlu3cruQf6QKPGW_Ws_GKacNykEZcPhJSIWM_ZgTa_64li9eWYRwUd5C1R32ZDcGFaV20W3_RHozzKaWbXzDKaoioxImok3XaH5gP4tyaYgxruRUzhTMpCCUTJNv6j4Vc4yfg9vLjCip9j9Wc5HdN1Q0ECu5VVuBJiSc1d5uRaTQhYeYqT9uHZeuZdOmt2XJbmVleQjhvNJJ3C5oY4DPqc2pYAjUM3QblmayQZ"/>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wider">Makan Siang</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• 12:30</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface truncate">Gado-Gado Komplit</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Rp 15.000 • 380 kkal</p>
+</div>
+<label class="flex items-center justify-center p-2 cursor-pointer shrink-0">
+<input class="meal-checkbox w-6 h-6 rounded-lg accent-primary cursor-pointer transition-transform active:scale-90" data-meal-name="Makan Siang: Gado-Gado" type="checkbox"/>
+<span class="sr-only">Centang Gado-Gado Komplit</span>
+</label>
+</div>
+<!-- Allergy Alert Chip (PRD FR-12) -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-error-container text-on-error-container ml-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-md text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-label-sm text-label-sm font-semibold">Peringatan: Mengandung Alergen Kacang</span>
+</div>
+<button class="font-label-sm text-label-sm text-error underline" onclick="alert('Pengingat Profil: Rani memiliki riwayat sensitivitas kacang. Porsi bumbu dapat dikurangi atau diganti kuah wijen.')" type="button">Detail</button>
+</div>
+</article>
+<!-- Meal 3: Makan Malam (Unchecked) -->
+<article class="flex items-center gap-3 p-space-sm rounded-xl bg-surface-container-lowest shadow-[0_2px_8px_-2px_rgba(18,24,18,0.06)] relative overflow-hidden transition-all duration-300" id="meal-card-3">
+<div class="w-1.5 self-stretch rounded-full bg-outline-variant shrink-0"></div>
+<img class="w-16 h-16 rounded-lg object-cover shrink-0" data-alt="Traditional Indonesian Sayur Lodeh coconut milk stew with chayote squash, tender tofu cubes, and green chilies served in a warm rustic bowl, comforting steam rising." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOuxx2Hn2QU8VcSv7bCYiBF_ChkPo9vuILA4M5q5X4NhoL3SuHoySq7VYNFNjcdaFYka77iuDfDwybnYvLqnxyuXqEXeCMA7p5v563Aq_sTPUBWXE6BKVX_iIt9AOMpKGEsHT-Vsni4iP3WPFB6GTWNIkTCVBhR2OXCY_DKUhGha_yC0znIShj1kVxKfmYyevyKE6M4adz7f2tVu0p8yU14Meubr9hMiDAxc79k4MJT3o8Is3r2CSk"/>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Makan Malam</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• 19:00</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface truncate">Sayur Lodeh Labu Tahu</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Rp 11.000 • 310 kkal</p>
+</div>
+<label class="flex items-center justify-center p-2 cursor-pointer shrink-0">
+<input class="meal-checkbox w-6 h-6 rounded-lg accent-primary cursor-pointer transition-transform active:scale-90" data-meal-name="Makan Malam: Sayur Lodeh" type="checkbox"/>
+<span class="sr-only">Centang Sayur Lodeh Labu Tahu</span>
+</label>
+</article>
+</section>
+<!-- 6. Zero Food Waste Commitment Card (SDG 12.3 & PRD FR-34) -->
+<section class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
+<span class="material-symbols-outlined text-title-lg">recycling</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Pahlawan Bebas Sampah</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Habiskan makanan untuk capai SDG 12.3</p>
+</div>
+</div>
+<button class="px-space-md py-2 rounded-full bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface font-label-md text-label-md active:scale-95 transition-all shrink-0" id="zero-waste-btn" type="button">
+        Habis Semua! 🌟
+      </button>
+</section>
+</div>
+<!-- Bottom Sheet: Quick Log Modal (Triggered by Global Catat Cepat FAB or contextual flows) -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="quick-log-backdrop">
+<div class="absolute bottom-0 inset-x-0 bg-surface-container-lowest rounded-t-3xl p-space-lg shadow-[0_-8px_24px_-4px_rgba(18,24,18,0.15)] transform translate-y-full transition-transform duration-300 ease-out flex flex-col gap-space-md max-h-[751px] overflow-y-auto" id="quick-log-sheet">
+<!-- Drag handle -->
+<div class="w-10 h-1 rounded-full bg-outline-variant mx-auto mb-1"></div>
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Catat Cepat</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pencatatan harian maksimal 2 ketukan</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95" id="close-quick-log" type="button">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Quick Action Tabs/Tiles: Minum, Makan, Food Waste -->
+<div class="grid grid-cols-3 gap-space-sm mt-1">
+<!-- Minum Action -->
+<button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-low hover:bg-tertiary-fixed/40 active:scale-95 transition-all" id="sheet-quick-water" type="button">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center mb-1">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">Minum Air</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">+250 ml</span>
+</button>
+<!-- Makan Action -->
+<button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-low hover:bg-primary-fixed/40 active:scale-95 transition-all" id="sheet-quick-meal" type="button">
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-primary flex items-center justify-center mb-1">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">Menu Siang</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Centang</span>
+</button>
+<!-- Buang Makanan Action -->
+<button class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-low hover:bg-secondary-fixed/50 active:scale-95 transition-all" id="sheet-quick-waste" type="button">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-secondary flex items-center justify-center mb-1">
+<span class="material-symbols-outlined">delete_sweep</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold">Sisa Bahan</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Catat Waste</span>
+</button>
+</div>
+<!-- Subform Quick Food Waste preview inside bottom sheet -->
+<div class="flex flex-col gap-space-xs p-space-sm rounded-xl bg-surface-container-low mt-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Pilih Sisa Makanan Terakhir:</span>
+<span class="font-label-sm text-label-sm text-primary">Est. Rp Otomatis</span>
+</div>
+<div class="flex flex-wrap gap-1.5 mt-1">
+<button class="waste-chip px-3 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm active:bg-secondary active:text-on-secondary" type="button">Nasi Putih (1/2 porsi)</button>
+<button class="waste-chip px-3 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm active:bg-secondary active:text-on-secondary" type="button">Kangkung (Sedikit)</button>
+<button class="waste-chip px-3 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm active:bg-secondary active:text-on-secondary" type="button">Tahu Goreng (1 bh)</button>
+</div>
+</div>
+<button class="w-full h-12 rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-2" id="sheet-submit-done" type="button">
+<span class="material-symbols-outlined">done_all</span>
+<span>Simpan Catatan Sekarang</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  (function initDashboardInteractions() {
+    // State storage simulation for 2-tap log and undo
+    let currentWaterMl = 750;
+    const targetWaterMl = 2000;
+    let lastAction = null;
+
+    // Toast & Undo Controller
+    const toast = document.getElementById('toast-undo');
+    const toastMsg = document.getElementById('toast-message');
+    const toastUndoBtn = document.getElementById('toast-undo-btn');
+    let toastTimeout = null;
+
+    function showToast(message, undoCallback) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastMsg.textContent = message;
+      toast.classList.remove('opacity-0', '-translate-y-28', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      lastAction = undoCallback;
+
+      toastTimeout = setTimeout(() => {
+        hideToast();
+      }, 4500);
+    }
+
+    function hideToast() {
+      toast.classList.remove('opacity-100', 'translate-y-0');
+      toast.classList.add('opacity-0', '-translate-y-28', 'pointer-events-none');
+      lastAction = null;
+    }
+
+    toastUndoBtn.addEventListener('click', () => {
+      if (typeof lastAction === 'function') {
+        lastAction();
+        hideToast();
+      }
+    });
+
+    // Hydration Tracker (FR-22, FR-31)
+    const waterValEl = document.getElementById('current-water-val');
+    const waterProgressFill = document.getElementById('water-progress-fill');
+    const waterPercentageLabel = document.getElementById('water-percentage-label');
+    const waterBtns = document.querySelectorAll('.water-log-btn');
+
+    function updateWaterDisplay() {
+      waterValEl.textContent = currentWaterMl;
+      const pct = Math.min(100, Math.round((currentWaterMl / targetWaterMl) * 100));
+      waterProgressFill.style.width = pct + '%';
+      waterPercentageLabel.textContent = pct + '%';
+    }
+
+    waterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const amount = parseInt(btn.getAttribute('data-water'), 10);
+        const prevWater = currentWaterMl;
+        currentWaterMl = Math.min(3500, currentWaterMl + amount);
+        updateWaterDisplay();
+
+        showToast(`+${amount} ml air tercatat! Total: ${currentWaterMl} ml`, () => {
+          currentWaterMl = prevWater;
+          updateWaterDisplay();
+        });
+      });
+    });
+
+    // Meal Checkbox Tracker (FR-32)
+    const mealCheckboxes = document.querySelectorAll('.meal-checkbox');
+    mealCheckboxes.forEach(cb => {
+      cb.addEventListener('change', (e) => {
+        const mealName = cb.getAttribute('data-meal-name');
+        const isChecked = cb.checked;
+        const msg = isChecked ? `${mealName} ditandai sudah dimakan!` : `Batal menandai ${mealName}.`;
+        
+        showToast(msg, () => {
+          cb.checked = !isChecked;
+        });
+      });
+    });
+
+    // Zero Food Waste Commitment Trigger (FR-34)
+    const zeroWasteBtn = document.getElementById('zero-waste-btn');
+    if (zeroWasteBtn) {
+      zeroWasteBtn.addEventListener('click', () => {
+        showToast('Hebat! Bebas sisa makanan dicatat untuk streak SDG 12.3 🌟', () => {});
+      });
+    }
+
+    // Quick Log Sheet Wiring (FR-30)
+    const globalFab = document.querySelector('a[data-path="catat-cepat"]');
+    const backdrop = document.getElementById('quick-log-backdrop');
+    const sheet = document.getElementById('quick-log-sheet');
+    const closeBtn = document.getElementById('close-quick-log');
+    const sheetWater = document.getElementById('sheet-quick-water');
+    const sheetMeal = document.getElementById('sheet-quick-meal');
+    const sheetSubmitDone = document.getElementById('sheet-submit-done');
+
+    function openQuickSheet(e) {
+      if (e) e.preventDefault();
+      backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      backdrop.classList.add('opacity-100');
+      sheet.classList.remove('translate-y-full');
+      sheet.classList.add('translate-y-0');
+    }
+
+    function closeQuickSheet() {
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0', 'pointer-events-none');
+      sheet.classList.remove('translate-y-0');
+      sheet.classList.add('translate-y-full');
+    }
+
+    if (globalFab) {
+      globalFab.addEventListener('click', openQuickSheet);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeQuickSheet);
+    }
+
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) closeQuickSheet();
+      });
+    }
+
+    if (sheetWater) {
+      sheetWater.addEventListener('click', () => {
+        const prev = currentWaterMl;
+        currentWaterMl += 250;
+        updateWaterDisplay();
+        closeQuickSheet();
+        showToast('+250 ml air dicatat via Catat Cepat', () => {
+          currentWaterMl = prev;
+          updateWaterDisplay();
+        });
+      });
+    }
+
+    if (sheetMeal) {
+      sheetMeal.addEventListener('click', () => {
+        const gadoGado = document.querySelector('[data-meal-name="Makan Siang: Gado-Gado"]');
+        if (gadoGado) gadoGado.checked = true;
+        closeQuickSheet();
+        showToast('Makan Siang dicatat sudah selesai!', () => {
+          if (gadoGado) gadoGado.checked = false;
+        });
+      });
+    }
+
+    if (sheetSubmitDone) {
+      sheetSubmitDone.addEventListener('click', () => {
+        closeQuickSheet();
+        showToast('Semua catatan cepat berhasil tersimpan!', () => {});
+      });
+    }
+  })();
+</script></main><div class="fixed bottom-20 right-margin z-50"><a class="inline-flex items-center gap-2 h-12 px-space-md rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_4px_16px_-2px_rgba(18,24,18,0.18)] active:scale-95 transition-all" data-path="catat-cepat" href="#"><span class="material-symbols-outlined text-title-lg">bolt</span><span>Catat Cepat</span></a></div><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-primary font-label-md"><div class="flex justify-around items-center h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 transition-colors text-primary font-label-md" data-path="beranda" href="#"><span class="material-symbols-outlined text-title-lg">home</span><span class="font-label-sm text-label-sm">Beranda</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="menu" href="#"><span class="material-symbols-outlined text-title-lg">restaurant_menu</span><span class="font-label-sm text-label-sm">Menu</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="belanja" href="#"><span class="material-symbols-outlined text-title-lg">shopping_bag</span><span class="font-label-sm text-label-sm">Belanja</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="air-dan-waste" href="#"><span class="material-symbols-outlined text-title-lg">water_drop</span><span class="font-label-sm text-label-sm">Air &amp; Waste</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="profil" href="#"><span class="material-symbols-outlined text-title-lg">person</span><span class="font-label-sm text-label-sm">Profil</span></a></div></nav></body></html>
