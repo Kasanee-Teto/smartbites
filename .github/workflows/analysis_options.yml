@@ -1,0 +1,51 @@
+name: Analyze
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main  
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  analyze:
+    name: Flutter Analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            submodules: true
+
+        - name: Setup Flutter
+          uses: subosito/flutter-action@v2
+          with:
+            channel: 'stable'
+            flutter-version: 3.47.4
+        
+        - name: Install dependencies
+          run: flutter pub get
+        
+        - name: Analyze using Flutter
+          run: flutter analyze --write=flutter_analyze.log 
+        
+        - if: ${{ !cancelled() }}              
+          uses: yorifuji/flutter-analyze-commenter@v1
+          with:
+            analyze-log: flutter_analyze.log   
+            custom-lint-log: custom_lint.log   
+            verbose: false        
+        
