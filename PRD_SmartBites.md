@@ -5,7 +5,7 @@
 | Item | Description |
 |---|---|
 | Course | Mobile Front-End Programming (Flutter) |
-| SDGs | SDG 3: Good Health and Well-Being (supporting alignment: SDG target 12.3 on reducing food waste) |
+| SDGs | SDG 3: Good Health and Well-Being (supporting alignment: SDG 12: Responsible Consumption and Production) |
 | Team | Louis, Jessica, Gilbert, Edbert |
 | Technology | Flutter, Dart, Material Design 3, `setState()` |
 | Document version | v1.1 |
@@ -35,7 +35,7 @@ Students, boarding-house residents, and young professionals may rely on whatever
 
 ### 2.2 Alignment with the SDGs
 
-SmartBites aims to support SDG 3 (Good Health and Well-Being) by encouraging awareness of balanced eating and hydration. Food-waste logging also aligns with SDG 12 (Responsible Consumption and Production), particularly target 12.3 on reducing food waste. These are intended contributions rather than demonstrated outcomes.
+SmartBites aims to support SDG 3 (Good Health and Well-Being) by encouraging awareness of balanced eating and hydration. Food-waste logging also aligns with SDG 12 (Responsible Consumption and Production), particularly targeting on reducing food waste. These are intended contributions rather than demonstrated outcomes.
 
 ## 3. Objectives and Success Indicators
 

@@ -38,13 +38,13 @@ Following the PRD principles and the project's technical constraints:
 
 | Widget | Built By | Used On | Description and Purpose |
 | :--- | :--- | :--- | :--- |
-| **SmartBitesAppBar** | Louis | All main tabs: Home, Meals, Shopping, Water, and Profile | A consistent top app bar with an SVG/PNG logo, SDG 3 and 12.3 pill badges, a streak counter chip, a notification button, and a profile avatar. |
+| **SmartBitesAppBar** | Louis | All main tabs: Home, Meals, Shopping, Water, and Profile | A consistent top app bar with an SVG/PNG logo, SDG 3 and 12 pill badges, a streak counter chip, a notification button, and a profile avatar. |
 | **AppLogo** | Louis | `SmartBitesAppBar`, `WelcomeScreen`, `OnboardingScreen` | Application logo widget with an asset fallback and configurable size (`size`). |
 | **SectionTitle** | Louis | `HomeScreen`, `MealPlanScreen`, `ProfileScreen`, etc. | A section heading using standard M3 typography, with an optional trailing action. |
 | **StatusBadge** | Louis | `BudgetCard`, `MealCard`, `GroceryItemTile`, `PantryItemTile` | Consistent status badges: `.hemat()`, `.pas()`, `.melebihi()`, and `.alergen()`. |
 | **ResponsiveLayout** | Louis | Root containers across all screens | Adaptive `LayoutBuilder` breakpoints: compact (<600 dp), medium (600–839 dp), and expanded (≥840 dp). |
 | **PageDots** | Louis (Step 3) | `OnboardingScreen`, `HealthTipCard` (Step 10) | Material 3 pagination dots with accessibility `Semantics` and smooth transition animations (addition to PRD 9.1). |
-| **SdgBadge** | Louis (Step 3) | `WelcomeScreen`, `OnboardingScreen`, `SmartBitesAppBar` | A badge representing the project's SDG 3 (Good Health) and SDG 12.3 (Zero Food Waste) aspirations, with regular and compact modes. |
+| **SdgBadge** | Louis (Step 3) | `WelcomeScreen`, `OnboardingScreen`, `SmartBitesAppBar` | A badge representing the project's SDG 3 (Good Health) and SDG 12 (Zero Food Waste) aspirations, with regular and compact modes. |
 | **AssetImageWithFallback** | Louis (Step 3) | `OnboardingScreen`, `HomeScreen`, `MealCard` | A local asset-image component with a safe, theme-based `errorBuilder` fallback when an image file has not yet been downloaded. |
 | **BudgetCard** | Louis (Step 5) | `HomeScreen`, `MealPlanScreen` | A weekly budget summary card with a linear gauge bar and status badge. |
 | **StreakCard** | Louis (Step 5) | `HomeScreen`, `AchievementsScreen` | A consecutive-day streak card with a flame icon, milestone level, and navigation to achievements. |

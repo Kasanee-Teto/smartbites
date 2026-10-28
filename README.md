@@ -13,6 +13,7 @@ Lightweight streaks and achievements support engagement with the application.
 | Goal | Intended connection to SmartBites |
 | --- | --- |
 | [SDG 3: Good Health and Well-Being](https://sdgs.un.org/goals/goal3) | Support awareness of everyday meal choices and hydration through planning and logging. |
+| [SDG target 12](https://sdgs.un.org/goals/goal12) | Support awareness of consumer food waste through pantry visibility, grocery planning, and food-waste records. |
 
 These connections describe the project's intended direction. They do not establish United Nations endorsement or demonstrate health improvements, actual savings, or measured food-waste reduction.
 
