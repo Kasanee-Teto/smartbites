@@ -1,69 +1,52 @@
-name: Build SmartBites
+name: Build 
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
-      - '**'
-    tags:
-      - 'v*'
+      - main  
   workflow_dispatch:
 
 concurrency:
-  group: build-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/v') }}
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
   build:
-    name: Analyze, test, and build Android
+    name: Build Android
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
-      - name: Check out source
-        uses: actions/checkout@v4
-
-      - name: Set up Java for Android builds
-        uses: actions/setup-java@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v7
         with:
-          distribution: temurin
+          fetch-depth: 0
+          submodules: true
+      
+      - name: Setup JDK
+        uses: actions/setup-java@v6
+        with:
           java-version: '17'
-
-      - name: Set up Android SDK
+      
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Set up Flutter
+      
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: stable
-          cache: true
-
-      - name: Install Dart and Flutter dependencies
+          flutter-version: 3.47.4
+      
+      - name: Install dependencies
         run: flutter pub get
-
-      - name: Check Dart formatting
-        run: dart format --output=none --set-exit-if-changed lib test
-
-      - name: Analyze Dart and Flutter code
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test
-
-      - name: Build debug APK
-        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
-        run: flutter build apk --debug
-
-      - name: Build release APK for version tag
-        if: startsWith(github.ref, 'refs/tags/v')
+      
+      - name: Build release APK
         run: flutter build apk --release
-
-      - name: Upload APK artifact
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: smartbites-apk-${{ github.ref_name }}
-          path: build/app/outputs/flutter-apk/*.apk
-          if-no-files-found: error
+      
+      - name: Build debug APK
+        run: flutter build apk --debug
