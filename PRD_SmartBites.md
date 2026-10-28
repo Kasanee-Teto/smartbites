@@ -1,238 +1,215 @@
 # SmartBites: Product Requirements Document
 
-**Aplikasi Mobile Perencana Makan Sehat, Hemat, dan Minim Food Waste**
+**Mobile App for Healthy, Budget-Friendly Meal Planning and Reduced Food Waste**
 
-| Item | Keterangan |
+| Item | Description |
 |---|---|
-| Mata kuliah | Pemrograman Mobile Front-End (Flutter) |
-| Proyek | UTS (Minggu 8), dilanjutkan ke Usability Testing (Minggu 15) dan UAS |
-| SDGs | SDG 3: Good Health and Well-Being (pendukung: SDG 12.3 pengurangan food waste) |
-| Kelompok | Louis, Jesseca, Gilbert, Edbert |
-| Teknologi | Flutter, Dart, Material Design 3, `setState()` |
-| Versi dokumen | v1.1 (Minggu 3, direvisi setelah masukan dosen) |
+| Course | Mobile Front-End Programming (Flutter) |
+| SDGs | SDG 3: Good Health and Well-Being (supporting alignment: SDG target 12.3 on reducing food waste) |
+| Team | Louis, Jessica, Gilbert, Edbert |
+| Technology | Flutter, Dart, Material Design 3, `setState()` |
+| Document version | v1.1 |
 
 ---
 
-## 1. Ringkasan Proyek
+## 1. Project Overview
 
-SmartBites adalah aplikasi mobile front-end yang membantu pengguna merencanakan makanan sehat sesuai budget, mengatur daftar belanja, memantau stok bahan di rumah, mengurangi makanan terbuang, dan mencatat konsumsi air harian. Semua fitur berjalan dengan data lokal (mock data), sehingga aplikasi dapat diuji dan dinilai tanpa koneksi server.
+SmartBites is a mobile application designed to help users plan healthy meals within their budget, organize grocery lists, track ingredients at home, reduce food waste, and record daily water intake. All features use local mock data, allowing the application to be tested and assessed without a server connection.
 
-**Prinsip pencatatan:** aplikasi pencatatan harian mudah melelahkan, sehingga semua pencatatan rutin (minum, makan, makanan terbuang) dirancang sederhana: maksimal 2 ketukan, tanpa berpindah menu, dan dapat dibatalkan. Untuk menjaga konsistensi pengguna, SmartBites menambahkan gamifikasi ringan berupa streak harian dan badge pencapaian.
+**Logging principle:** Daily tracking applications can become tiring to use. Therefore, routine logging—water intake, meals, and food waste—is designed to be simple: no more than two taps, no menu switching, and an option to undo. To encourage consistent participation, SmartBites includes lightweight gamification through daily streaks and achievement badges.
 
-**Pembeda utama:** SmartBites menempatkan budget sebagai pusat perencanaan. Setiap menu, item belanja, dan makanan terbuang dinyatakan dalam Rupiah, sehingga pengguna langsung melihat dampak pilihan makan terhadap kesehatan sekaligus uang saku.
+**Key differentiator:** SmartBites places the budget at the center of planning. Each meal, grocery item, and food-waste entry has a value expressed in Indonesian Rupiah, helping users consider both meal choices and their spending allowance.
 
----
+## 2. Background and Problem Statement
 
-## 2. Latar Belakang dan Permasalahan
+Students, boarding-house residents, and young professionals may rely on whatever food is readily available because of limited time and money. This project addresses concerns about unbalanced meals and insufficient attention to hydration. Meanwhile, ingredients purchased without a plan may spoil before use, wasting money and increasing food waste.
 
-Mahasiswa, anak kos, dan pekerja muda sering makan seadanya karena keterbatasan uang dan waktu. Pola ini berdampak pada gizi yang tidak seimbang dan konsumsi air yang kurang. Di sisi lain, bahan makanan yang dibeli tanpa rencana sering rusak sebelum terpakai, sehingga uang terbuang dan food waste bertambah.
+### 2.1 Main Problems
 
-### 2.1 Permasalahan Utama
+- Difficulty planning healthy meals within a weekly budget.
+- Unplanned shopping that leads to buying ingredients already available at home.
+- Ingredients passing their expiry dates unnoticed and eventually being discarded.
+- Daily water intake going unrecorded and potentially falling below users' needs.
+- Food allergies and preferences being overlooked when selecting meals.
+- Complicated daily logging that causes users to become tired and stop using the application.
 
-- Sulit menyusun menu sehat yang sesuai budget mingguan.
-- Belanja tidak terencana, sehingga membeli bahan yang sebenarnya masih ada di rumah.
-- Bahan makanan kedaluwarsa tanpa disadari dan akhirnya terbuang.
-- Konsumsi air harian tidak tercatat dan sering di bawah kebutuhan.
-- Alergi dan preferensi makanan tidak dipertimbangkan saat memilih menu.
-- Pencatatan harian yang rumit membuat pengguna cepat lelah dan berhenti memakai aplikasi.
+### 2.2 Alignment with the SDGs
 
-### 2.2 Keterkaitan dengan SDGs
+SmartBites aims to support SDG 3 (Good Health and Well-Being) by encouraging awareness of balanced eating and hydration. Food-waste logging also aligns with SDG 12 (Responsible Consumption and Production), particularly target 12.3 on reducing food waste. These are intended contributions rather than demonstrated outcomes.
 
-SmartBites berkontribusi pada SDG 3 (Kehidupan Sehat dan Sejahtera) melalui pembiasaan pola makan seimbang dan hidrasi yang cukup. Fitur pencatatan food waste juga mendukung SDG 12 (Konsumsi dan Produksi yang Bertanggung Jawab), khususnya target 12.3 tentang pengurangan sampah makanan.
+## 3. Objectives and Success Indicators
 
----
+The following indicators are evaluation targets, not completed research findings.
 
-## 3. Tujuan dan Indikator Keberhasilan
-
-| No | Tujuan | Indikator keberhasilan |
+| No. | Objective | Success indicator |
 |---|---|---|
-| 1 | Membantu pengguna menyusun menu harian sesuai budget | Pengguna dapat menyusun rencana makan 1 hari dan melihat status budget dalam waktu di bawah 2 menit |
-| 2 | Menyederhanakan pengelolaan belanja dan stok | Success rate tugas Grocery dan Pantry minimal 80% |
-| 3 | Meningkatkan kesadaran terhadap food waste | Pengguna dapat mencatat makanan terbuang dan melihat total kerugian bulanan |
-| 4 | Mendorong konsumsi air harian | Pengguna dapat mencatat air dan melihat progres terhadap target tanpa bantuan |
-| 5 | Antarmuka mudah dipakai dan konsisten | Skor SUS minimal 68 pada usability testing Minggu 15 |
-| 6 | Membuat pencatatan harian ringan dan cepat | Setiap pencatatan (minum, makan, makanan terbuang) selesai maksimal 2 ketukan dan di bawah 10 detik, tanpa berpindah tab |
-| 7 | Mendorong pengguna konsisten mencatat | Streak dan badge dapat dipahami dan ditemukan pengguna tanpa bantuan |
-| 8 | Aplikasi layak diuji oleh kelompok lain | Berjalan tanpa instalasi tambahan, tidak crash pada input tak terduga, dan dapat dipahami penguji baru dalam 2 menit pertama |
+| 1 | Help users plan daily meals within their budget | Users can create a one-day meal plan and view its budget status in under two minutes. |
+| 2 | Simplify grocery and pantry management | At least an 80% task success rate for Grocery and Pantry tasks. |
+| 3 | Increase awareness of food waste | Users can log discarded food and view the total estimated financial loss for the month. |
+| 4 | Encourage daily water intake awareness | Users can log water intake and view progress toward the configured target without assistance. |
+| 5 | Provide a consistent, easy-to-use interface | A System Usability Scale (SUS) score of at least 68 during Week 15 usability testing. |
+| 6 | Make daily logging quick and lightweight | Each water, meal, or food-waste entry takes no more than two taps and under ten seconds, without switching tabs. |
+| 7 | Encourage consistent logging | Users can understand and find streaks and badges without assistance. |
+| 8 | Prepare the application for testing by other groups | The application runs without additional installation requirements, handles unexpected input without crashing, and can be understood by a new tester within the first two minutes. |
 
----
+## 4. Target Users
 
-## 4. Target Pengguna
+**Primary users:** Students, boarding-house residents, and young professionals aged 18–30 who manage their own food budgets.
 
-**Pengguna utama:** mahasiswa, anak kos, dan pekerja muda (usia 18-30 tahun) yang mengatur sendiri uang makan mereka.
-
-| | Persona 1: Rani, 20 tahun | Persona 2: Dimas, 25 tahun |
+| Aspect | Persona 1: Rani, age 20 | Persona 2: Dimas, age 25 |
 |---|---|---|
-| Profil | Mahasiswa semester 5, tinggal di kos, uang makan terbatas | Karyawan baru, tinggal sendiri, jarang punya waktu memasak |
-| Kebutuhan | Menu murah dan bergizi, belanja tidak boros, tidak alergi kacang | Rencana makan cepat, mengingat minum air, mengurangi bahan terbuang |
-| Kendala | Sering membeli bahan yang sudah ada, bingung menu hemat | Sibuk, lupa stok di kulkas, sering membuang sayur |
-| Harapan | Tahu sisa budget mingguan dan daftar belanja yang jelas | Tampilan ringkas, sedikit langkah, peringatan bahan hampir habis |
+| Profile | Fifth-semester university student living in a boarding house with a limited food allowance. | Newly employed professional living alone with little time to cook. |
+| Needs | Affordable, nutritious meals; efficient grocery spending; consideration of peanut allergies. | Quick meal planning, reminders to drink water, and fewer discarded ingredients. |
+| Challenges | Often buys ingredients already available at home and struggles to find affordable meal ideas. | Busy schedule, forgets refrigerator contents, and frequently discards vegetables. |
+| Expectations | Clear visibility of the remaining weekly budget and an organized grocery list. | A concise interface, few interaction steps, and low-stock warnings. |
 
----
+## 5. Scope
 
-## 5. Ruang Lingkup
+### 5.1 In Scope
 
-### 5.1 Dalam Lingkup (In Scope)
+- Flutter mobile application using Material Design 3.
+- Temporary data based on local mock data and simple state management with `setState()`.
+- Responsive layouts for phones and tablets.
+- Quick Log: daily logging directly from Home and the Quick Log button without switching menus.
+- Lightweight gamification: daily streaks and eight achievement badges.
+- Lightweight on-device persistence using `shared_preferences`, if time permits.
 
-- Aplikasi mobile front-end Flutter dengan Material Design 3.
-- Data sementara menggunakan mock data lokal dan state sederhana dengan `setState()`.
-- Tampilan responsif untuk HP dan tablet.
-- Catat Cepat: pencatatan harian langsung dari Home dan tombol Catat Cepat tanpa berpindah menu.
-- Gamifikasi ringan: streak harian dan 8 badge pencapaian.
-- Penyimpanan ringan di perangkat (`shared_preferences`) bila waktu memungkinkan.
+### 5.2 Out of Scope
 
-### 5.2 Di Luar Lingkup (Out of Scope)
+- Backend and server-side database (PostgreSQL), recorded as possible future development outside the course.
+- Login, user accounts, and synchronization across devices.
+- Reminder notifications, receipt or camera scanning, and AI-generated recipes.
+- Medical nutrition calculations. Calorie values are estimates and are not medical advice.
 
-- Backend dan basis data server (PostgreSQL). Dicatat sebagai pengembangan lanjutan di luar mata kuliah.
-- Login dan akun pengguna, sinkronisasi antar perangkat.
-- Notifikasi pengingat, pemindaian struk atau kamera, dan resep otomatis berbasis AI.
-- Perhitungan gizi medis. Kalori bersifat estimasi dan bukan saran medis.
+## 6. Functional Requirements
 
----
+Priority: **M** = Must-have (required and tested in Week 15); **S** = Should-have (implemented if time permits).
 
-## 6. Kebutuhan Fungsional
+English names below describe the functions. In-app product copy remains Indonesian.
 
-Prioritas: **M** = Must-have (wajib ada dan diuji di Minggu 15), **S** = Should-have (dikerjakan bila waktu tersedia).
-
-| ID | Kebutuhan | Prio | PIC |
+| ID | Requirement | Priority | Owner |
 |---|---|---|---|
-| FR-01 | Welcome dan onboarding 3 slide (`PageView` dengan indikator) menjelaskan tujuan dan SDG 3 | M | Louis |
-| FR-02 | Navigasi utama: `NavigationBar` di HP, `NavigationRail` di tablet | M | Louis |
-| FR-03 | Tema Material Design 3 terang dan gelap (`ColorScheme.fromSeed`) | M | Louis |
-| FR-04 | Home: kartu ringkasan budget (terpakai, sisa, status) | M | Louis |
-| FR-05 | Home: ringkasan menu hari ini dan ringkasan air | M | Louis |
-| FR-06 | Home: kartu Health Tip yang dapat digeser | S | Louis |
-| FR-07 | Halaman Insight mingguan (bar chart sederhana dari widget, tanpa package) | S | Gilbert |
-| FR-08 | Daftar menu dengan filter kategori (`ChoiceChip`): Sarapan, Siang, Malam, Hemat, Tinggi Protein | M | Jesseca |
-| FR-09 | Meal Planner per hari (Senin-Minggu) dengan tiga waktu makan | M | Jesseca |
-| FR-10 | Tambah dan hapus menu ke rencana melalui bottom sheet | M | Jesseca |
-| FR-11 | Meal Detail: gambar, bahan, harga, kalori, waktu masak, langkah singkat | M | Jesseca |
-| FR-12 | Peringatan alergi pada kartu dan detail menu berdasarkan data Profile | M | Jesseca |
-| FR-13 | Total harga rencana mingguan dan status hemat / pas / melebihi budget | M | Jesseca |
-| FR-14 | Grocery List: daftar item dengan centang dan total perkiraan harga | M | Gilbert |
-| FR-15 | Tambah item belanja lewat kolom input inline di atas daftar (ketik lalu Enter), tanpa dialog atau pindah halaman | M | Gilbert |
-| FR-16 | Geser untuk menghapus item (`Dismissible`) dengan opsi batal (`SnackBar`) | M | Gilbert |
-| FR-17 | Tombol "Pindahkan ke Pantry" untuk item yang sudah dibeli | M | Gilbert |
-| FR-18 | Pantry: daftar stok dikelompokkan per kategori | M | Gilbert |
-| FR-19 | Indikator stok menipis (`LinearProgressIndicator` dan label) | M | Gilbert |
-| FR-20 | Badge kedaluwarsa: Aman, Segera habis, Kedaluwarsa | M | Gilbert |
-| FR-21 | Ubah jumlah stok langsung di baris dengan tombol + dan - (stepper) | S | Gilbert |
-| FR-22 | Water Tracker: progres target dan tombol tambah +150 / +250 / +500 ml | M | Edbert |
-| FR-23 | Riwayat minum hari ini dan status target tercapai | M | Edbert |
-| FR-24 | Food Waste: form catat (item, porsi, alasan, estimasi Rp) | M | Edbert |
-| FR-25 | Riwayat food waste dan total kerugian bulan ini | M | Edbert |
-| FR-26 | Profile: budget mingguan dan target air (`Slider`) | M | Edbert |
-| FR-27 | Profile: alergi dan preferensi makanan (`FilterChip`) | M | Edbert |
-| FR-28 | Profile: sakelar mode gelap dan tombol Reset Data Demo | M | Edbert |
-| FR-29 | Penyimpanan lokal dengan `shared_preferences` untuk budget, air, centang belanja, streak, dan badge. Untuk demo, data awal berisi streak contoh 5 hari | S | Louis |
-| FR-30 | Tombol Catat Cepat (Extended FAB) di semua tab utama; membuka bottom sheet berisi aksi Minum, Makan, dan Buang makanan | M | Louis |
-| FR-31 | Catat minum satu ketukan (+150 / +250 / +500 ml) langsung dari kartu air di Home dan dari Catat Cepat | M | Edbert |
-| FR-32 | Catat makan: centang "Sudah dimakan" pada menu hari ini di Home dan `MealCard` | M | Jesseca |
-| FR-33 | Catat food waste cepat: pilih item dari chip (dari Pantry atau menu terakhir), pilih porsi (sedikit / setengah / semua), estimasi harga terisi otomatis, field lain opsional | M | Edbert |
-| FR-34 | Tombol "Tidak ada yang terbuang hari ini" yang dihitung sebagai catatan harian | M | Edbert |
-| FR-35 | Semua pencatatan memberi umpan balik `SnackBar` dengan tombol Undo | M | Semua |
-| FR-36 | Streak harian: hari berturut-turut dengan minimal satu catatan, ditampilkan sebagai kartu di Home | M | Louis |
-| FR-37 | Sistem badge dengan 8 badge dan aturan pembukaan berbasis data yang sudah ada | M | Edbert |
-| FR-38 | Halaman Pencapaian: grid badge terbuka/terkunci dengan progres, dibuka dari Profile dan kartu streak | M | Edbert |
-| FR-39 | Selebrasi saat badge terbuka (dialog atau animasi ringan) | S | Edbert |
-| FR-40 | Toleransi satu hari libur agar streak tidak langsung putus (streak freeze) | S | Louis |
+| FR-01 | Welcome screen and three-slide onboarding (`PageView` with an indicator) explaining the purpose and SDG 3 alignment. | M | Louis |
+| FR-02 | Main navigation: `NavigationBar` on phones and `NavigationRail` on tablets. | M | Louis |
+| FR-03 | Light and dark Material Design 3 themes using `ColorScheme.fromSeed`. | M | Louis |
+| FR-04 | Home: budget summary card showing the amount used, remaining budget, and status. | M | Louis |
+| FR-05 | Home: summaries of today's meals and water intake. | M | Louis |
+| FR-06 | Home: swipeable Health Tip cards. | S | Louis |
+| FR-07 | Weekly Insights page with a simple widget-based bar chart, without an additional package. | S | Gilbert |
+| FR-08 | Meal list with category filters (`ChoiceChip`): Breakfast, Lunch, Dinner, Budget-Friendly, and High Protein. | M | Jessica |
+| FR-09 | Daily Meal Planner covering Monday–Sunday with three meal slots per day. | M | Jessica |
+| FR-10 | Add and remove meals from the plan through a bottom sheet. | M | Jessica |
+| FR-11 | Meal Detail: image, ingredients, price, calories, cooking time, and brief preparation steps. | M | Jessica |
+| FR-12 | Allergy warnings on meal cards and meal details based on Profile data. | M | Jessica |
+| FR-13 | Total weekly plan cost and a status showing whether it is under, within, or over budget. | M | Jessica |
+| FR-14 | Grocery List: checkable items and the total estimated cost. | M | Gilbert |
+| FR-15 | Add grocery items through an inline input field above the list by typing and pressing Enter, without a dialog or page change. | M | Gilbert |
+| FR-16 | Swipe to delete an item (`Dismissible`) with an undo option (`SnackBar`). | M | Gilbert |
+| FR-17 | A Move to Pantry button for purchased items. | M | Gilbert |
+| FR-18 | Pantry: inventory grouped by category. | M | Gilbert |
+| FR-19 | Low-stock indicators using `LinearProgressIndicator` and labels. | M | Gilbert |
+| FR-20 | Expiry-status badges: Safe, Expiring Soon, and Expired. | M | Gilbert |
+| FR-21 | Adjust stock quantities directly in the row using + and − stepper buttons. | S | Gilbert |
+| FR-22 | Water Tracker: target progress and +150 / +250 / +500 ml buttons. | M | Edbert |
+| FR-23 | Today's water-intake history and target-achieved status. | M | Edbert |
+| FR-24 | Food Waste: entry form with item, portion, reason, and estimated Rupiah value. | M | Edbert |
+| FR-25 | Food-waste history and total estimated financial loss for the current month. | M | Edbert |
+| FR-26 | Profile: weekly budget and water target controls using `Slider`. | M | Edbert |
+| FR-27 | Profile: allergies and food preferences using `FilterChip`. | M | Edbert |
+| FR-28 | Profile: dark-mode switch and Reset Demo Data button. | M | Edbert |
+| FR-29 | Local persistence using `shared_preferences` for budget, water intake, grocery checkmarks, streaks, and badges. Initial demo data includes a sample five-day streak. | S | Louis |
+| FR-30 | Quick Log button (Extended FAB) on all main tabs, opening a bottom sheet with Water, Meal, and Food Waste actions. | M | Louis |
+| FR-31 | One-tap water logging (+150 / +250 / +500 ml) directly from the Home water card and Quick Log. | M | Edbert |
+| FR-32 | Meal logging: a Mark as Eaten checkbox on today's meals in Home and `MealCard`. | M | Jessica |
+| FR-33 | Quick food-waste logging: select an item from chips populated from Pantry or recent meals, choose a portion (a little / half / all), and automatically populate the estimated cost; other fields are optional. | M | Edbert |
+| FR-34 | A Nothing Was Wasted Today button that counts as a daily record. | M | Edbert |
+| FR-35 | All logging actions provide `SnackBar` feedback with an Undo button. | M | All members |
+| FR-36 | Daily streak: consecutive days with at least one record, displayed as a Home card. | M | Louis |
+| FR-37 | A badge system with eight badges and unlock rules based on existing data. | M | Edbert |
+| FR-38 | Achievements page: a grid of unlocked/locked badges with progress, accessible from Profile and the streak card. | M | Edbert |
+| FR-39 | A celebration when a badge is unlocked, using a dialog or lightweight animation. | S | Edbert |
+| FR-40 | A one-day grace period to prevent an immediate streak reset (streak freeze). | S | Louis |
 
-> **Catatan teknis:** karena state hanya memakai `setState()`, data yang dipakai lintas halaman (budget, rencana menu, pantry, air, alergi) disimpan di satu widget induk (`MainNavigation`) dan dikirim ke halaman anak lewat constructor beserta callback. Pendekatan ini disepakati sejak awal agar tidak ada state ganda antar halaman.
+> **Technical note:** Since state management uses only `setState()`, data shared across pages—budget, meal plans, pantry, water intake, and allergies—is stored in one parent widget (`MainNavigation`) and passed to child pages through constructors together with callbacks. This approach was agreed upon from the outset to prevent duplicate state across pages. Shared feature data belongs to `_MainNavigationState`; app-level theme state remains in the app shell.
 
-### 6.1 Prinsip Pencatatan Cepat
+### 6.1 Quick Logging Principles
 
-- **Maksimal 2 ketukan** untuk satu pencatatan, dan di bawah 10 detik.
-- **Tanpa berpindah menu:** aksi minum dan makan ada di Home, sedangkan tombol Catat Cepat tersedia di semua tab.
-- **Nilai default cerdas:** jumlah air terakhir diingat, estimasi harga terisi otomatis dari data Pantry, dan porsi memakai pilihan chip, bukan mengetik.
-- **Field minimal:** hanya satu isian wajib per pencatatan, sisanya opsional.
-- **Mudah dibatalkan:** setiap pencatatan dapat di-Undo melalui `SnackBar`, sehingga pengguna tidak takut salah ketuk.
-- **Tanpa dialog berlapis:** pakai bottom sheet satu layar dan input inline, bukan dialog bertingkat.
+- **No more than two taps** per entry, completed in under ten seconds.
+- **No menu switching:** water and meal actions are available on Home, while Quick Log is available across all tabs.
+- **Convenient defaults:** remember the last water amount, populate estimated prices from Pantry data, and use portion chips instead of typed input.
+- **Minimal fields:** only one required input per entry, with the remaining fields optional.
+- **Easy reversal:** every entry can be undone through a `SnackBar`, reducing concern about accidental taps.
+- **No nested dialogs:** use a single-screen bottom sheet and inline input rather than layered dialogs.
 
-### 6.2 Gamifikasi: Streak dan Badge
+### 6.2 Gamification: Streaks and Badges
 
-Streak dihitung dari jumlah hari berturut-turut yang memiliki minimal satu catatan (minum, makan, belanja, atau waste). Badge dibuka dari data yang sudah ada, sehingga tidak perlu input tambahan dari pengguna.
+A streak counts consecutive days with at least one water, meal, shopping, or food-waste record. Badges are unlocked using existing data, so users do not need to provide additional input.
 
-| Badge | Syarat pembukaan | Sumber data |
+| Badge | Unlock condition | Data source |
 |---|---|---|
-| Langkah Pertama | Membuat catatan pertama apa pun | Catatan harian |
-| Streak 3 Hari | Mencatat 3 hari berturut-turut | Streak |
-| Streak 7 Hari | Mencatat 7 hari berturut-turut | Streak |
-| Hidrasi Hero | Target air tercapai 3 hari | Water Tracker |
-| Perencana Handal | Rencana makan terisi penuh selama 1 minggu | Meal Planner |
-| Dompet Aman | Total rencana mingguan tidak melebihi budget | Budget |
-| Pahlawan Anti-Waste | Menandai "tidak ada yang terbuang" 7 hari berturut-turut | Food Waste |
-| Belanja Cerdas | Semua item belanja dicentang dan dipindahkan ke Pantry | Grocery dan Pantry |
+| First Step | Create the first record of any type. | Daily records |
+| 3-Day Streak | Log activity on three consecutive days. | Streak |
+| 7-Day Streak | Log activity on seven consecutive days. | Streak |
+| Hydration Hero | Reach the water target on three days. | Water Tracker |
+| Skilled Planner | Fill all meal slots for one full week. | Meal Planner |
+| Budget Protected | Keep the total weekly plan cost within budget. | Budget |
+| Anti-Waste Hero | Mark Nothing Was Wasted for seven consecutive days. | Food Waste |
+| Smart Shopper | Check all grocery items and move them to Pantry. | Grocery and Pantry |
 
-**Catatan desain:** gamifikasi dibuat ramah, tanpa kata-kata yang menyalahkan saat streak putus, dan toleransi satu hari libur (FR-40) menjaga motivasi. Fitur ini adalah lapisan di atas data yang ada, sehingga risikonya terhadap jadwal rendah.
+**Design note:** Gamification should be friendly, with no blaming language when a streak ends. The optional one-day grace period (FR-40) is intended to support motivation. These features build on existing data, which is expected to limit their effect on the development schedule.
 
----
+## 7. Screen Flow and Navigation
 
-## 7. Alur Halaman dan Navigasi
+Entry flow: Welcome/Onboarding, followed by the main navigation shell with five tabs.
 
-Alur masuk: Welcome/Onboarding, lalu masuk ke kerangka navigasi utama dengan lima tab.
-
-| Tab | Halaman | Halaman turunan |
+| Tab | Screen | Child screens or interactions |
 |---|---|---|
-| 1. Beranda | Home (kartu air, menu hari ini, kartu streak) | Insight mingguan, Pencapaian (ketuk kartu streak) |
-| 2. Menu | Meal Planner | Meal Detail (`Navigator.push`), Bottom sheet Tambah Menu |
-| 3. Belanja | Grocery List dan Pantry (dua tab dalam satu halaman) | Dialog Tambah Item |
-| 4. Air | Water Tracker dan Food Waste (dua tab) | Form Catat Food Waste |
-| 5. Profil | Profile | Pencapaian (badge dan streak), pengaturan alergi dan preferensi |
-| Semua tab | Tombol Catat Cepat (Extended FAB) | Bottom sheet: Minum, Makan, Buang makanan |
+| 1. Home | Home: water card, today's meals, and streak card. | Weekly Insights; Achievements by tapping the streak card. |
+| 2. Meals | Meal Planner. | Meal Detail (`Navigator.push`); Add Meal bottom sheet. |
+| 3. Shopping | Grocery List and Pantry, presented as two tabs within one screen. | Add Item dialog. |
+| 4. Water | Water Tracker and Food Waste, presented as two tabs. | Food Waste entry form. |
+| 5. Profile | Profile. | Achievements (badges and streaks); allergy and preference settings. |
+| All tabs | Quick Log button (Extended FAB). | Bottom sheet: Water, Meal, and Food Waste. |
 
-Total: sekitar 14-15 layar dan sub-layar (Welcome, Onboarding, Home, Insight, Meal Planner, Meal Detail, Tambah Menu, Grocery, Pantry, Water, Food Waste, Catat Cepat, Profile, Pencapaian).
+Total: approximately 14–15 screens and sub-screens: Welcome, Onboarding, Home, Insights, Meal Planner, Meal Detail, Add Meal, Grocery, Pantry, Water, Food Waste, Quick Log, Profile, and Achievements.
 
-**Perilaku responsif:** layar *compact* (kurang dari 600 dp) memakai `NavigationBar` dan satu kolom. Layar *medium* (600-839 dp) memakai `NavigationRail` dan `GridView` 2 kolom. Layar *expanded* (840 dp ke atas) memakai `NavigationRail` dan tata letak dua panel, misalnya daftar menu di kiri dan detail di kanan.
+**Responsive behavior:** Compact screens below 600 dp use `NavigationBar` and a single-column layout. Medium screens from 600–839 dp use `NavigationRail` and a two-column `GridView`. Expanded screens at 840 dp and above use `NavigationRail` and a two-pane layout, such as a meal list on the left and details on the right.
 
----
+## 8. Non-Functional Requirements
 
-## 8. Kebutuhan Non-Fungsional
-
-| Aspek | Kebutuhan |
+| Aspect | Requirement |
 |---|---|
-| Desain | Konsisten dengan Material Design 3: skema warna dari seed color, tipografi `TextTheme`, komponen Card, Chip, NavigationBar, FilledButton |
-| Responsif | Tidak ada overflow pada lebar 360 dp hingga 1024 dp; diuji pada emulator HP dan tablet |
-| Ketahanan | Input kosong, angka negatif, dan budget 0 ditangani dengan validasi; tidak ada crash |
-| Empty state | Setiap daftar memiliki tampilan kosong yang informatif |
-| Aksesibilitas | Kontras teks memadai, target sentuh minimal 48 dp, ikon disertai label atau tooltip |
-| Kualitas kode | Penamaan Dart konsisten, tidak ada duplikasi UI, widget berulang dijadikan reusable widget, `flutter analyze` bersih |
-| Kemandirian | Dapat dijalankan dari APK release atau versi web tanpa konfigurasi tambahan |
-| Pencatatan cepat | Setiap pencatatan harian maksimal 2 ketukan dan di bawah 10 detik tanpa berpindah tab, dengan Undo |
-| Data awal | Mock data realistis berbahasa Indonesia dengan harga dalam Rupiah dan bahan lokal (tempe, tahu, telur, sayur) |
+| Design | Consistent Material Design 3: a seed-based color scheme, `TextTheme` typography, and Card, Chip, NavigationBar, and FilledButton components. |
+| Responsiveness | No overflow at widths from 360 dp to 1024 dp; tested on phone and tablet emulators. |
+| Robustness | Validate empty input, negative values, and a zero budget without crashing. |
+| Empty states | Every list provides an informative empty state. |
+| Accessibility | Adequate text contrast, touch targets of at least 48 dp, and labels or tooltips for icons. |
+| Code quality | Consistent Dart naming, no duplicated UI, reusable widgets for repeated elements, and clean `flutter analyze` results. |
+| Self-contained operation | Runs from a release APK or web version without additional configuration. |
+| Quick logging | Each daily entry takes no more than two taps and under ten seconds, without switching tabs, and supports Undo. |
+| Initial data | Realistic Indonesian-language mock data with prices in Rupiah and local ingredients such as tempeh, tofu, eggs, and vegetables. |
 
----
+## 9. Architecture and Project Structure
 
-## 9. Arsitektur dan Struktur Proyek
+### 9.1 Folder Structure
 
-### 9.1 Struktur Folder
+| Path | Contents |
+|---|---|
+| Project root | `smartbites/` (`budget_bites`) |
+| `assets/images/` | `logo.png`, `chickpea_bowl.png`, `vegetable_toast.png`, `oatmeal.png`, and other images. |
+| `assets/icons/` | `water_drop.png`. |
+| `lib/` | `main.dart`, `app.dart`. |
+| `lib/models/` | `meal.dart`, `grocery_item.dart`, `pantry_item.dart`, `water_record.dart`, `waste_record.dart`, `user_profile.dart`, `daily_log.dart`, `achievement.dart`. |
+| `lib/data/` | `mock_data.dart`. |
+| `lib/screens/` | Welcome, onboarding, home, insight, meal plan, meal detail, grocery, pantry, water tracker, food waste, profile, and achievements screens. |
+| `lib/widgets/` | `app_logo`, `budget_card`, `meal_card`, `grocery_item_tile`, `pantry_item_tile`, `water_progress_card`, `waste_item_tile`, `section_title`, `main_navigation`, `responsive_layout`, `quick_log_sheet`, `streak_card`, `badge_tile`. |
+| `lib/theme/` | `app_theme.dart`. |
+| `lib/utils/` | `app_colors`, `app_constants`, `responsive_breakpoints`, `badge_rules`. |
+| Root files | `pubspec.yaml`, `README.md`. |
 
-```text
-smartbites/ (budget_bites)
-|-- assets/
-|   |-- images/  logo.png, chickpea_bowl.png, vegetable_toast.png, oatmeal.png, ...
-|   `-- icons/   water_drop.png
-|-- lib/
-|   |-- main.dart, app.dart
-|   |-- models/  meal.dart, grocery_item.dart, pantry_item.dart,
-|   |            water_record.dart, waste_record.dart, user_profile.dart,
-|   |            daily_log.dart, achievement.dart
-|   |-- data/    mock_data.dart
-|   |-- screens/ welcome, onboarding, home, insight, meal_plan, meal_detail,
-|   |            grocery, pantry, water_tracker, food_waste, profile,
-|   |            achievements
-|   |-- widgets/ app_logo, budget_card, meal_card, grocery_item_tile,
-|   |            pantry_item_tile, water_progress_card, waste_item_tile,
-|   |            section_title, main_navigation, responsive_layout,
-|   |            quick_log_sheet, streak_card, badge_tile
-|   |-- theme/   app_theme.dart
-|   `-- utils/   app_colors, app_constants, responsive_breakpoints, badge_rules
-|-- pubspec.yaml
-`-- README.md
-```
+### 9.2 Data Models
 
-### 9.2 Model Data
-
-| Model | Atribut utama |
+| Model | Main attributes |
 |---|---|
 | `Meal` | id, name, category, imageAsset, price, calories, cookTimeMinutes, ingredients, allergens, steps |
 | `GroceryItem` | id, name, quantity, unit, price, isChecked |
@@ -243,174 +220,159 @@ smartbites/ (budget_bites)
 | `Achievement` | id, title, description, iconAsset, target, progress, isUnlocked |
 | `UserProfile` | weeklyBudget, waterTargetMl, allergies, preferences, darkMode |
 
-### 9.3 Reusable Widget
+### 9.3 Reusable Widgets
 
-| Widget | Fungsi | Dipakai di |
+| Widget | Function | Used in |
 |---|---|---|
-| `BudgetCard` | Ringkasan budget dan status hemat/pas/lewat | Home, Meal Planner |
-| `MealCard` | Kartu menu: gambar, harga, kalori, badge alergi | Meal Planner, Home |
-| `GroceryItemTile` | Baris item belanja dengan centang dan harga | Grocery |
-| `PantryItemTile` | Baris stok dengan indikator dan badge kedaluwarsa | Pantry |
-| `WaterProgressCard` | Progres air dan tombol tambah | Home, Water Tracker |
-| `WasteItemTile` | Baris riwayat makanan terbuang | Food Waste |
-| `SectionTitle`, `AppLogo` | Judul seksi dan logo | Semua halaman |
-| `ResponsiveLayout` | Memilih tata letak sesuai lebar layar | Semua halaman utama |
-| `QuickLogSheet` | Bottom sheet Catat Cepat: Minum, Makan, Buang makanan | Semua tab (via FAB) |
-| `StreakCard` | Jumlah hari streak dan progres menuju badge | Home, Pencapaian |
-| `BadgeTile` | Badge terbuka atau terkunci beserta progres | Pencapaian |
+| `BudgetCard` | Budget summary and under/within/over-budget status. | Home, Meal Planner |
+| `MealCard` | Meal card with image, price, calories, and allergy badge. | Meal Planner, Home |
+| `GroceryItemTile` | Grocery row with checkbox and price. | Grocery |
+| `PantryItemTile` | Inventory row with stock indicator and expiry badge. | Pantry |
+| `WaterProgressCard` | Water-intake progress and add buttons. | Home, Water Tracker |
+| `WasteItemTile` | Food-waste history row. | Food Waste |
+| `SectionTitle`, `AppLogo` | Section headings and application logo. | All screens |
+| `ResponsiveLayout` | Select a layout based on screen width. | All main screens |
+| `QuickLogSheet` | Quick Log bottom sheet for Water, Meal, and Food Waste. | All tabs through the FAB |
+| `StreakCard` | Streak length and progress toward a badge. | Home, Achievements |
+| `BadgeTile` | Unlocked or locked badge with progress. | Achievements |
 
----
+## 10. Mapping to Course Sessions 1–7
 
-## 10. Pemetaan Materi Pertemuan 1-7
-
-| Materi | Penerapan di SmartBites |
+| Topic | Application in SmartBites |
 |---|---|
-| Widget dasar | Text, Icon, Image.asset, CircleAvatar, Card, Chip, Button, TextField, Slider, Switch |
-| Layout single-child | Container, Padding, Center, Align, SizedBox, Expanded |
-| Layout multi-child | Row, Column, ListView, GridView, Stack, Wrap |
-| Material Design 3 | `ColorScheme.fromSeed`, `TextTheme`, NavigationBar/Rail, tema terang dan gelap |
-| Reusable widget | Dua belas widget pada bagian 9.3 sebagai komponen berulang |
-| Asset | Logo, foto menu, dan ikon di `assets/images` dan `assets/icons` |
-| Responsive UI | `LayoutBuilder`, `MediaQuery`, breakpoint 600/840 dp, Grid adaptif, tata letak dua panel |
+| Basic widgets | Text, Icon, Image.asset, CircleAvatar, Card, Chip, Button, TextField, Slider, Switch. |
+| Single-child layout | Container, Padding, Center, Align, SizedBox, Expanded. |
+| Multi-child layout | Row, Column, ListView, GridView, Stack, Wrap. |
+| Material Design 3 | `ColorScheme.fromSeed`, `TextTheme`, NavigationBar/Rail, light and dark themes. |
+| Reusable widgets | The twelve widgets in Section 9.3 used as repeated components. |
+| Assets | Logo, meal photos, and icons in `assets/images` and `assets/icons`. |
+| Responsive UI | `LayoutBuilder`, `MediaQuery`, 600/840 dp breakpoints, adaptive grids, and two-pane layouts. |
 
----
+## 11. Usability Testing Plan (Week 15)
 
-## 11. Rencana Usability Testing (Minggu 15)
+**Participants:** At least five people, ideally five to eight, outside the project team who match the target audience. Record age, occupation, and shopping and cooking habits.
 
-**Responden:** minimal 5 orang (ideal 5-8) di luar kelompok, sesuai target pengguna. Data yang dicatat: usia, pekerjaan, kebiasaan belanja dan memasak.
-
-| Kode | Skenario tugas | Fitur terkait |
+| Code | Task scenario | Related features |
 |---|---|---|
-| T1 | Atur budget mingguan Rp 300.000 dan alergi kacang | Profile |
-| T2 | Tambahkan menu sarapan untuk hari Senin dan lihat kalorinya | Meal Planner, Meal Detail |
-| T3 | Temukan bahan yang harus dibeli dan centang dua item | Grocery |
-| T4 | Cari bahan di pantry yang stoknya hampir habis | Pantry |
-| T5 | Dari Home, catat minum 500 ml tanpa pindah halaman dan cek target | Home, Catat Cepat |
-| T6 | Catat satu makanan terbuang lewat tombol Catat Cepat | Catat Cepat, Food Waste |
-| T7 | Lihat streak Anda dan temukan satu badge yang belum terbuka | Streak, Pencapaian |
+| T1 | Set a weekly budget of Rp 300,000 and a peanut allergy. | Profile |
+| T2 | Add a breakfast meal for Monday and view its calories. | Meal Planner, Meal Detail |
+| T3 | Find the ingredients that need to be purchased and check two items. | Grocery |
+| T4 | Find a Pantry ingredient that is running low. | Pantry |
+| T5 | From Home, log 500 ml of water without changing screens and check the target. | Home, Quick Log |
+| T6 | Log one discarded food item using Quick Log. | Quick Log, Food Waste |
+| T7 | View your streak and find one locked badge. | Streak, Achievements |
 
-| Metrik | Cara ukur | Target |
+| Metric | Measurement method | Target |
 |---|---|---|
-| Success rate | Persentase tugas selesai tanpa bantuan | 80% atau lebih |
-| Time on task | Stopwatch per tugas (detik) | Dicatat, dibandingkan antar tugas |
-| Error rate | Jumlah salah tap atau salah jalur per tugas | Rata-rata di bawah 1 per tugas |
-| Jumlah ketukan | Ketukan untuk menyelesaikan pencatatan harian (T5 dan T6) | 2 atau kurang |
-| SUS | 10 pertanyaan standar via formulir | 68 atau lebih |
-| Kualitatif | Catatan think-aloud dan 2-3 pertanyaan penutup | Temuan disertai akar penyebab |
+| Success rate | Percentage of tasks completed without assistance. | At least 80%. |
+| Time on task | Stopwatch measurement for each task in seconds. | Record and compare across tasks. |
+| Error rate | Number of incorrect taps or navigation paths per task. | Average below one per task. |
+| Tap count | Taps required to complete daily logging in T5 and T6. | Two or fewer. |
+| SUS | Ten standard questions administered through a form. | At least 68. |
+| Qualitative feedback | Think-aloud observations and two to three closing questions. | Findings accompanied by identified root causes. |
 
-**Bukti pengujian:** foto atau rekaman layar sesi (dengan izin responden), lembar observasi, hasil formulir SUS, dan formulir persetujuan singkat.
+**Testing evidence:** Session photos or screen recordings with participant permission, observation sheets, SUS responses, and a short consent form.
 
----
+## 12. Peer Testing Readiness (Final Assessment)
 
-## 12. Kesiapan Peer Testing (UAS)
+- **Distribution:** A release APK and a web version (`flutter build web`) as a fallback for non-Android testers.
+- **Tester package:** Application description, installation instructions, test tasks, devices already tested, and team contact details.
+- **Independent use:** Realistic initial data, brief onboarding, a Reset Demo Data button, and no nonfunctional buttons.
+- **As evaluators:** Prepare evaluation instruments for other projects: a functionality checklist, Material Design 3 and responsiveness assessments, SUS, and bug-report fields covering steps, expected results, actual results, and screenshots.
 
-- **Distribusi:** APK release dan versi web (`flutter build web`) sebagai cadangan bagi penguji non-Android.
-- **Paket penguji:** deskripsi aplikasi, cara instal, daftar tugas uji, perangkat yang sudah diuji, dan kontak kelompok.
-- **Mandiri:** data awal realistis, onboarding singkat, tombol Reset Data Demo, dan tidak ada tombol yang tidak berfungsi.
-- **Sebagai penilai:** kelompok menyiapkan instrumen evaluasi untuk proyek lain: checklist fungsionalitas, penilaian UI Material Design 3 dan responsivitas, SUS, serta kolom temuan bug (langkah, hasil diharapkan, hasil aktual, screenshot).
+## 13. Task Allocation and Schedule
 
----
+Tasks are distributed to balance the workload and give each member experience with different layouts, enabling everyone to explain their code during the demonstration. The project is in Week 3 at the time this document is prepared.
 
-## 13. Pembagian Tugas dan Jadwal
+### 13.1 Responsibilities by Member
 
-Pembagian dibuat seimbang dan setiap anggota memegang variasi layout berbeda, sehingga dapat menjelaskan kodenya saat demo. Posisi saat dokumen ini disusun adalah Minggu 3.
-
-### 13.1 Tanggung Jawab per Anggota
-
-| Anggota | Cakupan | Layout dominan |
+| Member | Scope | Main layouts |
 |---|---|---|
-| Louis | Tema M3, `app.dart`, navigasi utama dan state induk, `responsive_layout`, Welcome dan Onboarding, Home, `BudgetCard`, `SectionTitle`, `AppLogo`, `QuickLogSheet` dan FAB, `StreakCard` dan logika streak, model `DailyLog`, persistensi lokal | Stack, GridView, LayoutBuilder |
-| Jesseca | Model dan mock data Meal, Meal Planner, Meal Detail, `MealCard`, filter chip, bottom sheet tambah menu, peringatan alergi, centang "Sudah dimakan", aksi Makan di Catat Cepat, koordinasi video demo | ListView, Stack, Wrap |
-| Gilbert | Model Grocery dan Pantry, Grocery List dengan input inline, Pantry dengan stepper, `GroceryItemTile`, `PantryItemTile`, alur Grocery ke Pantry, badge stok dan kedaluwarsa, Insight, skrip usability testing | ListView, ListTile, Dismissible |
-| Edbert | Model Water, Waste, UserProfile, Achievement, Water Tracker, Food Waste cepat, Profile, `WaterProgressCard`, `WasteItemTile`, Reset Data, sistem badge dan halaman Pencapaian, `BadgeTile` | Column, Row, Slider, GridView |
+| Louis | M3 theme, `app.dart`, main navigation and parent state, `responsive_layout`, Welcome and Onboarding, Home, `BudgetCard`, `SectionTitle`, `AppLogo`, `QuickLogSheet` and FAB, `StreakCard` and streak logic, `DailyLog` model, local persistence. | Stack, GridView, LayoutBuilder |
+| Jessica | Meal model and mock data, Meal Planner, Meal Detail, `MealCard`, filter chips, Add Meal bottom sheet, allergy warnings, Mark as Eaten checkboxes, Quick Log Meal action, demo video coordination. | ListView, Stack, Wrap |
+| Gilbert | Grocery and Pantry models, Grocery List with inline input, Pantry with steppers, `GroceryItemTile`, `PantryItemTile`, Grocery-to-Pantry flow, stock and expiry badges, Insights, usability testing script. | ListView, ListTile, Dismissible |
+| Edbert | Water, Waste, UserProfile, and Achievement models, Water Tracker, quick Food Waste logging, Profile, `WaterProgressCard`, `WasteItemTile`, Reset Data, badge system and Achievements page, `BadgeTile`. | Column, Row, Slider, GridView |
 
-### 13.2 Jadwal per Blok
+### 13.2 Schedule by Block
 
 **Louis**
 
-| Blok | Tugas |
+| Block | Tasks |
 |---|---|
-| Blok 1: Minggu 3 (sisa waktu) | Repo GitHub dan branch; struktur folder dan `app_theme`; kerangka `MainNavigation` dan state induk (`DailyLog`); `responsive_layout`; finalisasi PRD v1.1 |
-| Blok 2: Minggu 4-6 | Welcome dan Onboarding; Home dengan `BudgetCard`; tombol Catat Cepat dan kerangka `QuickLogSheet`; `StreakCard` dan logika streak; integrasi state induk |
-| Blok 3: Minggu 7-8 | Integrasi budget lintas fitur; uji tablet Home; Health Tip dan streak freeze (opsional); laporan bagian arsitektur |
+| Block 1: Week 3, remaining time | GitHub repository and branches; folder structure and `app_theme`; `MainNavigation` scaffold and parent state (`DailyLog`); `responsive_layout`; finalize PRD v1.1. |
+| Block 2: Weeks 4–6 | Welcome and Onboarding; Home with `BudgetCard`; Quick Log button and `QuickLogSheet` scaffold; `StreakCard` and streak logic; parent-state integration. |
+| Block 3: Weeks 7–8 | Cross-feature budget integration; tablet testing for Home; optional Health Tip and streak freeze; architecture section of the report. |
 
-**Jesseca**
+**Jessica**
 
-| Blok | Tugas |
+| Block | Tasks |
 |---|---|
-| Blok 1: Minggu 3 (sisa waktu) | Wireframe Meal; model `Meal` dan mock data (minimal 10 menu); kerangka layar Meal Planner |
-| Blok 2: Minggu 4-6 | Meal Planner dan filter chip; Meal Detail dengan Stack; bottom sheet tambah menu; peringatan alergi; centang "Sudah dimakan" di `MealCard` dan Home |
-| Blok 3: Minggu 7-8 | Total dan status budget; tata letak dua panel tablet; aksi Makan di Catat Cepat; perbaikan bug Meal; koordinasi video demo; laporan bagian desain dan Meal |
+| Block 1: Week 3, remaining time | Meal wireframes; `Meal` model and mock data with at least ten meals; Meal Planner screen scaffold. |
+| Block 2: Weeks 4–6 | Meal Planner and filter chips; Meal Detail using Stack; Add Meal bottom sheet; allergy warnings; Mark as Eaten checkboxes in `MealCard` and Home. |
+| Block 3: Weeks 7–8 | Budget totals and status; tablet two-pane layout; Quick Log Meal action; Meal bug fixes; demo video coordination; design and Meal sections of the report. |
 
 **Gilbert**
 
-| Blok | Tugas |
+| Block | Tasks |
 |---|---|
-| Blok 1: Minggu 3 (sisa waktu) | Wireframe Grocery dan Pantry; model dan mock data; kerangka layar Grocery dan Pantry |
-| Blok 2: Minggu 4-6 | Grocery: centang, total, input inline; Dismissible dan SnackBar Undo; Pantry per kategori, indikator stok, badge kedaluwarsa, stepper; alur Grocery ke Pantry |
-| Blok 3: Minggu 7-8 | Insight (opsional); uji layar kecil dan tablet; validasi input; skrip uji usability; laporan bagian pengujian |
+| Block 1: Week 3, remaining time | Grocery and Pantry wireframes; models and mock data; Grocery and Pantry screen scaffolds. |
+| Block 2: Weeks 4–6 | Grocery checkboxes, totals, and inline input; Dismissible and SnackBar Undo; Pantry categories, stock indicators, expiry badges, and steppers; Grocery-to-Pantry flow. |
+| Block 3: Weeks 7–8 | Optional Insights; small-screen and tablet testing; input validation; usability testing script; testing section of the report. |
 
 **Edbert**
 
-| Blok | Tugas |
+| Block | Tasks |
 |---|---|
-| Blok 1: Minggu 3 (sisa waktu) | Wireframe Water, Waste, Profile, Pencapaian; model `Water`, `Waste`, `UserProfile`, `Achievement`; rancangan 8 badge dan aturan buka; kerangka layar |
-| Blok 2: Minggu 4-6 | Water Tracker dan tombol cepat +ml; Food Waste cepat (chip, porsi, harga otomatis); tombol "Tidak ada yang terbuang"; Profile (Slider, chip, Switch); Reset Data Demo |
-| Blok 3: Minggu 7-8 | Sistem badge (`badge_rules`); halaman Pencapaian dan `BadgeTile`; selebrasi badge (opsional); uji responsif; laporan bagian data dan Profile |
+| Block 1: Week 3, remaining time | Water, Waste, Profile, and Achievements wireframes; `Water`, `Waste`, `UserProfile`, and `Achievement` models; design eight badges and unlock rules; screen scaffolds. |
+| Block 2: Weeks 4–6 | Water Tracker and quick +ml buttons; quick Food Waste logging with chips, portions, and automatic prices; Nothing Was Wasted button; Profile with Slider, chips, and Switch; Reset Demo Data. |
+| Block 3: Weeks 7–8 | Badge system (`badge_rules`); Achievements page and `BadgeTile`; optional badge celebrations; responsive testing; data and Profile sections of the report. |
 
-### 13.3 Bukti Kontribusi untuk Dosen
+### 13.3 Evidence of Contributions for the Lecturer
 
-- Satu branch per anggota, digabung melalui pull request, sehingga riwayat commit menunjukkan kontribusi masing-masing.
-- Log AI/vibecoding per anggota: prompt, hasil, modifikasi, dan bug yang diperbaiki (laporan Pertemuan 2).
-- Tabel pembagian tugas di laporan lengkap dengan nama file yang dipegang setiap anggota.
-- Setiap anggota siap menjelaskan dan memodifikasi kode bagiannya saat demo.
+- An individual AI/vibecoding log recording prompts, outputs, modifications, and bug fixes for the Session 2 report.
+- A task-allocation table in the report identifying the files owned by each member.
+- Every member is prepared to explain and modify their own code during the demonstration.
 
-### 13.4 Jadwal Setelah UTS
+### 13.4 Post-Midterm Schedule
 
-| Periode | Kegiatan |
+| Period | Activities |
 |---|---|
-| Minggu 9-13 | Melengkapi fitur Should-have, polishing UI, uji internal, dan persiapan build release |
-| Minggu 14 | Merekrut responden dan menyiapkan skrip serta formulir usability testing |
-| Minggu 15 | Usability testing dengan pengguna eksternal, laporan, dan presentasi di Teams |
-| Setelah Minggu 15 | Perbaikan berdasarkan temuan, build final (APK dan web), paket penguji |
-| UAS | Demo, peer testing oleh kelompok lain, dan penilaian proyek kelompok lain |
+| Weeks 9–13 | Complete Should-have features, polish the UI, conduct internal testing, and prepare release builds. |
+| Week 14 | Recruit participants and prepare usability testing scripts and forms. |
+| Week 15 | Conduct usability testing with external users, prepare the report, and present through Teams. |
+| After Week 15 | Make improvements based on findings, prepare final APK and web builds, and assemble the tester package. |
+| Final Assessment | Demonstration, peer testing by other groups, and evaluation of other groups' projects. |
 
----
+## 14. Use of AI/Vibecoding
 
-## 14. Penggunaan AI/Vibecoding
+AI is used as an aid rather than a substitute for understanding. Team rules:
 
-AI dipakai sebagai alat bantu, bukan pengganti pemahaman. Aturan kelompok:
+1. Record important prompts and outputs in each member's AI log.
+2. Read, run, and test AI-generated code before merging it.
+3. Each member independently modifies at least one part of the code, such as colors, layout, or logic, and records the change.
+4. Document bugs and layout overflows together with their fixes.
+5. Do not merge pull requests until `flutter analyze` is clean and the affected screens have been tested on phones and tablets.
 
-1. Setiap prompt dan hasil penting dicatat dalam log AI masing-masing anggota.
-2. Kode hasil AI wajib dibaca, dijalankan, dan diuji sebelum digabung.
-3. Setiap anggota mengubah minimal satu bagian kode secara mandiri (misalnya warna, layout, atau logika) dan mencatatnya.
-4. Bug dan overflow yang muncul dicatat beserta cara memperbaikinya.
-5. Pull request tidak digabung sebelum `flutter analyze` bersih dan layar diuji di HP dan tablet.
+## 15. Risks and Mitigation
 
----
-
-## 15. Risiko dan Mitigasi
-
-| Risiko | Dampak | Mitigasi |
+| Risk | Impact | Mitigation |
 |---|---|---|
-| Beban tidak seimbang antar anggota | Anggota tertentu terlambat | Cek progres mingguan; Louis menyelesaikan fondasi paling awal |
-| State ganda antar halaman | Data tidak sinkron | State dipusatkan di `MainNavigation` sejak awal |
-| Overflow di layar kecil atau tablet | Nilai responsif turun | Uji rutin di beberapa ukuran emulator setiap pull request |
-| Build APK gagal mendekati tenggat | Peer testing terhambat | Coba `flutter build apk` sejak Minggu 4 dan ulangi tiap blok |
-| Sulit mendapat responden eksternal | Data usability kurang | Mulai merekrut di Minggu 12-13, siapkan cadangan responden |
-| Kode AI tidak dipahami | Gagal menjelaskan saat demo | Sesi saling menjelaskan kode antar anggota sebelum demo |
-| Scope membengkak karena Catat Cepat dan gamifikasi | Fitur inti tidak selesai | Badge berbasis aturan sederhana dari data yang ada; selebrasi dan streak freeze berstatus opsional |
-| Gamifikasi terasa menekan pengguna | Pengguna berhenti memakai aplikasi | Bahasa ramah, tanpa kata menyalahkan, toleransi satu hari libur |
-| Konflik merge | Waktu terbuang | Satu branch per anggota dan file dibagi per anggota |
-
----
+| Uneven workload across members | Some members fall behind. | Review progress weekly; Louis completes the foundation first. |
+| Duplicate state across pages | Inconsistent data. | Centralize shared state in `MainNavigation` from the outset. |
+| Overflow on small screens or tablets | Lower responsiveness assessment. | Regularly test multiple emulator sizes for each pull request. |
+| APK build failure near the deadline | Peer testing is delayed. | Try `flutter build apk` from Week 4 and repeat it in each block. |
+| Difficulty recruiting external participants | Insufficient usability data. | Begin recruitment in Weeks 12–13 and identify backup participants. |
+| AI-generated code is not understood | Members cannot explain it during the demonstration. | Hold peer code-explanation sessions before the demonstration. |
+| Scope growth from Quick Log and gamification | Core features remain incomplete. | Use simple badge rules based on existing data; keep celebrations and streak freeze optional. |
+| Gamification feels pressuring | Users stop using the application. | Use friendly, non-blaming language and a one-day grace period. |
+| Merge conflicts | Development time is lost. | Use one branch per member and allocate file ownership. |
 
 ## 16. Definition of Done
 
-Satu fitur dianggap selesai bila:
+A feature is considered complete when:
 
-- Berjalan tanpa error dan `flutter analyze` bersih.
-- Tampil benar di layar compact dan medium/expanded tanpa overflow.
-- Memakai tema Material Design 3 dan reusable widget yang ada.
-- Input tak valid dan daftar kosong ditangani.
-- Sudah di-review lewat pull request dan pemilik kode dapat menjelaskannya.
+- It works without errors and `flutter analyze` is clean.
+- It displays correctly on compact and medium/expanded screens without overflow.
+- It uses the existing Material Design 3 theme and reusable widgets.
+- Invalid input and empty lists are handled.
+- It has been reviewed through a pull request, and its owner can explain the code.
