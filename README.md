@@ -1,24 +1,5 @@
 # SmartBites
 
-## Table of Contents
-
-- [About the Project](#about-the-project)
-- [Intended Core Loop](#intended-core-loop)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Architecture](#project-architecture)
-- [Project Structure and Ownership](#project-structure-and-ownership)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Git and Team Collaboration](#git-and-team-collaboration)
-- [Validation and Testing](#validation-and-testing)
-- [Development Priorities](#development-priorities)
-- [Scope and Limitations](#scope-and-limitations)
-- [FAQ](#faq)
-- [Team](#team)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
-
 ## About the Project
 
 Everyday food decisions involve several connected questions: what to eat, how much to spend, which ingredients are available, and what needs to be purchased. SmartBites offers information easier for management and review.
