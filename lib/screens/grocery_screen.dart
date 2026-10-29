@@ -13,6 +13,16 @@ import 'package:flutter/material.dart';
 /// State lives in MainNavigation (see docs/integration_contract.md); this
 /// screen renders [items] and reports changes through callbacks.
 class GroceryScreen extends StatefulWidget {
+  const GroceryScreen({
+    super.key,
+    this.items = const [],
+    this.weeklyBudget = 300000,
+    this.onToggleItem,
+    this.onAddItem,
+    this.onDeleteItem,
+    this.onClearChecked,
+    this.pantryView,
+  });
   final List<GroceryItem> items;
   final int weeklyBudget;
   final ValueChanged<String>? onToggleItem;
@@ -24,17 +34,6 @@ class GroceryScreen extends StatefulWidget {
 
   /// Content of the "Pantry / Stok" tab, built by the parent with its own data.
   final Widget? pantryView;
-
-  const GroceryScreen({
-    super.key,
-    this.items = const [],
-    this.weeklyBudget = 300000,
-    this.onToggleItem,
-    this.onAddItem,
-    this.onDeleteItem,
-    this.onClearChecked,
-    this.pantryView,
-  });
 
   @override
   State<GroceryScreen> createState() => _GroceryScreenState();
@@ -57,7 +56,7 @@ class _GroceryScreenState extends State<GroceryScreen> {
   int get _totalPrice => _items.fold(0, (sum, item) => sum + item.price);
 
   void _addItem() {
-    final text = _textController.text.trim();
+    final text = _textController.text.trim().replaceAll(RegExp(r'\s+'), ' ');
     if (text.isEmpty) return;
 
     widget.onAddItem?.call(
@@ -249,8 +248,9 @@ class _GroceryScreenState extends State<GroceryScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: colorScheme.surfaceContainerLowest,
-                          borderRadius:
-                              BorderRadius.circular(AppConstants.radiusFull),
+                          borderRadius: BorderRadius.circular(
+                            AppConstants.radiusFull,
+                          ),
                         ),
                         child: Text(
                           isWithinBudget ? 'Terkendali' : 'Melebihi Budget',
@@ -267,8 +267,10 @@ class _GroceryScreenState extends State<GroceryScreen> {
                   const SizedBox(height: 2),
                   Text(
                     isWithinBudget
-                        ? 'Estimasi belanjaan ini aman dalam sisa batas saku kosan!'
-                        : 'Total belanja melebihi batas anggaran mingguan Anda.',
+                        ? 'Estimasi belanjaan ini aman dalam sisa '
+                              'batas saku kosan!'
+                        : 'Total belanja melebihi batas anggaran '
+                              'mingguan Anda.',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: textTheme.bodySmall?.copyWith(
@@ -322,9 +324,11 @@ class _GroceryScreenState extends State<GroceryScreen> {
               child: TextField(
                 controller: _textController,
                 textInputAction: TextInputAction.done,
+                maxLength: 50,
                 onSubmitted: (_) => _addItem(),
                 decoration: const InputDecoration(
                   hintText: '+ Ketik bahan baru lalu tekan Enter...',
+                  counterText: '',
                   border: InputBorder.none,
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(vertical: 8),
@@ -398,7 +402,8 @@ class _GroceryScreenState extends State<GroceryScreen> {
     );
   }
 
-  /// Sticky Bottom Summary & CTA Bar (FR-14 & FR-17, lines 339-348 of `code.html`).
+  /// Sticky Bottom Summary & CTA Bar (FR-14 & FR-17, lines 339-348 of
+  /// `code.html`).
   Widget _buildStickySummaryBar(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -494,7 +499,8 @@ class _GroceryScreenState extends State<GroceryScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Tambahkan bahan makanan yang ingin Anda beli menggunakan kolom di atas',
+                'Tambahkan bahan makanan yang ingin Anda beli '
+                'menggunakan kolom di atas',
                 textAlign: TextAlign.center,
                 style: textTheme.bodyMedium?.copyWith(
                   color: colorScheme.outline,
