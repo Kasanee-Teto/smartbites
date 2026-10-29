@@ -1,18 +1,14 @@
 // Owner: Louis | FR: FR-02
 
-enum WindowSize {
-  compact,
-  medium,
-  expanded,
-}
+enum WindowSize { compact, medium, expanded }
 
 class ResponsiveBreakpoints {
   ResponsiveBreakpoints._();
 
-  static const double compactMax = 599.0;
-  static const double mediumMin = 600.0;
-  static const double mediumMax = 839.0;
-  static const double expandedMin = 840.0;
+  static const double compactMax = 599;
+  static const double mediumMin = 600;
+  static const double mediumMax = 839;
+  static const double expandedMin = 840;
 }
 
 /// Menentukan WindowSize berdasarkan lebar layar (width).

@@ -1,14 +1,15 @@
 // Owner: Louis | FR: FR-03, FR-04
 
 /// Memformat integer ke format mata uang Rupiah standar ('Rp 25.000').
-/// Pilihan format angka negatif: '-Rp 25.000' (tanda minus ditempatkan di depan prefix).
+/// Pilihan format angka negatif: '-Rp 25.000' (tanda minus ditempatkan di
+/// depan prefix).
 String formatRupiah(int amount) {
   final isNegative = amount < 0;
   final digits = amount.abs().toString();
   final buffer = StringBuffer();
   final length = digits.length;
 
-  for (int i = 0; i < length; i++) {
+  for (var i = 0; i < length; i++) {
     if (i > 0 && (length - i) % 3 == 0) {
       buffer.write('.');
     }

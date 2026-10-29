@@ -12,20 +12,29 @@ import 'package:budget_bites/widgets/sdg_badge.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingBullet {
-  final IconData icon;
-  final String title;
-  final String description;
-  final String? sdgTag;
-
   const OnboardingBullet({
     required this.icon,
     required this.title,
     required this.description,
     this.sdgTag,
   });
+  final IconData icon;
+  final String title;
+  final String description;
+  final String? sdgTag;
 }
 
 class OnboardingSlide {
+  const OnboardingSlide({
+    required this.imageAsset,
+    required this.category,
+    required this.title,
+    required this.badgeText,
+    required this.badgeIcon,
+    required this.bullets,
+    this.secondaryBadgeText,
+    this.secondaryBadgeIcon,
+  });
   final String imageAsset;
   final String category;
   final String title;
@@ -34,17 +43,6 @@ class OnboardingSlide {
   final String? secondaryBadgeText;
   final IconData? secondaryBadgeIcon;
   final List<OnboardingBullet> bullets;
-
-  const OnboardingSlide({
-    required this.imageAsset,
-    required this.category,
-    required this.title,
-    required this.badgeText,
-    required this.badgeIcon,
-    this.secondaryBadgeText,
-    this.secondaryBadgeIcon,
-    required this.bullets,
-  });
 }
 
 const List<OnboardingSlide> _slides = [
@@ -135,12 +133,8 @@ const List<OnboardingSlide> _slides = [
 ];
 
 class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key, this.onFinish});
   final ValueChanged<UserProfile>? onFinish;
-
-  const OnboardingScreen({
-    super.key,
-    this.onFinish,
-  });
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -164,16 +158,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           waterTargetMl: 2000,
           allergies: [],
           preferences: ['Hemat', 'Tinggi Protein'],
-          darkMode: false,
         ),
       );
       return;
     }
 
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute<void>(
-        builder: (_) => const MainNavigation(),
-      ),
+      MaterialPageRoute<void>(builder: (_) => const MainNavigation()),
     );
   }
 
@@ -234,18 +225,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             });
                           },
                           itemBuilder: (context, index) {
-                            return _buildSlide(
-                              context,
-                              _slides[index],
-                              isWide,
-                            );
+                            return _buildSlide(context, _slides[index], isWide);
                           },
                         ),
                       ),
 
                       // 3. Dot Indicator (PageDots)
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                         child: PageDots(
                           count: _slides.length,
                           currentIndex: _currentPage,
@@ -290,7 +277,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Expanded(
                 child: Row(
                   children: [
-                    const AppLogo(size: 32.0),
+                    const AppLogo(size: 32),
                     const SizedBox(width: AppConstants.spaceSm),
                     Expanded(
                       child: Column(
@@ -312,8 +299,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               const SizedBox(width: AppConstants.spaceXs),
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 6.0,
-                                  vertical: 1.0,
+                                  horizontal: 6,
+                                  vertical: 1,
                                 ),
                                 decoration: BoxDecoration(
                                   color: colorScheme.secondaryFixed,
@@ -326,7 +313,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   style: theme.textTheme.labelSmall?.copyWith(
                                     color: colorScheme.onSecondaryFixed,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 9.0,
+                                    fontSize: 9,
                                   ),
                                 ),
                               ),
@@ -336,7 +323,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             'Sahabat Sehat Anak Kos',
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: colorScheme.onSurfaceVariant,
-                              fontSize: 10.0,
+                              fontSize: 10,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -352,12 +339,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 style: TextButton.styleFrom(
                   backgroundColor: colorScheme.surfaceContainerLow,
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(AppConstants.radiusFull),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.radiusFull,
+                    ),
                   ),
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 14.0,
-                    vertical: 6.0,
+                    horizontal: 14,
+                    vertical: 6,
                   ),
                 ),
                 child: Text(
@@ -370,7 +358,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 6.0),
+          const SizedBox(height: 6),
           // SDG Badges Bar
           const SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -387,11 +375,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildSlide(
-    BuildContext context,
-    OnboardingSlide slide,
-    bool isWide,
-  ) {
+  Widget _buildSlide(BuildContext context, OnboardingSlide slide, bool isWide) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -408,27 +392,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           AssetImageWithFallback(
             assetPath: slide.imageAsset,
             fallbackIcon: Icons.restaurant,
-            fit: BoxFit.cover,
           ),
           // Top Left Badge
           Positioned(
-            top: 10.0,
-            left: 10.0,
-            right: 10.0,
+            top: 10,
+            left: 10,
+            right: 10,
             child: Align(
               alignment: Alignment.topLeft,
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 4.0,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainerLowest.withAlpha(230),
                   borderRadius: BorderRadius.circular(AppConstants.radiusFull),
                   boxShadow: const [
                     BoxShadow(
                       color: Colors.black12,
-                      blurRadius: 4.0,
+                      blurRadius: 4,
                       offset: Offset(0, 1),
                     ),
                   ],
@@ -436,19 +416,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      slide.badgeIcon,
-                      size: 14.0,
-                      color: colorScheme.primary,
-                    ),
-                    const SizedBox(width: 4.0),
+                    Icon(slide.badgeIcon, size: 14, color: colorScheme.primary),
+                    const SizedBox(width: 4),
                     Flexible(
                       child: Text(
                         slide.badgeText,
                         style: theme.textTheme.labelSmall?.copyWith(
                           color: colorScheme.primary,
                           fontWeight: FontWeight.w800,
-                          fontSize: 10.0,
+                          fontSize: 10,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -461,23 +437,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           // Bottom Right Badge (if exists)
           if (slide.secondaryBadgeText != null)
             Positioned(
-              bottom: 10.0,
-              right: 10.0,
-              left: 10.0,
+              bottom: 10,
+              right: 10,
+              left: 10,
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 8.0,
-                    vertical: 4.0,
+                    horizontal: 8,
+                    vertical: 4,
                   ),
                   decoration: BoxDecoration(
                     color: colorScheme.tertiaryContainer,
-                    borderRadius: BorderRadius.circular(AppConstants.radiusFull),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.radiusFull,
+                    ),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
-                        blurRadius: 4.0,
+                        blurRadius: 4,
                         offset: Offset(0, 1),
                       ),
                     ],
@@ -488,10 +466,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       if (slide.secondaryBadgeIcon != null) ...[
                         Icon(
                           slide.secondaryBadgeIcon,
-                          size: 14.0,
+                          size: 14,
                           color: colorScheme.onTertiary,
                         ),
-                        const SizedBox(width: 4.0),
+                        const SizedBox(width: 4),
                       ],
                       Flexible(
                         child: Text(
@@ -499,7 +477,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           style: theme.textTheme.labelSmall?.copyWith(
                             color: colorScheme.onTertiary,
                             fontWeight: FontWeight.bold,
-                            fontSize: 10.0,
+                            fontSize: 10,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -525,7 +503,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             letterSpacing: 0.5,
           ),
         ),
-        const SizedBox(height: 2.0),
+        const SizedBox(height: 2),
         // Title
         Text(
           slide.title,
@@ -539,9 +517,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         // Bullets List
         ...slide.bullets.map((bullet) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 6.0),
+            padding: const EdgeInsets.only(bottom: 6),
             child: Container(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: colorScheme.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(AppConstants.radiusMd),
@@ -550,16 +528,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 28.0,
-                    height: 28.0,
+                    width: 28,
+                    height: 28,
                     decoration: BoxDecoration(
                       color: colorScheme.primaryFixed,
-                      borderRadius:
-                          BorderRadius.circular(AppConstants.radiusSm),
+                      borderRadius: BorderRadius.circular(
+                        AppConstants.radiusSm,
+                      ),
                     ),
                     child: Icon(
                       bullet.icon,
-                      size: 16.0,
+                      size: 16,
                       color: colorScheme.onPrimaryFixed,
                     ),
                   ),
@@ -569,8 +548,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Wrap(
-                          spacing: 4.0,
-                          runSpacing: 2.0,
+                          spacing: 4,
+                          runSpacing: 2,
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             Text(
@@ -583,8 +562,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             if (bullet.sdgTag != null)
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 4.0,
-                                  vertical: 1.0,
+                                  horizontal: 4,
+                                  vertical: 1,
                                 ),
                                 decoration: BoxDecoration(
                                   color: colorScheme.tertiaryFixedDim,
@@ -603,7 +582,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                           ],
                         ),
-                        const SizedBox(height: 1.0),
+                        const SizedBox(height: 1),
                         Text(
                           bullet.description,
                           style: theme.textTheme.bodySmall?.copyWith(
@@ -667,7 +646,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             onPressed: isLastSlide ? _finishOnboarding : _nextPage,
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(
-                vertical: 14.0,
+                vertical: 14,
                 horizontal: AppConstants.spaceMd,
               ),
               shape: RoundedRectangleBorder(
@@ -681,30 +660,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    isLastSlide
-                        ? 'Mulai Rencanakan Makan (3 Menit)'
-                        : 'Lanjut',
+                    isLastSlide ? 'Mulai Rencanakan Makan (3 Menit)' : 'Lanjut',
                     style: const TextStyle(
-                      fontSize: 15.0,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(width: AppConstants.spaceSm),
                   Text(
                     isLastSlide ? '🚀' : '→',
-                    style: const TextStyle(fontSize: 16.0),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 4.0),
+          const SizedBox(height: 4),
 
           // Secondary Demo Button
           TextButton(
             onPressed: _finishOnboarding,
             style: TextButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 8),
             ),
             child: Text(
               'Sudah punya data demo? Masuk Langsung',
@@ -717,14 +694,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
           // Academic Footer Note
           Text(
-            'Proyek Flutter MD3 • UTS & UAS Pemrograman Mobile\nTeknik Informatika • Indonesia Mandiri Sehat',
+            'Proyek Flutter MD3 • UTS & UAS Pemrograman Mobile\n'
+            'Teknik Informatika • Indonesia Mandiri Sehat',
             textAlign: TextAlign.center,
             style: theme.textTheme.bodySmall?.copyWith(
               color: colorScheme.outline,
-              fontSize: 9.0,
+              fontSize: 9,
             ),
           ),
-          const SizedBox(height: 4.0),
+          const SizedBox(height: 4),
         ],
       ),
     );

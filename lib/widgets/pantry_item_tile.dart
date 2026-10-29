@@ -6,10 +6,12 @@ import 'package:budget_bites/utils/app_colors.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
-/// Enum representing the freshness status of a pantry item based on expiry date.
+/// Enum representing the freshness status of a pantry item based on expiry
+/// date.
 enum ExpiryStatus { safe, expiringSoon, expired }
 
-/// Indonesian month abbreviations for manual date formatting without the intl package.
+/// Indonesian month abbreviations for manual date formatting without the intl
+/// package.
 const List<String> indonesianMonths = [
   'Jan',
   'Feb',
@@ -25,7 +27,8 @@ const List<String> indonesianMonths = [
   'Des',
 ];
 
-/// Formats a [DateTime] into Indonesian date format 'dd MMM yyyy' (e.g., '14 Okt 2026').
+/// Formats a [DateTime] into Indonesian date format 'dd MMM yyyy'
+/// (e.g., '14 Okt 2026').
 String formatExpiryDate(DateTime expiryDate) {
   final day = expiryDate.day.toString().padLeft(2, '0');
   final month = indonesianMonths[expiryDate.month - 1];
@@ -75,14 +78,13 @@ IconData _iconForCategory(String category) {
 /// A reusable widget representing a single pantry item row matching the
 /// Stitch HTML design (`smartbites_belanja_pantry/code.html`).
 class PantryItemTile extends StatelessWidget {
-  final PantryItem item;
-  final ValueChanged<double> onQuantityChanged;
-
   const PantryItemTile({
-    super.key,
     required this.item,
     required this.onQuantityChanged,
+    super.key,
   });
+  final PantryItem item;
+  final ValueChanged<double> onQuantityChanged;
 
   Widget _buildExpiryBadge(BuildContext context, DateTime expiryDate) {
     final theme = Theme.of(context);
@@ -99,7 +101,6 @@ class PantryItemTile extends StatelessWidget {
         backgroundColor = colorScheme.primaryContainer;
         textColor = colorScheme.onPrimaryContainer;
         label = 'Aman';
-        break;
       case ExpiryStatus.expiringSoon:
         backgroundColor = isDark
             ? AppColors.harvestAmber.withValues(alpha: 0.35)
@@ -108,12 +109,10 @@ class PantryItemTile extends StatelessWidget {
             ? AppColors.harvestAmberContainer
             : AppColors.harvestAmber;
         label = 'Segera habis';
-        break;
       case ExpiryStatus.expired:
         backgroundColor = colorScheme.error;
         textColor = colorScheme.onError;
         label = 'Kedaluwarsa';
-        break;
     }
 
     return Container(
@@ -139,25 +138,24 @@ class PantryItemTile extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     final status = getExpiryStatus(item.expiryDate);
-    final double maxQuantity =
-        item.minQuantity > 0 ? item.minQuantity * 2 : 1.0;
-    final double progressValue = (item.quantity / maxQuantity).clamp(0.0, 1.0);
-    final bool isLowStock = item.quantity <= item.minQuantity;
-    final Color warningColor = AppColors.alertTerracotta;
+    final maxQuantity = item.minQuantity > 0 ? item.minQuantity * 2 : 1.0;
+    final progressValue = (item.quantity / maxQuantity).clamp(0.0, 1.0);
+    final isLowStock = item.quantity <= item.minQuantity;
+    const warningColor = AppColors.alertTerracotta;
 
     final (Color iconBoxBg, Color iconBoxFg) = switch (status) {
       ExpiryStatus.expired => (
-          colorScheme.errorContainer.withValues(alpha: 0.6),
-          colorScheme.error,
-        ),
+        colorScheme.errorContainer.withValues(alpha: 0.6),
+        colorScheme.error,
+      ),
       ExpiryStatus.expiringSoon => (
-          AppColors.harvestAmberContainer.withValues(alpha: 0.6),
-          AppColors.harvestAmber,
-        ),
+        AppColors.harvestAmberContainer.withValues(alpha: 0.6),
+        AppColors.harvestAmber,
+      ),
       ExpiryStatus.safe => (
-          colorScheme.primaryContainer.withValues(alpha: 0.4),
-          colorScheme.primary,
-        ),
+        colorScheme.primaryContainer.withValues(alpha: 0.4),
+        colorScheme.primary,
+      ),
     };
 
     return Card(
@@ -179,7 +177,6 @@ class PantryItemTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Leading category icon box (40x40 rounded-xl from HTML)
                 Container(
@@ -219,8 +216,11 @@ class PantryItemTile extends StatelessWidget {
                       const SizedBox(height: 3),
                       Text(
                         status == ExpiryStatus.expired
-                            ? 'Kedaluwarsa ${formatExpiryDate(item.expiryDate)} • Buang via Waste'
-                            : 'Exp: ${formatExpiryDate(item.expiryDate)} • ${item.category}',
+                            ? 'Kedaluwarsa '
+                                  '${formatExpiryDate(item.expiryDate)} • '
+                                  'Buang via Waste'
+                            : 'Exp: ${formatExpiryDate(item.expiryDate)} • '
+                                  '${item.category}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: textTheme.bodySmall?.copyWith(
@@ -241,8 +241,9 @@ class PantryItemTile extends StatelessWidget {
                   padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     color: colorScheme.surfaceContainerLow,
-                    borderRadius:
-                        BorderRadius.circular(AppConstants.radiusFull),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.radiusFull,
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -262,8 +263,10 @@ class PantryItemTile extends StatelessWidget {
                         tooltip: 'Kurangi',
                         onPressed: item.quantity > 0
                             ? () {
-                                final double next = (item.quantity - 1.0)
-                                    .clamp(0.0, double.infinity);
+                                final next = (item.quantity - 1.0).clamp(
+                                  0.0,
+                                  double.infinity,
+                                );
                                 onQuantityChanged(next);
                               }
                             : null,
@@ -309,8 +312,9 @@ class PantryItemTile extends StatelessWidget {
                   '${_formatQuantity(item.quantity)} ${item.unit}',
                   style: textTheme.labelSmall?.copyWith(
                     fontWeight: FontWeight.w700,
-                    color:
-                        isLowStock ? warningColor : colorScheme.onSurfaceVariant,
+                    color: isLowStock
+                        ? warningColor
+                        : colorScheme.onSurfaceVariant,
                   ),
                 ),
                 if (isLowStock) ...[
@@ -322,8 +326,9 @@ class PantryItemTile extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: warningColor.withValues(alpha: 0.14),
-                      borderRadius:
-                          BorderRadius.circular(AppConstants.radiusSm),
+                      borderRadius: BorderRadius.circular(
+                        AppConstants.radiusSm,
+                      ),
                     ),
                     child: Text(
                       'Stok menipis',
@@ -338,8 +343,9 @@ class PantryItemTile extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(AppConstants.radiusFull),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.radiusFull,
+                    ),
                     child: LinearProgressIndicator(
                       value: progressValue,
                       minHeight: 6,

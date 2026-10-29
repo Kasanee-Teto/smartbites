@@ -5,43 +5,51 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('PantryItemTile helper tests', () {
-    test('formatExpiryDate formats date into dd MMM yyyy Indonesian format', () {
-      final date = DateTime(2026, 10, 14);
-      expect(formatExpiryDate(date), '14 Okt 2026');
+    test(
+      'formatExpiryDate formats date into dd MMM yyyy Indonesian format',
+      () {
+        final date = DateTime(2026, 10, 14);
+        expect(formatExpiryDate(date), '14 Okt 2026');
 
-      final dateJan = DateTime(2026, 1, 5);
-      expect(formatExpiryDate(dateJan), '05 Jan 2026');
+        final dateJan = DateTime(2026, 1, 5);
+        expect(formatExpiryDate(dateJan), '05 Jan 2026');
 
-      final dateAgu = DateTime(2026, 8, 17);
-      expect(formatExpiryDate(dateAgu), '17 Agu 2026');
-    });
+        final dateAgu = DateTime(2026, 8, 17);
+        expect(formatExpiryDate(dateAgu), '17 Agu 2026');
+      },
+    );
 
-    test('getExpiryStatus correctly calculates safe, expiringSoon, and expired', () {
-      final now = DateTime.now();
+    test(
+      'getExpiryStatus correctly calculates safe, expiringSoon, and expired',
+      () {
+        final now = DateTime.now();
 
-      // Past date -> expired
-      final pastDate = now.subtract(const Duration(days: 2));
-      expect(getExpiryStatus(pastDate), ExpiryStatus.expired);
+        // Past date -> expired
+        final pastDate = now.subtract(const Duration(days: 2));
+        expect(getExpiryStatus(pastDate), ExpiryStatus.expired);
 
-      // Today -> expired (per FR-20: 'expiry is today or past')
-      expect(getExpiryStatus(now), ExpiryStatus.expired);
+        // Today -> expired (per FR-20: 'expiry is today or past')
+        expect(getExpiryStatus(now), ExpiryStatus.expired);
 
-      // 1 to 3 days -> expiringSoon
-      final soonDate1 = now.add(const Duration(days: 1));
-      expect(getExpiryStatus(soonDate1), ExpiryStatus.expiringSoon);
+        // 1 to 3 days -> expiringSoon
+        final soonDate1 = now.add(const Duration(days: 1));
+        expect(getExpiryStatus(soonDate1), ExpiryStatus.expiringSoon);
 
-      final soonDate3 = now.add(const Duration(days: 3));
-      expect(getExpiryStatus(soonDate3), ExpiryStatus.expiringSoon);
+        final soonDate3 = now.add(const Duration(days: 3));
+        expect(getExpiryStatus(soonDate3), ExpiryStatus.expiringSoon);
 
-      // More than 3 days -> safe
-      final safeDate = now.add(const Duration(days: 5));
-      expect(getExpiryStatus(safeDate), ExpiryStatus.safe);
-    });
+        // More than 3 days -> safe
+        final safeDate = now.add(const Duration(days: 5));
+        expect(getExpiryStatus(safeDate), ExpiryStatus.safe);
+      },
+    );
   });
 
   group('PantryItemTile Widget tests', () {
-    testWidgets('renders item name, unit, and safe expiry badge', (tester) async {
-      double changedQty = -1;
+    testWidgets('renders item name, unit, and safe expiry badge', (
+      tester,
+    ) async {
+      var changedQty = -1.0;
       final item = PantryItem(
         id: 'p1',
         name: 'Beras Pulen',
@@ -74,7 +82,9 @@ void main() {
       expect(changedQty, 6.0);
     });
 
-    testWidgets('renders low stock warning when quantity <= minQuantity', (tester) async {
+    testWidgets('renders low stock warning when quantity <= minQuantity', (
+      tester,
+    ) async {
       final item = PantryItem(
         id: 'p2',
         name: 'Tempe',
@@ -88,10 +98,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: PantryItemTile(
-              item: item,
-              onQuantityChanged: (_) {},
-            ),
+            body: PantryItemTile(item: item, onQuantityChanged: (_) {}),
           ),
         ),
       );
@@ -103,7 +110,7 @@ void main() {
     });
 
     testWidgets('stepper cannot decrement below 0', (tester) async {
-      double changedQty = -1;
+      var changedQty = -1.0;
       final item = PantryItem(
         id: 'p3',
         name: 'Telur',
@@ -129,13 +136,17 @@ void main() {
       expect(find.text('0 butir'), findsOneWidget);
 
       // Decrement button should be disabled when quantity is 0
-      final removeButton = tester.widget<IconButton>(find.widgetWithIcon(IconButton, Icons.remove));
+      final removeButton = tester.widget<IconButton>(
+        find.widgetWithIcon(IconButton, Icons.remove),
+      );
       expect(removeButton.onPressed, isNull);
       expect(changedQty, -1);
     });
 
-    testWidgets('stepper decrements quantity when quantity > 0', (tester) async {
-      double changedQty = -1;
+    testWidgets('stepper decrements quantity when quantity > 0', (
+      tester,
+    ) async {
+      var changedQty = -1.0;
       final item = PantryItem(
         id: 'p4',
         name: 'Tahu',

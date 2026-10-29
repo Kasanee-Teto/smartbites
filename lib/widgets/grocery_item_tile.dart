@@ -17,18 +17,17 @@ String _formatQuantity(double quantity) {
 /// A reusable grocery item tile matching the Stitch HTML design
 /// (`smartbites_belanja_pantry/code.html`) with swipe-to-delete (FR-14, FR-16).
 class GroceryItemTile extends StatelessWidget {
+  const GroceryItemTile({
+    required this.item,
+    required this.onToggle,
+    super.key,
+    this.onDismissed,
+  });
   final GroceryItem item;
   final VoidCallback onToggle;
 
   /// Swipe-to-delete is disabled when null.
   final VoidCallback? onDismissed;
-
-  const GroceryItemTile({
-    super.key,
-    required this.item,
-    required this.onToggle,
-    this.onDismissed,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +65,7 @@ class GroceryItemTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 4),
-              Icon(
-                Icons.delete_outline,
-                color: colorScheme.onError,
-                size: 20,
-              ),
+              Icon(Icons.delete_outline, color: colorScheme.onError, size: 20),
             ],
           ),
         ),
@@ -115,13 +110,15 @@ class GroceryItemTile extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: textTheme.bodyMedium?.copyWith(
-                            decoration:
-                                isChecked ? TextDecoration.lineThrough : null,
+                            decoration: isChecked
+                                ? TextDecoration.lineThrough
+                                : null,
                             color: isChecked
                                 ? colorScheme.outline
                                 : colorScheme.onSurface,
-                            fontWeight:
-                                isChecked ? FontWeight.w500 : FontWeight.w600,
+                            fontWeight: isChecked
+                                ? FontWeight.w500
+                                : FontWeight.w600,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -133,14 +130,16 @@ class GroceryItemTile extends StatelessWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: colorScheme.primaryContainer
-                                    .withValues(alpha: 0.35),
+                                color: colorScheme.primaryContainer.withValues(
+                                  alpha: 0.35,
+                                ),
                                 borderRadius: BorderRadius.circular(
                                   AppConstants.radiusSm,
                                 ),
                               ),
                               child: Text(
-                                '${_formatQuantity(item.quantity)} ${item.unit}',
+                                '${_formatQuantity(item.quantity)} '
+                                '${item.unit}',
                                 style: textTheme.labelSmall?.copyWith(
                                   color: colorScheme.primary,
                                   fontWeight: FontWeight.w600,
@@ -170,8 +169,9 @@ class GroceryItemTile extends StatelessWidget {
                       Text(
                         formatRupiah(item.price),
                         style: textTheme.labelLarge?.copyWith(
-                          decoration:
-                              isChecked ? TextDecoration.lineThrough : null,
+                          decoration: isChecked
+                              ? TextDecoration.lineThrough
+                              : null,
                           color: isChecked
                               ? colorScheme.outline
                               : colorScheme.onSurface,
@@ -185,8 +185,9 @@ class GroceryItemTile extends StatelessWidget {
                           color: isChecked
                               ? colorScheme.primary
                               : colorScheme.outline,
-                          fontWeight:
-                              isChecked ? FontWeight.w600 : FontWeight.w400,
+                          fontWeight: isChecked
+                              ? FontWeight.w600
+                              : FontWeight.w400,
                         ),
                       ),
                     ],

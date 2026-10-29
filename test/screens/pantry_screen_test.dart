@@ -6,13 +6,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('PantryScreen Widget tests', () {
-    testWidgets('shows empty state when pantry items are empty', (tester) async {
+    testWidgets('shows empty state when pantry items are empty', (
+      tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: PantryScreen(items: []),
-          ),
-        ),
+        const MaterialApp(home: Scaffold(body: PantryScreen())),
       );
 
       expect(find.text('Pantry kosong'), findsOneWidget);
@@ -24,7 +22,8 @@ void main() {
       expect(find.byType(PantryItemTile), findsNothing);
     });
 
-    testWidgets('renders summary card with correct counts and grouped items alphabetically', (tester) async {
+    testWidgets('renders summary card with correct counts and grouped items '
+        'alphabetically', (tester) async {
       final now = DateTime.now();
       final items = [
         PantryItem(
@@ -58,13 +57,12 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: PantryScreen(items: items),
-          ),
+          home: Scaffold(body: PantryScreen(items: items)),
         ),
       );
 
-      // Summary Card (first Card in the list) — scoped so stepper values don't collide
+      // Summary Card (first Card in the list) — scoped so stepper values
+      // don't collide
       final summary = find.byType(Card).first;
       expect(find.text('Total Bahan'), findsOneWidget);
       expect(
@@ -142,8 +140,10 @@ void main() {
       expect(find.text('2 butir'), findsOneWidget);
     });
 
-    testWidgets('renders directly without own Scaffold or AppBar', (tester) async {
-      final widget = const PantryScreen();
+    testWidgets('renders directly without own Scaffold or AppBar', (
+      tester,
+    ) async {
+      const widget = PantryScreen();
       // PantryScreen root should not be Scaffold
       final element = widget.createElement();
       expect(element, isNotNull);

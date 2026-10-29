@@ -22,17 +22,27 @@ class AppTheme {
     // Apply exact HTML design overrides where seed generation differs slightly
     final colorScheme = baseColorScheme.copyWith(
       surface: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-      surfaceContainerLowest: isDark ? AppColors.cardSurfaceDark : AppColors.cardSurfaceLight,
-      surfaceContainerHighest: isDark ? const Color(0xFF2C322B) : AppColors.surfaceContainerHighest,
+      surfaceContainerLowest: isDark
+          ? AppColors.cardSurfaceDark
+          : AppColors.cardSurfaceLight,
+      surfaceContainerHighest: isDark
+          ? const Color(0xFF2C322B)
+          : AppColors.surfaceContainerHighest,
       primary: isDark ? const Color(0xFF88D982) : AppColors.primaryDarkGreen,
       primaryContainer: AppColors.seedColor,
       secondary: isDark ? const Color(0xFFFFB786) : AppColors.harvestAmber,
-      secondaryContainer: isDark ? const Color(0xFF5E2C00) : const Color(0xFFFC820C),
+      secondaryContainer: isDark
+          ? const Color(0xFF5E2C00)
+          : const Color(0xFFFC820C),
       tertiary: isDark ? const Color(0xFF96CCFF) : AppColors.hydrationBlue,
       error: isDark ? AppColors.errorLight : AppColors.errorRed,
-      errorContainer: isDark ? AppColors.errorContainerDark : AppColors.errorContainer,
+      errorContainer: isDark
+          ? AppColors.errorContainerDark
+          : AppColors.errorContainer,
       onError: isDark ? const Color(0xFF690005) : Colors.white,
-      onErrorContainer: isDark ? AppColors.onErrorContainerDark : AppColors.onErrorContainerLight,
+      onErrorContainer: isDark
+          ? AppColors.onErrorContainerDark
+          : AppColors.onErrorContainerLight,
     );
 
     return ThemeData(
@@ -40,16 +50,14 @@ class AppTheme {
       colorScheme: colorScheme,
       scaffoldBackgroundColor: colorScheme.surface,
       textTheme: _buildTextTheme(colorScheme),
-      // 1. Plain Card: pure white background in light mode, rounded 12dp (HTML rounded-xl)
+      // 1. Plain Card: pure white background in light mode, rounded 12dp
+      // (HTML rounded-xl)
       cardTheme: CardThemeData(
         color: colorScheme.surfaceContainerLowest,
-        elevation: 1.0,
+        elevation: 1,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppConstants.radiusMd),
-          side: BorderSide(
-            color: colorScheme.outlineVariant.withAlpha(50),
-            width: 1.0,
-          ),
+          side: BorderSide(color: colorScheme.outlineVariant.withAlpha(50)),
         ),
         margin: EdgeInsets.zero,
       ),
@@ -58,11 +66,11 @@ class AppTheme {
         shape: const StadiumBorder(),
         side: BorderSide.none,
         labelStyle: TextStyle(
-          fontSize: 12.0,
+          fontSize: 12,
           fontWeight: FontWeight.w600,
           color: colorScheme.onSurface,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       ),
       // 3. FilledButton: full pill geometry, 48dp touch target
       filledButtonTheme: FilledButtonThemeData(
@@ -74,13 +82,11 @@ class AppTheme {
           shape: const StadiumBorder(),
           backgroundColor: colorScheme.primary,
           foregroundColor: colorScheme.onPrimary,
-          textStyle: const TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
       ),
-      // 4. NavigationBar: 72dp operational clearance, primaryContainer pill indicator
+      // 4. NavigationBar: 72dp operational clearance, primaryContainer pill
+      // indicator
       navigationBarTheme: NavigationBarThemeData(
         height: 72,
         backgroundColor: colorScheme.surface,
@@ -94,11 +100,11 @@ class AppTheme {
       ),
       // 6. Slider: 8px gauge height with pill thumb matching Design.md
       sliderTheme: SliderThemeData(
-        trackHeight: 8.0,
+        trackHeight: 8,
         activeTrackColor: colorScheme.primary,
         inactiveTrackColor: colorScheme.surfaceContainerHighest,
         thumbColor: colorScheme.primary,
-        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10.0),
+        thumbShape: const RoundSliderThumbShape(),
       ),
       // 7. SnackBar: floating so it clears the FAB, rounded-lg (8dp)
       snackBarTheme: SnackBarThemeData(
@@ -109,7 +115,8 @@ class AppTheme {
           borderRadius: BorderRadius.circular(AppConstants.radiusDefault),
         ),
       ),
-      // 8. InputDecoration: 8dp radius outline with surfaceContainerHighest fill
+      // 8. InputDecoration: 8dp radius outline with surfaceContainerHighest
+      // fill
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: colorScheme.surfaceContainerHighest,
@@ -136,66 +143,66 @@ class AppTheme {
   static TextTheme _buildTextTheme(ColorScheme colorScheme) {
     return TextTheme(
       displayLarge: TextStyle(
-        fontSize: 40.0,
+        fontSize: 40,
         fontWeight: FontWeight.w800,
         letterSpacing: -0.8,
         color: colorScheme.onSurface,
       ),
       headlineLarge: TextStyle(
-        fontSize: 32.0,
+        fontSize: 32,
         fontWeight: FontWeight.w700,
         letterSpacing: -0.32,
         color: colorScheme.onSurface,
       ),
       headlineMedium: TextStyle(
-        fontSize: 24.0,
+        fontSize: 24,
         fontWeight: FontWeight.w700,
         color: colorScheme.onSurface,
       ),
       headlineSmall: TextStyle(
-        fontSize: 20.0,
+        fontSize: 20,
         fontWeight: FontWeight.w600,
         color: colorScheme.onSurface,
       ),
       titleLarge: TextStyle(
-        fontSize: 18.0,
+        fontSize: 18,
         fontWeight: FontWeight.w600,
         color: colorScheme.onSurface,
       ),
       titleMedium: TextStyle(
-        fontSize: 16.0,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: colorScheme.onSurface,
       ),
       bodyLarge: TextStyle(
-        fontSize: 16.0,
+        fontSize: 16,
         fontWeight: FontWeight.w400,
         color: colorScheme.onSurface,
       ),
       bodyMedium: TextStyle(
-        fontSize: 14.0,
+        fontSize: 14,
         fontWeight: FontWeight.w400,
         color: colorScheme.onSurface,
       ),
       bodySmall: TextStyle(
-        fontSize: 12.0,
+        fontSize: 12,
         fontWeight: FontWeight.w400,
         color: colorScheme.onSurfaceVariant,
       ),
       labelLarge: TextStyle(
-        fontSize: 14.0,
+        fontSize: 14,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.14,
         color: colorScheme.onSurface,
       ),
       labelMedium: TextStyle(
-        fontSize: 12.0,
+        fontSize: 12,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.24,
         color: colorScheme.onSurface,
       ),
       labelSmall: TextStyle(
-        fontSize: 11.0,
+        fontSize: 11,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.33,
         color: colorScheme.onSurfaceVariant,

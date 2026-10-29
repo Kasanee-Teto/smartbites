@@ -4,14 +4,9 @@ import 'package:budget_bites/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {
+  const SectionTitle({required this.title, super.key, this.trailing});
   final String title;
   final Widget? trailing;
-
-  const SectionTitle({
-    super.key,
-    required this.title,
-    this.trailing,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +18,8 @@ class SectionTitle extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(context).textTheme.titleLarge
+                  ?.copyWith(fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

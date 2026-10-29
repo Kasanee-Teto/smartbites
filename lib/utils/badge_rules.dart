@@ -1,6 +1,7 @@
 // Owner: Edbert | FR: FR-37
 
-/// Defines the unique identifier constants and unlocking rule metadata for the 8 app badges.
+/// Defines the unique identifier constants and unlocking rule metadata for
+/// the 8 app badges.
 class BadgeRules {
   BadgeRules._();
 

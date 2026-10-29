@@ -3,27 +3,19 @@
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
-enum SdgType {
-  sdg3,
-  sdg12,
-  both,
-}
+enum SdgType { sdg3, sdg12, both }
 
 /// A compact, accessible badge displaying SDG 3 (Good Health and Well-being)
 /// and SDG 12.3 (Halve Food Waste), matching the HTML header and card tags.
 class SdgBadge extends StatelessWidget {
-  final SdgType type;
-  final bool compact;
-
-  const SdgBadge({
-    super.key,
-    this.type = SdgType.both,
-    this.compact = false,
-  });
+  const SdgBadge({super.key, this.type = SdgType.both, this.compact = false});
 
   const SdgBadge.sdg3({super.key, this.compact = false}) : type = SdgType.sdg3;
-  const SdgBadge.sdg12({super.key, this.compact = false}) : type = SdgType.sdg12;
+  const SdgBadge.sdg12({super.key, this.compact = false})
+    : type = SdgType.sdg12;
   const SdgBadge.both({super.key, this.compact = false}) : type = SdgType.both;
+  final SdgType type;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -33,24 +25,24 @@ class SdgBadge extends StatelessWidget {
     if (compact) {
       final (label, bg, fg) = switch (type) {
         SdgType.sdg3 => (
-            'SDG 3',
-            colorScheme.tertiaryFixedDim,
-            colorScheme.onTertiaryFixed,
-          ),
+          'SDG 3',
+          colorScheme.tertiaryFixedDim,
+          colorScheme.onTertiaryFixed,
+        ),
         SdgType.sdg12 => (
-            'SDG 12.3',
-            colorScheme.secondaryFixedDim,
-            colorScheme.onSecondaryFixed,
-          ),
+          'SDG 12.3',
+          colorScheme.secondaryFixedDim,
+          colorScheme.onSecondaryFixed,
+        ),
         SdgType.both => (
-            'SDG 3 & 12.3',
-            colorScheme.secondaryFixed,
-            colorScheme.onSecondaryFixed,
-          ),
+          'SDG 3 & 12.3',
+          colorScheme.secondaryFixed,
+          colorScheme.onSecondaryFixed,
+        ),
       };
 
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
         decoration: BoxDecoration(
           color: bg,
           borderRadius: BorderRadius.circular(AppConstants.radiusSm),
@@ -60,7 +52,7 @@ class SdgBadge extends StatelessWidget {
           style: theme.textTheme.labelSmall?.copyWith(
             color: fg,
             fontWeight: FontWeight.bold,
-            fontSize: 9.0,
+            fontSize: 9,
           ),
         ),
       );
@@ -70,13 +62,13 @@ class SdgBadge extends StatelessWidget {
       SdgType.sdg3 => ('SDG 3: Kehidupan Sehat', colorScheme.primary),
       SdgType.sdg12 => ('SDG 12.3: Nol Sampah Pangan', colorScheme.secondary),
       SdgType.both => (
-          'SDG 3 & 12.3: Sehat & Berkelanjutan',
-          colorScheme.primary,
-        ),
+        'SDG 3 & 12.3: Sehat & Berkelanjutan',
+        colorScheme.primary,
+      ),
     };
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(AppConstants.radiusFull),
@@ -87,9 +79,9 @@ class SdgBadge extends StatelessWidget {
             WidgetSpan(
               alignment: PlaceholderAlignment.middle,
               child: Container(
-                width: 8.0,
-                height: 8.0,
-                margin: const EdgeInsets.only(right: 6.0),
+                width: 8,
+                height: 8,
+                margin: const EdgeInsets.only(right: 6),
                 decoration: BoxDecoration(
                   color: dotColor,
                   shape: BoxShape.circle,

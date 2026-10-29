@@ -1,14 +1,6 @@
 // Owner: Edbert | FR: FR-37, FR-38, FR-39
 
 class Achievement {
-  final String id;
-  final String title;
-  final String description;
-  final String iconAsset;
-  final int target;
-  final int progress;
-  final bool isUnlocked;
-
   const Achievement({
     required this.id,
     required this.title,
@@ -18,6 +10,13 @@ class Achievement {
     required this.progress,
     this.isUnlocked = false,
   });
+  final String id;
+  final String title;
+  final String description;
+  final String iconAsset;
+  final int target;
+  final int progress;
+  final bool isUnlocked;
 
   Achievement copyWith({
     String? id,

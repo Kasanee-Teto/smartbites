@@ -6,16 +6,15 @@ import 'package:budget_bites/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class PageDots extends StatelessWidget {
+  const PageDots({
+    required this.count,
+    required this.currentIndex,
+    super.key,
+    this.onDotTapped,
+  });
   final int count;
   final int currentIndex;
   final ValueChanged<int>? onDotTapped;
-
-  const PageDots({
-    super.key,
-    required this.count,
-    required this.currentIndex,
-    this.onDotTapped,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +33,9 @@ class PageDots extends StatelessWidget {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOut,
-              margin: const EdgeInsets.symmetric(horizontal: 3.0),
+              margin: const EdgeInsets.symmetric(horizontal: 3),
               width: isActive ? 24.0 : 8.0,
-              height: 8.0,
+              height: 8,
               decoration: BoxDecoration(
                 color: isActive
                     ? colorScheme.primary

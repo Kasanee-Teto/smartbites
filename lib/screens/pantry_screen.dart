@@ -20,11 +20,6 @@ String _formatQty(double quantity) {
 /// State lives in MainNavigation (see docs/integration_contract.md).
 /// Embedded inside GroceryScreen's TabBarView (no separate Scaffold or AppBar).
 class PantryScreen extends StatelessWidget {
-  final List<PantryItem> items;
-  final ValueChanged<PantryItem>? onAddItem;
-  final ValueChanged<PantryItem>? onUpdateItem;
-  final ValueChanged<String>? onDeleteItem;
-
   const PantryScreen({
     super.key,
     this.items = const [],
@@ -32,6 +27,10 @@ class PantryScreen extends StatelessWidget {
     this.onUpdateItem,
     this.onDeleteItem,
   });
+  final List<PantryItem> items;
+  final ValueChanged<PantryItem>? onAddItem;
+  final ValueChanged<PantryItem>? onUpdateItem;
+  final ValueChanged<String>? onDeleteItem;
 
   List<PantryItem> get _items => items;
 
@@ -78,8 +77,9 @@ class PantryScreen extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     final totalItems = _items.length;
-    final lowStockCount =
-        _items.where((item) => item.quantity <= item.minQuantity).length;
+    final lowStockCount = _items
+        .where((item) => item.quantity <= item.minQuantity)
+        .length;
     final expiredCount = _items
         .where(
           (item) => getExpiryStatus(item.expiryDate) == ExpiryStatus.expired,
@@ -205,7 +205,9 @@ class PantryScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: colorScheme.surfaceContainerLowest,
-                  borderRadius: BorderRadius.circular(AppConstants.radiusDefault),
+                  borderRadius: BorderRadius.circular(
+                    AppConstants.radiusDefault,
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -236,12 +238,15 @@ class PantryScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(AppConstants.radiusFull),
+                      borderRadius: BorderRadius.circular(
+                        AppConstants.radiusFull,
+                      ),
                       child: LinearProgressIndicator(
                         value: item.minQuantity > 0
-                            ? (item.quantity / (item.minQuantity * 2))
-                                .clamp(0.08, 1.0)
+                            ? (item.quantity / (item.minQuantity * 2)).clamp(
+                                0.08,
+                                1.0,
+                              )
                             : 0.2,
                         minHeight: 6,
                         backgroundColor: colorScheme.surfaceContainerHighest,
@@ -357,11 +362,12 @@ class PantryScreen extends StatelessWidget {
       return _buildEmptyState(context);
     }
 
-    final lowStockItems =
-        _items.where((item) => item.quantity <= item.minQuantity).toList();
+    final lowStockItems = _items
+        .where((item) => item.quantity <= item.minQuantity)
+        .toList();
 
     // Group items by category (FR-18)
-    final Map<String, List<PantryItem>> groupedItems = {};
+    final groupedItems = <String, List<PantryItem>>{};
     for (final item in _items) {
       groupedItems.putIfAbsent(item.category, () => []).add(item);
     }
@@ -370,7 +376,7 @@ class PantryScreen extends StatelessWidget {
     final sortedCategories = groupedItems.keys.toList()..sort();
 
     // Single flat ListView with mixed header + item children
-    final List<Widget> listChildren = [
+    final listChildren = <Widget>[
       _buildSummaryCard(context),
       if (lowStockItems.isNotEmpty)
         _buildCriticalStockBanner(context, lowStockItems),
