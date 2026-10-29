@@ -6,19 +6,14 @@ import 'package:flutter/material.dart';
 enum StatusBadgeType {
   success, // Hemat, Selesai, Fresh
   warning, // Pas, Menipis, Sedang
-  danger,  // Melebihi budget, Kadaluarsa, Alergen
-  info,    // Kategori menu, Netral, Jadwal
+  danger, // Melebihi budget, Kadaluarsa, Alergen
+  info, // Kategori menu, Netral, Jadwal
 }
 
 class StatusBadge extends StatelessWidget {
-  final String label;
-  final IconData? icon;
-  final StatusBadgeType type;
-  final VoidCallback? onTap;
-
   const StatusBadge({
-    super.key,
     required this.label,
+    super.key,
     this.icon,
     this.type = StatusBadgeType.info,
     this.onTap,
@@ -59,8 +54,8 @@ class StatusBadge extends StatelessWidget {
 
   /// Factory helper untuk peringatan alergen
   factory StatusBadge.alergen({
-    Key? key,
     required String name,
+    Key? key,
     VoidCallback? onTap,
   }) {
     return StatusBadge(
@@ -71,6 +66,10 @@ class StatusBadge extends StatelessWidget {
       onTap: onTap,
     );
   }
+  final String label;
+  final IconData? icon;
+  final StatusBadgeType type;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -79,28 +78,28 @@ class StatusBadge extends StatelessWidget {
 
     final (Color bgColor, Color fgColor) = switch (type) {
       StatusBadgeType.success => (
-          colorScheme.surfaceContainerLow,
-          colorScheme.primary,
-        ),
+        colorScheme.surfaceContainerLow,
+        colorScheme.primary,
+      ),
       StatusBadgeType.warning => (
-          colorScheme.secondaryContainer.withAlpha(50),
-          colorScheme.secondary,
-        ),
+        colorScheme.secondaryContainer.withAlpha(50),
+        colorScheme.secondary,
+      ),
       StatusBadgeType.danger => (
-          colorScheme.errorContainer,
-          colorScheme.onErrorContainer,
-        ),
+        colorScheme.errorContainer,
+        colorScheme.onErrorContainer,
+      ),
       StatusBadgeType.info => (
-          colorScheme.surfaceContainerHighest,
-          colorScheme.onSurfaceVariant,
-        ),
+        colorScheme.surfaceContainerHighest,
+        colorScheme.onSurfaceVariant,
+      ),
     };
 
     final content = Container(
-      constraints: const BoxConstraints(minHeight: 28.0),
+      constraints: const BoxConstraints(minHeight: 28),
       padding: const EdgeInsets.symmetric(
         horizontal: AppConstants.spaceSm,
-        vertical: 4.0,
+        vertical: 4,
       ),
       decoration: BoxDecoration(
         color: bgColor,
@@ -110,11 +109,7 @@ class StatusBadge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(
-              icon,
-              size: 14.0,
-              color: fgColor,
-            ),
+            Icon(icon, size: 14, color: fgColor),
             const SizedBox(width: AppConstants.spaceXs),
           ],
           Text(

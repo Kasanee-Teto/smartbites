@@ -5,11 +5,6 @@ import 'package:budget_bites/models/meal.dart';
 import 'package:flutter/material.dart';
 
 class MealDetailScreen extends StatelessWidget {
-  final Meal? meal;
-  final List<String> userAllergies;
-  final ValueChanged<Meal>? onAddToGrocery;
-  final VoidCallback? onBack;
-
   const MealDetailScreen({
     super.key,
     this.meal,
@@ -17,14 +12,17 @@ class MealDetailScreen extends StatelessWidget {
     this.onAddToGrocery,
     this.onBack,
   });
+  final Meal? meal;
+  final List<String> userAllergies;
+  final ValueChanged<Meal>? onAddToGrocery;
+  final VoidCallback? onBack;
 
   @override
   Widget build(BuildContext context) {
-    // TODO(Jesseca): Implement meal recipe detail, allergy warning, and ingredients list.
+    // TODO(Jesseca): Implement meal recipe detail, allergy warning, and
+    // ingredients list.
     return const Scaffold(
-      body: Center(
-        child: Text('MealDetailScreen - Jesseca (Detail Resep)'),
-      ),
+      body: Center(child: Text('MealDetailScreen - Jesseca (Detail Resep)')),
     );
   }
 }

@@ -6,14 +6,13 @@ import 'package:budget_bites/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class SmartBitesApp extends StatefulWidget {
-  final ValueChanged<ThemeMode>? onThemeModeChanged;
-  final ThemeMode initialThemeMode;
-
   const SmartBitesApp({
     super.key,
     this.onThemeModeChanged,
     this.initialThemeMode = ThemeMode.system,
   });
+  final ValueChanged<ThemeMode>? onThemeModeChanged;
+  final ThemeMode initialThemeMode;
 
   @override
   State<SmartBitesApp> createState() => _SmartBitesAppState();

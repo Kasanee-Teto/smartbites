@@ -5,15 +5,6 @@ import 'package:budget_bites/models/meal.dart';
 import 'package:flutter/material.dart';
 
 class MealPlanScreen extends StatelessWidget {
-  final List<List<String>> weekPlan;
-  final List<List<bool>> eaten;
-  final List<Meal> meals;
-  final int weeklyBudget;
-  final void Function(int dayIndex, int slotIndex, String newMealId)? onSwapMeal;
-  final void Function(int dayIndex, int slotIndex)? onDeleteMeal;
-  final void Function(int dayIndex, int slotIndex, bool eaten)? onToggleMealEaten;
-  final ValueChanged<Meal>? onMealTap;
-
   const MealPlanScreen({
     super.key,
     this.weekPlan = const [],
@@ -25,14 +16,25 @@ class MealPlanScreen extends StatelessWidget {
     this.onToggleMealEaten,
     this.onMealTap,
   });
+  final List<List<String>> weekPlan;
+  final List<List<bool>> eaten;
+  final List<Meal> meals;
+  final int weeklyBudget;
+  final void Function(int dayIndex, int slotIndex, String newMealId)?
+  onSwapMeal;
+  final void Function(int dayIndex, int slotIndex)? onDeleteMeal;
+  // Signature matches the shared integration contract.
+  // ignore: avoid_positional_boolean_parameters
+  final void Function(int dayIndex, int slotIndex, bool eaten)?
+  onToggleMealEaten;
+  final ValueChanged<Meal>? onMealTap;
 
   @override
   Widget build(BuildContext context) {
-    // TODO(Jesseca): Implement meal planner grid, day chips, calorie tracker, and slot cards.
+    // TODO(Jesseca): Implement meal planner grid, day chips, calorie tracker,
+    // and slot cards.
     return const Scaffold(
-      body: Center(
-        child: Text('MealPlanScreen - Jesseca (Menu)'),
-      ),
+      body: Center(child: Text('MealPlanScreen - Jesseca (Menu)')),
     );
   }
 }

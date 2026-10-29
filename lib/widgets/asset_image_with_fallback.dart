@@ -5,22 +5,21 @@ import 'package:flutter/material.dart';
 /// Renders a local asset image if available; otherwise falls back gracefully
 /// to an error builder container with a themed icon and subtle surface tint.
 class AssetImageWithFallback extends StatelessWidget {
-  final String assetPath;
-  final IconData fallbackIcon;
-  final double? width;
-  final double? height;
-  final BoxFit fit;
-  final BorderRadius? borderRadius;
-
   const AssetImageWithFallback({
-    super.key,
     required this.assetPath,
+    super.key,
     this.fallbackIcon = Icons.eco,
     this.width,
     this.height,
     this.fit = BoxFit.cover,
     this.borderRadius,
   });
+  final String assetPath;
+  final IconData fallbackIcon;
+  final double? width;
+  final double? height;
+  final BoxFit fit;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +47,7 @@ class AssetImageWithFallback extends StatelessWidget {
     );
 
     if (borderRadius != null) {
-      imageWidget = ClipRRect(
-        borderRadius: borderRadius!,
-        child: imageWidget,
-      );
+      imageWidget = ClipRRect(borderRadius: borderRadius!, child: imageWidget);
     }
 
     return imageWidget;

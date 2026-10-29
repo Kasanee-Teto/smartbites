@@ -6,16 +6,15 @@ import 'package:flutter/material.dart';
 typedef ResponsiveWidgetBuilder = Widget Function(BuildContext context);
 
 class ResponsiveLayout extends StatelessWidget {
-  final ResponsiveWidgetBuilder compact;
-  final ResponsiveWidgetBuilder? medium;
-  final ResponsiveWidgetBuilder? expanded;
-
   const ResponsiveLayout({
-    super.key,
     required this.compact,
+    super.key,
     this.medium,
     this.expanded,
   });
+  final ResponsiveWidgetBuilder compact;
+  final ResponsiveWidgetBuilder? medium;
+  final ResponsiveWidgetBuilder? expanded;
 
   @override
   Widget build(BuildContext context) {

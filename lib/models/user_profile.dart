@@ -1,12 +1,6 @@
 // Owner: Edbert | FR: FR-26, FR-27, FR-28
 
 class UserProfile {
-  final int weeklyBudget;
-  final int waterTargetMl;
-  final List<String> allergies;
-  final List<String> preferences;
-  final bool darkMode;
-
   const UserProfile({
     required this.weeklyBudget,
     required this.waterTargetMl,
@@ -14,6 +8,11 @@ class UserProfile {
     required this.preferences,
     this.darkMode = false,
   });
+  final int weeklyBudget;
+  final int waterTargetMl;
+  final List<String> allergies;
+  final List<String> preferences;
+  final bool darkMode;
 
   UserProfile copyWith({
     int? weeklyBudget,

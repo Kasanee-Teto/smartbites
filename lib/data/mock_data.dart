@@ -19,9 +19,18 @@ final List<Meal> mockMeals = [
     price: 8000,
     calories: 310,
     cookTimeMinutes: 8,
-    ingredients: ['Oatmeal 40g', 'Pisang 1 buah', 'Kayu Manis Bubuk', 'Madu 1 sdm'],
+    ingredients: [
+      'Oatmeal 40g',
+      'Pisang 1 buah',
+      'Kayu Manis Bubuk',
+      'Madu 1 sdm',
+    ],
     allergens: [],
-    steps: ['Masak oat dengan air', 'Tambahkan irisan pisang dan madu', 'Taburi kayu manis'],
+    steps: [
+      'Masak oat dengan air',
+      'Tambahkan irisan pisang dan madu',
+      'Taburi kayu manis',
+    ],
   ),
   const Meal(
     id: 'm2',
@@ -31,9 +40,19 @@ final List<Meal> mockMeals = [
     price: 15000,
     calories: 380,
     cookTimeMinutes: 20,
-    ingredients: ['Tahu 100g', 'Tempe 100g', 'Bayam 1 ikat', 'Tauge 50g', 'Bumbu Kacang'],
+    ingredients: [
+      'Tahu 100g',
+      'Tempe 100g',
+      'Bayam 1 ikat',
+      'Tauge 50g',
+      'Bumbu Kacang',
+    ],
     allergens: ['Kacang'],
-    steps: ['Rebus sayuran', 'Goreng tahu dan tempe', 'Sajikan dengan bumbu kacang'],
+    steps: [
+      'Rebus sayuran',
+      'Goreng tahu dan tempe',
+      'Sajikan dengan bumbu kacang',
+    ],
   ),
   const Meal(
     id: 'm3',
@@ -43,9 +62,18 @@ final List<Meal> mockMeals = [
     price: 18000,
     calories: 420,
     cookTimeMinutes: 25,
-    ingredients: ['Dada Ayam 150g', 'Wortel 1 buah', 'Buncis 50g', 'Bawang Putih'],
+    ingredients: [
+      'Dada Ayam 150g',
+      'Wortel 1 buah',
+      'Buncis 50g',
+      'Bawang Putih',
+    ],
     allergens: [],
-    steps: ['Marinasi ayam dengan bawang putih', 'Panggang hingga matang', 'Rebus wortel dan buncis'],
+    steps: [
+      'Marinasi ayam dengan bawang putih',
+      'Panggang hingga matang',
+      'Rebus wortel dan buncis',
+    ],
   ),
   const Meal(
     id: 'm4',
@@ -55,9 +83,18 @@ final List<Meal> mockMeals = [
     price: 10000,
     calories: 390,
     cookTimeMinutes: 12,
-    ingredients: ['Nasi Putih 150g', 'Telur 1 butir', 'Sawi Hijau', 'Kecap Manis'],
+    ingredients: [
+      'Nasi Putih 150g',
+      'Telur 1 butir',
+      'Sawi Hijau',
+      'Kecap Manis',
+    ],
     allergens: ['Telur'],
-    steps: ['Tumis bumbu dan telur', 'Masukkan nasi dan sawi', 'Bumbui dengan kecap dan garam'],
+    steps: [
+      'Tumis bumbu dan telur',
+      'Masukkan nasi dan sawi',
+      'Bumbui dengan kecap dan garam',
+    ],
   ),
   const Meal(
     id: 'm5',
@@ -67,9 +104,18 @@ final List<Meal> mockMeals = [
     price: 9000,
     calories: 250,
     cookTimeMinutes: 15,
-    ingredients: ['Tahu Putih 2 kotak', 'Bayam 1 ikat', 'Bawang Putih 2 siung', 'Kaldu'],
+    ingredients: [
+      'Tahu Putih 2 kotak',
+      'Bayam 1 ikat',
+      'Bawang Putih 2 siung',
+      'Kaldu',
+    ],
     allergens: ['Kedelai'],
-    steps: ['Didihkan air kaldu', 'Masukkan bawang putih dan tahu', 'Tambahkan bayam sesaat sebelum diangkat'],
+    steps: [
+      'Didihkan air kaldu',
+      'Masukkan bawang putih dan tahu',
+      'Tambahkan bayam sesaat sebelum diangkat',
+    ],
   ),
   const Meal(
     id: 'm6',
@@ -79,9 +125,18 @@ final List<Meal> mockMeals = [
     price: 8500,
     calories: 280,
     cookTimeMinutes: 15,
-    ingredients: ['Buncis 100g', 'Tempe 100g', 'Bawang Merah 3 siung', 'Cabai Merah 1 buah'],
+    ingredients: [
+      'Buncis 100g',
+      'Tempe 100g',
+      'Bawang Merah 3 siung',
+      'Cabai Merah 1 buah',
+    ],
     allergens: ['Kedelai'],
-    steps: ['Potong tempe dan buncis', 'Tumis bumbu iris', 'Masukkan tempe dan buncis hingga empuk'],
+    steps: [
+      'Potong tempe dan buncis',
+      'Tumis bumbu iris',
+      'Masukkan tempe dan buncis hingga empuk',
+    ],
   ),
 ];
 
@@ -108,105 +163,148 @@ final List<List<bool>> mockEaten = [
 ];
 
 // ===== GROCERY / PANTRY (Gilbert) =====
-final List<GroceryItem> mockGroceryItems = [
-  const GroceryItem(
+const List<GroceryItem> mockGroceryItems = [
+  GroceryItem(
     id: 'g1',
-    name: 'Tahu Putih',
-    quantity: 2,
-    unit: 'bungkus',
-    price: 8000,
-    isChecked: true,
-  ),
-  const GroceryItem(
-    id: 'g2',
-    name: 'Bayam Hijau',
+    name: 'Telur Ayam',
     quantity: 1,
-    unit: 'ikat',
-    price: 4000,
-    isChecked: true,
-  ),
-  const GroceryItem(
-    id: 'g3',
-    name: 'Dada Ayam Fillet',
-    quantity: 500,
-    unit: 'gram',
-    price: 26000,
-    isChecked: false,
-  ),
-  const GroceryItem(
-    id: 'g4',
-    name: 'Beras Setra Ramos',
-    quantity: 2,
     unit: 'kg',
     price: 28000,
-    isChecked: false,
+    isChecked: true,
   ),
-  const GroceryItem(
-    id: 'g5',
-    name: 'Telur Ayam',
-    quantity: 0.5,
+  GroceryItem(
+    id: 'g2',
+    name: 'Beras Ramos',
+    quantity: 5,
     unit: 'kg',
+    price: 68000,
+  ),
+  GroceryItem(
+    id: 'g3',
+    name: 'Tempe Balok',
+    quantity: 2,
+    unit: 'papan',
+    price: 6000,
+    isChecked: true,
+  ),
+  GroceryItem(
+    id: 'g4',
+    name: 'Tahu Putih',
+    quantity: 1,
+    unit: 'bungkus',
+    price: 4000,
+  ),
+  GroceryItem(
+    id: 'g5',
+    name: 'Mie Instan Goreng',
+    quantity: 5,
+    unit: 'bungkus',
     price: 15000,
-    isChecked: false,
+  ),
+  GroceryItem(
+    id: 'g6',
+    name: 'Bawang Merah',
+    quantity: 250,
+    unit: 'g',
+    price: 9000,
+  ),
+  GroceryItem(
+    id: 'g7',
+    name: 'Cabai Rawit Merah',
+    quantity: 150,
+    unit: 'g',
+    price: 7500,
+    isChecked: true,
+  ),
+  GroceryItem(
+    id: 'g8',
+    name: 'Kangkung Segar',
+    quantity: 2,
+    unit: 'ikat',
+    price: 5000,
   ),
 ];
 
 final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p1',
-    name: 'Bawang Merah',
-    category: 'Bumbu',
-    quantity: 250,
-    minQuantity: 100,
-    unit: 'gram',
-    expiryDate: DateTime(2026, 10, 28),
+    name: 'Telur Ayam',
+    category: 'Protein',
+    quantity: 4,
+    minQuantity: 6,
+    unit: 'butir',
+    expiryDate: DateTime(2026, 10, 24),
   ),
   PantryItem(
     id: 'p2',
-    name: 'Minyak Goreng',
-    category: 'Kebutuhan Pokok',
-    quantity: 1.5,
-    minQuantity: 0.5,
-    unit: 'liter',
-    expiryDate: DateTime(2026, 12, 1),
+    name: 'Tahu Kuning',
+    category: 'Protein',
+    quantity: 5,
+    minQuantity: 2,
+    unit: 'potong',
+    expiryDate: DateTime(2026, 10, 16),
   ),
   PantryItem(
     id: 'p3',
-    name: 'Kecap Manis',
-    category: 'Bumbu',
+    name: 'Bayam Segar',
+    category: 'Sayuran',
     quantity: 1,
     minQuantity: 1,
-    unit: 'botol',
-    expiryDate: DateTime(2026, 11, 15),
+    unit: 'ikat',
+    expiryDate: DateTime(2026, 10, 12),
   ),
   PantryItem(
     id: 'p4',
-    name: 'Oatmeal Instan',
-    category: 'Karbohidrat',
-    quantity: 400,
-    minQuantity: 200,
-    unit: 'gram',
-    expiryDate: DateTime(2026, 10, 24),
+    name: 'Wortel',
+    category: 'Sayuran',
+    quantity: 3,
+    minQuantity: 2,
+    unit: 'buah',
+    expiryDate: DateTime(2026, 10, 20),
+  ),
+  PantryItem(
+    id: 'p5',
+    name: 'Bawang Putih',
+    category: 'Bumbu',
+    quantity: 50,
+    minQuantity: 100,
+    unit: 'g',
+    expiryDate: DateTime(2026, 11, 10),
+  ),
+  PantryItem(
+    id: 'p6',
+    name: 'Beras Pulen',
+    category: 'Pokok',
+    quantity: 3,
+    minQuantity: 1,
+    unit: 'kg',
+    expiryDate: DateTime(2026, 12, 15),
+  ),
+  PantryItem(
+    id: 'p7',
+    name: 'Mie Telur',
+    category: 'Pokok',
+    quantity: 1,
+    minQuantity: 2,
+    unit: 'bungkus',
+    expiryDate: DateTime(2026, 10, 15),
+  ),
+  PantryItem(
+    id: 'p8',
+    name: 'Susu UHT Cokelat',
+    category: 'Minuman',
+    quantity: 2,
+    minQuantity: 1,
+    unit: 'kotak',
+    expiryDate: DateTime(2026, 10, 13),
   ),
 ];
 
 // ===== WATER / WASTE / PROFILE / BADGES (Edbert) =====
 final List<WaterRecord> mockWaterRecords = [
-  WaterRecord(
-    id: 'w1',
-    amountMl: 250,
-    time: DateTime(2026, 10, 19, 8, 0),
-  ),
-  WaterRecord(
-    id: 'w2',
-    amountMl: 250,
-    time: DateTime(2026, 10, 19, 11, 30),
-  ),
-  WaterRecord(
-    id: 'w3',
-    amountMl: 250,
-    time: DateTime(2026, 10, 19, 14, 15),
-  ),
+  WaterRecord(id: 'w1', amountMl: 250, time: DateTime(2026, 10, 19, 8)),
+  WaterRecord(id: 'w2', amountMl: 250, time: DateTime(2026, 10, 19, 11, 30)),
+  WaterRecord(id: 'w3', amountMl: 250, time: DateTime(2026, 10, 19, 14, 15)),
 ];
 
 final List<WasteRecord> mockWasteRecords = [
@@ -233,7 +331,6 @@ const UserProfile mockUserProfile = UserProfile(
   waterTargetMl: 2000,
   allergies: ['Kacang'],
   preferences: ['Hemat', 'Tinggi Protein'],
-  darkMode: false,
 );
 
 final List<Achievement> mockAchievements = [
@@ -271,7 +368,6 @@ final List<Achievement> mockAchievements = [
     iconAsset: 'assets/icons/badge_streak.png',
     target: 7,
     progress: 5,
-    isUnlocked: false,
   ),
 ];
 

@@ -7,8 +7,6 @@ class BadgeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('BadgeTile - TODO'),
-    );
+    return const Center(child: Text('BadgeTile - TODO'));
   }
 }

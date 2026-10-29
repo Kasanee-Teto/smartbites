@@ -1,13 +1,6 @@
 // Owner: Edbert | FR: FR-24, FR-25, FR-33, FR-34
 
 class WasteRecord {
-  final String id;
-  final String itemName;
-  final String portion;
-  final String reason;
-  final int estimatedLoss;
-  final DateTime date;
-
   const WasteRecord({
     required this.id,
     required this.itemName,
@@ -16,4 +9,10 @@ class WasteRecord {
     required this.estimatedLoss,
     required this.date,
   });
+  final String id;
+  final String itemName;
+  final String portion;
+  final String reason;
+  final int estimatedLoss;
+  final DateTime date;
 }

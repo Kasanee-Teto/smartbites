@@ -5,12 +5,6 @@ import 'package:budget_bites/models/water_record.dart';
 import 'package:flutter/material.dart';
 
 class WaterTrackerScreen extends StatelessWidget {
-  final int dailyTargetMl;
-  final int currentWaterMl;
-  final List<WaterRecord> records;
-  final ValueChanged<int>? onAddWater;
-  final ValueChanged<String>? onDeleteRecord;
-
   const WaterTrackerScreen({
     super.key,
     this.dailyTargetMl = 2000,
@@ -19,14 +13,18 @@ class WaterTrackerScreen extends StatelessWidget {
     this.onAddWater,
     this.onDeleteRecord,
   });
+  final int dailyTargetMl;
+  final int currentWaterMl;
+  final List<WaterRecord> records;
+  final ValueChanged<int>? onAddWater;
+  final ValueChanged<String>? onDeleteRecord;
 
   @override
   Widget build(BuildContext context) {
-    // TODO(Edbert): Implement hydration gauge, quick-add buttons (+150, +250, +500), and history list.
+    // TODO(Edbert): Implement hydration gauge, quick-add buttons (+150, +250,
+    // +500), and history list.
     return const Scaffold(
-      body: Center(
-        child: Text('WaterTrackerScreen - Edbert (Air)'),
-      ),
+      body: Center(child: Text('WaterTrackerScreen - Edbert (Air)')),
     );
   }
 }
