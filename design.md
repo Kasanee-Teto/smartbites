@@ -50,84 +50,84 @@ colors:
   surface-variant: '#dee4da'
 typography:
   display-lg:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: Playfair
     fontSize: 40px
     fontWeight: '800'
     lineHeight: 48px
     letterSpacing: -0.02em
   headline-lg:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: Playfair
     fontSize: 32px
     fontWeight: '700'
     lineHeight: 40px
     letterSpacing: -0.01em
   headline-lg-mobile:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: Playfair
     fontSize: 26px
     fontWeight: '700'
     lineHeight: 34px
     letterSpacing: -0.01em
   headline-md:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: Playfair
     fontSize: 24px
     fontWeight: '700'
     lineHeight: 32px
   headline-sm:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 20px
+    fontFamily: Playfair
+    fontSize: 24px
     fontWeight: '600'
     lineHeight: 28px
   title-lg:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 18px
+    fontFamily: Playfair
+    fontSize: 22px
     fontWeight: '600'
     lineHeight: 26px
   title-md:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 16px
     fontWeight: '600'
     lineHeight: 24px
   body-lg:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 16px
     fontWeight: '400'
     lineHeight: 24px
   body-md:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 14px
     fontWeight: '400'
     lineHeight: 20px
   body-sm:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 12px
     fontWeight: '400'
     lineHeight: 16px
   label-lg:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 14px
     fontWeight: '600'
     lineHeight: 20px
     letterSpacing: 0.01em
   label-md:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 12px
     fontWeight: '600'
     lineHeight: 16px
     letterSpacing: 0.02em
   label-sm:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 11px
     fontWeight: '600'
     lineHeight: 14px
     letterSpacing: 0.03em
   numeric-currency:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 22px
     fontWeight: '800'
     lineHeight: 28px
     letterSpacing: -0.01em
   numeric-stat:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: system sans-serif
     fontSize: 18px
     fontWeight: '700'
     lineHeight: 24px
@@ -168,7 +168,7 @@ The palette is tuned around fresh nutrition, thrift, and pragmatic everyday metr
 
 ## Typography
 
-Typography prioritizes fast scanning and tabular clarity. Plus Jakarta Sans provides contemporary warmth with balanced proportions, open apertures, and crisp numeric legibility.
+Typography prioritizes fast scanning and tabular clarity. Playfair is the serif typeface for large titles and headings. Body text, compact titles, controls, and numbers keep the platform sans-serif font for readability. Its normal and italic variable fonts are bundled locally under `assets/fonts/playfair/` so typography works offline. Headings use normal width (`wdth: 100`) and an optical size of 24; large titles are 22px and small headlines are 24px. Test compact layouts and larger text when changing typography.
 
 - **Numeric & Financial Prioritization**: Indonesian Rupiah amounts (`Rp 25.000`) and macro calorie calculations (`650 kkal`) must use tabular figures (`font-variant-numeric: tabular-nums`) with semi-bold to extra-bold weights to avoid visual jitter across dynamic budget meters.
 - **Rhythm & Hierarchy**: Headlines employ tight negative tracking to keep long Indonesian compound words (e.g., *Pengeluaran*, *Perencanaan*) compact and visually grounded.
@@ -217,3 +217,15 @@ The geometric signature uses comfortable, rounded curves (Level 2) that feel org
 ### Input Fields & Quick-Log Sheets
 - **Inputs**: Outlined text fields with an 8px radius, recessed 12px padding, and floating labels. Numerical fields for Indonesian Rupiah prefix with an immutable, muted `Rp` anchor.
 - **Quick-Log Bottom Sheets**: Drag-handle anchored top center (32x4px rounded pill in 20% opacity neutral). Surface stacks ingredients, quick meal presets, and an instant-log action button grouped in the lower natural thumb zone.
+### Meal choices and nutrition snapshot
+
+Meal-source options use outlined icon cards with visible text labels and selected
+borders. Category and focus options use small colored Material icons on soft
+tonal backings. Icons supplement labels; they do not replace them. Long labels
+wrap and option cards reflow when text is enlarged.
+
+The full nutrition snapshot uses expandable energy/macro rings and nutrient
+rows. Rings wrap on phones and can form one row on wider layouts. Values and
+units remain visible; ring progress requires a personal target and complete
+data. Missing targets show an empty track with "Tanpa target", and incomplete
+values show coverage. Progress is not a clinical assessment.

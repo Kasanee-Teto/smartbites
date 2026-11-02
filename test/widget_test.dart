@@ -3,6 +3,7 @@
 
 import 'package:budget_bites/app.dart';
 import 'package:budget_bites/screens/grocery_screen.dart';
+import 'package:budget_bites/screens/meal_plan_screen.dart';
 import 'package:budget_bites/screens/onboarding_screen.dart';
 import 'package:budget_bites/screens/welcome_screen.dart';
 import 'package:budget_bites/theme/app_theme.dart';
@@ -122,7 +123,8 @@ void main() {
       // Tab 1: Menu
       await tester.tap(find.text('Menu'));
       await tester.pumpAndSettle();
-      expect(find.text('MealPlanScreen - Jesseca (Menu)'), findsOneWidget);
+      expect(find.byType(MealPlanScreen), findsOneWidget);
+      expect(find.text('Menu & Gizi'), findsOneWidget);
 
       // Tab 2: Belanja ('Belanja' also appears as a TabBar label inside the
       // screen)
@@ -144,7 +146,7 @@ void main() {
       // Tab 4: Profil
       await tester.tap(find.text('Profil'));
       await tester.pumpAndSettle();
-      expect(find.text('ProfileScreen - Edbert (Profil)'), findsOneWidget);
+      expect(find.text('Profil & preferensi'), findsOneWidget);
 
       // Switch back to Tab 0: Beranda
       await tester.tap(find.text('Beranda'));

@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-/// Renders a local asset image if available; otherwise falls back gracefully
-/// to an error builder container with a themed icon and subtle surface tint.
 class AssetImageWithFallback extends StatelessWidget {
   const AssetImageWithFallback({
     required this.assetPath,

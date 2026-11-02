@@ -5,7 +5,9 @@ import 'package:budget_bites/models/achievement.dart';
 import 'package:budget_bites/models/daily_log.dart';
 import 'package:budget_bites/models/grocery_item.dart';
 import 'package:budget_bites/models/meal.dart';
+import 'package:budget_bites/models/meal_preferences.dart';
 import 'package:budget_bites/models/pantry_item.dart';
+import 'package:budget_bites/models/planned_meal.dart';
 import 'package:budget_bites/models/user_profile.dart';
 import 'package:budget_bites/models/waste_record.dart';
 import 'package:budget_bites/models/water_record.dart';
@@ -16,6 +18,7 @@ import 'package:budget_bites/screens/meal_plan_screen.dart';
 import 'package:budget_bites/screens/pantry_screen.dart';
 import 'package:budget_bites/screens/profile_screen.dart';
 import 'package:budget_bites/screens/water_tracker_screen.dart';
+import 'package:budget_bites/utils/meal_planning.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
 import 'package:budget_bites/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +40,10 @@ class _MainNavigationState extends State<MainNavigation> {
   // Single source of truth parent state variables
   late UserProfile _profile;
   late List<Meal> _meals;
-  late List<List<String>> _weekPlan;
-  late List<List<bool>> _eaten;
+  late List<PlannedMeal> _plan;
+  final GlobalKey _mealPlanKey = GlobalKey(debugLabel: 'meal-planner');
+  Map<Nutrient, double> _nutritionGoals = {};
+  NutritionFocus _nutritionFocus = NutritionFocus.general;
   late List<GroceryItem> _grocery;
   late List<PantryItem> _pantry;
   late List<WaterRecord> _waterRecords;
@@ -116,8 +121,7 @@ class _MainNavigationState extends State<MainNavigation> {
     _selectedIndex = widget.initialIndex;
     _profile = mockUserProfile;
     _meals = List<Meal>.from(mockMeals);
-    _weekPlan = mockWeekPlan.map(List<String>.from).toList();
-    _eaten = mockEaten.map(List<bool>.from).toList();
+    _plan = seedMealPlan(DateTime.now(), mockWeekPlan, mockEaten);
     _grocery = List<GroceryItem>.from(mockGroceryItems);
     _pantry = List<PantryItem>.from(mockPantryItems);
     _waterRecords = List<WaterRecord>.from(mockWaterRecords);
@@ -126,14 +130,137 @@ class _MainNavigationState extends State<MainNavigation> {
     _achievements = List<Achievement>.from(mockAchievements);
   }
 
+  void _syncMealLog(DateTime date) {
+    final day = calendarDay(date);
+    final eatenIds = mealsOnDay(
+      _plan,
+      day,
+    ).where((e) => e.isEaten).map((e) => e.mealId).toList();
+    final index = _dailyLogs.indexWhere((log) => sameDay(log.date, day));
+    if (index < 0) {
+      if (eatenIds.isNotEmpty) {
+        _dailyLogs.add(
+          DailyLog(
+            date: day,
+            waterMl: 0,
+            mealsEaten: eatenIds,
+            wasteLogged: false,
+            noWasteMarked: false,
+          ),
+        );
+      }
+      return;
+    }
+    final previous = _dailyLogs[index];
+    if (eatenIds.isEmpty &&
+        previous.waterMl == 0 &&
+        !previous.wasteLogged &&
+        !previous.noWasteMarked) {
+      _dailyLogs.removeAt(index);
+    } else {
+      _dailyLogs[index] = previous.copyWith(mealsEaten: eatenIds);
+    }
+  }
+
+  void _savePlannedMeal(PlannedMeal entry) {
+    if (!_meals.any((meal) => meal.id == entry.mealId) ||
+        !entry.servings.isFinite ||
+        entry.servings < 0.25 ||
+        entry.servings > 10 ||
+        (entry.isEaten &&
+            calendarDay(entry.scheduledAt)
+                .isAfter(calendarDay(DateTime.now())))) {
+      return;
+    }
+    final index = _plan.indexWhere((item) => item.id == entry.id);
+    final previous = index < 0 ? null : _plan[index];
+    void apply(PlannedMeal? value) {
+      setState(() {
+        _plan.removeWhere((item) => item.id == entry.id);
+        if (value != null) _plan.add(value);
+        _syncMealLog(entry.scheduledAt);
+        if (previous != null &&
+            !sameDay(previous.scheduledAt, entry.scheduledAt)) {
+          _syncMealLog(previous.scheduledAt);
+        }
+      });
+    }
+
+    _applyWithUndo(
+      entry.isEaten ? 'Menu dicatat dimakan' : 'Rencana menu disimpan',
+      () {
+        apply(entry);
+      },
+      () {
+        apply(previous);
+      },
+    );
+  }
+
+  void _deletePlannedMeal(String id) {
+    final index = _plan.indexWhere((item) => item.id == id);
+    if (index < 0) return;
+    final previous = _plan[index];
+    _applyWithUndo(
+      'Menu dihapus dari rencana',
+      () => setState(() {
+        _plan.removeWhere((entry) => entry.id == id);
+        _syncMealLog(previous.scheduledAt);
+      }),
+      () => setState(() {
+        _plan.add(previous);
+        _syncMealLog(previous.scheduledAt);
+      }),
+    );
+  }
+
+  void _addRecipeGroceries(Meal meal, double servings) {
+    final prefix = 'recipe_${DateTime.now().microsecondsSinceEpoch}';
+    final items = recipeGroceries(meal, servings, prefix);
+    if (items.isEmpty) return;
+    final ids = items.map((item) => item.id).toSet();
+    _applyWithUndo(
+      'Bahan ditambahkan ke belanja',
+      () => setState(() => _grocery.addAll(items)),
+      () =>
+          setState(() => _grocery.removeWhere((item) => ids.contains(item.id))),
+    );
+  }
+
+  void _updateProfile(UserProfile profile) {
+    final previous = _profile;
+    _applyWithUndo(
+      'Preferensi profil disimpan',
+      () => setState(() => _profile = profile),
+      () => setState(() => _profile = previous),
+    );
+  }
+
+  void _saveMealPreferences(
+    List<String> allergies,
+    MealPreferences preferences,
+  ) {
+    if ((preferences.maxPrice != null &&
+            (preferences.maxPrice! < 0 || preferences.maxPrice! > 10000000)) ||
+        (preferences.maxCookMinutes != null &&
+            (preferences.maxCookMinutes! < 0 ||
+                preferences.maxCookMinutes! > 1440))) {
+      return;
+    }
+    _updateProfile(
+      _profile.copyWith(
+        allergies: List.of(allergies),
+        mealPreferences: preferences,
+      ),
+    );
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  /// Private helper that executes an action and displays a floating SnackBar
-  /// with an "Urungkan" action button to revert the change safely.
   void _applyWithUndo(String message, VoidCallback apply, VoidCallback revert) {
     apply();
     if (!mounted) return;
@@ -189,17 +316,15 @@ class _MainNavigationState extends State<MainNavigation> {
     // Streak count calculated dynamically from daily logs
     final streakDays = _dailyLogs.isNotEmpty ? _dailyLogs.length : 5;
 
-    // Today meals (e.g. Day 0: Senin)
-    final todayMealIds = _weekPlan.isNotEmpty ? _weekPlan[0] : <String>[];
-    final todayMeals = todayMealIds
-        .map(
-          (id) =>
-              _meals.firstWhere((m) => m.id == id, orElse: () => _meals.first),
-        )
+    final mealMap = {for (final meal in _meals) meal.id: meal};
+    final todayEntries = mealsOnDay(
+      _plan,
+      DateTime.now(),
+    ).where((entry) => mealMap.containsKey(entry.mealId)).toList();
+    final todayMeals = todayEntries
+        .map((entry) => mealMap[entry.mealId]!)
         .toList();
-    final todayEaten = _eaten.isNotEmpty
-        ? _eaten[0]
-        : <bool>[false, false, false];
+    final todayEaten = todayEntries.map((entry) => entry.isEaten).toList();
 
     // Reference pantry, waste records, and achievements for child screen
     // integration
@@ -242,20 +367,9 @@ class _MainNavigationState extends State<MainNavigation> {
           );
         },
         onToggleMealEaten: (slotIndex, eaten) {
-          final prev = _eaten[0][slotIndex];
-          _applyWithUndo(
-            eaten ? 'Menu ditandai selesai dimakan' : 'Tanda makan dibatalkan',
-            () {
-              setState(() {
-                _eaten[0][slotIndex] = eaten;
-              });
-            },
-            () {
-              setState(() {
-                _eaten[0][slotIndex] = prev;
-              });
-            },
-          );
+          if (slotIndex < todayEntries.length) {
+            _savePlannedMeal(todayEntries[slotIndex].copyWith(isEaten: eaten));
+          }
         },
         onOpenMealPlan: () => setState(() => _selectedIndex = 1),
         onOpenInsight: () => Navigator.of(context).push(
@@ -269,26 +383,27 @@ class _MainNavigationState extends State<MainNavigation> {
         ),
       ),
       MealPlanScreen(
-        weekPlan: _weekPlan,
-        eaten: _eaten,
+        key: _mealPlanKey,
+        entries: _plan,
         meals: _meals,
+        allergies: _profile.allergies,
+        preferences: _profile.mealPreferences,
+        onPreferencesChanged: _saveMealPreferences,
+        goals: _nutritionGoals,
+        focus: _nutritionFocus,
         weeklyBudget: _profile.weeklyBudget,
-        onToggleMealEaten: (dayIndex, slotIndex, eaten) {
-          final prev = _eaten[dayIndex][slotIndex];
+        onSave: _savePlannedMeal,
+        onDelete: _deletePlannedMeal,
+        onFocusChanged: (focus) => setState(() => _nutritionFocus = focus),
+        onGoalsChanged: (goals) {
+          final previous = _nutritionGoals;
           _applyWithUndo(
-            eaten ? 'Menu ditandai sudah dimakan' : 'Tanda makan dibatalkan',
-            () {
-              setState(() {
-                _eaten[dayIndex][slotIndex] = eaten;
-              });
-            },
-            () {
-              setState(() {
-                _eaten[dayIndex][slotIndex] = prev;
-              });
-            },
+            'Target gizi disimpan',
+            () => setState(() => _nutritionGoals = Map.of(goals)),
+            () => setState(() => _nutritionGoals = previous),
           );
         },
+        onAddToGrocery: _addRecipeGroceries,
       ),
       GroceryScreen(
         items: _grocery,
@@ -403,31 +518,15 @@ class _MainNavigationState extends State<MainNavigation> {
           );
         },
       ),
-      ProfileScreen(
-        profile: _profile,
-        onUpdateProfile: (newProfile) {
-          final prev = _profile;
-          _applyWithUndo(
-            'Profil berhasil diperbarui',
-            () {
-              setState(() {
-                _profile = newProfile;
-              });
-            },
-            () {
-              setState(() {
-                _profile = prev;
-              });
-            },
-          );
-        },
-      ),
+      ProfileScreen(profile: _profile, onUpdateProfile: _updateProfile),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
     final screens = _buildScreens();
+    final extraTextHeight = MediaQuery.textScalerOf(context).scale(28) - 28;
+    final appBarHeight = 64 + (extraTextHeight > 0 ? extraTextHeight : 0.0);
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -437,6 +536,7 @@ class _MainNavigationState extends State<MainNavigation> {
         if (isCompact) {
           return Scaffold(
             appBar: SmartBitesAppBar(
+              height: appBarHeight,
               subtitle: _titles[_selectedIndex],
               streakDays: 5,
             ),
@@ -448,12 +548,13 @@ class _MainNavigationState extends State<MainNavigation> {
               onDestinationSelected: _onItemTapped,
               destinations: _destinations,
             ),
-            floatingActionButton: _buildFab(),
+            floatingActionButton: _selectedIndex == 1 ? null : _buildFab(),
           );
         }
 
         return Scaffold(
           appBar: SmartBitesAppBar(
+            height: appBarHeight,
             subtitle: _titles[_selectedIndex],
             streakDays: 5,
           ),
@@ -473,7 +574,7 @@ class _MainNavigationState extends State<MainNavigation> {
               ],
             ),
           ),
-          floatingActionButton: _buildFab(),
+          floatingActionButton: _selectedIndex == 1 ? null : _buildFab(),
         );
       },
     );

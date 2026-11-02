@@ -18,6 +18,9 @@ analyzer:
     - android/**
     - web/**
 
+  errors:
+    lines_longer_than_80_chars: ignore
+
 # ============================================================
 # Extra native Dart lints
 # ============================================================

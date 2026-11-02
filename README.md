@@ -85,6 +85,24 @@ The structure separates application startup, app-level configuration, shared fea
 
 Avoid independently maintained copies of the same shared records in different screens. 
 
+Meal fixtures distinguish "Masak Sendiri" recipes from "Beli Siap Makan" options
+for warteg, restaurants, and street stalls. The shared catalog combines both;
+the Menu tab provides a date-based planner, recipe details, and nutrition diary. See the
+[meal option contract](docs/integration_contract.md#5-cook-and-buy-meal-options)
+for fields, sample price meanings, and integration limits.
+
+Cook and buy meals also contain per-serving sample nutrition amounts beyond
+calories. See the
+[nutrition contract](docs/integration_contract.md#6-per-serving-nutrition-estimates)
+for units and estimate limitations.
+
+The meal calendar supports day/week views, date selection, meal times, snacks,
+portion changes, and undo. Nutrition separates planned and eaten amounts, offers
+optional personal daily targets/limits, and compares cholesterol/heart-related
+nutrients without diagnosing conditions or prescribing diets. Plans and targets
+are held locally for the current app session.
+
+
 Budget summaries, insights, streaks, and achievements should use the authoritative feature data relevant to them.
 
 ### Design and Responsive Layout
@@ -134,9 +152,16 @@ The project groups files by responsibility:
 | `lib/widgets/quick_log_sheet.dart` | Louis | FR-30 |
 | `lib/widgets/streak_card.dart` | Louis | FR-36, FR-40 |
 | `lib/models/meal.dart` | Jessica | FR-08, FR-09, FR-11, FR-12 |
+| `lib/models/nutrition_facts.dart` | Jessica | Per-serving sample nutrition for meals |
+| `lib/models/planned_meal.dart` | Jessica | Dated meal plan and diary entries |
+| `lib/utils/meal_planning.dart` | Jessica | Calendar, portions, nutrition aggregation, and recipe groceries |
 | `lib/screens/meal_plan_screen.dart` | Jessica | FR-08..10, FR-13 |
 | `lib/screens/meal_detail_screen.dart` | Jessica | FR-11, FR-12 |
 | `lib/widgets/meal_card.dart` | Jessica | FR-08, FR-11, FR-12, FR-32 |
+| `lib/widgets/meal_catalog.dart`, `lib/widgets/meal_editor_sheet.dart` | Jessica | Search, filters, scheduling, and meal logging |
+| `lib/widgets/nutrition_summary.dart`, `lib/widgets/nutrition_goals_sheet.dart` | Jessica | Nutrition snapshot, coverage, trends, and personal goals |
+| `lib/widgets/option_icon.dart` | Jessica | Decorative icons for meal choices, focus, and nutrition |
+| `lib/models/meal_preferences.dart`, `lib/widgets/meal_preferences_sheet.dart` | Jessica, Edbert | Shared dietary, allergen, budget, and time preferences |
 | `lib/models/grocery_item.dart` | Gilbert | FR-14..17 |
 | `lib/models/pantry_item.dart` | Gilbert | FR-18..21 |
 | `lib/screens/grocery_screen.dart` | Gilbert | FR-14..17 |
@@ -268,3 +293,25 @@ Backends, AI services, payments, cloud synchronization, and other major scope ex
 | Gilbert | Grocery and pantry features, related models and tiles, and insights. |
 | Edbert | Water tracking, food-waste records, profile, achievements, and badge rules. |
 | All members | Shared mock data and feature integration. |
+
+### Font assets
+
+Large titles and headings in the shared light and dark themes use [Playfair from Google Fonts](https://github.com/google/fonts/tree/main/ofl/playfair).
+Body text, controls, and numbers retain the platform sans-serif font for readability.
+Normal and italic variable TrueType files are bundled in `assets/fonts/playfair/`
+and declared in `pubspec.yaml`; no runtime font download is needed.
+Playfair is licensed under the SIL Open Font License 1.1; its copyright notice
+and full license are included in [OFL.txt](assets/fonts/playfair/OFL.txt).
+
+### Meal preferences
+
+Open **Preferensi makan** from Rencana/Jelajah menu or **Ubah preferensi makan**
+from Profil. Allergy/ingredient choices, dietary preference, maximum price per
+portion, and maximum cooking time filter the catalog together. Save applies the
+draft with undo; closing the sheet cancels. Existing plans/logs remain intact.
+These preferences are session-only, matching the current shared state model.
+
+27 cook recipes carry explicit vegetarian/vegan mock tags based on their listed
+ingredients. Vegan recipes also match Vegetarian. Untagged recipes and all
+current buy fixtures are excluded when a diet is selected; vendor composition
+is not verified. Allergy tags do not certify an allergen-free meal.

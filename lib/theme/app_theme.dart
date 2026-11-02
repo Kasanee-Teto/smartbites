@@ -7,6 +7,11 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
+  static const _headingVariations = [
+    FontVariation('opsz', 24),
+    FontVariation('wdth', 100),
+  ];
+
   static ThemeData get lightTheme => _buildTheme(Brightness.light);
   static ThemeData get darkTheme => _buildTheme(Brightness.dark);
 
@@ -143,29 +148,39 @@ class AppTheme {
   static TextTheme _buildTextTheme(ColorScheme colorScheme) {
     return TextTheme(
       displayLarge: TextStyle(
+        fontFamily: 'Playfair',
+        fontVariations: _headingVariations,
         fontSize: 40,
         fontWeight: FontWeight.w800,
         letterSpacing: -0.8,
         color: colorScheme.onSurface,
       ),
       headlineLarge: TextStyle(
+        fontFamily: 'Playfair',
+        fontVariations: _headingVariations,
         fontSize: 32,
         fontWeight: FontWeight.w700,
         letterSpacing: -0.32,
         color: colorScheme.onSurface,
       ),
       headlineMedium: TextStyle(
+        fontFamily: 'Playfair',
+        fontVariations: _headingVariations,
         fontSize: 24,
         fontWeight: FontWeight.w700,
         color: colorScheme.onSurface,
       ),
       headlineSmall: TextStyle(
-        fontSize: 20,
+        fontFamily: 'Playfair',
+        fontVariations: _headingVariations,
+        fontSize: 24,
         fontWeight: FontWeight.w600,
         color: colorScheme.onSurface,
       ),
       titleLarge: TextStyle(
-        fontSize: 18,
+        fontFamily: 'Playfair',
+        fontVariations: _headingVariations,
+        fontSize: 22,
         fontWeight: FontWeight.w600,
         color: colorScheme.onSurface,
       ),
@@ -175,16 +190,19 @@ class AppTheme {
         color: colorScheme.onSurface,
       ),
       bodyLarge: TextStyle(
+        height: 1.4,
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: colorScheme.onSurface,
       ),
       bodyMedium: TextStyle(
+        height: 1.4,
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: colorScheme.onSurface,
       ),
       bodySmall: TextStyle(
+        height: 1.3,
         fontSize: 12,
         fontWeight: FontWeight.w400,
         color: colorScheme.onSurfaceVariant,

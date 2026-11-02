@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   shared_preferences: ^2.3.2
 
 dev_dependencies:
@@ -22,3 +24,10 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/fonts/playfair/OFL.txt
+  fonts:
+    - family: Playfair
+      fonts:
+        - asset: assets/fonts/playfair/Playfair-Variable.ttf
+        - asset: assets/fonts/playfair/Playfair-Italic-Variable.ttf
+          style: italic

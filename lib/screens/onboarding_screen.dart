@@ -5,7 +5,7 @@ import 'package:budget_bites/models/user_profile.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
 import 'package:budget_bites/widgets/app_logo.dart';
-import 'package:budget_bites/widgets/asset_image_with_fallback.dart';
+import 'package:budget_bites/widgets/asset_image.dart';
 import 'package:budget_bites/widgets/main_navigation.dart';
 import 'package:budget_bites/widgets/page_dots.dart';
 import 'package:budget_bites/widgets/sdg_badge.dart';

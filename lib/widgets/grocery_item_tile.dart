@@ -25,8 +25,6 @@ class GroceryItemTile extends StatelessWidget {
   });
   final GroceryItem item;
   final VoidCallback onToggle;
-
-  /// Swipe-to-delete is disabled when null.
   final VoidCallback? onDismissed;
 
   @override
@@ -167,7 +165,9 @@ class GroceryItemTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        formatRupiah(item.price),
+                        item.price == 0
+                            ? 'Harga belum diisi'
+                            : formatRupiah(item.price),
                         style: textTheme.labelLarge?.copyWith(
                           decoration: isChecked
                               ? TextDecoration.lineThrough

@@ -10,8 +10,6 @@ import 'package:budget_bites/widgets/grocery_item_tile.dart';
 import 'package:flutter/material.dart';
 
 /// Belanja & Pantry tab modeled after `smartbites_belanja_pantry/code.html`.
-/// State lives in MainNavigation (see docs/integration_contract.md); this
-/// screen renders [items] and reports changes through callbacks.
 class GroceryScreen extends StatefulWidget {
   const GroceryScreen({
     super.key,
@@ -28,11 +26,7 @@ class GroceryScreen extends StatefulWidget {
   final ValueChanged<String>? onToggleItem;
   final ValueChanged<GroceryItem>? onAddItem;
   final ValueChanged<String>? onDeleteItem;
-
-  /// Moves all checked items to the Pantry (FR-17).
   final VoidCallback? onClearChecked;
-
-  /// Content of the "Pantry / Stok" tab, built by the parent with its own data.
   final Widget? pantryView;
 
   @override
@@ -194,6 +188,7 @@ class _GroceryScreenState extends State<GroceryScreen> {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
     final isWithinBudget = _totalPrice <= widget.weeklyBudget;
+    final hasUnknownPrices = _items.any((item) => item.price == 0);
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -253,7 +248,11 @@ class _GroceryScreenState extends State<GroceryScreen> {
                           ),
                         ),
                         child: Text(
-                          isWithinBudget ? 'Terkendali' : 'Melebihi Budget',
+                          hasUnknownPrices
+                              ? 'Estimasi belum lengkap'
+                              : isWithinBudget
+                              ? 'Terkendali'
+                              : 'Melebihi Budget',
                           style: textTheme.labelSmall?.copyWith(
                             color: isWithinBudget
                                 ? AppColors.harvestAmber
@@ -266,7 +265,9 @@ class _GroceryScreenState extends State<GroceryScreen> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    isWithinBudget
+                    hasUnknownPrices
+                        ? 'Sebagian bahan belum memiliki estimasi harga.'
+                        : isWithinBudget
                         ? 'Estimasi belanjaan ini aman dalam sisa '
                               'batas saku kosan!'
                         : 'Total belanja melebihi batas anggaran '

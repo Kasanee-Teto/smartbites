@@ -97,9 +97,9 @@ English names below describe the functions. In-app product copy remains Indonesi
 | FR-06 | Home: swipeable Health Tip cards. | S | Louis |
 | FR-07 | Weekly Insights page with a simple widget-based bar chart, without an additional package. | S | Gilbert |
 | FR-08 | Meal list with category filters (`ChoiceChip`): Breakfast, Lunch, Dinner, Budget-Friendly, and High Protein. | M | Jessica |
-| FR-09 | Daily Meal Planner covering Monday–Sunday with three meal slots per day. | M | Jessica |
-| FR-10 | Add and remove meals from the plan through a bottom sheet. | M | Jessica |
-| FR-11 | Meal Detail: image, ingredients, price, calories, cooking time, and brief preparation steps. | M | Jessica |
+| FR-09 | Date-based Meal Planner with day/week views and a month date picker. Seed data starts with three meals per day; additional meals and snacks can use custom times and portions. | M | Jessica |
+| FR-10 | Add, edit, reschedule, and remove meals through a bottom sheet, with undo and portion validation. | M | Jessica |
+| FR-11 | Meal Detail: image, ingredients, sample price, per-serving nutrition, cooking time, and preparation steps for cook options; separate bought-meal information. | M | Jessica |
 | FR-12 | Allergy warnings on meal cards and meal details based on Profile data. | M | Jessica |
 | FR-13 | Total weekly plan cost and a status showing whether it is under, within, or over budget. | M | Jessica |
 | FR-14 | Grocery List: checkable items and the total estimated cost. | M | Gilbert |
@@ -115,7 +115,7 @@ English names below describe the functions. In-app product copy remains Indonesi
 | FR-24 | Food Waste: entry form with item, portion, reason, and estimated Rupiah value. | M | Edbert |
 | FR-25 | Food-waste history and total estimated financial loss for the current month. | M | Edbert |
 | FR-26 | Profile: weekly budget and water target controls using `Slider`. | M | Edbert |
-| FR-27 | Profile: allergies and food preferences using `FilterChip`. | M | Edbert |
+| FR-27 | Shared meal-preference sheet from Profile and Menu: ingredient/allergen FilterChips, optional Vegetarian/Vegan tags, per-portion budget and cooking-time limits; draft/save/cancel and undo. | M | Edbert |
 | FR-28 | Profile: dark-mode switch and Reset Demo Data button. | M | Edbert |
 | FR-29 | Local persistence using `shared_preferences` for budget, water intake, grocery checkmarks, streaks, and badges. Initial demo data includes a sample five-day streak. | S | Louis |
 | FR-30 | Quick Log button (Extended FAB) on all main tabs, opening a bottom sheet with Water, Meal, and Food Waste actions. | M | Louis |
@@ -157,6 +157,17 @@ A streak counts consecutive days with at least one water, meal, shopping, or foo
 | Smart Shopper | Check all grocery items and move them to Pantry. | Grocery and Pantry |
 
 **Design note:** Gamification should be friendly, with no blaming language when a streak ends. The optional one-day grace period (FR-40) is intended to support motivation. These features build on existing data, which is expected to limit their effect on the development schedule.
+
+### 6.3 Meal Nutrition Tracking and Comparison
+
+The Menu tab includes a dated food diary, planned-versus-eaten nutrient totals,
+seven-day energy trends, and optional user-entered daily targets and limits.
+Totals scale with portion count and retain unknown nutrient coverage. Cholesterol
+and heart focus modes highlight relevant sample nutrients and support comparison;
+they do not diagnose conditions, certify meals as disease-safe, or prescribe
+clinical targets. Data remains mock, session-local, and clearly labeled as
+estimates. These requirements extend meal planning without adding food scanning,
+weight-loss prediction, remote calendars, ordering, or medical treatment.
 
 ## 7. Screen Flow and Navigation
 
@@ -218,7 +229,7 @@ Total: approximately 14–15 screens and sub-screens: Welcome, Onboarding, Home,
 | `WasteRecord` | id, itemName, portion, reason, estimatedLoss, date |
 | `DailyLog` | date, waterMl, mealsEaten, wasteLogged, noWasteMarked |
 | `Achievement` | id, title, description, iconAsset, target, progress, isUnlocked |
-| `UserProfile` | weeklyBudget, waterTargetMl, allergies, preferences, darkMode |
+| `UserProfile` | weeklyBudget, waterTargetMl, allergies, preferences (legacy strings), darkMode, mealPreferences |
 
 ### 9.3 Reusable Widgets
 

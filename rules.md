@@ -126,6 +126,7 @@ Keep `.codex/` and `graphify-out/` local/untracked unless explicitly adopted for
 - Dispose owned controllers, listeners, focus nodes, and similar resources. Check mounted state after asynchronous gaps where needed; never use asynchronous `setState()` callbacks.
 - Preserve supported undo behavior. Keep summaries, streaks, badges, and budget totals consistent with underlying records.
 - Document public APIs and non-obvious contracts when useful; do not add comments that merely repeat code.
+- Follow my project’s analysis_options.yaml. Avoid lint suppressions and preserve the existing behavior.
 
 ## 5. Data and product integrity
 

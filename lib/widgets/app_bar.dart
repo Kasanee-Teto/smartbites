@@ -12,15 +12,17 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onNotificationTap,
     this.onProfileTap,
     this.onStreakTap,
+    this.height = 64,
   });
   final String subtitle;
   final int streakDays;
   final VoidCallback? onNotificationTap;
   final VoidCallback? onProfileTap;
   final VoidCallback? onStreakTap;
+  final double height;
 
   @override
-  Size get preferredSize => const Size.fromHeight(64);
+  Size get preferredSize => Size.fromHeight(height);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: SafeArea(
         bottom: false,
         child: Container(
-          height: 64,
+          height: height,
           padding: const EdgeInsets.symmetric(horizontal: AppConstants.spaceSm),
           decoration: BoxDecoration(
             color: colorScheme.surface,
