@@ -120,3 +120,5 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 # Widget Preview related
 .widget_preview/
+# Smartbites UI Design
+/stitch_smartbites_meal_budget_planner/
