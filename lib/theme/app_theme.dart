@@ -120,6 +120,12 @@ class AppTheme {
           borderRadius: BorderRadius.circular(AppConstants.radiusDefault),
         ),
       ),
+      // 8. FloatingActionButton: green background with onPrimary (white) icon & text
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
+        shape: const StadiumBorder(),
+      ),
       // 8. InputDecoration: 8dp radius outline with surfaceContainerHighest
       // fill
       inputDecorationTheme: InputDecorationTheme(

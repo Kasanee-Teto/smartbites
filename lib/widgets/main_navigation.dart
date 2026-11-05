@@ -294,7 +294,10 @@ class _MainNavigationState extends State<MainNavigation> {
   }
 
   Widget _buildFab() {
+    final theme = Theme.of(context);
     return FloatingActionButton.extended(
+      backgroundColor: theme.colorScheme.primary,
+      foregroundColor: theme.colorScheme.onPrimary,
       icon: const Icon(Icons.bolt),
       label: const Text('Catat Cepat'),
       onPressed: _showQuickLogPlaceholder,
@@ -372,6 +375,54 @@ class _MainNavigationState extends State<MainNavigation> {
           }
         },
         onOpenMealPlan: () => setState(() => _selectedIndex = 1),
+        onGoToTab: (index) => setState(() => _selectedIndex = index),
+        onOpenStreak: () => setState(() => _selectedIndex = 4),
+        onNoWaste: () {
+          final today = calendarDay(DateTime.now());
+          final index = _dailyLogs.indexWhere(
+            (log) => sameDay(log.date, today),
+          );
+          final prevLog = index >= 0 ? _dailyLogs[index] : null;
+
+          _applyWithUndo(
+            'Komitmen bebas sampah hari ini tercatat! 🌟',
+            () {
+              setState(() {
+                if (index >= 0) {
+                  _dailyLogs[index] = _dailyLogs[index].copyWith(
+                    noWasteMarked: true,
+                  );
+                } else {
+                  _dailyLogs.add(
+                    DailyLog(
+                      date: today,
+                      waterMl: 0,
+                      mealsEaten: const [],
+                      wasteLogged: false,
+                      noWasteMarked: true,
+                    ),
+                  );
+                }
+              });
+            },
+            () {
+              setState(() {
+                if (prevLog != null) {
+                  _dailyLogs[index] = prevLog;
+                } else {
+                  _dailyLogs.removeWhere(
+                    (log) =>
+                        sameDay(log.date, today) &&
+                        log.noWasteMarked &&
+                        !log.wasteLogged &&
+                        log.waterMl == 0 &&
+                        log.mealsEaten.isEmpty,
+                  );
+                }
+              });
+            },
+          );
+        },
         onOpenInsight: () => Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (navContext) => InsightScreen(
