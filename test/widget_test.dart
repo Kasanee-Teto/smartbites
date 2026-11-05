@@ -2,12 +2,16 @@
 // adaptive layouts, and overflow
 
 import 'package:budget_bites/app.dart';
+import 'package:budget_bites/data/mock_data.dart';
+import 'package:budget_bites/models/user_profile.dart';
 import 'package:budget_bites/screens/grocery_screen.dart';
+import 'package:budget_bites/screens/home_screen.dart';
 import 'package:budget_bites/screens/meal_plan_screen.dart';
 import 'package:budget_bites/screens/onboarding_screen.dart';
 import 'package:budget_bites/screens/welcome_screen.dart';
 import 'package:budget_bites/theme/app_theme.dart';
 import 'package:budget_bites/widgets/app_bar.dart';
+import 'package:budget_bites/widgets/budget_card.dart';
 import 'package:budget_bites/widgets/main_navigation.dart';
 import 'package:budget_bites/widgets/page_dots.dart';
 import 'package:budget_bites/widgets/sdg_badge.dart';
@@ -118,7 +122,8 @@ void main() {
       expect(find.byType(NavigationRail), findsNothing);
 
       // Tab 0: Beranda
-      expect(find.text('HomeScreen - Louis (Beranda)'), findsOneWidget);
+      expect(find.byType(HomeScreen), findsOneWidget);
+      expect(find.text('Budget Makan Minggu Ini'), findsOneWidget);
 
       // Tab 1: Menu
       await tester.tap(find.text('Menu'));
@@ -151,7 +156,8 @@ void main() {
       // Switch back to Tab 0: Beranda
       await tester.tap(find.text('Beranda'));
       await tester.pumpAndSettle();
-      expect(find.text('HomeScreen - Louis (Beranda)'), findsOneWidget);
+      expect(find.byType(HomeScreen), findsOneWidget);
+      expect(find.text('Budget Makan Minggu Ini'), findsOneWidget);
       expect(find.byType(IndexedStack), findsOneWidget);
 
       // Floating Action Button (Catat Cepat)
@@ -247,6 +253,257 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
       expect(find.byType(OnboardingScreen), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'BudgetCard renders in standard mode, compact mode, and handles budget <= 0',
+    (tester) async {
+      // 1. Standard mode (spent: 235000, budget: 300000)
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(body: BudgetCard(spent: 235000, budget: 300000)),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Budget Makan Minggu Ini'), findsOneWidget);
+      expect(find.text('Rp 235.000'), findsOneWidget);
+      expect(find.text('/ Rp 300.000'), findsOneWidget);
+      expect(find.text('78%'), findsOneWidget);
+      expect(find.text('Hemat'), findsOneWidget);
+      expect(find.textContaining('Rp 65.000'), findsOneWidget);
+
+      // 2. Compact mode (Perencana Makan)
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(
+            body: BudgetCard(spent: 235000, budget: 300000, compact: true),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Total Rencana Mingguan'), findsOneWidget);
+      expect(find.text('Terpakai 78%'), findsOneWidget);
+      expect(find.text('Hemat (Di Bawah Target)'), findsOneWidget);
+
+      // 3. Budget <= 0 (Unset budget)
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(body: BudgetCard(spent: 50000, budget: 0)),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text('Atur budget di Profil untuk memantau pengeluaran.'),
+        findsOneWidget,
+      );
+      expect(find.text('Atur di Profil'), findsOneWidget);
+    },
+  );
+
+  testWidgets('HomeScreen renders all 6 sections and handles water quick log, checkboxes, '
+      'and zero-waste commitment', (tester) async {
+    tester.view.physicalSize = const Size(390 * 2.0, 844 * 2.0);
+    tester.view.devicePixelRatio = 2.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    var loggedWater = 0;
+    var toggledSlot = -1;
+    var toggledValue = false;
+    var zeroWasteTapped = false;
+    var insightTapped = false;
+    var mealPlanTapped = false;
+
+    const testProfile = UserProfile(
+      weeklyBudget: 300000,
+      waterTargetMl: 2000,
+      allergies: ['Kacang'],
+      preferences: ['Murah'],
+    );
+
+    final meals = [mockCookMeals[0], mockCookMeals[1]];
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.lightTheme,
+        home: HomeScreen(
+          profile: testProfile,
+          todayMeals: meals,
+          todayEaten: const [true, false],
+          currentSpent: 235000,
+          todayWaterMl: 750,
+          streakDays: 5,
+          onQuickWaterAdd: (amount) => loggedWater += amount,
+          onToggleMealEaten: (slot, val) {
+            toggledSlot = slot;
+            toggledValue = val;
+          },
+          onNoWaste: () => zeroWasteTapped = true,
+          onOpenInsight: () => insightTapped = true,
+          onOpenMealPlan: () => mealPlanTapped = true,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // 1. Header greeting
+    expect(find.text('Halo, Rani! 👋'), findsOneWidget);
+    expect(find.text('20 thn • Mahasiswa Kost Aktif'), findsOneWidget);
+    expect(find.textContaining('Pilihan Bijak Hari Ini'), findsOneWidget);
+
+    // Tap insight button
+    await tester.tap(find.byIcon(Icons.tips_and_updates_outlined));
+    expect(insightTapped, isTrue);
+
+    // 2. BudgetCard
+    expect(find.byType(BudgetCard), findsOneWidget);
+
+    // 3. Streak Card
+    expect(find.text('5 Hari Beruntun 🔥'), findsOneWidget);
+    expect(find.text('Level 2'), findsOneWidget);
+
+    // 4. Water Card & Quick-log buttons
+    expect(find.text('Konsumsi Air Hari Ini'), findsOneWidget);
+    expect(find.text('+150 ml'), findsOneWidget);
+    expect(find.text('+250 ml'), findsOneWidget);
+    expect(find.text('+500 ml'), findsOneWidget);
+
+    await tester.tap(find.text('+250 ml'));
+    expect(loggedWater, 250);
+
+    // 5. Today's Menu & Allergy warning
+    expect(find.text('Menu Hari Ini'), findsOneWidget);
+    expect(find.text(meals[0].name), findsOneWidget);
+    expect(find.text(meals[1].name), findsOneWidget);
+
+    // Meal 2 contains 'Kacang' and user profile has 'Kacang'
+    if (meals[1].allergens.any((a) => a.toLowerCase().contains('kacang'))) {
+      expect(
+        find.textContaining('Peringatan: Mengandung Alergen'),
+        findsOneWidget,
+      );
+    }
+
+    // Checkbox toggling
+    final checkboxes = find.byType(Checkbox);
+    expect(checkboxes, findsNWidgets(2));
+    await tester.tap(checkboxes.at(1));
+    expect(toggledSlot, 1);
+    expect(toggledValue, isTrue);
+
+    // Tap 'Lihat Rencana'
+    await tester.tap(find.text('Lihat Rencana'));
+    expect(mealPlanTapped, isTrue);
+
+    // 6. Zero Waste Commitment Card
+    await tester.scrollUntilVisible(
+      find.text('Pahlawan Bebas Sampah'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(find.text('Pahlawan Bebas Sampah'), findsOneWidget);
+    await tester.tap(find.text('Habis Semua! 🌟'));
+    expect(zeroWasteTapped, isTrue);
+  });
+
+  testWidgets(
+    'HomeScreen renders empty state when todayMeals is empty and allows planning',
+    (tester) async {
+      var planCalled = false;
+      const testProfile = UserProfile(
+        weeklyBudget: 300000,
+        waterTargetMl: 2000,
+        allergies: [],
+        preferences: [],
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: HomeScreen(
+            profile: testProfile,
+            onOpenMealPlan: () => planCalled = true,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Belum ada menu hari ini'), findsOneWidget);
+      expect(
+        find.text('Mulai rencanakan menu mingguan hematmu sekarang!'),
+        findsOneWidget,
+      );
+      expect(find.text('Rencanakan Menu'), findsOneWidget);
+
+      await tester.tap(find.text('Rencanakan Menu'));
+      expect(planCalled, isTrue);
+    },
+  );
+
+  testWidgets(
+    'HomeScreen has no overflow on compact (360x640) and wide (1024x768) at text scale 1.3',
+    (tester) async {
+      const testProfile = UserProfile(
+        weeklyBudget: 300000,
+        waterTargetMl: 2000,
+        allergies: ['Kacang'],
+        preferences: ['Murah'],
+      );
+
+      // 1. Compact 360 x 640
+      tester.view.physicalSize = const Size(360 * 2.0, 640 * 2.0);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(textScaler: TextScaler.linear(1.3)),
+          child: MaterialApp(
+            theme: AppTheme.lightTheme,
+            home: HomeScreen(
+              profile: testProfile,
+              todayMeals: [mockCookMeals[0], mockCookMeals[1]],
+              todayEaten: const [true, false],
+              currentSpent: 235000,
+              todayWaterMl: 750,
+              streakDays: 5,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      expect(find.byType(HomeScreen), findsOneWidget);
+
+      // 2. Wide 1024 x 768
+      tester.view.physicalSize = const Size(1024 * 2.0, 768 * 2.0);
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(textScaler: TextScaler.linear(1.3)),
+          child: MaterialApp(
+            theme: AppTheme.darkTheme,
+            home: HomeScreen(
+              profile: testProfile,
+              todayMeals: [mockCookMeals[0], mockCookMeals[1]],
+              todayEaten: const [true, false],
+              currentSpent: 235000,
+              todayWaterMl: 750,
+              streakDays: 5,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      expect(find.byType(HomeScreen), findsOneWidget);
     },
   );
 }
