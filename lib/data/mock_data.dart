@@ -9,6 +9,7 @@ import 'package:budget_bites/models/pantry_item.dart';
 import 'package:budget_bites/models/user_profile.dart';
 import 'package:budget_bites/models/waste_record.dart';
 import 'package:budget_bites/models/water_record.dart';
+import 'package:budget_bites/utils/badge_rules.dart';
 
 // Meals (Jessica)
 
@@ -4211,7 +4212,7 @@ final List<WasteRecord> mockWasteRecords = [
   WasteRecord(
     id: 'wr1',
     itemName: 'Sawi Putih',
-    portion: '1/4 porsi',
+    portion: WastePortions.sedikit,
     reason: 'Beli Kebanyakan',
     estimatedLoss: 3000,
     date: DateTime(2026, 10, 18),
@@ -4219,7 +4220,7 @@ final List<WasteRecord> mockWasteRecords = [
   WasteRecord(
     id: 'wr2',
     itemName: 'Nasi Putih',
-    portion: '1/2 porsi',
+    portion: WastePortions.setengah,
     reason: 'Sisa Piring',
     estimatedLoss: 2500,
     date: DateTime(2026, 10, 17),
@@ -4233,43 +4234,7 @@ const UserProfile mockUserProfile = UserProfile(
   preferences: ['Hemat', 'Tinggi Protein'],
 );
 
-final List<Achievement> mockAchievements = [
-  const Achievement(
-    id: 'a1',
-    title: 'Pahlawan Pangan',
-    description: 'Catat food waste 3 hari berturut-turut',
-    iconAsset: 'assets/icons/badge_waste.png',
-    target: 3,
-    progress: 3,
-    isUnlocked: true,
-  ),
-  const Achievement(
-    id: 'a2',
-    title: 'Master Hemat',
-    description: 'Belanja mingguan di bawah target budget',
-    iconAsset: 'assets/icons/badge_budget.png',
-    target: 1,
-    progress: 1,
-    isUnlocked: true,
-  ),
-  const Achievement(
-    id: 'a3',
-    title: 'Hidrasi Disiplin',
-    description: 'Capai target minum 2000 ml selama 5 hari',
-    iconAsset: 'assets/icons/badge_water.png',
-    target: 5,
-    progress: 5,
-    isUnlocked: true,
-  ),
-  const Achievement(
-    id: 'a4',
-    title: 'Disiplin 7 Hari',
-    description: 'Pertahankan catatan harian selama 7 hari berturut-turut',
-    iconAsset: 'assets/icons/badge_streak.png',
-    target: 7,
-    progress: 5,
-  ),
-];
+const List<Achievement> mockAchievements = BadgeRules.catalog;
 
 // ===== DAILY LOG (Louis) =====
 List<DailyLog> buildMockDailyLogs([DateTime? now]) {

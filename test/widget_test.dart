@@ -4,10 +4,13 @@
 import 'package:budget_bites/app.dart';
 import 'package:budget_bites/data/mock_data.dart';
 import 'package:budget_bites/models/user_profile.dart';
+import 'package:budget_bites/screens/achievements_screen.dart';
+import 'package:budget_bites/screens/food_waste_screen.dart';
 import 'package:budget_bites/screens/grocery_screen.dart';
 import 'package:budget_bites/screens/home_screen.dart';
 import 'package:budget_bites/screens/meal_plan_screen.dart';
 import 'package:budget_bites/screens/onboarding_screen.dart';
+import 'package:budget_bites/screens/water_tracker_screen.dart';
 import 'package:budget_bites/screens/welcome_screen.dart';
 import 'package:budget_bites/theme/app_theme.dart';
 import 'package:budget_bites/widgets/app_bar.dart';
@@ -148,12 +151,15 @@ void main() {
       // Tab 3: Air & Waste
       await tester.tap(find.text('Air & Waste'));
       await tester.pumpAndSettle();
-      expect(find.text('WaterTrackerScreen - Edbert (Air)'), findsOneWidget);
+      expect(find.byType(WaterTrackerScreen), findsOneWidget);
+      await tester.tap(find.text('Food Waste'));
+      await tester.pumpAndSettle();
+      expect(find.byType(FoodWasteScreen), findsOneWidget);
 
       // Tab 4: Profil
       await tester.tap(find.text('Profil'));
       await tester.pumpAndSettle();
-      expect(find.text('Profil & preferensi'), findsOneWidget);
+      expect(find.text('Budget Mingguan'), findsOneWidget);
 
       // Switch back to Tab 0: Beranda
       await tester.tap(find.text('Beranda'));
@@ -688,6 +694,61 @@ void main() {
         find.text('Streak-mu istirahat dulu. Yuk mulai lagi!'),
         findsOneWidget,
       );
+    },
+  );
+
+  testWidgets(
+    'Air & Waste, Profile, and Achievements have no overflow on compact '
+    '(360x640) and expanded (1024x768) and dark mode switch updates theme',
+    (tester) async {
+      ThemeMode? activeMode;
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      for (final size in [
+        const Size(360 * 2.0, 640 * 2.0),
+        const Size(1024 * 2.0, 768 * 2.0),
+      ]) {
+        tester.view.physicalSize = size;
+        await tester.pumpWidget(const SizedBox.shrink());
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.lightTheme,
+            home: MainNavigation(
+              initialIndex: 3,
+              onThemeModeChanged: (mode) => activeMode = mode,
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.byType(WaterTrackerScreen), findsOneWidget);
+
+        await tester.tap(find.text('Food Waste'));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.byType(FoodWasteScreen), findsOneWidget);
+
+        await tester.tap(find.text('Profil').last);
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.text('Budget Mingguan'), findsOneWidget);
+
+        await tester.ensureVisible(find.text('Pencapaian'));
+        await tester.tap(find.text('Pencapaian'));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.byType(AchievementsScreen), findsOneWidget);
+
+        await tester.tap(find.byType(BackButton));
+        await tester.pumpAndSettle();
+      }
+
+      await tester.ensureVisible(find.text('Mode Gelap'));
+      await tester.tap(find.byType(Switch));
+      await tester.pumpAndSettle();
+      expect(activeMode, ThemeMode.dark);
     },
   );
 }

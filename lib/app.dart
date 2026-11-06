@@ -46,7 +46,7 @@ class _SmartBitesAppState extends State<SmartBitesApp> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,
-      home: const WelcomeScreen(),
+      home: WelcomeScreen(onThemeModeChanged: handleThemeModeChanged),
     );
   }
 }

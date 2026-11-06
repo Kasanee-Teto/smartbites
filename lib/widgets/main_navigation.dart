@@ -13,6 +13,8 @@ import 'package:budget_bites/models/planned_meal.dart';
 import 'package:budget_bites/models/user_profile.dart';
 import 'package:budget_bites/models/waste_record.dart';
 import 'package:budget_bites/models/water_record.dart';
+import 'package:budget_bites/screens/achievements_screen.dart';
+import 'package:budget_bites/screens/food_waste_screen.dart';
 import 'package:budget_bites/screens/grocery_screen.dart';
 import 'package:budget_bites/screens/home_screen.dart';
 import 'package:budget_bites/screens/insight_screen.dart';
@@ -20,6 +22,7 @@ import 'package:budget_bites/screens/meal_plan_screen.dart';
 import 'package:budget_bites/screens/pantry_screen.dart';
 import 'package:budget_bites/screens/profile_screen.dart';
 import 'package:budget_bites/screens/water_tracker_screen.dart';
+import 'package:budget_bites/utils/badge_rules.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/meal_planning.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
@@ -32,8 +35,14 @@ import 'package:flutter/material.dart';
 /// All shared state lives in [_MainNavigationState] and flows down
 /// via constructors and callbacks.
 class MainNavigation extends StatefulWidget {
-  const MainNavigation({super.key, this.initialIndex = 0});
+  const MainNavigation({
+    super.key,
+    this.initialIndex = 0,
+    this.onThemeModeChanged,
+  });
+
   final int initialIndex;
+  final ValueChanged<ThemeMode>? onThemeModeChanged;
 
   @override
   State<MainNavigation> createState() => _MainNavigationState();
@@ -41,6 +50,7 @@ class MainNavigation extends StatefulWidget {
 
 class _MainNavigationState extends State<MainNavigation> {
   late int _selectedIndex;
+  int _airWasteTab = 0;
 
   // Single source of truth parent state variables
   late UserProfile _profile;
@@ -168,7 +178,8 @@ class _MainNavigationState extends State<MainNavigation> {
   }
 
   /// Memperbarui catatan [DailyLog] untuk hari ini berdasarkan data
-  /// air minum (_waterRecords), makanan selesai (_plan), dan sisa makanan (_wasteRecords).
+  /// air minum (_waterRecords), makanan selesai (_plan), dan sisa makanan
+  /// (_wasteRecords).
   void _recompute() {
     final today = calendarDay(DateTime.now());
     final todayWater = _waterRecords
@@ -249,10 +260,12 @@ class _MainNavigationState extends State<MainNavigation> {
       () => setState(() {
         _plan.removeWhere((entry) => entry.id == id);
         _syncMealLog(previous.scheduledAt);
+        _recompute();
       }),
       () => setState(() {
         _plan.add(previous);
         _syncMealLog(previous.scheduledAt);
+        _recompute();
       }),
     );
   }
@@ -274,8 +287,22 @@ class _MainNavigationState extends State<MainNavigation> {
     final previous = _profile;
     _applyWithUndo(
       'Preferensi profil disimpan',
-      () => setState(() => _profile = profile),
-      () => setState(() => _profile = previous),
+      () {
+        setState(() => _profile = profile);
+        if (profile.darkMode != previous.darkMode) {
+          widget.onThemeModeChanged?.call(
+            profile.darkMode ? ThemeMode.dark : ThemeMode.light,
+          );
+        }
+      },
+      () {
+        setState(() => _profile = previous);
+        if (profile.darkMode != previous.darkMode) {
+          widget.onThemeModeChanged?.call(
+            previous.darkMode ? ThemeMode.dark : ThemeMode.light,
+          );
+        }
+      },
     );
   }
 
@@ -295,6 +322,142 @@ class _MainNavigationState extends State<MainNavigation> {
         allergies: List.of(allergies),
         mealPreferences: preferences,
       ),
+    );
+  }
+
+  void _addWasteRecord(WasteRecord record) {
+    final previousRecords = List<WasteRecord>.from(_wasteRecords);
+    final previousLogs = List<DailyLog>.from(_dailyLogs);
+    final today = calendarDay(DateTime.now());
+    _applyWithUndo(
+      'Food waste dicatat',
+      () => setState(() {
+        _wasteRecords.add(record);
+        final index = _dailyLogs.indexWhere((log) => sameDay(log.date, today));
+        if (index >= 0) {
+          _dailyLogs[index] = _dailyLogs[index].copyWith(wasteLogged: true);
+        } else {
+          _dailyLogs.add(
+            DailyLog(
+              date: today,
+              waterMl: 0,
+              mealsEaten: const [],
+              wasteLogged: true,
+              noWasteMarked: false,
+            ),
+          );
+        }
+        _recompute();
+      }),
+      () => setState(() {
+        _wasteRecords
+          ..clear()
+          ..addAll(previousRecords);
+        _dailyLogs
+          ..clear()
+          ..addAll(previousLogs);
+      }),
+    );
+  }
+
+  void _deleteWasteRecord(String id) {
+    final index = _wasteRecords.indexWhere((record) => record.id == id);
+    if (index < 0) return;
+    final removed = _wasteRecords[index];
+    _applyWithUndo(
+      'Catatan food waste dihapus',
+      () => setState(() {
+        _wasteRecords.removeAt(index);
+        _recompute();
+      }),
+      () => setState(() {
+        _wasteRecords.insert(index.clamp(0, _wasteRecords.length), removed);
+        _recompute();
+      }),
+    );
+  }
+
+  void _resetData() {
+    final previousDarkMode = _profile.darkMode;
+    setState(() {
+      _profile = mockUserProfile;
+      _meals = List<Meal>.from(mockMeals);
+      _plan = seedMealPlan(DateTime.now(), mockWeekPlan, mockEaten);
+      _nutritionGoals = {};
+      _nutritionFocus = NutritionFocus.general;
+      _grocery = List<GroceryItem>.from(mockGroceryItems);
+      _pantry = List<PantryItem>.from(mockPantryItems);
+      _waterRecords = List<WaterRecord>.from(mockWaterRecords);
+      _wasteRecords = List<WasteRecord>.from(mockWasteRecords);
+      _dailyLogs = List<DailyLog>.from(mockDailyLogs);
+      _achievements = List<Achievement>.from(mockAchievements);
+    });
+    if (previousDarkMode != mockUserProfile.darkMode) {
+      widget.onThemeModeChanged?.call(
+        mockUserProfile.darkMode ? ThemeMode.dark : ThemeMode.light,
+      );
+    }
+  }
+
+  List<List<String>> _currentWeekPlan(DateTime today) {
+    final monday = mondayOf(today);
+    return [
+      for (var day = 0; day < 7; day++)
+        mealsOnDay(
+          _plan,
+          calendarDay(monday, day),
+        ).map((entry) => entry.mealId).toList(),
+    ];
+  }
+
+  void _openAchievements() {
+    final today = calendarDay(DateTime.now());
+    final achievements = BadgeRules.evaluate(
+      logs: _dailyLogs,
+      waterTargetMl: _profile.waterTargetMl,
+      weekPlan: _currentWeekPlan(today),
+      meals: _meals,
+      weeklyBudget: _profile.weeklyBudget,
+      grocery: _grocery,
+    );
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (navContext) => AchievementsScreen(
+          achievements: achievements,
+          currentStreak: calculateStreak(_dailyLogs, today),
+          onBack: () => Navigator.of(navContext).pop(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAirWaste({required Widget water, required Widget waste}) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+          child: SegmentedButton<int>(
+            segments: const [
+              ButtonSegment<int>(
+                value: 0,
+                icon: Icon(Icons.water_drop_outlined),
+                label: Text('Air'),
+              ),
+              ButtonSegment<int>(
+                value: 1,
+                icon: Icon(Icons.delete_outline),
+                label: Text('Food Waste'),
+              ),
+            ],
+            selected: {_airWasteTab},
+            onSelectionChanged: (selection) =>
+                setState(() => _airWasteTab = selection.first),
+          ),
+        ),
+        Expanded(
+          child: IndexedStack(index: _airWasteTab, children: [water, waste]),
+        ),
+      ],
     );
   }
 
@@ -358,12 +521,10 @@ class _MainNavigationState extends State<MainNavigation> {
     );
   }
 
-  // TODO(Jessica): Hook to full meal diary in Step 6
   void _handleQuickMarkMealEaten(PlannedMeal plannedMeal) {
     _savePlannedMeal(plannedMeal.copyWith(isEaten: true));
   }
 
-  // TODO(Edbert): Hook to full food waste tracker in Step 8
   void _handleQuickLogWaste(
     String itemName,
     String portion,
@@ -380,7 +541,8 @@ class _MainNavigationState extends State<MainNavigation> {
     );
 
     _applyWithUndo(
-      '✓ Catatan sisa $itemName ($portion) tersimpan! (-${formatRupiah(estimatedLoss)})',
+      '✓ Catatan sisa $itemName ($portion) tersimpan! '
+      '(-${formatRupiah(estimatedLoss)})',
       () {
         setState(() {
           _wasteRecords.add(wasteRecord);
@@ -396,7 +558,6 @@ class _MainNavigationState extends State<MainNavigation> {
     );
   }
 
-  // TODO(Edbert): Hook to SDG 12.3 zero-waste streak in Step 8
   void _handleQuickNoWaste() {
     final today = calendarDay(DateTime.now());
     final index = _dailyLogs.indexWhere((log) => sameDay(log.date, today));
@@ -466,7 +627,10 @@ class _MainNavigationState extends State<MainNavigation> {
         onNoWaste: _handleQuickNoWaste,
         lastWaterMl: _lastWaterMl,
         pantryItems: _pantry,
-        onOpenWasteForm: () => setState(() => _selectedIndex = 3),
+        onOpenWasteForm: () => setState(() {
+          _selectedIndex = 3;
+          _airWasteTab = 1;
+        }),
       ),
     );
   }
@@ -667,35 +831,55 @@ class _MainNavigationState extends State<MainNavigation> {
           },
         ),
       ),
-      WaterTrackerScreen(
-        dailyTargetMl: _profile.waterTargetMl,
-        currentWaterMl: todayWater,
-        records: _waterRecords,
-        onAddWater: (amount) {
-          _applyWithUndo(
-            '+$amount ml air berhasil dicatat',
-            () {
-              setState(() {
-                _waterRecords.add(
-                  WaterRecord(
-                    id: 'w_${DateTime.now().millisecondsSinceEpoch}',
-                    amountMl: amount,
-                    time: DateTime.now(),
-                  ),
-                );
-              });
-            },
-            () {
-              setState(() {
-                if (_waterRecords.isNotEmpty) {
-                  _waterRecords.removeLast();
-                }
-              });
-            },
-          );
-        },
+      _buildAirWaste(
+        water: WaterTrackerScreen(
+          dailyTargetMl: _profile.waterTargetMl,
+          currentWaterMl: todayWater,
+          records: _waterRecords,
+          onAddWater: (amount) {
+            _applyWithUndo(
+              '+$amount ml air berhasil dicatat',
+              () {
+                setState(() {
+                  _waterRecords.add(
+                    WaterRecord(
+                      id: 'w_${DateTime.now().millisecondsSinceEpoch}',
+                      amountMl: amount,
+                      time: DateTime.now(),
+                    ),
+                  );
+                  _recompute();
+                });
+              },
+              () {
+                setState(() {
+                  if (_waterRecords.isNotEmpty) {
+                    _waterRecords.removeLast();
+                  }
+                  _recompute();
+                });
+              },
+            );
+          },
+        ),
+        waste: FoodWasteScreen(
+          records: _wasteRecords,
+          onAddRecord: _addWasteRecord,
+          onDeleteRecord: _deleteWasteRecord,
+          pantryItems: _pantry,
+          recentMeals: todayMeals,
+          noWasteMarked: _dailyLogs.any(
+            (log) => sameDay(log.date, DateTime.now()) && log.noWasteMarked,
+          ),
+          onMarkNoWaste: _handleQuickNoWaste,
+        ),
       ),
-      ProfileScreen(profile: _profile, onUpdateProfile: _updateProfile),
+      ProfileScreen(
+        profile: _profile,
+        onUpdateProfile: _updateProfile,
+        onResetData: _resetData,
+        onOpenAchievements: _openAchievements,
+      ),
     ];
   }
 
@@ -727,7 +911,7 @@ class _MainNavigationState extends State<MainNavigation> {
               onDestinationSelected: _onItemTapped,
               destinations: _destinations,
             ),
-            floatingActionButton: _buildFab(),
+            floatingActionButton: _selectedIndex == 1 ? null : _buildFab(),
           );
         }
 
@@ -753,7 +937,7 @@ class _MainNavigationState extends State<MainNavigation> {
               ],
             ),
           ),
-          floatingActionButton: _buildFab(),
+          floatingActionButton: _selectedIndex == 1 ? null : _buildFab(),
         );
       },
     );

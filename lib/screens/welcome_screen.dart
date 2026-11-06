@@ -11,22 +11,28 @@ import 'package:budget_bites/widgets/sdg_badge.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key, this.onGetStarted});
+  const WelcomeScreen({super.key, this.onGetStarted, this.onThemeModeChanged});
   final VoidCallback? onGetStarted;
+  final ValueChanged<ThemeMode>? onThemeModeChanged;
 
   void _navigateToOnboarding(BuildContext context) {
     if (onGetStarted != null) {
       onGetStarted!();
       return;
     }
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute<void>(builder: (_) => const OnboardingScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) =>
+            OnboardingScreen(onThemeModeChanged: onThemeModeChanged),
+      ),
+    );
   }
 
   void _navigateToMainNavigation(BuildContext context) {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute<void>(builder: (_) => const MainNavigation()),
+      MaterialPageRoute<void>(
+        builder: (_) => MainNavigation(onThemeModeChanged: onThemeModeChanged),
+      ),
     );
   }
 
