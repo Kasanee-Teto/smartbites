@@ -29,8 +29,27 @@ Following the PRD principles and the project's technical constraints:
 | **ProfileScreen** | Edbert | `smartbites_profil_pencapaian/code.html` | `UserProfile profile` | `ValueChanged<UserProfile>? onUpdateProfile`, `VoidCallback? onResetData` | `_profile` |
 | **AchievementsScreen** | Edbert | `smartbites_profil_pencapaian/code.html` | `List<Achievement> achievements`, `int currentStreak` | `VoidCallback? onBack` | `_achievements`, `_dailyLogs` |
 | **InsightScreen** | Gilbert | `smartbites_beranda/code.html` | `int currentSpent`, `int weeklyBudget` | `VoidCallback? onBack` | `_grocery`, `_profile.weeklyBudget` |
+| **QuickLogSheet** | Louis | `smartbites_modal_catat_cepat_1/code.html` & `smartbites_modal_catat_cepat_2/code.html` | `int dailyWaterTargetMl`, `int currentWaterMl`, `int lastWaterMl`, `List<PlannedMeal> todayPlannedMeals`, `List<Meal> mealCatalog`, `List<PantryItem> pantryItems` | `ValueChanged<int> onLogWater`, `ValueChanged<PlannedMeal> onMarkMealEaten`, `void Function(String itemName, String portion, int estimatedLoss) onLogWaste`, `VoidCallback onNoWaste`, `VoidCallback? onOpenWasteForm` | `_waterRecords`, `_plan`, `_meals`, `_pantry`, `_dailyLogs` |
 | **WelcomeScreen** | Louis | `smartbites_welcome_onboarding/code.html` | — | `VoidCallback? onGetStarted` | — |
 | **OnboardingScreen** | Louis | `smartbites_welcome_onboarding/code.html` | — | `ValueChanged<UserProfile>? onFinish` | — |
+
+---
+
+## 2.1 Quick Log Callbacks & Typedefs (Step 5 - FR-30..35)
+
+Used by `QuickLogSheet` and wired into `_MainNavigationState`:
+- `typedef WaterLogCallback = void Function(int amountMl);`
+- `typedef MealMarkEatenCallback = void Function(PlannedMeal plannedMeal);`
+- `typedef WasteLogCallback = void Function(String itemName, String portion, int estimatedLoss);`
+- `typedef NoWasteCallback = VoidCallback;`
+- `typedef OpenWasteFormCallback = VoidCallback;`
+
+Temporary in-memory handlers implemented in `_MainNavigationState`:
+- `_handleLogWater`: updates `_waterRecords` and today's `DailyLog.waterMl`, reversible via `_applyWithUndo`.
+- `_handleQuickMarkMealEaten`: `// TODO(Jessica)` marks meal eaten in `_plan` and syncs `DailyLog.mealsEaten`.
+- `_handleQuickLogWaste`: `// TODO(Edbert)` logs `WasteRecord` and sets `DailyLog.wasteLogged = true`.
+- `_handleQuickNoWaste`: sets `DailyLog.noWasteMarked = true` (+1 streak SDG 12.3).
+
 
 ---
 
@@ -47,7 +66,7 @@ Following the PRD principles and the project's technical constraints:
 | **SdgBadge** | Louis (Step 3) | `WelcomeScreen`, `OnboardingScreen`, `SmartBitesAppBar` | A badge representing the project's SDG 3 (Good Health) and SDG 12 (Zero Food Waste) aspirations, with regular and compact modes. |
 | **AssetImageWithFallback** | Louis (Step 3) | `OnboardingScreen`, `HomeScreen`, `MealCard` | A local asset-image component with a safe, theme-based `errorBuilder` fallback when an image file has not yet been downloaded. |
 | **BudgetCard** | Louis (Step 5) | `HomeScreen`, `MealPlanScreen` | A weekly budget summary card with a linear gauge bar and status badge. |
-| **StreakCard** | Louis (Step 5) | `HomeScreen`, `AchievementsScreen` | A consecutive-day streak card with a flame icon, milestone level, and navigation to achievements. |
+| **StreakCard** | Louis (Step 6) | `HomeScreen`, `AchievementsScreen` | `StreakCard({required int streak, required int level, required int nextTarget, required int progress, VoidCallback? onTap, bool isLoggedToday = true, bool isBroken = false, super.key})`. A consecutive-day streak card with flame icon, level milestone pill, and navigation. In `smartbites_profil_pencapaian/code.html`, the HTML shows an inline compact stat chip under profile (`Level 2 • 5 Hari Streak Aktif`), not the full card; Edbert can reuse `StreakCard` on top of Achievements or inline. |
 | **QuickLogSheet** | Louis (Step 4) | Global FAB (`Catat Cepat`, meaning Quick Log) | A modal bottom sheet with multiple actions for logging water, marking lunch as eaten, and recording food waste with one tap. |
 | **MealCard** | Jessica (Step 6) | `HomeScreen`, `MealPlanScreen` | A meal card with a photo, calories, price, allergen tags, and a checkbox for marking the meal as eaten. |
 | **GroceryItemTile** | Gilbert (Step 7) | `GroceryScreen` | A grocery-list item with a checkbox, quantity, estimated price, and swipe-to-delete interaction. |

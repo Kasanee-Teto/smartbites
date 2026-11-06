@@ -4272,26 +4272,46 @@ final List<Achievement> mockAchievements = [
 ];
 
 // ===== DAILY LOG (Louis) =====
-final List<DailyLog> mockDailyLogs = [
-  DailyLog(
-    date: DateTime(2026, 10, 17),
-    waterMl: 2000,
-    mealsEaten: ['m1', 'm2', 'm3'],
-    wasteLogged: true,
-    noWasteMarked: false,
-  ),
-  DailyLog(
-    date: DateTime(2026, 10, 18),
-    waterMl: 2000,
-    mealsEaten: ['m4', 'm5', 'm6'],
-    wasteLogged: true,
-    noWasteMarked: false,
-  ),
-  DailyLog(
-    date: DateTime(2026, 10, 19),
-    waterMl: 750,
-    mealsEaten: ['m1'],
-    wasteLogged: false,
-    noWasteMarked: false,
-  ),
-];
+List<DailyLog> buildMockDailyLogs([DateTime? now]) {
+  final base = now ?? DateTime.now();
+  final today = DateTime(base.year, base.month, base.day);
+  return [
+    DailyLog(
+      date: DateTime(today.year, today.month, today.day - 4),
+      waterMl: 2000,
+      mealsEaten: const ['m1', 'm2', 'm3'],
+      wasteLogged: false,
+      noWasteMarked: true,
+    ),
+    DailyLog(
+      date: DateTime(today.year, today.month, today.day - 3),
+      waterMl: 1800,
+      mealsEaten: const ['m4', 'm5', 'm6'],
+      wasteLogged: true,
+      noWasteMarked: false,
+    ),
+    DailyLog(
+      date: DateTime(today.year, today.month, today.day - 2),
+      waterMl: 2000,
+      mealsEaten: const ['m1', 'm3'],
+      wasteLogged: false,
+      noWasteMarked: true,
+    ),
+    DailyLog(
+      date: DateTime(today.year, today.month, today.day - 1),
+      waterMl: 2200,
+      mealsEaten: const ['m2', 'm4', 'm5'],
+      wasteLogged: true,
+      noWasteMarked: false,
+    ),
+    DailyLog(
+      date: today,
+      waterMl: 750,
+      mealsEaten: const ['m1'],
+      wasteLogged: false,
+      noWasteMarked: false,
+    ),
+  ];
+}
+
+final List<DailyLog> mockDailyLogs = buildMockDailyLogs();

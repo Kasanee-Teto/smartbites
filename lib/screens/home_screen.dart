@@ -6,7 +6,9 @@ import 'package:budget_bites/models/user_profile.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
+import 'package:budget_bites/utils/streak_logic.dart';
 import 'package:budget_bites/widgets/budget_card.dart';
+import 'package:budget_bites/widgets/streak_card.dart';
 import 'package:flutter/material.dart';
 
 /// Layar utama (Beranda) SmartBites yang menampilkan ringkasan anggaran mingguan,
@@ -23,6 +25,10 @@ class HomeScreen extends StatelessWidget {
     this.currentSpent = 0,
     this.todayWaterMl = 0,
     this.streakDays = 0,
+    this.streakLevelValue,
+    this.nextTarget,
+    this.streakProgress,
+    this.isLoggedToday = true,
     this.onQuickWaterAdd,
     this.onLogWater,
     this.onToggleMealEaten,
@@ -59,6 +65,18 @@ class HomeScreen extends StatelessWidget {
 
   /// Jumlah hari beruntun kebiasaan aktif (streak).
   final int streakDays;
+
+  /// Tingkat level gamifikasi streak (opsional; dihitung otomatis jika null).
+  final int? streakLevelValue;
+
+  /// Target badge streak berikutnya (opsional; dihitung otomatis jika null).
+  final int? nextTarget;
+
+  /// Progres saat ini menuju [nextTarget] (opsional; dihitung otomatis jika null).
+  final int? streakProgress;
+
+  /// Apakah pengguna sudah mencatat aktivitas hari ini (default true).
+  final bool isLoggedToday;
 
   /// Callback cepat penambahan asupan air minum (kompatibilitas kontrak).
   final ValueChanged<int>? onQuickWaterAdd;
@@ -154,7 +172,7 @@ class HomeScreen extends StatelessWidget {
         const SizedBox(height: AppConstants.spaceMd),
         _buildZeroWasteCard(context, theme, colorScheme),
         // Jarak aman agar FloatingActionButton 'Catat Cepat' tidak menutupi kartu
-        const SizedBox(height: 88),
+        const SizedBox(height: 104),
       ],
     );
   }
@@ -203,7 +221,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppConstants.spaceXl),
+          const SizedBox(height: 104),
         ],
       ),
     );
@@ -340,111 +358,16 @@ class HomeScreen extends StatelessWidget {
     ThemeData theme,
     ColorScheme colorScheme,
   ) {
-    // TODO(Louis): Step 6 StreakCard - Integrasi penuh dengan sistem pencapaian.
-    final level = streakDays >= 14
-        ? 4
-        : (streakDays >= 7 ? 3 : (streakDays >= 3 ? 2 : 1));
-    final title = streakDays > 0
-        ? '$streakDays Hari Beruntun 🔥'
-        : 'Mulai Beruntun Pertamamu! 🔥';
+    final level = streakLevelValue ?? streakLevel(streakDays);
+    final badgeProgress = nextBadgeProgress(streakDays);
 
-    return Card(
-      elevation: 0,
-      color: colorScheme.surfaceContainerLowest,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppConstants.radiusLg),
-        side: BorderSide(color: colorScheme.outlineVariant.withAlpha(60)),
-      ),
-      child: InkWell(
-        onTap: onOpenStreak ?? () => onGoToTab?.call(4),
-        borderRadius: BorderRadius.circular(AppConstants.radiusLg),
-        child: Padding(
-          padding: const EdgeInsets.all(AppConstants.spaceMd),
-          child: Row(
-            children: [
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: colorScheme.secondaryContainer.withAlpha(160),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.local_fire_department,
-                  color: colorScheme.secondary,
-                  size: 28,
-                ),
-              ),
-              const SizedBox(width: AppConstants.spaceMd),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            title,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: colorScheme.onSurface,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(width: AppConstants.spaceXs),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: colorScheme.surfaceContainerHigh,
-                            borderRadius: BorderRadius.circular(
-                              AppConstants.radiusSm,
-                            ),
-                          ),
-                          child: Text(
-                            'Level $level',
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      'Pertahankan kebiasaan sehat dan hematmu!',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: AppConstants.spaceSm),
-              Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerLow,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.chevron_right,
-                  color: colorScheme.onSurfaceVariant,
-                  size: 20,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+    return StreakCard(
+      streak: streakDays,
+      level: level,
+      nextTarget: nextTarget ?? badgeProgress.target,
+      progress: streakProgress ?? badgeProgress.progress,
+      isLoggedToday: isLoggedToday,
+      onTap: onOpenStreak ?? () => onGoToTab?.call(4),
     );
   }
 
@@ -1049,57 +972,134 @@ class HomeScreen extends StatelessWidget {
         color: colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(AppConstants.radiusLg),
       ),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withAlpha(35),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(Icons.recycling, color: colorScheme.primary, size: 22),
-          ),
-          const SizedBox(width: AppConstants.spaceSm),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isNarrow = constraints.maxWidth < 420;
+
+          if (isNarrow) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  'Pahlawan Bebas Sampah',
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
-                  maxLines: 2,
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary.withAlpha(35),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.recycling,
+                        color: colorScheme.primary,
+                        size: 22,
+                      ),
+                    ),
+                    const SizedBox(width: AppConstants.spaceSm),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Pahlawan Bebas Sampah',
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            'Habiskan makanan untuk capai SDG 12.3',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  'Habiskan makanan untuk capai SDG 12.3',
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
+                const SizedBox(height: AppConstants.spaceSm),
+                FilledButton.tonal(
+                  onPressed: onNoWaste,
+                  style: FilledButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    backgroundColor: colorScheme.surfaceContainerHighest,
+                    foregroundColor: colorScheme.onSurface,
+                    shape: const StadiumBorder(),
                   ),
-                  maxLines: 2,
+                  child: const Text(
+                    'Habis Semua! 🌟',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+                  ),
                 ),
               ],
-            ),
-          ),
-          const SizedBox(width: AppConstants.spaceSm),
-          FilledButton.tonal(
-            onPressed: onNoWaste,
-            style: FilledButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              backgroundColor: colorScheme.surfaceContainerHighest,
-              foregroundColor: colorScheme.onSurface,
-              visualDensity: VisualDensity.compact,
-            ),
-            child: const Text(
-              'Habis Semua! 🌟',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
-            ),
-          ),
-        ],
+            );
+          }
+
+          return Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: colorScheme.primary.withAlpha(35),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.recycling,
+                  color: colorScheme.primary,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: AppConstants.spaceSm),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Pahlawan Bebas Sampah',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Habiskan makanan untuk capai SDG 12.3',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: AppConstants.spaceSm),
+              FilledButton.tonal(
+                onPressed: onNoWaste,
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
+                  backgroundColor: colorScheme.surfaceContainerHighest,
+                  foregroundColor: colorScheme.onSurface,
+                  visualDensity: VisualDensity.compact,
+                  shape: const StadiumBorder(),
+                ),
+                child: const Text(
+                  'Habis Semua! 🌟',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
