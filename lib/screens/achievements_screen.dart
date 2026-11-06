@@ -1,8 +1,6 @@
 // Owner: Edbert | FR: FR-37, FR-38, FR-39
 // Design: stitch_smartbites_meal_budget_planner/smartbites_profil_pencapaian/code.html
 
-import 'dart:math' as math;
-
 import 'package:budget_bites/models/achievement.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/badge_rules.dart';
@@ -108,57 +106,49 @@ class AchievementsScreen extends StatelessWidget {
         leading: showBack ? BackButton(onPressed: onBack) : null,
         title: const Text('Pencapaian'),
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final contentWidth = math.min(
-            constraints.maxWidth - AppConstants.spaceMd * 2,
-            AppConstants.maxContentWidth,
-          );
-          final columns = (contentWidth / 180.0).floor().clamp(2, 4).toInt();
-          final tileWidth =
-              (contentWidth - AppConstants.spaceMd * (columns - 1)) / columns;
-
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(AppConstants.spaceMd),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: AppConstants.maxContentWidth,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _buildSummary(theme),
-                    const SizedBox(height: AppConstants.spaceMd),
-                    if (achievements.isEmpty)
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(AppConstants.spaceLg),
-                          child: Text(
-                            'Belum ada badge. Mulai mencatat untuk membukanya.',
-                            style: theme.textTheme.bodyMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      )
-                    else
-                      Wrap(
-                        spacing: AppConstants.spaceMd,
-                        runSpacing: AppConstants.spaceMd,
-                        children: [
-                          for (final badge in achievements)
-                            SizedBox(
-                              width: tileWidth,
-                              child: BadgeTile(achievement: badge),
-                            ),
-                        ],
-                      ),
-                  ],
-                ),
-              ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppConstants.spaceMd),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: AppConstants.maxContentWidth,
             ),
-          );
-        },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildSummary(theme),
+                const SizedBox(height: AppConstants.spaceMd),
+                if (achievements.isEmpty)
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppConstants.spaceLg),
+                      child: Text(
+                        'Belum ada badge. Mulai mencatat untuk membukanya.',
+                        style: theme.textTheme.bodyMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                else
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: achievements.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 220.0,
+                      mainAxisSpacing: AppConstants.spaceMd,
+                      crossAxisSpacing: AppConstants.spaceMd,
+                      mainAxisExtent: 290.0,
+                    ),
+                    itemBuilder: (context, index) {
+                      return BadgeTile(achievement: achievements[index]);
+                    },
+                  ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
