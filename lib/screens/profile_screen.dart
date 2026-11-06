@@ -35,12 +35,14 @@ class ProfileScreen extends StatefulWidget {
   final UserProfile profile;
   final ValueChanged<UserProfile>? onUpdateProfile;
   final VoidCallback? onResetData;
+  final VoidCallback? onOpenAchievements;
 
   const ProfileScreen({
     super.key,
     required this.profile,
     this.onUpdateProfile,
     this.onResetData,
+    this.onOpenAchievements,
   });
 
   @override
@@ -245,6 +247,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          ListTile(                                   // <- blok baru
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.emoji_events_outlined),
+            title: const Text('Pencapaian'),
+            subtitle: const Text('Lihat badge dan streak-mu'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: widget.onOpenAchievements,
+          ),
+          
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('Mode Gelap'),
@@ -384,7 +395,7 @@ class _ChipGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    // Merah hanya untuk alergi; pilihan lain memakai hijau utama (design.md).
+ 
     final selectedColor =
         isAllergy ? colorScheme.errorContainer : colorScheme.primary;
     final selectedTextColor =
