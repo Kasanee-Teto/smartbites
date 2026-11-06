@@ -5,6 +5,8 @@ import 'package:budget_bites/models/user_profile.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
+import 'package:budget_bites/widgets/meal_preferences_sheet.dart';
+import 'package:budget_bites/widgets/option_icon.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -82,6 +84,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
     widget.onUpdateProfile?.call(updated);
   }
 
+  Future<void> _editMealPreferences() {
+    final profile = widget.profile;
+    return showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      showDragHandle: true,
+      builder: (_) => MealPreferencesSheet(
+        allergies: profile.allergies,
+        preferences: profile.mealPreferences,
+        onSave: (allergies, preferences) {
+          _update(
+            profile.copyWith(
+              allergies: allergies,
+              mealPreferences: preferences,
+            ),
+          );
+        },
+      ),
+    );
+  }
   /// Membuat list baru, karena list di profil bisa berupa list const.
   List<String> _toggled(List<String> source, String value, bool selected) {
     final others = source.where((item) => item != value).toList();
@@ -241,6 +264,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
 
+    final mealPrefs = profile.mealPreferences;
+    final mealPreferenceCard = _SectionCard(
+      title: 'Preferensi Makan',
+      icon: Icons.tune,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              OptionIcon(icon: Icons.tune, color: theme.colorScheme.primary),
+              const SizedBox(width: AppConstants.spaceSm),
+              Expanded(
+                child: Text(
+                  'Pilihan makanan: ${mealPrefs.diet?.label ?? 'Tanpa preferensi'}',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppConstants.spaceSm),
+          Text(
+            'Anggaran per porsi: ${mealPrefs.maxPrice == null ? 'Tanpa batas' : formatRupiah(mealPrefs.maxPrice!)}',
+          ),
+          const SizedBox(height: AppConstants.spaceXs),
+          Text(
+            'Waktu masak: ${mealPrefs.maxCookMinutes == null ? 'Tanpa batas' : '${mealPrefs.maxCookMinutes} menit maksimal'}',
+          ),
+          const SizedBox(height: AppConstants.spaceMd),
+          FilledButton.icon(
+            onPressed:
+                widget.onUpdateProfile == null ? null : _editMealPreferences,
+            icon: const Icon(Icons.edit_outlined),
+            label: const Text('Ubah preferensi makan'),
+          ),
+        ],
+      ),
+    );
+
     final appCard = _SectionCard(
       title: 'Pengaturan Aplikasi',
       icon: Icons.settings_outlined,
@@ -304,6 +364,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         waterCard,
                         allergyCard,
                         preferenceCard,
+ mealPreferenceCard,
                         appCard,
                       ]),
                     )
@@ -323,6 +384,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: _withGaps([
                               allergyCard,
                               preferenceCard,
+ mealPreferenceCard,
                               appCard,
                             ]),
                           ),

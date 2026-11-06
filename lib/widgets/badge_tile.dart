@@ -3,7 +3,7 @@
 import 'package:budget_bites/models/achievement.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/badge_rules.dart';
-import 'package:budget_bites/widgets/asset_image_with_fallback.dart';
+import 'package:budget_bites/widgets/asset_image.dart';
 import 'package:budget_bites/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 

@@ -1,12 +1,32 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+# ============================================================
+# Dart analyzer
+# ============================================================
+
 analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
   exclude:
     - build/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.mocks.dart"
     - android/**
     - web/**
-include: package:flutter_lints/flutter.yaml
+
+  errors:
+    lines_longer_than_80_chars: ignore
+
+# ============================================================
+# Extra native Dart lints
+# ============================================================
 
 linter:
   rules:
-    - prefer_const_constructors
-    - prefer_const_literals_to_create_immutables
-    - avoid_print
+    avoid_annotating_with_dynamic: true
+    public_member_api_docs: false
+    unnecessary_type_name_in_constructor: false

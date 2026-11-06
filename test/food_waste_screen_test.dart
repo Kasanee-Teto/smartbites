@@ -1,4 +1,5 @@
 import 'package:budget_bites/models/meal.dart';
+import 'package:budget_bites/models/nutrition_facts.dart';
 import 'package:budget_bites/models/waste_record.dart';
 import 'package:budget_bites/screens/food_waste_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,17 @@ const Meal _gado = Meal(
   imageAsset: 'assets/images/meal_gado_gado.png',
   price: 15000,
   calories: 380,
+  nutrition: NutritionFacts(
+    servingSize: '1 porsi',
+    servingSizeGrams: 300,
+    totalFatGrams: 10,
+    saturatedFatGrams: 2,
+    sodiumMilligrams: 300,
+    carbohydrateGrams: 40,
+    fiberGrams: 6,
+    totalSugarsGrams: 8,
+    proteinGrams: 12,
+  ),
   cookTimeMinutes: 20,
   ingredients: ['Tahu 100g'],
   allergens: ['Kacang'],

@@ -1,14 +1,6 @@
 // Owner: Gilbert | FR: FR-18, FR-19, FR-20, FR-21
 
 class PantryItem {
-  final String id;
-  final String name;
-  final String category;
-  final double quantity;
-  final double minQuantity;
-  final String unit;
-  final DateTime expiryDate;
-
   const PantryItem({
     required this.id,
     required this.name,
@@ -18,6 +10,13 @@ class PantryItem {
     required this.unit,
     required this.expiryDate,
   });
+  final String id;
+  final String name;
+  final String category;
+  final double quantity;
+  final double minQuantity;
+  final String unit;
+  final DateTime expiryDate;
 
   PantryItem copyWith({
     String? id,

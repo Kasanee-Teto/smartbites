@@ -5,12 +5,6 @@ import 'package:budget_bites/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
 
 class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String subtitle;
-  final int streakDays;
-  final VoidCallback? onNotificationTap;
-  final VoidCallback? onProfileTap;
-  final VoidCallback? onStreakTap;
-
   const SmartBitesAppBar({
     super.key,
     this.subtitle = 'Beranda',
@@ -18,29 +12,35 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onNotificationTap,
     this.onProfileTap,
     this.onStreakTap,
+    this.height = 64,
   });
+  final String subtitle;
+  final int streakDays;
+  final VoidCallback? onNotificationTap;
+  final VoidCallback? onProfileTap;
+  final VoidCallback? onStreakTap;
+  final double height;
 
   @override
-  Size get preferredSize => const Size.fromHeight(64.0);
+  Size get preferredSize => Size.fromHeight(height);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Container(
+    return ColoredBox(
       color: colorScheme.surface,
       child: SafeArea(
         bottom: false,
         child: Container(
-          height: 64.0,
+          height: height,
           padding: const EdgeInsets.symmetric(horizontal: AppConstants.spaceSm),
           decoration: BoxDecoration(
             color: colorScheme.surface,
             border: Border(
               bottom: BorderSide(
                 color: colorScheme.outlineVariant.withAlpha(50),
-                width: 1.0,
               ),
             ),
           ),
@@ -50,7 +50,7 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
               Expanded(
                 child: Row(
                   children: [
-                    const AppLogo(size: 32.0),
+                    const AppLogo(size: 32),
                     const SizedBox(width: AppConstants.spaceSm),
                     Expanded(
                       child: Column(
@@ -74,11 +74,12 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
                               const SizedBox(width: AppConstants.spaceXs),
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 6.0,
-                                  vertical: 1.0,
+                                  horizontal: 6,
+                                  vertical: 1,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: colorScheme.secondaryContainer.withAlpha(50),
+                                  color: colorScheme.secondaryContainer
+                                      .withAlpha(50),
                                   borderRadius: BorderRadius.circular(
                                     AppConstants.radiusFull,
                                   ),
@@ -87,7 +88,7 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
                                   'SDG',
                                   style: theme.textTheme.labelSmall?.copyWith(
                                     color: colorScheme.secondary,
-                                    fontSize: 10.0,
+                                    fontSize: 10,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -119,12 +120,14 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
                   if (streakDays > 0)
                     InkWell(
                       onTap: onStreakTap,
-                      borderRadius: BorderRadius.circular(AppConstants.radiusFull),
+                      borderRadius: BorderRadius.circular(
+                        AppConstants.radiusFull,
+                      ),
                       child: Container(
-                        constraints: const BoxConstraints(minHeight: 32.0),
+                        constraints: const BoxConstraints(minHeight: 32),
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                          vertical: 4.0,
+                          horizontal: 6,
+                          vertical: 4,
                         ),
                         decoration: BoxDecoration(
                           color: colorScheme.secondaryContainer.withAlpha(60),
@@ -137,10 +140,10 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
                           children: [
                             Icon(
                               Icons.local_fire_department,
-                              size: 16.0,
+                              size: 16,
                               color: colorScheme.secondary,
                             ),
-                            const SizedBox(width: 2.0),
+                            const SizedBox(width: 2),
                             Text(
                               '$streakDays',
                               style: theme.textTheme.labelMedium?.copyWith(
@@ -164,15 +167,17 @@ class SmartBitesAppBar extends StatelessWidget implements PreferredSizeWidget {
                   // Avatar Profil (Touch target >= 48dp)
                   InkWell(
                     onTap: onProfileTap ?? () {},
-                    borderRadius: BorderRadius.circular(AppConstants.radiusFull),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.radiusFull,
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(AppConstants.spaceXs),
                       child: CircleAvatar(
-                        radius: 14.0,
+                        radius: 14,
                         backgroundColor: colorScheme.primaryContainer,
                         child: Icon(
                           Icons.person,
-                          size: 18.0,
+                          size: 18,
                           color: colorScheme.onPrimaryContainer,
                         ),
                       ),

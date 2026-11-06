@@ -11,30 +11,22 @@ import 'package:budget_bites/widgets/sdg_badge.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key, this.onGetStarted});
   final VoidCallback? onGetStarted;
-
-  const WelcomeScreen({
-    super.key,
-    this.onGetStarted,
-  });
 
   void _navigateToOnboarding(BuildContext context) {
     if (onGetStarted != null) {
       onGetStarted!();
       return;
     }
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const OnboardingScreen(),
-      ),
-    );
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (_) => const OnboardingScreen()));
   }
 
   void _navigateToMainNavigation(BuildContext context) {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute<void>(
-        builder: (_) => const MainNavigation(),
-      ),
+      MaterialPageRoute<void>(builder: (_) => const MainNavigation()),
     );
   }
 
@@ -43,7 +35,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ResponsiveLayout(
-          compact: (context) => _buildCompactLayout(context),
+          compact: _buildCompactLayout,
           medium: (context) => _buildWideLayout(context, WindowSize.medium),
           expanded: (context) => _buildWideLayout(context, WindowSize.expanded),
         ),
@@ -69,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
           Center(
             child: Column(
               children: [
-                const AppLogo(size: 80.0),
+                const AppLogo(size: 80),
                 const SizedBox(height: AppConstants.spaceSm),
                 FittedBox(
                   fit: BoxFit.scaleDown,
@@ -87,27 +79,28 @@ class WelcomeScreen extends StatelessWidget {
                       const SizedBox(width: AppConstants.spaceXs),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
-                          vertical: 2.0,
+                          horizontal: 8,
+                          vertical: 2,
                         ),
                         decoration: BoxDecoration(
                           color: colorScheme.secondaryFixed,
-                          borderRadius:
-                              BorderRadius.circular(AppConstants.radiusFull),
+                          borderRadius: BorderRadius.circular(
+                            AppConstants.radiusFull,
+                          ),
                         ),
                         child: Text(
                           'v1.0',
                           style: theme.textTheme.labelSmall?.copyWith(
                             color: colorScheme.onSecondaryFixed,
                             fontWeight: FontWeight.bold,
-                            fontSize: 10.0,
+                            fontSize: 10,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 4),
                 Text(
                   'Sahabat Sehat Anak Kos',
                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -126,10 +119,7 @@ class WelcomeScreen extends StatelessWidget {
               spacing: AppConstants.spaceSm,
               runSpacing: AppConstants.spaceXs,
               alignment: WrapAlignment.center,
-              children: [
-                SdgBadge.sdg3(),
-                SdgBadge.sdg12(),
-              ],
+              children: [SdgBadge.sdg3(), SdgBadge.sdg12()],
             ),
           ),
           const SizedBox(height: AppConstants.spaceLg),
@@ -140,9 +130,7 @@ class WelcomeScreen extends StatelessWidget {
             color: colorScheme.surfaceContainerLowest,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppConstants.radiusLg),
-              side: BorderSide(
-                color: colorScheme.outlineVariant.withAlpha(80),
-              ),
+              side: BorderSide(color: colorScheme.outlineVariant.withAlpha(80)),
             ),
             child: Padding(
               padding: const EdgeInsets.all(AppConstants.spaceLg),
@@ -158,7 +146,9 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: AppConstants.spaceSm),
                   Text(
-                    'Rencanakan menu harian murah, pantau hidrasi tubuh dengan 1 ketukan, kelola anggaran belanja pasar, dan kurangi sisa makanan basi di kos.',
+                    'Rencanakan menu harian murah, pantau hidrasi tubuh dengan '
+                    '1 ketukan, kelola anggaran belanja pasar, dan kurangi '
+                    'sisa makanan basi di kos.',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                       height: 1.4,
@@ -171,21 +161,22 @@ class WelcomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(AppConstants.spaceSm),
                     decoration: BoxDecoration(
                       color: colorScheme.surfaceContainerLow,
-                      borderRadius:
-                          BorderRadius.circular(AppConstants.radiusMd),
+                      borderRadius: BorderRadius.circular(
+                        AppConstants.radiusMd,
+                      ),
                     ),
                     child: Row(
                       children: [
                         Container(
-                          width: 36.0,
-                          height: 36.0,
+                          width: 36,
+                          height: 36,
                           decoration: BoxDecoration(
                             color: colorScheme.primaryFixed,
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
                             Icons.school,
-                            size: 20.0,
+                            size: 20,
                             color: colorScheme.primary,
                           ),
                         ),
@@ -202,10 +193,11 @@ class WelcomeScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Resep realistis: tanpa kulkas besar, tanpa bumbu mahal.',
+                                'Resep realistis: tanpa kulkas besar, '
+                                'tanpa bumbu mahal.',
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: colorScheme.onSurfaceVariant,
-                                  fontSize: 11.0,
+                                  fontSize: 11,
                                 ),
                               ),
                             ],
@@ -225,7 +217,7 @@ class WelcomeScreen extends StatelessWidget {
             onPressed: () => _navigateToOnboarding(context),
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(
-                vertical: 16.0,
+                vertical: 16,
                 horizontal: AppConstants.spaceMd,
               ),
               shape: RoundedRectangleBorder(
@@ -240,13 +232,10 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Mulai Rencanakan Makan',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(width: AppConstants.spaceSm),
-                  Text('🚀', style: TextStyle(fontSize: 18.0)),
+                  Text('🚀', style: TextStyle(fontSize: 18)),
                 ],
               ),
             ),
@@ -258,10 +247,10 @@ class WelcomeScreen extends StatelessWidget {
             fit: BoxFit.scaleDown,
             child: TextButton.icon(
               onPressed: () => _navigateToMainNavigation(context),
-              icon: const Icon(Icons.dataset_outlined, size: 18.0),
+              icon: const Icon(Icons.dataset_outlined, size: 18),
               label: const Text('Sudah punya data demo? Masuk Langsung'),
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                padding: const EdgeInsets.symmetric(vertical: 12),
               ),
             ),
           ),
@@ -275,15 +264,15 @@ class WelcomeScreen extends StatelessWidget {
                   'Proyek Flutter MD3 • Pemrograman Mobile',
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: colorScheme.onSurfaceVariant,
-                    fontSize: 10.0,
+                    fontSize: 10,
                   ),
                 ),
-                const SizedBox(height: 2.0),
+                const SizedBox(height: 2),
                 Text(
                   'Teknik Informatika • Indonesia Mandiri Sehat',
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: colorScheme.outline,
-                    fontSize: 9.0,
+                    fontSize: 9,
                   ),
                 ),
               ],
@@ -298,9 +287,9 @@ class WelcomeScreen extends StatelessWidget {
   Widget _buildWideLayout(BuildContext context, WindowSize size) {
     return Center(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 680.0),
+        constraints: const BoxConstraints(maxWidth: 680),
         child: Card(
-          elevation: 1.0,
+          elevation: 1,
           margin: const EdgeInsets.all(AppConstants.spaceLg),
           child: _buildCompactLayout(context),
         ),

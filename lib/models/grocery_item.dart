@@ -1,13 +1,6 @@
 // Owner: Gilbert | FR: FR-14, FR-15, FR-16, FR-17
 
 class GroceryItem {
-  final String id;
-  final String name;
-  final double quantity;
-  final String unit;
-  final int price;
-  final bool isChecked;
-
   const GroceryItem({
     required this.id,
     required this.name,
@@ -16,6 +9,12 @@ class GroceryItem {
     required this.price,
     this.isChecked = false,
   });
+  final String id;
+  final String name;
+  final double quantity;
+  final String unit;
+  final int price;
+  final bool isChecked;
 
   GroceryItem copyWith({
     String? id,
