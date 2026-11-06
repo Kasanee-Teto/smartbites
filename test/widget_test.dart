@@ -11,6 +11,7 @@ import 'package:budget_bites/widgets/sdg_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:budget_bites/screens/water_tracker_screen.dart';
+import 'package:budget_bites/screens/profile_screen.dart';
 
 void main() {
   testWidgets(
@@ -137,7 +138,7 @@ void main() {
     // Tab 4: Profil
     await tester.tap(find.text('Profil'));
     await tester.pumpAndSettle();
-    expect(find.text('ProfileScreen - Edbert (Profil)'), findsOneWidget);
+    expect(find.byType(ProfileScreen), findsOneWidget);
 
     // Switch back to Tab 0: Beranda
     await tester.tap(find.text('Beranda'));
