@@ -6,14 +6,10 @@ import 'package:budget_bites/utils/formatters.dart';
 import 'package:flutter/material.dart';
 
 class WasteItemTile extends StatelessWidget {
+  const WasteItemTile({required this.record, super.key, this.onDelete});
+
   final WasteRecord record;
   final ValueChanged<String>? onDelete;
-
-  const WasteItemTile({
-    super.key,
-    required this.record,
-    this.onDelete,
-  });
 
   String get _subtitle {
     final parts = <String>[

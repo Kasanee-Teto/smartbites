@@ -47,7 +47,13 @@ void main() {
     await tester.pumpWidget(app());
     await tester.pumpAndSettle();
     await tapVisible(tester, find.text('Preferensi makan'));
-    await tapVisible(tester, find.widgetWithText(FilterChip, 'Susu'));
+    await tapVisible(
+      tester,
+      find.descendant(
+        of: find.byType(MealPreferencesSheet),
+        matching: find.text('Susu'),
+      ),
+    );
     await tapVisible(tester, find.widgetWithText(ChoiceChip, 'Vegan'));
     final price = find.widgetWithText(
       TextFormField,
@@ -103,7 +109,13 @@ void main() {
     var profile = tester.widget<ProfileScreen>(find.byType(ProfileScreen));
     expect(profile.profile.allergies, ['Kacang']);
     await tapVisible(tester, find.text('Ubah preferensi makan'));
-    await tapVisible(tester, find.widgetWithText(FilterChip, 'Telur'));
+    await tapVisible(
+      tester,
+      find.descendant(
+        of: find.byType(MealPreferencesSheet),
+        matching: find.text('Telur'),
+      ),
+    );
     await tapVisible(tester, find.byTooltip('Tutup tanpa menyimpan'));
     profile = tester.widget<ProfileScreen>(find.byType(ProfileScreen));
     expect(profile.profile.allergies, ['Kacang']);

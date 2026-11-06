@@ -17,9 +17,9 @@ class WastePortions {
       case setengah:
         return 0.5;
       case semua:
-        return 1.0;
+        return 1;
       default:
-        return 1.0;
+        return 1;
     }
   }
 
@@ -28,19 +28,19 @@ class WastePortions {
 }
 
 class WasteRecord {
+  const WasteRecord({
+    required this.id,
+    required this.itemName,
+    required this.portion,
+    required this.estimatedLoss,
+    required this.date,
+    this.reason = '',
+  });
+
   final String id;
   final String itemName;
   final String portion;
   final String reason;
   final int estimatedLoss;
   final DateTime date;
-
-  const WasteRecord({
-    required this.id,
-    required this.itemName,
-    required this.portion,
-    this.reason = '',
-    required this.estimatedLoss,
-    required this.date,
-  });
 }

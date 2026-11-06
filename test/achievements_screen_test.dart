@@ -10,8 +10,9 @@ void main() {
     ...BadgeRules.catalog.skip(2),
   ];
 
-  testWidgets('menampilkan 8 badge, jumlah terbuka, dan pesan streak',
-      (tester) async {
+  testWidgets('menampilkan 8 badge, jumlah terbuka, dan pesan streak', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         home: AchievementsScreen(achievements: badges, currentStreak: 5),
@@ -25,9 +26,10 @@ void main() {
     expect(find.text('2 hari lagi menuju Streak 7 Hari'), findsOneWidget);
   });
 
-  testWidgets('streak 0 memakai bahasa ramah tanpa menyalahkan',
-      (tester) async {
-        await tester.pumpWidget(
+  testWidgets('streak 0 memakai bahasa ramah tanpa menyalahkan', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
       const MaterialApp(
         home: AchievementsScreen(achievements: BadgeRules.catalog),
       ),
@@ -50,7 +52,7 @@ void main() {
   });
 
   testWidgets('tombol kembali memanggil onBack', (tester) async {
-    int backCount = 0;
+    var backCount = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: AchievementsScreen(

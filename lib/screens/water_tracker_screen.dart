@@ -9,12 +9,6 @@ import 'package:budget_bites/widgets/water_progress_card.dart';
 import 'package:flutter/material.dart';
 
 class WaterTrackerScreen extends StatelessWidget {
-  final int dailyTargetMl;
-  final int currentWaterMl;
-  final List<WaterRecord> records;
-  final ValueChanged<int>? onAddWater;
-  final ValueChanged<String>? onDeleteRecord;
-
   const WaterTrackerScreen({
     super.key,
     this.dailyTargetMl = 2000,
@@ -24,11 +18,16 @@ class WaterTrackerScreen extends StatelessWidget {
     this.onDeleteRecord,
   });
 
+  final int dailyTargetMl;
+  final int currentWaterMl;
+  final List<WaterRecord> records;
+  final ValueChanged<int>? onAddWater;
+  final ValueChanged<String>? onDeleteRecord;
+
   List<WaterRecord> _todayRecords() {
     final today = dateOnly(DateTime.now());
-    final list = records.where((r) => dateOnly(r.time) == today).toList();
-    list.sort((a, b) => b.time.compareTo(a.time));
-    return list;
+    return records.where((r) => dateOnly(r.time) == today).toList()
+      ..sort((a, b) => b.time.compareTo(a.time));
   }
 
   @override
@@ -49,12 +48,11 @@ class WaterTrackerScreen extends StatelessWidget {
             windowSizeFor(constraints.maxWidth) == WindowSize.compact;
 
         return SingleChildScrollView(
-
           padding: const EdgeInsets.fromLTRB(
             AppConstants.spaceMd,
             AppConstants.spaceMd,
             AppConstants.spaceMd,
-            96.0,
+            96,
           ),
           child: Center(
             child: ConstrainedBox(
@@ -87,10 +85,10 @@ class WaterTrackerScreen extends StatelessWidget {
 }
 
 class _WaterHistory extends StatelessWidget {
+  const _WaterHistory({required this.records, this.onDelete});
+
   final List<WaterRecord> records;
   final ValueChanged<String>? onDelete;
-
-  const _WaterHistory({required this.records, this.onDelete});
 
   String _formatTime(DateTime t) {
     final hour = t.hour.toString().padLeft(2, '0');
@@ -117,7 +115,7 @@ class _WaterHistory extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.water_drop_outlined,
-                        size: 40.0,
+                        size: 40,
                         color: colorScheme.tertiary.withAlpha(150),
                       ),
                       const SizedBox(height: AppConstants.spaceSm),

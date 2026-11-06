@@ -8,20 +8,14 @@ import 'package:budget_bites/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 
 class BadgeTile extends StatelessWidget {
+  const BadgeTile({required this.achievement, super.key, this.onTap});
+
   final Achievement achievement;
   final VoidCallback? onTap;
 
-  const BadgeTile({
-    super.key,
-    required this.achievement,
-    this.onTap,
-  });
-
   double get _progressValue {
-    if (achievement.target <= 0) return 0.0;
-    return (achievement.progress / achievement.target)
-        .clamp(0.0, 1.0)
-        .toDouble();
+    if (achievement.target <= 0) return 0;
+    return (achievement.progress / achievement.target).clamp(0.0, 1.0);
   }
 
   @override
@@ -33,7 +27,7 @@ class BadgeTile extends StatelessWidget {
     final semanticsLabel = unlocked
         ? '${achievement.title}, terbuka'
         : '${achievement.title}, terkunci, progres '
-            '${achievement.progress} dari ${achievement.target}';
+              '${achievement.progress} dari ${achievement.target}';
 
     return Semantics(
       label: semanticsLabel,
@@ -51,8 +45,8 @@ class BadgeTile extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     Container(
-                      width: 72.0,
-                      height: 72.0,
+                      width: 72,
+                      height: 72,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: unlocked
@@ -61,13 +55,13 @@ class BadgeTile extends StatelessWidget {
                       ),
                     ),
                     Opacity(
-                      opacity: unlocked ? 1.0 : 0.4,
+                      opacity: unlocked ? 1 : 0.4,
                       child: AssetImageWithFallback(
                         assetPath: achievement.iconAsset,
                         fallbackIcon: BadgeRules.iconFor(achievement.id),
-                        width: 64.0,
-                        height: 64.0,
-                        borderRadius: BorderRadius.circular(32.0),
+                        width: 64,
+                        height: 64,
+                        borderRadius: BorderRadius.circular(32),
                       ),
                     ),
                     if (!unlocked)
@@ -75,11 +69,11 @@ class BadgeTile extends StatelessWidget {
                         right: 0,
                         bottom: 0,
                         child: CircleAvatar(
-                          radius: 12.0,
+                          radius: 12,
                           backgroundColor: colorScheme.surface,
                           child: Icon(
                             Icons.lock_outline,
-                            size: 14.0,
+                            size: 14,
                             color: colorScheme.onSurfaceVariant,
                           ),
                         ),
@@ -111,11 +105,12 @@ class BadgeTile extends StatelessWidget {
                   )
                 else ...[
                   ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(AppConstants.radiusFull),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.radiusFull,
+                    ),
                     child: LinearProgressIndicator(
                       value: _progressValue,
-                      minHeight: 8.0,
+                      minHeight: 8,
                     ),
                   ),
                   const SizedBox(height: AppConstants.spaceXs),

@@ -5,7 +5,7 @@ import 'package:budget_bites/screens/food_waste_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const Meal _gado = Meal(
+const _gado = Meal(
   id: 'm2',
   name: 'Gado-Gado Komplit',
   category: 'Makan Siang',
@@ -34,8 +34,9 @@ Widget _wrap(Widget screen) {
 }
 
 void main() {
-  testWidgets('pilih chip mengisi harga otomatis dan mencatat record',
-      (tester) async {
+  testWidgets('pilih chip mengisi harga otomatis dan mencatat record', (
+    tester,
+  ) async {
     WasteRecord? added;
     await tester.pumpWidget(
       _wrap(
@@ -64,8 +65,9 @@ void main() {
     expect(added!.estimatedLoss, 3750);
   });
 
-  testWidgets('nama kosong menampilkan error dan tidak mencatat',
-      (tester) async {
+  testWidgets('nama kosong menampilkan error dan tidak mencatat', (
+    tester,
+  ) async {
     WasteRecord? added;
     await tester.pumpWidget(
       _wrap(FoodWasteScreen(onAddRecord: (r) => added = r)),
@@ -79,8 +81,7 @@ void main() {
     expect(added, isNull);
   });
 
-  testWidgets('total kerugian hanya menghitung bulan berjalan',
-      (tester) async {
+  testWidgets('total kerugian hanya menghitung bulan berjalan', (tester) async {
     await tester.pumpWidget(
       _wrap(
         FoodWasteScreen(
@@ -115,9 +116,10 @@ void main() {
     expect(find.text('Rp 5.500'), findsOneWidget);
   });
 
-  testWidgets('tombol tidak ada yang terbuang memanggil callback',
-      (tester) async {
-    int count = 0;
+  testWidgets('tombol tidak ada yang terbuang memanggil callback', (
+    tester,
+  ) async {
+    var count = 0;
     await tester.pumpWidget(
       _wrap(FoodWasteScreen(onMarkNoWaste: () => count++)),
     );
@@ -129,13 +131,12 @@ void main() {
     expect(count, 1);
   });
 
-  testWidgets('sudah ditandai: tombol nonaktif dan muncul status Tercatat',
-      (tester) async {
-    int count = 0;
+  testWidgets('sudah ditandai: tombol nonaktif dan muncul status Tercatat', (
+    tester,
+  ) async {
+    var count = 0;
     await tester.pumpWidget(
-      _wrap(
-        FoodWasteScreen(noWasteMarked: true, onMarkNoWaste: () => count++),
-      ),
+      _wrap(FoodWasteScreen(noWasteMarked: true, onMarkNoWaste: () => count++)),
     );
 
     expect(find.text('Tercatat'), findsOneWidget);

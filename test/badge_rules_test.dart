@@ -32,7 +32,7 @@ void main() {
 
   test('longestRun memutus saat ada hari yang terlewat', () {
     final days = {
-      DateTime(2026, 10, 1),
+      DateTime(2026, 10),
       DateTime(2026, 10, 2),
       DateTime(2026, 10, 4),
     };

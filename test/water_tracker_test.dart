@@ -20,13 +20,12 @@ void main() {
     expect(added, 250);
   });
 
-  testWidgets('menampilkan empty state dan status target tercapai',
-      (tester) async {
+  testWidgets('menampilkan empty state dan status target tercapai', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(
-          body: WaterTrackerScreen(currentWaterMl: 2000),
-        ),
+        home: Scaffold(body: WaterTrackerScreen(currentWaterMl: 2000)),
       ),
     );
 

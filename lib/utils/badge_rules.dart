@@ -4,8 +4,8 @@ import 'package:budget_bites/models/achievement.dart';
 import 'package:budget_bites/models/daily_log.dart';
 import 'package:budget_bites/models/grocery_item.dart';
 import 'package:budget_bites/models/meal.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart' show Icons;
+import 'package:flutter/widgets.dart';
 
 class BadgeRules {
   BadgeRules._();
@@ -108,7 +108,6 @@ class BadgeRules {
     }
   }
 
-
   static DateTime _day(DateTime d) => DateTime(d.year, d.month, d.day);
 
   static DateTime _prevDay(DateTime d) => DateTime(d.year, d.month, d.day - 1);
@@ -126,8 +125,8 @@ class BadgeRules {
 
   static int longestRun(Set<DateTime> days) {
     final sorted = days.map(_day).toSet().toList()..sort();
-    int best = 0;
-    int run = 0;
+    var best = 0;
+    var run = 0;
     DateTime? previous;
     for (final d in sorted) {
       if (previous != null && _prevDay(d) == previous) {
@@ -141,12 +140,11 @@ class BadgeRules {
     return best;
   }
 
-
   static int currentStreak(List<DailyLog> logs, DateTime today) {
     final days = activeDays(logs);
     var cursor = _day(today);
     if (!days.contains(cursor)) cursor = _prevDay(cursor);
-    int count = 0;
+    var count = 0;
     while (days.contains(cursor)) {
       count++;
       cursor = _prevDay(cursor);
@@ -207,7 +205,7 @@ class BadgeRules {
         default:
           raw = 0;
       }
-      final progress = raw.clamp(0, badge.target).toInt();
+      final progress = raw.clamp(0, badge.target);
       return badge.copyWith(
         progress: progress,
         isUnlocked: progress >= badge.target,

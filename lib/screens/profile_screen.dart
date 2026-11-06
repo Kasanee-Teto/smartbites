@@ -10,6 +10,14 @@ import 'package:budget_bites/widgets/option_icon.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({
+    required this.profile,
+    super.key,
+    this.onUpdateProfile,
+    this.onResetData,
+    this.onOpenAchievements,
+  });
+
   static const int minBudget = 50000;
   static const int maxBudget = 1000000;
   static const int budgetStep = 10000;
@@ -38,14 +46,6 @@ class ProfileScreen extends StatefulWidget {
   final ValueChanged<UserProfile>? onUpdateProfile;
   final VoidCallback? onResetData;
   final VoidCallback? onOpenAchievements;
-
-  const ProfileScreen({
-    super.key,
-    required this.profile,
-    this.onUpdateProfile,
-    this.onResetData,
-    this.onOpenAchievements,
-  });
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -105,8 +105,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
   /// Membuat list baru, karena list di profil bisa berupa list const.
-  List<String> _toggled(List<String> source, String value, bool selected) {
+  List<String> _toggled(
+    List<String> source,
+    String value, {
+    required bool selected,
+  }) {
     final others = source.where((item) => item != value).toList();
     return selected ? [...others, value] : others;
   }
@@ -135,12 +140,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
 
-    if (confirmed == true) reset();
+    if (confirmed ?? false) reset();
   }
 
   List<Widget> _withGaps(List<Widget> children) {
     return [
-      for (int i = 0; i < children.length; i++) ...[
+      for (var i = 0; i < children.length; i++) ...[
         if (i > 0) const SizedBox(height: AppConstants.spaceMd),
         children[i],
       ],
@@ -173,7 +178,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             value: _budget,
             min: ProfileScreen.minBudget.toDouble(),
             max: ProfileScreen.maxBudget.toDouble(),
-            divisions: (ProfileScreen.maxBudget - ProfileScreen.minBudget) ~/
+            divisions:
+                (ProfileScreen.maxBudget - ProfileScreen.minBudget) ~/
                 ProfileScreen.budgetStep,
             label: formatRupiah(_budget.round()),
             onChanged: (value) => setState(() => _budget = value),
@@ -213,7 +219,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               value: _waterTarget,
               min: ProfileScreen.minWaterMl.toDouble(),
               max: ProfileScreen.maxWaterMl.toDouble(),
-              divisions: (ProfileScreen.maxWaterMl - ProfileScreen.minWaterMl) ~/
+              divisions:
+                  (ProfileScreen.maxWaterMl - ProfileScreen.minWaterMl) ~/
                   ProfileScreen.waterStepMl,
               label: '${_waterTarget.round()} ml',
               onChanged: (value) => setState(() => _waterTarget = value),
@@ -238,10 +245,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         options: ProfileScreen.allergyOptions,
         selected: profile.allergies,
         isAllergy: true,
-        onChanged: (value, selected) {
+        onToggle: (value) {
+          final isSelected = !profile.allergies.contains(value);
           _update(
             profile.copyWith(
-              allergies: _toggled(profile.allergies, value, selected),
+              allergies: _toggled(
+                profile.allergies,
+                value,
+                selected: isSelected,
+              ),
             ),
           );
         },
@@ -254,10 +266,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: _ChipGroup(
         options: ProfileScreen.preferenceOptions,
         selected: profile.preferences,
-        onChanged: (value, selected) {
+        onToggle: (value) {
+          final isSelected = !profile.preferences.contains(value);
           _update(
             profile.copyWith(
-              preferences: _toggled(profile.preferences, value, selected),
+              preferences: _toggled(
+                profile.preferences,
+                value,
+                selected: isSelected,
+              ),
             ),
           );
         },
@@ -277,23 +294,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(width: AppConstants.spaceSm),
               Expanded(
                 child: Text(
-                  'Pilihan makanan: ${mealPrefs.diet?.label ?? 'Tanpa preferensi'}',
+                  'Pilihan makanan: '
+                  '${mealPrefs.diet?.label ?? 'Tanpa preferensi'}',
                 ),
               ),
             ],
           ),
           const SizedBox(height: AppConstants.spaceSm),
           Text(
-            'Anggaran per porsi: ${mealPrefs.maxPrice == null ? 'Tanpa batas' : formatRupiah(mealPrefs.maxPrice!)}',
+            'Anggaran per porsi: '
+            '${mealPrefs.maxPrice == null ? 'Tanpa batas' : formatRupiah(mealPrefs.maxPrice!)}',
           ),
           const SizedBox(height: AppConstants.spaceXs),
           Text(
-            'Waktu masak: ${mealPrefs.maxCookMinutes == null ? 'Tanpa batas' : '${mealPrefs.maxCookMinutes} menit maksimal'}',
+            'Waktu masak: '
+            '${mealPrefs.maxCookMinutes == null ? 'Tanpa batas' : '${mealPrefs.maxCookMinutes} menit maksimal'}',
           ),
           const SizedBox(height: AppConstants.spaceMd),
           FilledButton.icon(
-            onPressed:
-                widget.onUpdateProfile == null ? null : _editMealPreferences,
+            onPressed: widget.onUpdateProfile == null
+                ? null
+                : _editMealPreferences,
             icon: const Icon(Icons.edit_outlined),
             label: const Text('Ubah preferensi makan'),
           ),
@@ -307,7 +328,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ListTile(                                   // <- blok baru
+          ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const Icon(Icons.emoji_events_outlined),
             title: const Text('Pencapaian'),
@@ -315,7 +336,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             trailing: const Icon(Icons.chevron_right),
             onTap: widget.onOpenAchievements,
           ),
-          
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('Mode Gelap'),
@@ -349,7 +369,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             AppConstants.spaceMd,
             AppConstants.spaceMd,
             AppConstants.spaceMd,
-            96.0,
+            96,
           ),
           child: Center(
             child: ConstrainedBox(
@@ -364,7 +384,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         waterCard,
                         allergyCard,
                         preferenceCard,
- mealPreferenceCard,
+                        mealPreferenceCard,
                         appCard,
                       ]),
                     )
@@ -384,7 +404,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: _withGaps([
                               allergyCard,
                               preferenceCard,
- mealPreferenceCard,
+                              mealPreferenceCard,
                               appCard,
                             ]),
                           ),
@@ -400,17 +420,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class _SectionCard extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final Color? iconColor;
-  final Widget child;
-
   const _SectionCard({
     required this.title,
     required this.icon,
     required this.child,
     this.iconColor,
   });
+
+  final String title;
+  final IconData icon;
+  final Color? iconColor;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -441,27 +461,28 @@ class _SectionCard extends StatelessWidget {
 }
 
 class _ChipGroup extends StatelessWidget {
-  final List<String> options;
-  final List<String> selected;
-  final bool isAllergy;
-  final void Function(String value, bool selected) onChanged;
-
   const _ChipGroup({
     required this.options,
     required this.selected,
-    required this.onChanged,
+    required this.onToggle,
     this.isAllergy = false,
   });
+
+  final List<String> options;
+  final List<String> selected;
+  final bool isAllergy;
+  final ValueChanged<String> onToggle;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
- 
-    final selectedColor =
-        isAllergy ? colorScheme.errorContainer : colorScheme.primary;
-    final selectedTextColor =
-        isAllergy ? colorScheme.onErrorContainer : colorScheme.onPrimary;
+    final selectedColor = isAllergy
+        ? colorScheme.errorContainer
+        : colorScheme.primary;
+    final selectedTextColor = isAllergy
+        ? colorScheme.onErrorContainer
+        : colorScheme.onPrimary;
 
     return Wrap(
       spacing: AppConstants.spaceSm,
@@ -474,13 +495,13 @@ class _ChipGroup extends StatelessWidget {
             selectedColor: selectedColor,
             checkmarkColor: selectedTextColor,
             labelStyle: TextStyle(
-              fontSize: 12.0,
+              fontSize: 12,
               fontWeight: FontWeight.w600,
               color: selected.contains(option)
                   ? selectedTextColor
                   : colorScheme.onSurface,
             ),
-            onSelected: (value) => onChanged(option, value),
+            onSelected: (_) => onToggle(option),
           ),
       ],
     );

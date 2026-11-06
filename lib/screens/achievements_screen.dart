@@ -8,10 +8,6 @@ import 'package:budget_bites/widgets/badge_tile.dart';
 import 'package:flutter/material.dart';
 
 class AchievementsScreen extends StatelessWidget {
-  final List<Achievement> achievements;
-  final int currentStreak;
-  final VoidCallback? onBack;
-
   const AchievementsScreen({
     super.key,
     this.achievements = const [],
@@ -19,18 +15,23 @@ class AchievementsScreen extends StatelessWidget {
     this.onBack,
   });
 
+  final List<Achievement> achievements;
+  final int currentStreak;
+  final VoidCallback? onBack;
+
   int get _unlockedCount => achievements.where((a) => a.isUnlocked).length;
 
   /// Badge streak terdekat yang masih terkunci (3 hari, lalu 7 hari).
   Achievement? get _nextStreakBadge {
-    final locked = achievements
-        .where(
-          (a) =>
-              !a.isUnlocked &&
-              (a.id == BadgeRules.streak3 || a.id == BadgeRules.streak7),
-        )
-        .toList()
-      ..sort((a, b) => a.target.compareTo(b.target));
+    final locked =
+        achievements
+            .where(
+              (a) =>
+                  !a.isUnlocked &&
+                  (a.id == BadgeRules.streak3 || a.id == BadgeRules.streak7),
+            )
+            .toList()
+          ..sort((a, b) => a.target.compareTo(b.target));
     return locked.isEmpty ? null : locked.first;
   }
 
@@ -61,7 +62,7 @@ class AchievementsScreen extends StatelessWidget {
               children: [
                 Icon(
                   Icons.local_fire_department,
-                  size: 32.0,
+                  size: 32,
                   color: colorScheme.secondary,
                 ),
                 const SizedBox(width: AppConstants.spaceSm),
@@ -85,8 +86,8 @@ class AchievementsScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(AppConstants.radiusFull),
               child: LinearProgressIndicator(
-                value: total == 0 ? 0.0 : unlocked / total,
-                minHeight: 8.0,
+                value: total == 0 ? 0 : unlocked / total,
+                minHeight: 8,
               ),
             ),
           ],
@@ -136,11 +137,11 @@ class AchievementsScreen extends StatelessWidget {
                     itemCount: achievements.length,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 220.0,
-                      mainAxisSpacing: AppConstants.spaceMd,
-                      crossAxisSpacing: AppConstants.spaceMd,
-                      mainAxisExtent: 290.0,
-                    ),
+                          maxCrossAxisExtent: 220,
+                          mainAxisSpacing: AppConstants.spaceMd,
+                          crossAxisSpacing: AppConstants.spaceMd,
+                          mainAxisExtent: 290,
+                        ),
                     itemBuilder: (context, index) {
                       return BadgeTile(achievement: achievements[index]);
                     },

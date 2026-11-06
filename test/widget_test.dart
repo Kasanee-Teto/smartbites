@@ -4,6 +4,8 @@
 import 'package:budget_bites/app.dart';
 import 'package:budget_bites/data/mock_data.dart';
 import 'package:budget_bites/models/user_profile.dart';
+import 'package:budget_bites/screens/achievements_screen.dart';
+import 'package:budget_bites/screens/food_waste_screen.dart';
 import 'package:budget_bites/screens/grocery_screen.dart';
 import 'package:budget_bites/screens/home_screen.dart';
 import 'package:budget_bites/screens/meal_plan_screen.dart';
@@ -15,7 +17,9 @@ import 'package:budget_bites/widgets/app_bar.dart';
 import 'package:budget_bites/widgets/budget_card.dart';
 import 'package:budget_bites/widgets/main_navigation.dart';
 import 'package:budget_bites/widgets/page_dots.dart';
+import 'package:budget_bites/widgets/quick_log_sheet.dart';
 import 'package:budget_bites/widgets/sdg_badge.dart';
+import 'package:budget_bites/widgets/streak_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -148,6 +152,9 @@ void main() {
       await tester.tap(find.text('Air & Waste'));
       await tester.pumpAndSettle();
       expect(find.byType(WaterTrackerScreen), findsOneWidget);
+      await tester.tap(find.text('Food Waste'));
+      await tester.pumpAndSettle();
+      expect(find.byType(FoodWasteScreen), findsOneWidget);
 
       // Tab 4: Profil
       await tester.tap(find.text('Profil'));
@@ -161,7 +168,7 @@ void main() {
       expect(find.text('Budget Makan Minggu Ini'), findsOneWidget);
       expect(find.byType(IndexedStack), findsOneWidget);
 
-      // Floating Action Button (Catat Cepat)
+      // Floating Action Button (Catat Cepat opens QuickLogSheet)
       final fabFinder = find.widgetWithText(
         FloatingActionButton,
         'Catat Cepat',
@@ -169,11 +176,13 @@ void main() {
       expect(fabFinder, findsOneWidget);
       await tester.tap(fabFinder);
       await tester.pumpAndSettle();
-      expect(find.byType(SnackBar), findsOneWidget);
-      expect(
-        find.text('Catat Cepat dibuka (fitur lengkap di Step 4)'),
-        findsOneWidget,
-      );
+      expect(find.byType(QuickLogSheet), findsOneWidget);
+      expect(find.text('⚡ Catat Cepat'), findsOneWidget);
+
+      // Close modal
+      await tester.tap(find.byIcon(Icons.close));
+      await tester.pumpAndSettle();
+      expect(find.byType(QuickLogSheet), findsNothing);
     },
   );
 
@@ -321,6 +330,7 @@ void main() {
     var zeroWasteTapped = false;
     var insightTapped = false;
     var mealPlanTapped = false;
+    var streakTapped = false;
 
     const testProfile = UserProfile(
       weeklyBudget: 300000,
@@ -349,6 +359,7 @@ void main() {
           onNoWaste: () => zeroWasteTapped = true,
           onOpenInsight: () => insightTapped = true,
           onOpenMealPlan: () => mealPlanTapped = true,
+          onOpenStreak: () => streakTapped = true,
         ),
       ),
     );
@@ -369,6 +380,8 @@ void main() {
     // 3. Streak Card
     expect(find.text('5 Hari Beruntun 🔥'), findsOneWidget);
     expect(find.text('Level 2'), findsOneWidget);
+    await tester.tap(find.text('5 Hari Beruntun 🔥'));
+    expect(streakTapped, isTrue);
 
     // 4. Water Card & Quick-log buttons
     expect(find.text('Konsumsi Air Hari Ini'), findsOneWidget);
@@ -505,6 +518,237 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
       expect(find.byType(HomeScreen), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'QuickLogSheet: tapping +250 adds 250 ml, and Undo reverts both waterRecords and DailyLog (FR-31, FR-35)',
+    (tester) async {
+      tester.view.physicalSize = const Size(390 * 2.0, 844 * 2.0);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        MaterialApp(theme: AppTheme.lightTheme, home: const MainNavigation()),
+      );
+      await tester.pumpAndSettle();
+
+      // 1. Open QuickLogSheet via FAB
+      final fab = find.widgetWithText(FloatingActionButton, 'Catat Cepat');
+      expect(fab, findsOneWidget);
+      await tester.tap(fab);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(QuickLogSheet), findsOneWidget);
+      expect(find.text('⚡ Catat Cepat'), findsOneWidget);
+
+      // 2. Tap +250 ml (Gelas)
+      final water250Btn = find.textContaining('+250 ml (Gelas)');
+      expect(water250Btn, findsOneWidget);
+      await tester.tap(water250Btn);
+      await tester.pumpAndSettle();
+
+      // Sheet should be dismissed
+      expect(find.byType(QuickLogSheet), findsNothing);
+
+      // SnackBar with Undo action should appear
+      expect(find.byType(SnackBar), findsOneWidget);
+      expect(find.textContaining('250 ml (Gelas)'), findsOneWidget);
+      expect(find.text('Urungkan'), findsOneWidget);
+
+      // 3. Tap Undo
+      await tester.tap(find.text('Urungkan'));
+      await tester.pumpAndSettle();
+
+      // SnackBar disappears and state safely reverts
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'QuickLogSheet supports tab switching, 2-tap waste logging, and zero-waste commitment',
+    (tester) async {
+      tester.view.physicalSize = const Size(390 * 2.0, 844 * 2.0);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        MaterialApp(theme: AppTheme.lightTheme, home: const MainNavigation()),
+      );
+      await tester.pumpAndSettle();
+
+      // Open QuickLogSheet
+      await tester.tap(
+        find.widgetWithText(FloatingActionButton, 'Catat Cepat'),
+      );
+      await tester.pumpAndSettle();
+
+      // Switch to Makan tab
+      await tester.tap(find.text('Makan'));
+      await tester.pumpAndSettle();
+      expect(find.text('JADWAL MAKAN HARI INI'), findsOneWidget);
+
+      // Switch to Food Waste tab
+      await tester.tap(find.text('Food Waste'));
+      await tester.pumpAndSettle();
+      expect(find.text('Tidak ada makanan terbuang hari ini'), findsOneWidget);
+      expect(find.text('Sayur Bayam'), findsOneWidget);
+
+      // 2-tap log: Tap [Sedikit] on Sayur Bayam
+      final sedikitBtn = find.text('Sedikit');
+      expect(sedikitBtn, findsAtLeastNWidgets(1));
+      await tester.tap(sedikitBtn.first);
+      await tester.pumpAndSettle();
+
+      // Sheet closes and SnackBar appears
+      expect(find.byType(QuickLogSheet), findsNothing);
+      expect(find.textContaining('Catatan sisa Sayur Bayam'), findsOneWidget);
+      expect(find.text('Urungkan'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'StreakCard renders correctly across active, zero, broken, and not-logged states',
+    (tester) async {
+      var tapped = false;
+
+      // 1. Active streak with today logged (HTML standard)
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: Scaffold(
+            body: StreakCard(
+              streak: 5,
+              level: 2,
+              nextTarget: 7,
+              progress: 5,
+              onTap: () => tapped = true,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('5 Hari Beruntun 🔥'), findsOneWidget);
+      expect(find.text('Level 2'), findsOneWidget);
+      expect(
+        find.text('Pertahankan kebiasaan sehat dan hematmu!'),
+        findsOneWidget,
+      );
+      await tester.tap(find.byType(StreakCard));
+      expect(tapped, isTrue);
+
+      // 2. Active streak but not logged today
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(
+            body: StreakCard(
+              streak: 5,
+              level: 2,
+              nextTarget: 7,
+              progress: 5,
+              isLoggedToday: false,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Catat satu hal hari ini untuk menjaga streak'),
+        findsOneWidget,
+      );
+
+      // 3. Zero streak (Fresh start)
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(
+            body: StreakCard(streak: 0, level: 1, nextTarget: 3, progress: 0),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Mulai Beruntun Pertamamu! 🔥'), findsOneWidget);
+      expect(find.text('Mulai streak pertamamu hari ini!'), findsOneWidget);
+
+      // 4. Broken streak
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(
+            body: StreakCard(
+              streak: 0,
+              level: 1,
+              nextTarget: 3,
+              progress: 0,
+              isBroken: true,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Streak-mu istirahat dulu. Yuk mulai lagi!'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets(
+    'Air & Waste, Profile, and Achievements have no overflow on compact '
+    '(360x640) and expanded (1024x768) and dark mode switch updates theme',
+    (tester) async {
+      ThemeMode? activeMode;
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      for (final size in [
+        const Size(360 * 2.0, 640 * 2.0),
+        const Size(1024 * 2.0, 768 * 2.0),
+      ]) {
+        tester.view.physicalSize = size;
+        await tester.pumpWidget(const SizedBox.shrink());
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.lightTheme,
+            home: MainNavigation(
+              initialIndex: 3,
+              onThemeModeChanged: (mode) => activeMode = mode,
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.byType(WaterTrackerScreen), findsOneWidget);
+
+        await tester.tap(find.text('Food Waste'));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.byType(FoodWasteScreen), findsOneWidget);
+
+        await tester.tap(find.text('Profil').last);
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.text('Budget Mingguan'), findsOneWidget);
+
+        await tester.ensureVisible(find.text('Pencapaian'));
+        await tester.tap(find.text('Pencapaian'));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+        expect(find.byType(AchievementsScreen), findsOneWidget);
+
+        await tester.tap(find.byType(BackButton));
+        await tester.pumpAndSettle();
+      }
+
+      await tester.ensureVisible(find.text('Mode Gelap'));
+      await tester.tap(find.byType(Switch));
+      await tester.pumpAndSettle();
+      expect(activeMode, ThemeMode.dark);
     },
   );
 }

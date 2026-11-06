@@ -3,12 +3,11 @@ import 'package:budget_bites/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const UserProfile _profile = UserProfile(
+const _profile = UserProfile(
   weeklyBudget: 300000,
   waterTargetMl: 2000,
   allergies: ['Kacang'],
   preferences: ['Hemat'],
-  darkMode: false,
 );
 
 Widget _wrap(ProfileScreen screen) {
@@ -16,11 +15,14 @@ Widget _wrap(ProfileScreen screen) {
 }
 
 void main() {
-  testWidgets('memilih alergi menambah item tanpa menghapus yang lama',
-      (tester) async {
+  testWidgets('memilih alergi menambah item tanpa menghapus yang lama', (
+    tester,
+  ) async {
     UserProfile? updated;
     await tester.pumpWidget(
-      _wrap(ProfileScreen(profile: _profile, onUpdateProfile: (p) => updated = p)),
+      _wrap(
+        ProfileScreen(profile: _profile, onUpdateProfile: (p) => updated = p),
+      ),
     );
 
     await tester.ensureVisible(find.text('Telur'));
@@ -34,7 +36,9 @@ void main() {
   testWidgets('menghapus pilihan alergi', (tester) async {
     UserProfile? updated;
     await tester.pumpWidget(
-      _wrap(ProfileScreen(profile: _profile, onUpdateProfile: (p) => updated = p)),
+      _wrap(
+        ProfileScreen(profile: _profile, onUpdateProfile: (p) => updated = p),
+      ),
     );
 
     await tester.ensureVisible(find.text('Kacang'));
@@ -47,7 +51,9 @@ void main() {
   testWidgets('sakelar mode gelap mengirim darkMode true', (tester) async {
     UserProfile? updated;
     await tester.pumpWidget(
-      _wrap(ProfileScreen(profile: _profile, onUpdateProfile: (p) => updated = p)),
+      _wrap(
+        ProfileScreen(profile: _profile, onUpdateProfile: (p) => updated = p),
+      ),
     );
 
     await tester.ensureVisible(find.text('Mode Gelap'));
@@ -57,11 +63,14 @@ void main() {
     expect(updated!.darkMode, isTrue);
   });
 
-  testWidgets('geser slider budget mengirim budget baru saat dilepas',
-      (tester) async {
+  testWidgets('geser slider budget mengirim budget baru saat dilepas', (
+    tester,
+  ) async {
     UserProfile? updated;
     await tester.pumpWidget(
-      _wrap(ProfileScreen(profile: _profile, onUpdateProfile: (p) => updated = p)),
+      _wrap(
+        ProfileScreen(profile: _profile, onUpdateProfile: (p) => updated = p),
+      ),
     );
 
     await tester.drag(find.byType(Slider).first, const Offset(60, 0));
@@ -72,9 +81,10 @@ void main() {
     expect(updated!.weeklyBudget % ProfileScreen.budgetStep, 0);
   });
 
-  testWidgets('Reset Data Demo meminta konfirmasi lalu memanggil callback',
-      (tester) async {
-    int resetCount = 0;
+  testWidgets('Reset Data Demo meminta konfirmasi lalu memanggil callback', (
+    tester,
+  ) async {
+    var resetCount = 0;
     await tester.pumpWidget(
       _wrap(ProfileScreen(profile: _profile, onResetData: () => resetCount++)),
     );

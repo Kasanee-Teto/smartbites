@@ -5,22 +5,22 @@ import 'package:budget_bites/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 
 class WaterProgressCard extends StatelessWidget {
+  const WaterProgressCard({
+    required this.currentMl,
+    required this.targetMl,
+    super.key,
+    this.onAdd,
+  });
+
   static const List<int> quickAmounts = [150, 250, 500];
 
   final int currentMl;
   final int targetMl;
   final ValueChanged<int>? onAdd;
 
-  const WaterProgressCard({
-    super.key,
-    required this.currentMl,
-    required this.targetMl,
-    this.onAdd,
-  });
-
   double get _progress {
-    if (targetMl <= 0) return 0.0;
-    return (currentMl / targetMl).clamp(0.0, 1.0).toDouble();
+    if (targetMl <= 0) return 0;
+    return (currentMl / targetMl).clamp(0.0, 1.0);
   }
 
   @override
@@ -44,7 +44,10 @@ class WaterProgressCard extends StatelessWidget {
                 Icon(Icons.water_drop, color: waterColor),
                 const SizedBox(width: AppConstants.spaceSm),
                 Expanded(
-                  child: Text('Air Hari Ini', style: theme.textTheme.titleMedium),
+                  child: Text(
+                    'Air Hari Ini',
+                    style: theme.textTheme.titleMedium,
+                  ),
                 ),
                 if (reached)
                   const StatusBadge(
@@ -81,7 +84,7 @@ class WaterProgressCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppConstants.radiusFull),
               child: LinearProgressIndicator(
                 value: _progress,
-                minHeight: 8.0,
+                minHeight: 8,
                 color: waterColor,
                 backgroundColor: waterColor.withAlpha(38),
               ),
@@ -103,7 +106,7 @@ class WaterProgressCard extends StatelessWidget {
             const SizedBox(height: AppConstants.spaceMd),
             Row(
               children: [
-                for (int i = 0; i < quickAmounts.length; i++) ...[
+                for (var i = 0; i < quickAmounts.length; i++) ...[
                   if (i > 0) const SizedBox(width: AppConstants.spaceSm),
                   Expanded(
                     child: FilledButton(

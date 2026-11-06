@@ -151,6 +151,8 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
           Text('Tag diet resep: ${meal.diet?.label ?? 'Belum diberi tag'}'),
           const SizedBox(height: 8),
           Text('Alergen tercatat: $allergens'),
+          const SizedBox(height: 4),
+          const Text('Daftar alergen contoh tidak menjamin bebas alergen.'),
           if (matchesAllergy(meal, widget.userAllergies))
             Text(
               'Perhatian: terdapat alergen yang cocok dengan profil Anda',

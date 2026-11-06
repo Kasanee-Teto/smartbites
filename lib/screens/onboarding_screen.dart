@@ -133,8 +133,9 @@ const List<OnboardingSlide> _slides = [
 ];
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key, this.onFinish});
+  const OnboardingScreen({super.key, this.onFinish, this.onThemeModeChanged});
   final ValueChanged<UserProfile>? onFinish;
+  final ValueChanged<ThemeMode>? onThemeModeChanged;
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -164,7 +165,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
 
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute<void>(builder: (_) => const MainNavigation()),
+      MaterialPageRoute<void>(
+        builder: (_) =>
+            MainNavigation(onThemeModeChanged: widget.onThemeModeChanged),
+      ),
     );
   }
 

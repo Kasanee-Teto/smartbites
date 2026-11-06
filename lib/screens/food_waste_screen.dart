@@ -16,13 +16,25 @@ import 'package:flutter/services.dart';
 
 /// Saran item untuk chip. Harga penuh bernilai null bila tidak diketahui.
 class _Suggestion {
+  const _Suggestion(this.name, this.fullPrice);
+
   final String name;
   final int? fullPrice;
-
-  const _Suggestion(this.name, this.fullPrice);
 }
 
 class FoodWasteScreen extends StatefulWidget {
+  const FoodWasteScreen({
+    super.key,
+    this.records = const [],
+    this.onAddRecord,
+    this.onDeleteRecord,
+    this.pantryItems = const [],
+    this.recentMeals = const [],
+    this.noWasteMarked = false,
+    this.onMarkNoWaste,
+    this.now,
+  });
+
   static const List<String> reasonOptions = [
     'Basi / Busuk',
     'Beli Kebanyakan',
@@ -44,18 +56,6 @@ class FoodWasteScreen extends StatefulWidget {
 
   /// Tanggal acuan untuk total bulan ini; bawaannya hari ini (memudahkan test).
   final DateTime? now;
-
-  const FoodWasteScreen({
-    super.key,
-    this.records = const [],
-    this.onAddRecord,
-    this.onDeleteRecord,
-    this.pantryItems = const [],
-    this.recentMeals = const [],
-    this.noWasteMarked = false,
-    this.onMarkNoWaste,
-    this.now,
-  });
 
   @override
   State<FoodWasteScreen> createState() => _FoodWasteScreenState();
@@ -97,8 +97,9 @@ class _FoodWasteScreenState extends State<FoodWasteScreen> {
       _nameError = null;
       _fullPrice = suggestion.fullPrice;
       final full = suggestion.fullPrice;
-      _priceController.text =
-          full == null ? '' : WastePortions.estimateLoss(_portion, full).toString();
+      _priceController.text = full == null
+          ? ''
+          : WastePortions.estimateLoss(_portion, full).toString();
     });
   }
 
@@ -107,8 +108,10 @@ class _FoodWasteScreenState extends State<FoodWasteScreen> {
       _portion = portion;
       final full = _fullPrice;
       if (full != null) {
-        _priceController.text =
-            WastePortions.estimateLoss(portion, full).toString();
+        _priceController.text = WastePortions.estimateLoss(
+          portion,
+          full,
+        ).toString();
       }
     });
   }
@@ -150,14 +153,13 @@ class _FoodWasteScreenState extends State<FoodWasteScreen> {
   }
 
   List<WasteRecord> _sortedRecords() {
-    final list = List<WasteRecord>.from(widget.records);
-    list.sort((a, b) => b.date.compareTo(a.date));
-    return list;
+    return List<WasteRecord>.from(widget.records)
+      ..sort((a, b) => b.date.compareTo(a.date));
   }
 
   List<Widget> _withGaps(List<Widget> children) {
     return [
-      for (int i = 0; i < children.length; i++) ...[
+      for (var i = 0; i < children.length; i++) ...[
         if (i > 0) const SizedBox(height: AppConstants.spaceMd),
         children[i],
       ],
@@ -360,7 +362,7 @@ class _FoodWasteScreenState extends State<FoodWasteScreen> {
                     children: [
                       Icon(
                         Icons.eco_outlined,
-                        size: 40.0,
+                        size: 40,
                         color: theme.colorScheme.primary.withAlpha(150),
                       ),
                       const SizedBox(height: AppConstants.spaceSm),
@@ -406,7 +408,7 @@ class _FoodWasteScreenState extends State<FoodWasteScreen> {
             AppConstants.spaceMd,
             AppConstants.spaceMd,
             AppConstants.spaceMd,
-            96.0,
+            96,
           ),
           child: Center(
             child: ConstrainedBox(
