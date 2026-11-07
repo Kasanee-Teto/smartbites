@@ -16,10 +16,12 @@ import 'package:budget_bites/theme/app_theme.dart';
 import 'package:budget_bites/widgets/app_bar.dart';
 import 'package:budget_bites/widgets/budget_card.dart';
 import 'package:budget_bites/widgets/main_navigation.dart';
+import 'package:budget_bites/widgets/meal_card.dart';
 import 'package:budget_bites/widgets/page_dots.dart';
 import 'package:budget_bites/widgets/quick_log_sheet.dart';
 import 'package:budget_bites/widgets/sdg_badge.dart';
 import 'package:budget_bites/widgets/streak_card.dart';
+import 'package:budget_bites/widgets/water_progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -384,7 +386,8 @@ void main() {
     expect(streakTapped, isTrue);
 
     // 4. Water Card & Quick-log buttons
-    expect(find.text('Konsumsi Air Hari Ini'), findsOneWidget);
+    expect(find.byType(WaterProgressCard), findsOneWidget);
+    expect(find.text('Air Hari Ini'), findsOneWidget);
     expect(find.text('+150 ml'), findsOneWidget);
     expect(find.text('+250 ml'), findsOneWidget);
     expect(find.text('+500 ml'), findsOneWidget);
@@ -394,13 +397,18 @@ void main() {
 
     // 5. Today's Menu & Allergy warning
     expect(find.text('Menu Hari Ini'), findsOneWidget);
+    // Tap 'Lihat Rencana' while in view
+    await tester.tap(find.text('Lihat Rencana'));
+    expect(mealPlanTapped, isTrue);
+
+    expect(find.byType(MealCard), findsNWidgets(2));
     expect(find.text(meals[0].name), findsOneWidget);
     expect(find.text(meals[1].name), findsOneWidget);
 
     // Meal 2 contains 'Kacang' and user profile has 'Kacang'
     if (meals[1].allergens.any((a) => a.toLowerCase().contains('kacang'))) {
       expect(
-        find.textContaining('Peringatan: Mengandung Alergen'),
+        find.textContaining('Mengandung alergen profil Anda'),
         findsOneWidget,
       );
     }
@@ -408,13 +416,16 @@ void main() {
     // Checkbox toggling
     final checkboxes = find.byType(Checkbox);
     expect(checkboxes, findsNWidgets(2));
+    await tester.scrollUntilVisible(
+      checkboxes.at(1),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
     await tester.tap(checkboxes.at(1));
+    await tester.pumpAndSettle();
     expect(toggledSlot, 1);
     expect(toggledValue, isTrue);
-
-    // Tap 'Lihat Rencana'
-    await tester.tap(find.text('Lihat Rencana'));
-    expect(mealPlanTapped, isTrue);
 
     // 6. Zero Waste Commitment Card
     await tester.scrollUntilVisible(

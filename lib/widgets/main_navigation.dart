@@ -911,7 +911,9 @@ class _MainNavigationState extends State<MainNavigation> {
               onDestinationSelected: _onItemTapped,
               destinations: _destinations,
             ),
-            floatingActionButton: _selectedIndex == 1 ? null : _buildFab(),
+            floatingActionButton: (_selectedIndex == 1 || _selectedIndex == 2)
+                ? null
+                : _buildFab(),
           );
         }
 
@@ -937,7 +939,9 @@ class _MainNavigationState extends State<MainNavigation> {
               ],
             ),
           ),
-          floatingActionButton: _selectedIndex == 1 ? null : _buildFab(),
+          floatingActionButton: (_selectedIndex == 1 || _selectedIndex == 2)
+              ? null
+              : _buildFab(),
         );
       },
     );

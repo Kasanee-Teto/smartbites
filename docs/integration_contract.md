@@ -19,14 +19,14 @@ Following the PRD principles and the project's technical constraints:
 
 | Screen | Owner | Design File (HTML Reference) | Parameters Passed In | Callbacks Passed In | State Fields Read |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **HomeScreen** | Louis | `smartbites_beranda/code.html` | `UserProfile profile`, `List<Meal> todayMeals`, `List<bool> todayEaten`, `int totalWeeklyBudget`, `int currentSpent`, `int todayWaterMl`, `int streakDays` | `ValueChanged<int>? onQuickWaterAdd`, `void Function(int slotIndex, bool eaten)? onToggleMealEaten`, `VoidCallback? onOpenMealPlan`, `VoidCallback? onOpenInsight`, `VoidCallback? onOpenStreak` | `_profile`, `_plan` (today), `_meals`, `_waterRecords`, `_grocery` |
+| **HomeScreen** | Louis | `smartbites_beranda/code.html` | `UserProfile profile`, `List<Meal> todayMeals`, `List<bool> todayEaten`, `int totalWeeklyBudget`, `int currentSpent`, `int todayWaterMl`, `int streakDays`, optional `int? streakLevelValue`, `int? nextTarget`, `int? streakProgress`, `bool isLoggedToday` | `ValueChanged<int>? onQuickWaterAdd`, `void Function(int slotIndex, bool eaten)? onToggleMealEaten`, `VoidCallback? onOpenMealPlan`, `VoidCallback? onOpenInsight`, `VoidCallback? onOpenStreak`, `VoidCallback? onNoWaste`, `ValueChanged<int>? onGoToTab` | `_profile`, `_plan` (today), `_meals`, `_waterRecords`, `_grocery`, `_dailyLogs` |
 | **MealPlanScreen** | Jessica | User-supplied planner/calendar/nutrition references and `design.md` | `List<PlannedMeal> entries`, `List<Meal> meals`, `List<String> allergies`, `MealPreferences preferences`, `Map<Nutrient, double> goals`, `NutritionFocus focus`, `int weeklyBudget`, optional `DateTime initialDate` | `ValueChanged<PlannedMeal> onSave`, `ValueChanged<String> onDelete`, `ValueChanged<Map<Nutrient, double>> onGoalsChanged`, `ValueChanged<NutritionFocus> onFocusChanged`, `void Function(Meal, double) onAddToGrocery`, optional `void Function(List<String>, MealPreferences) onPreferencesChanged` | `_plan`, `_meals`, `_nutritionGoals`, `_nutritionFocus`, `_profile` |
 | **MealDetailScreen** | Jessica | User-supplied recipe/nutrition references and `design.md` | `Meal meal`, `List<String> userAllergies` | optional `void Function(Meal, double) onAddToGrocery`, `void Function(Meal, double) onPlan`, `VoidCallback onBack` | Read-only meal; portion selection stays local |
-| **GroceryScreen** | Gilbert | `smartbites_belanja_pantry/code.html` | `List<GroceryItem> items`, `int weeklyBudget` | `ValueChanged<String>? onToggleItem`, `ValueChanged<GroceryItem>? onAddItem`, `ValueChanged<String>? onDeleteItem`, `VoidCallback? onClearChecked` | `_grocery`, `_profile.weeklyBudget` |
+| **GroceryScreen** | Gilbert | `smartbites_belanja_pantry/code.html` | `List<GroceryItem> items`, `int weeklyBudget`, optional `Widget? pantryView` | `ValueChanged<String>? onToggleItem`, `ValueChanged<GroceryItem>? onAddItem`, `ValueChanged<String>? onDeleteItem`, `VoidCallback? onClearChecked` | `_grocery`, `_profile.weeklyBudget` |
 | **PantryScreen** | Gilbert | `smartbites_belanja_pantry/code.html` | `List<PantryItem> items` | `ValueChanged<PantryItem>? onAddItem`, `ValueChanged<PantryItem>? onUpdateItem`, `ValueChanged<String>? onDeleteItem` | `_pantry` |
 | **WaterTrackerScreen** | Edbert | `smartbites_air_food_waste/code.html` | `int dailyTargetMl`, `int currentWaterMl`, `List<WaterRecord> records` | `ValueChanged<int>? onAddWater`, `ValueChanged<String>? onDeleteRecord` | `_waterRecords`, `_profile.waterTargetMl` |
-| **FoodWasteScreen** | Edbert | `smartbites_air_food_waste/code.html` | `List<WasteRecord> records` | `ValueChanged<WasteRecord>? onAddRecord`, `ValueChanged<String>? onDeleteRecord` | `_wasteRecords` |
-| **ProfileScreen** | Edbert | `smartbites_profil_pencapaian/code.html` | `UserProfile profile` | `ValueChanged<UserProfile>? onUpdateProfile`, `VoidCallback? onResetData` | `_profile` |
+| **FoodWasteScreen** | Edbert | `smartbites_air_food_waste/code.html` | `List<WasteRecord> records`, optional `List<PantryItem> pantryItems`, `List<Meal> recentMeals`, `bool noWasteMarked` | `ValueChanged<WasteRecord>? onAddRecord`, `ValueChanged<String>? onDeleteRecord`, optional `VoidCallback? onMarkNoWaste` | `_wasteRecords`, `_pantry`, `_dailyLogs` |
+| **ProfileScreen** | Edbert | `smartbites_profil_pencapaian/code.html` | `UserProfile profile` | `ValueChanged<UserProfile>? onUpdateProfile`, `VoidCallback? onResetData`, `VoidCallback? onOpenAchievements` | `_profile` |
 | **AchievementsScreen** | Edbert | `smartbites_profil_pencapaian/code.html` | `List<Achievement> achievements`, `int currentStreak` | `VoidCallback? onBack` | `_achievements`, `_dailyLogs` |
 | **InsightScreen** | Gilbert | `smartbites_beranda/code.html` | `int currentSpent`, `int weeklyBudget` | `VoidCallback? onBack` | `_grocery`, `_profile.weeklyBudget` |
 | **QuickLogSheet** | Louis | `smartbites_modal_catat_cepat_1/code.html` & `smartbites_modal_catat_cepat_2/code.html` | `int dailyWaterTargetMl`, `int currentWaterMl`, `int lastWaterMl`, `List<PlannedMeal> todayPlannedMeals`, `List<Meal> mealCatalog`, `List<PantryItem> pantryItems` | `ValueChanged<int> onLogWater`, `ValueChanged<PlannedMeal> onMarkMealEaten`, `void Function(String itemName, String portion, int estimatedLoss) onLogWaste`, `VoidCallback onNoWaste`, `VoidCallback? onOpenWasteForm` | `_waterRecords`, `_plan`, `_meals`, `_pantry`, `_dailyLogs` |
@@ -35,20 +35,29 @@ Following the PRD principles and the project's technical constraints:
 
 ---
 
-## 2.1 Quick Log Callbacks & Typedefs (Step 5 - FR-30..35)
+## 2.1 Quick Log Callbacks & Unified Typedefs (Step 5–7 - FR-30..36)
 
-Used by `QuickLogSheet` and wired into `_MainNavigationState`:
+Unified callback signatures wired into `_MainNavigationState`:
 - `typedef WaterLogCallback = void Function(int amountMl);`
 - `typedef MealMarkEatenCallback = void Function(PlannedMeal plannedMeal);`
 - `typedef WasteLogCallback = void Function(String itemName, String portion, int estimatedLoss);`
 - `typedef NoWasteCallback = VoidCallback;`
 - `typedef OpenWasteFormCallback = VoidCallback;`
+- `typedef ToggleMealEatenCallback = void Function(int slotIndex, bool eaten);`
+- `typedef TabNavigationCallback = void Function(int tabIndex);`
+- `typedef RecipeGroceriesCallback = void Function(Meal meal, double servings);`
 
-Temporary in-memory handlers implemented in `_MainNavigationState`:
+Delivered and wired handlers in `_MainNavigationState`:
 - `_handleLogWater`: updates `_waterRecords` and today's `DailyLog.waterMl`, reversible via `_applyWithUndo`.
-- `_handleQuickMarkMealEaten`: `// TODO(Jessica)` marks meal eaten in `_plan` and syncs `DailyLog.mealsEaten`.
-- `_handleQuickLogWaste`: `// TODO(Edbert)` logs `WasteRecord` and sets `DailyLog.wasteLogged = true`.
-- `_handleQuickNoWaste`: sets `DailyLog.noWasteMarked = true` (+1 streak SDG 12.3).
+- `_handleQuickMarkMealEaten`: fully wired to Jessica's `_savePlannedMeal(plannedMeal.copyWith(isEaten: true))`, updating `_plan` and `DailyLog.mealsEaten`.
+- `_handleQuickLogWaste`: logs `WasteRecord` and syncs `DailyLog.wasteLogged = true`, reversible via `_applyWithUndo`.
+- `_handleQuickNoWaste`: sets `DailyLog.noWasteMarked = true` (+1 streak SDG 12.3), reversible via `_applyWithUndo`.
+
+## 2.2 Step 7 Home Integration & Single Source of Truth
+In Step 7, all placeholder widgets in `HomeScreen` were replaced with the real delivered components:
+- `_buildMealItem` was replaced by Jessica's delivered `MealCard` (`lib/widgets/meal_card.dart`).
+- `_buildWaterCard` was replaced by Edbert's delivered `WaterProgressCard` (`lib/widgets/water_progress_card.dart`).
+- Direct single source of truth in `_MainNavigationState` guarantees zero duplicated lists, zero out-of-sync states, and full undo consistency across all features.
 
 
 ---
