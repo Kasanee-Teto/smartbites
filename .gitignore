@@ -122,3 +122,4 @@ app.*.symbols
 .widget_preview/
 # Smartbites UI Design
 /stitch_smartbites_meal_budget_planner/
+/graphify-out
