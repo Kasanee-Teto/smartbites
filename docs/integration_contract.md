@@ -272,3 +272,32 @@ Vegetarian; untagged meals do not match either dietary filter. 27 listed cook
 recipes have tags. Recipes with ambiguous stock/seasoning and all buy fixtures
 remain untagged. Tags describe sample recipes, not vendor verification,
 certification, allergen safety, or medical suitability.
+
+## 9. Budget Data Consistency and Badge Contract Helpers (FR-04, FR-13, FR-37)
+
+### Single Source of Truth
+Budget and meal planning data maintain a strict single source of truth inside `_MainNavigationState`:
+1. `_profile.weeklyBudget`: The single weekly budget amount in Rupiah, modified through `_updateProfile` (e.g. from the budget Slider in `ProfileScreen`).
+2. `_plan`: The single calendar meal plan list (`List<PlannedMeal>`), updated through `_savePlannedMeal` and `_deletePlannedMeal`.
+3. `_meals`: The master catalog of cook recipes and buy meals.
+
+### Dynamic Totals and Immediate Synchronization
+- Totals are dynamically derived on every build of `_MainNavigationState._buildScreens()`, never stored as duplicate mutable counters.
+- `weeklyTotal(weekEntries, _meals)`: Computes the current weekly meal plan cost.
+- Synchronized views in `IndexedStack`:
+  - **Beranda (`HomeScreen`)**: `BudgetCard` receives `budget: _profile.weeklyBudget` and `spent: weeklyPlanCost`.
+  - **Perencana Makan (`MealPlanScreen`)**: Receives `weeklyBudget: _profile.weeklyBudget` and `entries: _plan`.
+  - **Profil (`ProfileScreen`)**: Displays and modifies `_profile.weeklyBudget` via `Slider`.
+- Changing the slider in `ProfileScreen` invokes `_updateProfile`, causing `_MainNavigationState.setState()` to immediately rebuild all tabs without any screen reload. The budget status on `BudgetCard` immediately flips between `Hemat` and `Perlu Hemat` as the budget changes.
+- Adding or removing a meal in `MealPlanScreen` or `HomeScreen` immediately updates `_plan`, keeping weekly totals consistent across both screens. SnackBar "Urungkan" (Undo) reliably restores the previous plan and exact totals.
+
+### Edge Case Guarantees
+- **Budget 0 / Negative**: Handled safely via `budgetStatus(spent, budget) -> BudgetStatus.belumDiatur`. Progress indicator clamps safely to 0 without division by zero.
+- **Empty Plan**: `weeklyTotal([], meals)` safely returns `0`.
+- **Missing Meal ID**: Any meal ID not found in the catalog is gracefully ignored (`+ 0`).
+- **Price 0 or Negative**: Free meals (`price: 0`) and anomalous prices are clamped and handled without exceptions.
+
+### Badge Contract Helpers (Edbert's `BadgeRules` Integration)
+Pure helper functions in `lib/utils/budget_status.dart` expose the values required for badge evaluations without modifying Edbert's `badge_rules.dart`:
+- **Dompet Aman (`safeWallet`)**: `isBudgetSafe(int planTotal, int weeklyBudget)` returns `true` when `weeklyBudget > 0 && planTotal > 0 && planTotal <= weeklyBudget`.
+- **Perencana Handal (`masterPlanner`)**: `isMealPlanFull(List<List<String>> weekPlan)` returns `true` when all 7 days have $\ge 3$ non-empty meal slots (all 21 slots filled).
