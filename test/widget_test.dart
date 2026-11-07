@@ -10,9 +10,12 @@ import 'package:budget_bites/screens/grocery_screen.dart';
 import 'package:budget_bites/screens/home_screen.dart';
 import 'package:budget_bites/screens/meal_plan_screen.dart';
 import 'package:budget_bites/screens/onboarding_screen.dart';
+import 'package:budget_bites/screens/profile_screen.dart';
 import 'package:budget_bites/screens/water_tracker_screen.dart';
 import 'package:budget_bites/screens/welcome_screen.dart';
 import 'package:budget_bites/theme/app_theme.dart';
+import 'package:budget_bites/utils/formatters.dart';
+import 'package:budget_bites/utils/meal_planning.dart';
 import 'package:budget_bites/widgets/app_bar.dart';
 import 'package:budget_bites/widgets/budget_card.dart';
 import 'package:budget_bites/widgets/main_navigation.dart';
@@ -760,6 +763,134 @@ void main() {
       await tester.tap(find.byType(Switch));
       await tester.pumpAndSettle();
       expect(activeMode, ThemeMode.dark);
+    },
+  );
+
+  testWidgets(
+    'FR-04, FR-13: Changing budget slider in Profile updates BudgetCard on Home and in Meal Planner immediately and flips status',
+    (tester) async {
+      tester.view.physicalSize = const Size(390 * 2.0, 844 * 2.0);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        MaterialApp(theme: AppTheme.lightTheme, home: const MainNavigation()),
+      );
+      await tester.pumpAndSettle();
+
+      // 1. Initial state on Home (Tab 0):
+      // Seed weekly meal plan cost is within Rp 300.000 -> BudgetCard displays status 'Hemat'.
+      expect(find.byType(HomeScreen), findsOneWidget);
+      expect(find.byType(BudgetCard), findsOneWidget);
+      expect(find.text('Hemat'), findsOneWidget);
+      expect(find.textContaining('/ Rp 300.000'), findsOneWidget);
+
+      // 2. Switch to Profil (Tab 4)
+      await tester.tap(find.text('Profil').last);
+      await tester.pumpAndSettle();
+      expect(find.byType(ProfileScreen), findsOneWidget);
+      expect(find.text('Budget Mingguan'), findsOneWidget);
+      expect(find.text('Rp 300.000'), findsOneWidget);
+
+      // Update slider to minimum budget (Rp 100.000)
+      final slider = tester.widget<Slider>(find.byType(Slider).first);
+      slider.onChanged?.call(100000);
+      slider.onChangeEnd?.call(100000);
+      await tester.pumpAndSettle();
+
+      // Verify SnackBar "Preferensi profil disimpan" appeared
+      expect(find.text('Preferensi profil disimpan'), findsOneWidget);
+      expect(find.text('Rp 100.000'), findsOneWidget);
+
+      // 3. Switch back to Beranda (Tab 0) without reloading
+      await tester.tap(find.text('Beranda').last);
+      await tester.pumpAndSettle();
+
+      // Verify BudgetCard on Home immediately updated budget to Rp 100.000
+      // and flipped status from 'Hemat' to 'Perlu Hemat' (since cost exceeds 100k)
+      expect(find.byType(HomeScreen), findsOneWidget);
+      expect(find.textContaining('/ Rp 100.000'), findsOneWidget);
+      expect(find.text('Perlu Hemat'), findsOneWidget);
+      expect(find.text('Hemat'), findsNothing);
+
+      // 4. Switch to Menu / Perencana Makan (Tab 1)
+      await tester.tap(find.text('Menu').last);
+      await tester.pumpAndSettle();
+      expect(find.byType(MealPlanScreen), findsOneWidget);
+      expect(find.text('Anggaran Rp 100.000'), findsOneWidget);
+
+      // 5. Test Undo: Tap "Urungkan" on the SnackBar
+      await tester.tap(find.text('Urungkan'));
+      await tester.pumpAndSettle();
+
+      // MealPlanScreen immediately restores Anggaran Rp 300.000
+      expect(find.text('Anggaran Rp 300.000'), findsOneWidget);
+
+      // Switch back to Beranda (Tab 0) and verify status flipped back to 'Hemat'
+      await tester.tap(find.text('Beranda').last);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('/ Rp 300.000'), findsOneWidget);
+      expect(find.text('Hemat'), findsOneWidget);
+      expect(find.text('Perlu Hemat'), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'FR-10, FR-13: Deleting a planned meal updates totals on Meal Planner and Home, and Undo restores them',
+    (tester) async {
+      tester.view.physicalSize = const Size(390 * 2.0, 844 * 2.0);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const MainNavigation(initialIndex: 1), // Start at Menu tab
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final mealPlan = tester.widget<MealPlanScreen>(
+        find.byType(MealPlanScreen),
+      );
+      expect(mealPlan.entries, isNotEmpty);
+      final initialCost = plannedCost(mealPlan.entries, {
+        for (final m in mealPlan.meals) m.id: m,
+      });
+      expect(find.text(formatRupiah(initialCost)), findsOneWidget);
+
+      // Delete the first entry
+      final entryToDelete = mealPlan.entries.first;
+      final mealCatalog = {for (final m in mealPlan.meals) m.id: m};
+      final deletedMealPrice =
+          (mealCatalog[entryToDelete.mealId]?.price ?? 0) *
+          entryToDelete.servings;
+      mealPlan.onDelete(entryToDelete.id);
+      await tester.pumpAndSettle();
+
+      // Verify SnackBar appeared
+      expect(find.text('Menu dihapus dari rencana'), findsOneWidget);
+      final reducedCost = initialCost - deletedMealPrice.round();
+      expect(find.text(formatRupiah(reducedCost)), findsOneWidget);
+
+      // Switch to Beranda and check BudgetCard reflects the reduced cost
+      await tester.tap(find.text('Beranda').last);
+      await tester.pumpAndSettle();
+      expect(find.text(formatRupiah(reducedCost)), findsOneWidget);
+
+      // Tap Undo ("Urungkan")
+      await tester.tap(find.text('Urungkan'));
+      await tester.pumpAndSettle();
+
+      // Home BudgetCard reflects restored cost
+      expect(find.text(formatRupiah(initialCost)), findsOneWidget);
+
+      // Switch back to Menu and verify restored cost
+      await tester.tap(find.text('Menu').last);
+      await tester.pumpAndSettle();
+      expect(find.text(formatRupiah(initialCost)), findsOneWidget);
     },
   );
 }

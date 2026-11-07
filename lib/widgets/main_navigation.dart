@@ -23,6 +23,7 @@ import 'package:budget_bites/screens/pantry_screen.dart';
 import 'package:budget_bites/screens/profile_screen.dart';
 import 'package:budget_bites/screens/water_tracker_screen.dart';
 import 'package:budget_bites/utils/badge_rules.dart';
+import 'package:budget_bites/utils/budget_status.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/meal_planning.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
@@ -667,10 +668,14 @@ class _MainNavigationState extends State<MainNavigation> {
         .where((item) => sameDay(item.time, today))
         .fold<int>(0, (sum, item) => sum + item.amountMl);
 
-    // Current spend from checked grocery items
-    final currentSpent = _grocery
-        .where((item) => item.isChecked)
-        .fold<int>(0, (sum, item) => sum + item.price);
+    // Derive weekly plan cost dynamically from single source of truth (_plan & _meals) (FR-04, FR-13)
+    final monday = mondayOf(today);
+    final weekEntries = _plan.where(
+      (e) =>
+          !e.scheduledAt.isBefore(monday) &&
+          e.scheduledAt.isBefore(calendarDay(monday, 7)),
+    );
+    final weeklyPlanCost = weeklyTotal(weekEntries, _meals);
 
     final mealMap = {for (final meal in _meals) meal.id: meal};
     final todayEntries = mealsOnDay(
@@ -696,7 +701,7 @@ class _MainNavigationState extends State<MainNavigation> {
         todayMeals: todayMeals,
         todayEaten: todayEaten,
         totalWeeklyBudget: _profile.weeklyBudget,
-        currentSpent: currentSpent,
+        currentSpent: weeklyPlanCost,
         todayWaterMl: todayWater,
         streakDays: currentStreak,
         streakLevelValue: streakLvl,
@@ -716,7 +721,7 @@ class _MainNavigationState extends State<MainNavigation> {
         onOpenInsight: () => Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (navContext) => InsightScreen(
-              currentSpent: currentSpent,
+              currentSpent: weeklyPlanCost,
               weeklyBudget: _profile.weeklyBudget,
               onBack: () => Navigator.of(navContext).pop(),
             ),
