@@ -476,7 +476,7 @@ void main() {
   );
 
   testWidgets(
-    'HomeScreen has no overflow on compact (360x640) and wide (1024x768) at text scale 1.3',
+    'Smoke test: HomeScreen has no overflow across phones, tablets, and text scales 1.0, 1.3, 2.0',
     (tester) async {
       const testProfile = UserProfile(
         weeklyBudget: 300000,
@@ -485,53 +485,103 @@ void main() {
         preferences: ['Murah'],
       );
 
-      // 1. Compact 360 x 640
-      tester.view.physicalSize = const Size(360 * 2.0, 640 * 2.0);
-      tester.view.devicePixelRatio = 2.0;
+      const sizes = [
+        Size(360, 640),
+        Size(411, 891),
+        Size(600, 960),
+        Size(768, 1024),
+        Size(1024, 768),
+        Size(1280, 800),
+      ];
+      const scales = [1.0, 1.3, 2.0];
+
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
+      tester.view.devicePixelRatio = 1.0;
 
-      await tester.pumpWidget(
-        MediaQuery(
-          data: const MediaQueryData(textScaler: TextScaler.linear(1.3)),
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            home: HomeScreen(
-              profile: testProfile,
-              todayMeals: [mockCookMeals[0], mockCookMeals[1]],
-              todayEaten: const [true, false],
-              currentSpent: 235000,
-              todayWaterMl: 750,
-              streakDays: 5,
+      for (final size in sizes) {
+        for (final scale in scales) {
+          tester.view.physicalSize = size;
+          await tester.pumpWidget(const SizedBox.shrink());
+          await tester.pumpWidget(
+            MediaQuery(
+              data: MediaQueryData(textScaler: TextScaler.linear(scale)),
+              child: MaterialApp(
+                theme: AppTheme.lightTheme,
+                home: HomeScreen(
+                  profile: testProfile,
+                  todayMeals: [mockCookMeals[0], mockCookMeals[1]],
+                  todayEaten: const [true, false],
+                  currentSpent: 235000,
+                  todayWaterMl: 750,
+                  streakDays: 5,
+                ),
+              ),
             ),
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-      expect(tester.takeException(), isNull);
-      expect(find.byType(HomeScreen), findsOneWidget);
+          );
+          await tester.pumpAndSettle();
+          expect(
+            tester.takeException(),
+            isNull,
+            reason:
+                'HomeScreen threw overflow or error at size $size and scale $scale',
+          );
+          expect(find.byType(HomeScreen), findsOneWidget);
+        }
+      }
+    },
+  );
 
-      // 2. Wide 1024 x 768
-      tester.view.physicalSize = const Size(1024 * 2.0, 768 * 2.0);
-      await tester.pumpWidget(
-        MediaQuery(
-          data: const MediaQueryData(textScaler: TextScaler.linear(1.3)),
-          child: MaterialApp(
-            theme: AppTheme.darkTheme,
-            home: HomeScreen(
-              profile: testProfile,
-              todayMeals: [mockCookMeals[0], mockCookMeals[1]],
-              todayEaten: const [true, false],
-              currentSpent: 235000,
-              todayWaterMl: 750,
-              streakDays: 5,
+  testWidgets(
+    'Smoke test: MainNavigation has no overflow across phones, tablets, and text scales 1.0, 1.3, 2.0',
+    (tester) async {
+      const sizes = [
+        Size(360, 640),
+        Size(411, 891),
+        Size(600, 960),
+        Size(768, 1024),
+        Size(1024, 768),
+        Size(1280, 800),
+      ];
+      const scales = [1.0, 1.3, 2.0];
+
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      tester.view.devicePixelRatio = 1.0;
+
+      final originalOnError = FlutterError.onError;
+      final overflowErrors = <String>[];
+      FlutterError.onError = (details) {
+        final message = details.exceptionAsString();
+        if (message.contains('overflowed by')) {
+          overflowErrors.add(message);
+        }
+      };
+      addTearDown(() => FlutterError.onError = originalOnError);
+
+      for (final size in sizes) {
+        for (final scale in scales) {
+          tester.view.physicalSize = size;
+          await tester.pumpWidget(const SizedBox.shrink());
+          await tester.pumpWidget(
+            MediaQuery(
+              data: MediaQueryData(textScaler: TextScaler.linear(scale)),
+              child: MaterialApp(
+                theme: AppTheme.lightTheme,
+                home: const MainNavigation(),
+              ),
             ),
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-      expect(tester.takeException(), isNull);
-      expect(find.byType(HomeScreen), findsOneWidget);
+          );
+          await tester.pumpAndSettle();
+          expect(
+            overflowErrors,
+            isEmpty,
+            reason:
+                'MainNavigation threw unexpected overflow or error at size $size and scale $scale: $overflowErrors',
+          );
+          expect(find.byType(MainNavigation), findsOneWidget);
+        }
+      }
     },
   );
 

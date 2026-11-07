@@ -646,36 +646,40 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Primary Button
-          FilledButton(
-            onPressed: isLastSlide ? _finishOnboarding : _nextPage,
-            style: FilledButton.styleFrom(
-              padding: const EdgeInsets.symmetric(
-                vertical: 14,
-                horizontal: AppConstants.spaceMd,
+          SizedBox(
+            height: 48,
+            child: FilledButton(
+              onPressed: isLastSlide ? _finishOnboarding : _nextPage,
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppConstants.spaceMd,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppConstants.radiusFull),
+                ),
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppConstants.radiusFull),
-              ),
-            ),
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    isLastSlide ? 'Mulai Rencanakan Makan (3 Menit)' : 'Lanjut',
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      isLastSlide
+                          ? 'Mulai Rencanakan Makan (3 Menit)'
+                          : 'Lanjut',
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: AppConstants.spaceSm),
-                  Text(
-                    isLastSlide ? '🚀' : '→',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ],
+                    const SizedBox(width: AppConstants.spaceSm),
+                    Icon(
+                      isLastSlide ? Icons.rocket_launch : Icons.arrow_forward,
+                      size: 18,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
