@@ -408,47 +408,45 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Judul Menu Hari Ini + Chip Hari + Link Lihat Rencana
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: AppConstants.spaceSm,
+          runSpacing: 4,
           children: [
-            Expanded(
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      'Menu Hari Ini',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: AppConstants.spaceSm,
+              runSpacing: 4,
+              children: [
+                Text(
+                  'Menu Hari Ini',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainer,
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.radiusFull,
                     ),
                   ),
-                  const SizedBox(width: AppConstants.spaceSm),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: colorScheme.surfaceContainer,
-                      borderRadius: BorderRadius.circular(
-                        AppConstants.radiusFull,
-                      ),
-                    ),
-                    child: Text(
-                      todayDayName,
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  child: Text(
+                    todayDayName,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const SizedBox(width: AppConstants.spaceXs),
             TextButton.icon(
               onPressed: _navigateToMealPlan,
               style: TextButton.styleFrom(
@@ -583,7 +581,9 @@ class HomeScreen extends StatelessWidget {
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final isNarrow = constraints.maxWidth < 420;
+          final isNarrow =
+              constraints.maxWidth < 480 ||
+              MediaQuery.textScalerOf(context).scale(14) > 18;
 
           if (isNarrow) {
             return Column(

@@ -107,8 +107,10 @@ class _QuickLogSheetState extends State<QuickLogSheet> {
           child: SafeArea(
             top: false,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppConstants.spaceMd,
+              padding: EdgeInsets.only(
+                left: AppConstants.spaceMd,
+                right: AppConstants.spaceMd,
+                bottom: MediaQuery.viewInsetsOf(context).bottom,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
