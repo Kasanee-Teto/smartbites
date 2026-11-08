@@ -207,8 +207,11 @@ class BudgetCard extends StatelessWidget {
         const SizedBox(height: 6),
 
         // Subtext Keterangan
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: AppConstants.spaceSm,
+          runSpacing: 2,
           children: [
             Text(
               isUnset ? 'Budget belum diatur' : 'Terpakai $percentInt%',
@@ -391,49 +394,46 @@ class BudgetCard extends StatelessWidget {
           const SizedBox(height: AppConstants.spaceSm),
 
           // 4. Footer: Sisa / Lebih & Sisa Hari
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: AppConstants.spaceSm,
+            runSpacing: 4,
             children: [
-              Flexible(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
+              Text.rich(
+                TextSpan(
                   children: [
-                    Icon(
-                      isOver
-                          ? Icons.warning_amber_rounded
-                          : Icons.savings_outlined,
-                      size: 16,
-                      color: isOver ? colorScheme.error : colorScheme.primary,
-                    ),
-                    const SizedBox(width: 4),
-                    Flexible(
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: isOver ? 'Lebih: ' : 'Sisa uang makan: ',
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                color: colorScheme.onSurface,
-                              ),
-                            ),
-                            TextSpan(
-                              text: formatRupiah(diff),
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: isOver
-                                    ? colorScheme.error
-                                    : colorScheme.primary,
-                              ),
-                            ),
-                          ],
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: Icon(
+                          isOver
+                              ? Icons.warning_amber_rounded
+                              : Icons.savings_outlined,
+                          size: 16,
+                          color: isOver
+                              ? colorScheme.error
+                              : colorScheme.primary,
                         ),
-                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    TextSpan(
+                      text: isOver ? 'Lebih: ' : 'Sisa uang makan: ',
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    TextSpan(
+                      text: formatRupiah(diff),
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: isOver ? colorScheme.error : colorScheme.primary,
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(width: AppConstants.spaceSm),
               Text(
                 'Tersisa $remainingDays hari',
                 style: theme.textTheme.labelSmall?.copyWith(
