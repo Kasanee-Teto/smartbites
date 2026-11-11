@@ -47,13 +47,11 @@ class OnboardingSlide {
 
 const List<OnboardingSlide> _slides = [
   OnboardingSlide(
-    imageAsset: 'assets/images/onboarding_1.png',
+    imageAsset: 'assets/images/onboardings/onboarding_1.png',
     category: 'POLA MAKAN ANTI KANKER (KANTONG KERING)',
     title: 'Makan Enak, Hemat & Sehat Tanpa Boros',
     badgeText: 'Rp 12.500 / porsi',
     badgeIcon: Icons.eco,
-    secondaryBadgeText: '500ml Tercatat',
-    secondaryBadgeIcon: Icons.water_drop,
     bullets: [
       OnboardingBullet(
         icon: Icons.calendar_month,
@@ -78,7 +76,7 @@ const List<OnboardingSlide> _slides = [
     ],
   ),
   OnboardingSlide(
-    imageAsset: 'assets/images/onboarding_2.png',
+    imageAsset: 'assets/images/onboardings/onboarding_2.png',
     category: 'TRANSPARANSI DOMPET MAHASISWA',
     title: 'Alokasi Uang Makan Realistis',
     badgeText: 'Hemat 35% Bulanan',
@@ -104,7 +102,7 @@ const List<OnboardingSlide> _slides = [
     ],
   ),
   OnboardingSlide(
-    imageAsset: 'assets/images/onboarding_3.png',
+    imageAsset: 'assets/images/onboardings/onboarding_3.png',
     category: 'MISI HARIAN MENYENANGKAN',
     title: 'Bentuk Rutinitas Sehat & Berkelanjutan',
     badgeText: '8 Lencana Siap Diraih',

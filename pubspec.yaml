@@ -28,6 +28,8 @@ flutter:
     - assets/images/meals/
     - assets/images/ingredients/
     - assets/images/pantries/
+    - assets/images/onboardings/
+    - assets/images/logos/
     - assets/icons/
     - assets/fonts/playfair/OFL.txt
   fonts:
