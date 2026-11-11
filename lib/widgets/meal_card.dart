@@ -4,6 +4,7 @@ import 'package:budget_bites/models/meal.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/meal_planning.dart';
 import 'package:budget_bites/widgets/asset_image.dart';
+import 'package:budget_bites/widgets/list_tile_spacing.dart';
 import 'package:flutter/material.dart';
 
 class MealCard extends StatelessWidget {
@@ -148,13 +149,15 @@ class MealCard extends StatelessWidget {
             ),
           ),
           if (isEaten != null)
-            CheckboxListTile(
-              title: Text(isEaten! ? 'Sudah dimakan' : 'Tandai dimakan'),
-              value: isEaten,
-              onChanged: onEatenChanged == null
-                  ? null
-                  : (value) => onEatenChanged!(value ?? false),
-              controlAffinity: ListTileControlAffinity.leading,
+            ListTileSpacing(
+              child: CheckboxListTile(
+                title: Text(isEaten! ? 'Sudah dimakan' : 'Tandai dimakan'),
+                value: isEaten,
+                onChanged: onEatenChanged == null
+                    ? null
+                    : (value) => onEatenChanged!(value ?? false),
+                controlAffinity: ListTileControlAffinity.leading,
+              ),
             ),
           if (onSelect != null)
             Padding(

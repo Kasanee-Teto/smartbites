@@ -8,6 +8,7 @@ class GroceryItem {
     required this.unit,
     required this.price,
     this.isChecked = false,
+    this.imageAsset = '',
   });
   final String id;
   final String name;
@@ -15,6 +16,7 @@ class GroceryItem {
   final String unit;
   final int price;
   final bool isChecked;
+  final String imageAsset;
 
   GroceryItem copyWith({
     String? id,
@@ -23,6 +25,7 @@ class GroceryItem {
     String? unit,
     int? price,
     bool? isChecked,
+    String? imageAsset,
   }) {
     return GroceryItem(
       id: id ?? this.id,
@@ -31,6 +34,7 @@ class GroceryItem {
       unit: unit ?? this.unit,
       price: price ?? this.price,
       isChecked: isChecked ?? this.isChecked,
+      imageAsset: imageAsset ?? this.imageAsset,
     );
   }
 }

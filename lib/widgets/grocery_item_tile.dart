@@ -4,6 +4,7 @@
 import 'package:budget_bites/models/grocery_item.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/formatters.dart';
+import 'package:budget_bites/widgets/asset_image.dart';
 import 'package:flutter/material.dart';
 
 /// Helper to format quantities like 1.0 -> 1, 2.5 -> 2.5.
@@ -99,6 +100,18 @@ class GroceryItemTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
+                  ExcludeSemantics(
+                    child: AssetImageWithFallback(
+                        assetPath: item.imageAsset,
+                        width: 40,
+                        height: 40,
+                        fallbackIcon: Icons.shopping_basket_outlined,
+                        borderRadius: BorderRadius.circular(
+                          AppConstants.radiusSm,
+                        ),
+                      ),
+                  ),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +133,10 @@ class GroceryItemTile extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 4),
-                        Row(
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 4,
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -144,53 +160,43 @@ class GroceryItemTile extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 8),
-                            Flexible(
-                              child: Text(
-                                'Pasar Tradisional',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: textTheme.labelSmall?.copyWith(
-                                  color: colorScheme.outline,
-                                ),
+                            Text(
+                              'Pasar Tradisional',
+                              style: textTheme.labelSmall?.copyWith(
+                                color: colorScheme.outline,
                               ),
                             ),
                           ],
                         ),
+                        const SizedBox(height: 4),
+                        Text(
+                          item.price == 0
+                              ? 'Harga belum diisi'
+                              : formatRupiah(item.price),
+                          style: textTheme.labelLarge?.copyWith(
+                            decoration: isChecked
+                                ? TextDecoration.lineThrough
+                                : null,
+                            color: isChecked
+                                ? colorScheme.outline
+                                : colorScheme.onSurface,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          isChecked ? 'Selesai' : 'Tersedia',
+                          style: textTheme.labelSmall?.copyWith(
+                            color: isChecked
+                                ? colorScheme.primary
+                                : colorScheme.outline,
+                            fontWeight: isChecked
+                                ? FontWeight.w600
+                                : FontWeight.w400,
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        item.price == 0
-                            ? 'Harga belum diisi'
-                            : formatRupiah(item.price),
-                        style: textTheme.labelLarge?.copyWith(
-                          decoration: isChecked
-                              ? TextDecoration.lineThrough
-                              : null,
-                          color: isChecked
-                              ? colorScheme.outline
-                              : colorScheme.onSurface,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        isChecked ? 'Selesai' : 'Tersedia',
-                        style: textTheme.labelSmall?.copyWith(
-                          color: isChecked
-                              ? colorScheme.primary
-                              : colorScheme.outline,
-                          fontWeight: isChecked
-                              ? FontWeight.w600
-                              : FontWeight.w400,
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),

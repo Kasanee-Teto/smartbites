@@ -329,6 +329,7 @@ class _GroceryScreenState extends State<GroceryScreen> {
                 onSubmitted: (_) => _addItem(),
                 decoration: const InputDecoration(
                   hintText: '+ Ketik bahan baru lalu tekan Enter...',
+                  hintStyle: TextStyle(fontSize: 14),
                   counterText: '',
                   border: InputBorder.none,
                   isDense: true,

@@ -3,6 +3,7 @@
 import 'package:budget_bites/models/meal.dart';
 import 'package:budget_bites/models/planned_meal.dart';
 import 'package:budget_bites/utils/meal_planning.dart';
+import 'package:budget_bites/widgets/list_tile_spacing.dart';
 import 'package:flutter/material.dart';
 
 class MealEditorSheet extends StatefulWidget {
@@ -181,11 +182,13 @@ class _MealEditorSheetState extends State<MealEditorSheet> {
                   return null;
                 },
               ),
-              CheckboxListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Sudah dimakan'),
-                value: _eaten,
-                onChanged: (value) => setState(() => _eaten = value ?? false),
+              ListTileSpacing(
+                child: CheckboxListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Sudah dimakan'),
+                  value: _eaten,
+                  onChanged: (value) => setState(() => _eaten = value ?? false),
+                ),
               ),
               if (_dateError != null)
                 Text(

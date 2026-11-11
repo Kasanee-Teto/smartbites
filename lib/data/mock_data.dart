@@ -19,7 +19,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Oatmeal Pisang Kayu Manis',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_oatmeal.jpeg',
+    imageAsset: 'assets/images/meals/meal_oatmeal.jpeg',
     price: 8000,
     calories: 310,
     nutrition: NutritionFacts(
@@ -61,7 +61,7 @@ final List<Meal> mockCookMeals = [
     name: 'Gado-Gado Komplit',
     diet: MealDiet.vegetarian,
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_gado_gado.png',
+    imageAsset: 'assets/images/meals/meal_gado_gado.png',
     price: 15000,
     calories: 380,
     nutrition: NutritionFacts(
@@ -103,7 +103,7 @@ final List<Meal> mockCookMeals = [
     id: 'm3',
     name: 'Ayam Panggang & Sayur Rebus',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_ayam_panggang.jpeg',
+    imageAsset: 'assets/images/meals/meal_ayam_panggang.jpeg',
     price: 18000,
     calories: 420,
     nutrition: NutritionFacts(
@@ -147,7 +147,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Nasi Goreng Telur Sayur',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_nasi_goreng.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_goreng.jpeg',
     price: 10000,
     calories: 390,
     nutrition: NutritionFacts(
@@ -190,7 +190,7 @@ final List<Meal> mockCookMeals = [
     id: 'm5',
     name: 'Sup Tahu Bayam',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_sup_tahu.jpeg',
+    imageAsset: 'assets/images/meals/meal_sup_tahu.jpeg',
     price: 9000,
     calories: 250,
     nutrition: NutritionFacts(
@@ -232,7 +232,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Tumis Buncis Tempe',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_tumis_buncis.jpg',
+    imageAsset: 'assets/images/meals/meal_tumis_buncis.jpg',
     price: 8500,
     calories: 280,
     nutrition: NutritionFacts(
@@ -274,7 +274,7 @@ final List<Meal> mockCookMeals = [
     id: 'm7',
     name: 'Bubur Ayam Sederhana',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_bubur_ayam.jpg',
+    imageAsset: 'assets/images/meals/meal_bubur_ayam.jpg',
     price: 10000,
     calories: 340,
     nutrition: NutritionFacts(
@@ -319,7 +319,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Nasi Uduk Telur Dadar',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_nasi_uduk.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_uduk.jpeg',
     price: 11000,
     calories: 460,
     nutrition: NutritionFacts(
@@ -368,7 +368,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Lontong Sayur Labu Siam',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_lontong_sayur.jpeg',
+    imageAsset: 'assets/images/meals/meal_lontong_sayur.jpeg',
     price: 12000,
     calories: 400,
     nutrition: NutritionFacts(
@@ -416,7 +416,7 @@ final List<Meal> mockCookMeals = [
     id: 'm10',
     name: 'Soto Ayam Bening',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_soto_ayam.jpg',
+    imageAsset: 'assets/images/meals/meal_soto_ayam.jpg',
     price: 14000,
     calories: 360,
     nutrition: NutritionFacts(
@@ -463,7 +463,7 @@ final List<Meal> mockCookMeals = [
     id: 'm11',
     name: 'Pecel Sayur Tempe',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_pecel.jpeg',
+    imageAsset: 'assets/images/meals/meal_pecel.jpeg',
     price: 10000,
     calories: 410,
     nutrition: NutritionFacts(
@@ -509,7 +509,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Urap Sayur Telur Rebus',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_urap.jpeg',
+    imageAsset: 'assets/images/meals/meal_urap.jpeg',
     price: 11000,
     calories: 370,
     nutrition: NutritionFacts(
@@ -559,7 +559,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Pepes Tahu Kemangi',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_pepes_tahu.jpg',
+    imageAsset: 'assets/images/meals/meal_pepes_tahu.jpg',
     price: 9000,
     calories: 290,
     nutrition: NutritionFacts(
@@ -606,7 +606,7 @@ final List<Meal> mockCookMeals = [
     id: 'm14',
     name: 'Ikan Kembung Kunyit',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_ikan_kembung.jpg',
+    imageAsset: 'assets/images/meals/meal_ikan_kembung.jpg',
     price: 16000,
     calories: 430,
     nutrition: NutritionFacts(
@@ -653,7 +653,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Sup Jagung Telur',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_sup_jagung.jpg',
+    imageAsset: 'assets/images/meals/meal_sup_jagung.jpg',
     price: 9500,
     calories: 260,
     nutrition: NutritionFacts(
@@ -698,7 +698,7 @@ final List<Meal> mockCookMeals = [
     id: 'm16',
     name: 'Ayam Kecap Palembang Nanas Pedas',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_ayam_kecap_palembang.jpeg',
+    imageAsset: 'assets/images/meals/meal_ayam_kecap_palembang.jpeg',
     price: 18000,
     calories: 360,
     nutrition: NutritionFacts(
@@ -747,7 +747,7 @@ final List<Meal> mockCookMeals = [
     id: 'm17',
     name: 'Paru Krispi Sambal Geprek Rawit',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_paru_krispi_geprek.jpg',
+    imageAsset: 'assets/images/meals/meal_paru_krispi_geprek.jpg',
     price: 19000,
     calories: 390,
     nutrition: NutritionFacts(
@@ -793,7 +793,7 @@ final List<Meal> mockCookMeals = [
     id: 'm18',
     name: 'Tumis Ayam Kentang Bumbu Bawang',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_tumis_ayam_kentang.jpeg',
+    imageAsset: 'assets/images/meals/meal_tumis_ayam_kentang.jpeg',
     price: 16000,
     calories: 330,
     nutrition: NutritionFacts(
@@ -840,7 +840,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Terong Balado Merah Tomat',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_terong_balado.jpeg',
+    imageAsset: 'assets/images/meals/meal_terong_balado.jpeg',
     price: 8000,
     calories: 180,
     nutrition: NutritionFacts(
@@ -885,7 +885,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Tumis Sawi Hijau Bawang Putih',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_tumis_sawi.png',
+    imageAsset: 'assets/images/meals/meal_tumis_sawi.png',
     price: 7000,
     calories: 90,
     nutrition: NutritionFacts(
@@ -927,7 +927,7 @@ final List<Meal> mockCookMeals = [
     id: 'm21',
     name: 'Ikan Nila Asam Manis Nanas',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_ikan_asam_manis.jpeg',
+    imageAsset: 'assets/images/meals/meal_ikan_asam_manis.jpeg',
     price: 20000,
     calories: 350,
     nutrition: NutritionFacts(
@@ -979,7 +979,7 @@ final List<Meal> mockCookMeals = [
     id: 'm22',
     name: 'Telur Dadar Kepiting Daun Bawang',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_telur_kepiting.jpg',
+    imageAsset: 'assets/images/meals/meal_telur_kepiting.jpg',
     price: 22000,
     calories: 290,
     nutrition: NutritionFacts(
@@ -1024,7 +1024,7 @@ final List<Meal> mockCookMeals = [
     id: 'm23',
     name: 'Capcay Kuah Ayam Kembang Kol',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_capcay_kuah_ayam.jpg',
+    imageAsset: 'assets/images/meals/meal_capcay_kuah_ayam.jpg',
     price: 15000,
     calories: 210,
     nutrition: NutritionFacts(
@@ -1071,7 +1071,7 @@ final List<Meal> mockCookMeals = [
     id: 'm24',
     name: 'Ayam Goreng Lengkuas Serundeng',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_ayam_goreng_lengkuas.jpeg',
+    imageAsset: 'assets/images/meals/meal_ayam_goreng_lengkuas.jpeg',
     price: 18000,
     calories: 400,
     nutrition: NutritionFacts(
@@ -1119,7 +1119,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Tempe Sambal Bawang Pedas',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_tempe_sambal.png',
+    imageAsset: 'assets/images/meals/meal_tempe_sambal.png',
     price: 8000,
     calories: 260,
     nutrition: NutritionFacts(
@@ -1164,7 +1164,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Perkedel Jagung Renyah Daun Jeruk',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_perkedel_jagung.png',
+    imageAsset: 'assets/images/meals/meal_perkedel_jagung.png',
     price: 9000,
     calories: 280,
     nutrition: NutritionFacts(
@@ -1211,7 +1211,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Tumis Brokoli Wortel Bawang Putih',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_tumis_brokoli.jpeg',
+    imageAsset: 'assets/images/meals/meal_tumis_brokoli.jpeg',
     price: 11000,
     calories: 130,
     nutrition: NutritionFacts(
@@ -1254,7 +1254,7 @@ final List<Meal> mockCookMeals = [
     id: 'm28',
     name: 'Soto Medan Ayam Kuah Santan',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_soto_medan.jpg',
+    imageAsset: 'assets/images/meals/meal_soto_medan.jpg',
     price: 18000,
     calories: 380,
     nutrition: NutritionFacts(
@@ -1306,7 +1306,7 @@ final List<Meal> mockCookMeals = [
     id: 'm29',
     name: 'Tumis Tauge Ikan Asin Jambal',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_tumis_tauge_ikan_asin.jpg',
+    imageAsset: 'assets/images/meals/meal_tumis_tauge_ikan_asin.jpg',
     price: 11000,
     calories: 190,
     nutrition: NutritionFacts(
@@ -1351,7 +1351,7 @@ final List<Meal> mockCookMeals = [
     id: 'm30',
     name: 'Udang Balado Cabai Merah',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_udang_balado.jpg',
+    imageAsset: 'assets/images/meals/meal_udang_balado.jpg',
     price: 21000,
     calories: 260,
     nutrition: NutritionFacts(
@@ -1397,7 +1397,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Enoki Tempura Tepung Beras',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_enoki_tempura.png',
+    imageAsset: 'assets/images/meals/meal_enoki_tempura.png',
     price: 12000,
     calories: 270,
     nutrition: NutritionFacts(
@@ -1443,7 +1443,7 @@ final List<Meal> mockCookMeals = [
     id: 'm32',
     name: 'Semur Ayam Kentang Pala',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_semur_ayam.jpg',
+    imageAsset: 'assets/images/meals/meal_semur_ayam.jpg',
     price: 18000,
     calories: 370,
     nutrition: NutritionFacts(
@@ -1493,7 +1493,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Telur Sambal Pete Balado',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_telur_sambal_pete.jpg',
+    imageAsset: 'assets/images/meals/meal_telur_sambal_pete.jpg',
     price: 12000,
     calories: 280,
     nutrition: NutritionFacts(
@@ -1541,7 +1541,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Lumpia Sayuran Wortel Bengkuang',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_lumpia_sayuran.jpeg',
+    imageAsset: 'assets/images/meals/meal_lumpia_sayuran.jpeg',
     price: 10000,
     calories: 300,
     nutrition: NutritionFacts(
@@ -1589,7 +1589,7 @@ final List<Meal> mockCookMeals = [
     id: 'm35',
     name: 'Daun Ubi Teri Pedas Bawang Merah',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_daun_ubi_teri.jpg',
+    imageAsset: 'assets/images/meals/meal_daun_ubi_teri.jpg',
     price: 11000,
     calories: 210,
     nutrition: NutritionFacts(
@@ -1636,7 +1636,7 @@ final List<Meal> mockCookMeals = [
     id: 'm36',
     name: 'Siomay Ayam Udang Kukus',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_siomay_ayam_udang.jpg',
+    imageAsset: 'assets/images/meals/meal_siomay_ayam_udang.jpg',
     price: 20000,
     calories: 310,
     nutrition: NutritionFacts(
@@ -1685,7 +1685,7 @@ final List<Meal> mockCookMeals = [
     id: 'm37',
     name: 'Kari Ayam Kentang Santan',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_kari_ayam.jpeg',
+    imageAsset: 'assets/images/meals/meal_kari_ayam.jpeg',
     price: 19000,
     calories: 410,
     nutrition: NutritionFacts(
@@ -1735,7 +1735,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Tumis Kol Wortel Merica',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_tumis_kol.jpg',
+    imageAsset: 'assets/images/meals/meal_tumis_kol.jpg',
     price: 7000,
     calories: 120,
     nutrition: NutritionFacts(
@@ -1780,7 +1780,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Tahu Sumedang Goreng Cabai Rawit',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_tahu_sumedang.jpeg',
+    imageAsset: 'assets/images/meals/meal_tahu_sumedang.jpeg',
     price: 8000,
     calories: 240,
     nutrition: NutritionFacts(
@@ -1825,7 +1825,7 @@ final List<Meal> mockCookMeals = [
     id: 'm40',
     name: 'Ikan Kembung Goreng Cabe Hijau',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_ikan_goreng_cabe.jpeg',
+    imageAsset: 'assets/images/meals/meal_ikan_goreng_cabe.jpeg',
     price: 17000,
     calories: 340,
     nutrition: NutritionFacts(
@@ -1871,7 +1871,7 @@ final List<Meal> mockCookMeals = [
     id: 'm41',
     name: 'Ayam Gulung Pandan Bumbu Ketumbar',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_ayam_gulung_pandan.jpg',
+    imageAsset: 'assets/images/meals/meal_ayam_gulung_pandan.jpg',
     price: 18000,
     calories: 330,
     nutrition: NutritionFacts(
@@ -1916,7 +1916,7 @@ final List<Meal> mockCookMeals = [
     id: 'm42',
     name: 'Ifumie Goreng Siram Ayam Sayuran',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_ifumie_goreng.jpeg',
+    imageAsset: 'assets/images/meals/meal_ifumie_goreng.jpeg',
     price: 18000,
     calories: 480,
     nutrition: NutritionFacts(
@@ -1966,7 +1966,7 @@ final List<Meal> mockCookMeals = [
     id: 'm43',
     name: 'Tumis Labu Jipang Ebi Pedas',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_tumis_labu_jipang.jpeg',
+    imageAsset: 'assets/images/meals/meal_tumis_labu_jipang.jpeg',
     price: 9000,
     calories: 150,
     nutrition: NutritionFacts(
@@ -2011,7 +2011,7 @@ final List<Meal> mockCookMeals = [
     id: 'm44',
     name: 'Kerang Hijau Saus Tiram Jahe',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_seafood_kerang.png',
+    imageAsset: 'assets/images/meals/meal_seafood_kerang.png',
     price: 20000,
     calories: 230,
     nutrition: NutritionFacts(
@@ -2059,7 +2059,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Tahu Kecap Bawang Bombay',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_tahu_kecap.jpg',
+    imageAsset: 'assets/images/meals/meal_tahu_kecap.jpg',
     price: 9000,
     calories: 230,
     nutrition: NutritionFacts(
@@ -2105,7 +2105,7 @@ final List<Meal> mockCookMeals = [
     id: 'm46',
     name: 'Ayam Katsu Saus Barbeque Wijen',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_ayam_katsu_barbeque.png',
+    imageAsset: 'assets/images/meals/meal_ayam_katsu_barbeque.png',
     price: 21000,
     calories: 470,
     nutrition: NutritionFacts(
@@ -2154,7 +2154,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Sayur Asam Jawa Jagung Melinjo',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_sayur_asam.jpg',
+    imageAsset: 'assets/images/meals/meal_sayur_asam.jpg',
     price: 9000,
     calories: 140,
     nutrition: NutritionFacts(
@@ -2210,7 +2210,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Es Teler Alpukat Nangka Kelapa Muda',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_es_teler.jpg',
+    imageAsset: 'assets/images/meals/meal_es_teler.jpg',
     price: 12000,
     calories: 330,
     nutrition: NutritionFacts(
@@ -2250,7 +2250,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Kue Talam Ubi Ungu Santan',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_kue_talam.jpg',
+    imageAsset: 'assets/images/meals/meal_kue_talam.jpg',
     price: 7000,
     calories: 330,
     nutrition: NutritionFacts(
@@ -2293,7 +2293,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Puding Lumut Pandan Santan',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_puding_lumut.png',
+    imageAsset: 'assets/images/meals/meal_puding_lumut.png',
     price: 6000,
     calories: 300,
     nutrition: NutritionFacts(
@@ -2334,7 +2334,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Kue Pancong Betawi Kelapa Parut',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_kue_pancong.png',
+    imageAsset: 'assets/images/meals/meal_kue_pancong.png',
     price: 6500,
     calories: 360,
     nutrition: NutritionFacts(
@@ -2375,7 +2375,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Es Doger Tape Kelapa Nangka',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_es_doger.png',
+    imageAsset: 'assets/images/meals/meal_es_doger.png',
     price: 10000,
     calories: 300,
     nutrition: NutritionFacts(
@@ -2417,7 +2417,7 @@ final List<Meal> mockCookMeals = [
     id: 'm86',
     name: 'Lemper Ayam Suwir Santan',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_lemper_ayam.jpeg',
+    imageAsset: 'assets/images/meals/meal_lemper_ayam.jpeg',
     price: 8000,
     calories: 370,
     nutrition: NutritionFacts(
@@ -2465,7 +2465,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegan,
     name: 'Es Bandrek Jahe Gula Merah',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_es_bandrek.jpg',
+    imageAsset: 'assets/images/meals/meal_es_bandrek.jpg',
     price: 5000,
     calories: 110,
     nutrition: NutritionFacts(
@@ -2508,7 +2508,7 @@ final List<Meal> mockCookMeals = [
     diet: MealDiet.vegetarian,
     name: 'Kue Lontar Mini Susu Telur Panggang',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_kue_lontar.jpg',
+    imageAsset: 'assets/images/meals/meal_kue_lontar.jpg',
     price: 11000,
     calories: 500,
     nutrition: NutritionFacts(
@@ -2549,7 +2549,7 @@ final List<Meal> mockCookMeals = [
     id: 'm89',
     name: 'Rawon Daging Sapi dan Nasi',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_rawon.jpeg',
+    imageAsset: 'assets/images/meals/meal_rawon.jpeg',
     price: 19000,
     calories: 430,
     nutrition: NutritionFacts(
@@ -2595,7 +2595,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm48',
     name: 'Bubur Ayam Suwir Gerobak',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_bubur_ayam_warung.jpg',
+    imageAsset: 'assets/images/meals/meal_bubur_ayam_warung.jpg',
     price: 14000,
     calories: 400,
     nutrition: NutritionFacts(
@@ -2615,7 +2615,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm49',
     name: 'Nasi Uduk Telur Warung Pagi',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_nasi_uduk_warung.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_uduk_warung.jpeg',
     price: 15000,
     calories: 520,
     nutrition: NutritionFacts(
@@ -2635,7 +2635,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm50',
     name: 'Nasi Ayam Kecap Sayur Warteg',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_ayam_kecap_palembang.jpeg',
+    imageAsset: 'assets/images/meals/meal_ayam_kecap_palembang.jpeg',
     price: 20000,
     calories: 590,
     nutrition: NutritionFacts(
@@ -2655,7 +2655,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm51',
     name: 'Nasi Pecel Tempe Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_pecel.jpeg',
+    imageAsset: 'assets/images/meals/meal_pecel.jpeg',
     price: 15000,
     calories: 480,
     nutrition: NutritionFacts(
@@ -2675,7 +2675,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm52',
     name: 'Soto Medan Ayam dan Nasi Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_soto_medan.jpg',
+    imageAsset: 'assets/images/meals/meal_soto_medan.jpg',
     price: 24000,
     calories: 550,
     nutrition: NutritionFacts(
@@ -2695,7 +2695,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm53',
     name: 'Nasi Telur Balado Sayur Warteg',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_telur_sambal_pete.jpg',
+    imageAsset: 'assets/images/meals/meal_telur_sambal_pete.jpg',
     price: 14000,
     calories: 450,
     nutrition: NutritionFacts(
@@ -2715,7 +2715,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm54',
     name: 'Siomay Ayam Udang Gerobak',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_siomay_ayam_udang.jpg',
+    imageAsset: 'assets/images/meals/meal_siomay_ayam_udang.jpg',
     price: 18000,
     calories: 430,
     nutrition: NutritionFacts(
@@ -2735,7 +2735,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm55',
     name: 'Nasi Capcay Ayam Rumah Makan',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_capcay_kuah_ayam.jpg',
+    imageAsset: 'assets/images/meals/meal_capcay_kuah_ayam.jpg',
     price: 22000,
     calories: 500,
     nutrition: NutritionFacts(
@@ -2755,7 +2755,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm56',
     name: 'Nasi Sayur Tahu Tempe Warteg',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_nasi_tahu_tempe.png',
+    imageAsset: 'assets/images/meals/meal_nasi_tahu_tempe.png',
     price: 10000,
     calories: 440,
     nutrition: NutritionFacts(
@@ -2775,7 +2775,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm57',
     name: 'Nasi Telur Dadar Kangkung Warteg',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_nasi_telur_kangkung.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_telur_kangkung.jpeg',
     price: 12000,
     calories: 470,
     nutrition: NutritionFacts(
@@ -2795,7 +2795,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm58',
     name: 'Nasi Tongkol Balado Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_nasi_tongkol_balado.jpg',
+    imageAsset: 'assets/images/meals/meal_nasi_tongkol_balado.jpg',
     price: 16000,
     calories: 490,
     nutrition: NutritionFacts(
@@ -2815,7 +2815,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm59',
     name: 'Nasi Tempe Orek Sayur Lodeh Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_nasi_tempe_lodeh.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_tempe_lodeh.jpeg',
     price: 12000,
     calories: 500,
     nutrition: NutritionFacts(
@@ -2835,7 +2835,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm60',
     name: 'Nasi Ayam Goreng Lalapan Warung',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_nasi_ayam_lalapan.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_ayam_lalapan.jpeg',
     price: 18000,
     calories: 580,
     nutrition: NutritionFacts(
@@ -2855,7 +2855,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm61',
     name: 'Nasi Lele Penyet Lalapan Kaki Lima',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_nasi_lele_penyet.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_lele_penyet.jpeg',
     price: 16000,
     calories: 550,
     nutrition: NutritionFacts(
@@ -2875,7 +2875,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm62',
     name: 'Nasi Kembung Goreng Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_nasi_kembung_goreng.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_kembung_goreng.jpeg',
     price: 18000,
     calories: 540,
     nutrition: NutritionFacts(
@@ -2895,7 +2895,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm63',
     name: 'Nasi Telur Dadar Kuah Gulai Rumah Makan Padang',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_nasi_telur_padang.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_telur_padang.jpeg',
     price: 16000,
     calories: 560,
     nutrition: NutritionFacts(
@@ -2915,7 +2915,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm64',
     name: 'Gado-Gado Lontong Kaki Lima',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_gado_gado_lontong.jpeg',
+    imageAsset: 'assets/images/meals/meal_gado_gado_lontong.jpeg',
     price: 15000,
     calories: 470,
     nutrition: NutritionFacts(
@@ -2935,7 +2935,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm65',
     name: 'Ketoprak Tahu Bihun Gerobak',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_ketoprak.png',
+    imageAsset: 'assets/images/meals/meal_ketoprak.png',
     price: 14000,
     calories: 510,
     nutrition: NutritionFacts(
@@ -2955,7 +2955,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm66',
     name: 'Lontong Sayur Telur Warung',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_lontong_sayur_telur.png',
+    imageAsset: 'assets/images/meals/meal_lontong_sayur_telur.png',
     price: 14000,
     calories: 450,
     nutrition: NutritionFacts(
@@ -2975,7 +2975,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm67',
     name: 'Bubur Kacang Hijau Ketan Hitam Gerobak',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_bubur_kacang_hijau.jpeg',
+    imageAsset: 'assets/images/meals/meal_bubur_kacang_hijau.jpeg',
     price: 8000,
     calories: 330,
     nutrition: NutritionFacts(
@@ -2995,7 +2995,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm68',
     name: 'Nasi Kuning Telur Suwir Warung',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_nasi_kuning_telur.jpg',
+    imageAsset: 'assets/images/meals/meal_nasi_kuning_telur.jpg',
     price: 12000,
     calories: 460,
     nutrition: NutritionFacts(
@@ -3015,7 +3015,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm69',
     name: 'Nasi Goreng Kampung Telur Gerobak',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_nasi_goreng_kampung.jpg',
+    imageAsset: 'assets/images/meals/meal_nasi_goreng_kampung.jpg',
     price: 15000,
     calories: 570,
     nutrition: NutritionFacts(
@@ -3035,7 +3035,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm70',
     name: 'Mie Goreng Sayur Telur Kaki Lima',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_mie_goreng_telur.jpg',
+    imageAsset: 'assets/images/meals/meal_mie_goreng_telur.jpg',
     price: 15000,
     calories: 520,
     nutrition: NutritionFacts(
@@ -3055,7 +3055,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm71',
     name: 'Kwetiau Goreng Telur Kaki Lima',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_kwetiau_goreng_telur.jpeg',
+    imageAsset: 'assets/images/meals/meal_kwetiau_goreng_telur.jpeg',
     price: 17000,
     calories: 530,
     nutrition: NutritionFacts(
@@ -3075,7 +3075,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm72',
     name: 'Bihun Goreng Sayur Kaki Lima',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_bihun_goreng_sayur.jpg',
+    imageAsset: 'assets/images/meals/meal_bihun_goreng_sayur.jpg',
     price: 13000,
     calories: 430,
     nutrition: NutritionFacts(
@@ -3095,7 +3095,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm73',
     name: 'Bakso Sapi Bihun Gerobak',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_bakso_bihun.png',
+    imageAsset: 'assets/images/meals/meal_bakso_bihun.png',
     price: 16000,
     calories: 420,
     nutrition: NutritionFacts(
@@ -3115,7 +3115,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm74',
     name: 'Soto Ayam Bening dan Nasi Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_soto_ayam_nasi.jpg',
+    imageAsset: 'assets/images/meals/meal_soto_ayam_nasi.jpg',
     price: 17000,
     calories: 460,
     nutrition: NutritionFacts(
@@ -3135,7 +3135,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm75',
     name: 'Sop Ayam dan Nasi Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_sop_ayam_nasi.jpeg',
+    imageAsset: 'assets/images/meals/meal_sop_ayam_nasi.jpeg',
     price: 18000,
     calories: 450,
     nutrition: NutritionFacts(
@@ -3155,7 +3155,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm76',
     name: 'Nasi Ayam Suwir Sambal Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_nasi_ayam_suwir.jpeg',
+    imageAsset: 'assets/images/meals/meal_nasi_ayam_suwir.jpeg',
     price: 15000,
     calories: 480,
     nutrition: NutritionFacts(
@@ -3175,7 +3175,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm77',
     name: 'Pecel Sayur Tahu Lontong Kaki Lima',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_pecel_tahu_lontong.jpeg',
+    imageAsset: 'assets/images/meals/meal_pecel_tahu_lontong.jpeg',
     price: 13000,
     calories: 420,
     nutrition: NutritionFacts(
@@ -3195,7 +3195,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm78',
     name: 'Nasi Ikan Pindang Sayur Warung',
     category: 'Makan Siang',
-    imageAsset: 'assets/images/meal_nasi_ikan_pindang.jpg',
+    imageAsset: 'assets/images/meals/meal_nasi_ikan_pindang.jpg',
     price: 14000,
     calories: 440,
     nutrition: NutritionFacts(
@@ -3215,7 +3215,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm79',
     name: 'Nasi Ayam Bakar Kecap Warung',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_nasi_ayam_bakar.jpg',
+    imageAsset: 'assets/images/meals/meal_nasi_ayam_bakar.jpg',
     price: 20000,
     calories: 550,
     nutrition: NutritionFacts(
@@ -3235,7 +3235,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm80',
     name: 'Sate Ayam Kecap Warung',
     category: 'Sarapan',
-    imageAsset: 'assets/images/meal_sate_ayam.jpeg',
+    imageAsset: 'assets/images/meals/meal_sate_ayam.jpeg',
     price: 16000,
     calories: 320,
     nutrition: NutritionFacts(
@@ -3255,7 +3255,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm91',
     name: 'Pisang Goreng Kepok Renyah Kaki Lima',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_pisang_goreng.png',
+    imageAsset: 'assets/images/meals/meal_pisang_goreng.png',
     price: 5000,
     calories: 280,
     nutrition: NutritionFacts(
@@ -3275,7 +3275,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm92',
     name: 'Serabi Tepung Beras Kuah Santan Warung',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_serabi.jpg',
+    imageAsset: 'assets/images/meals/meal_serabi.jpg',
     price: 6000,
     calories: 300,
     nutrition: NutritionFacts(
@@ -3295,7 +3295,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm93',
     name: 'Dadar Gulung Unti Kelapa Jajanan Pasar',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_dadar_gulung.png',
+    imageAsset: 'assets/images/meals/meal_dadar_gulung.png',
     price: 5000,
     calories: 290,
     nutrition: NutritionFacts(
@@ -3315,7 +3315,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm94',
     name: 'Kue Putu Bambu Gula Merah Gerobak',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_kue_putu.png',
+    imageAsset: 'assets/images/meals/meal_kue_putu.png',
     price: 5000,
     calories: 240,
     nutrition: NutritionFacts(
@@ -3335,7 +3335,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm95',
     name: 'Lapis Legit Potong Toko Kue',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_lapis_legit.jpeg',
+    imageAsset: 'assets/images/meals/meal_lapis_legit.jpeg',
     price: 8000,
     calories: 230,
     nutrition: NutritionFacts(
@@ -3355,7 +3355,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm96',
     name: 'Klepon Gula Merah Kelapa Jajanan Pasar',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_klepon.jpeg',
+    imageAsset: 'assets/images/meals/meal_klepon.jpeg',
     price: 5000,
     calories: 250,
     nutrition: NutritionFacts(
@@ -3375,7 +3375,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm97',
     name: 'Odading Wijen Empuk Kaki Lima',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_odading.jpeg',
+    imageAsset: 'assets/images/meals/meal_odading.jpeg',
     price: 5000,
     calories: 320,
     nutrition: NutritionFacts(
@@ -3395,7 +3395,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm98',
     name: 'Kolak Pisang Ubi Santan Warung',
     category: 'Camilan',
-    imageAsset: 'assets/images/meal_kolak.jpg',
+    imageAsset: 'assets/images/meals/meal_kolak.jpg',
     price: 7000,
     calories: 300,
     nutrition: NutritionFacts(
@@ -3415,7 +3415,7 @@ const List<Meal> mockBuyMeals = [
     id: 'm99',
     name: 'Rawon Sapi dan Nasi Warung',
     category: 'Makan Malam',
-    imageAsset: 'assets/images/meal_rawon_warung.jpeg',
+    imageAsset: 'assets/images/meals/meal_rawon_warung.jpeg',
     price: 20000,
     calories: 520,
     nutrition: NutritionFacts(
@@ -3466,6 +3466,7 @@ const List<GroceryItem> mockGroceryItems = [
     unit: 'kg',
     price: 28000,
     isChecked: true,
+    imageAsset: 'assets/images/ingredients/telur_ayam.jpg'
   ),
   GroceryItem(
     id: 'g2',
@@ -3473,6 +3474,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 5,
     unit: 'kg',
     price: 68000,
+    imageAsset: 'assets/images/ingredients/beras_ramos.jpg'
   ),
   GroceryItem(
     id: 'g3',
@@ -3481,6 +3483,7 @@ const List<GroceryItem> mockGroceryItems = [
     unit: 'papan',
     price: 6000,
     isChecked: true,
+    imageAsset: 'assets/images/ingredients/tempe_balok.png'
   ),
   GroceryItem(
     id: 'g4',
@@ -3488,6 +3491,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/tahu_putih.jpg'
   ),
   GroceryItem(
     id: 'g5',
@@ -3495,6 +3499,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 5,
     unit: 'bungkus',
     price: 15000,
+    imageAsset: 'assets/images/ingredients/mi_goreng.png'
   ),
   GroceryItem(
     id: 'g6',
@@ -3502,6 +3507,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 9000,
+    imageAsset: 'assets/images/ingredients/bawang_merah.jpg'
   ),
   GroceryItem(
     id: 'g7',
@@ -3510,6 +3516,7 @@ const List<GroceryItem> mockGroceryItems = [
     unit: 'g',
     price: 7500,
     isChecked: true,
+    imageAsset: 'assets/images/ingredients/cabai_rawit.png'
   ),
   GroceryItem(
     id: 'g8',
@@ -3517,6 +3524,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 2,
     unit: 'ikat',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/kangkung.jpg'
   ),
   GroceryItem(
     id: 'g9',
@@ -3524,6 +3532,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 500,
     unit: 'g',
     price: 22000,
+    imageAsset: 'assets/images/ingredients/dada_ayam.jpg'
   ),
   GroceryItem(
     id: 'g10',
@@ -3531,6 +3540,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 2,
     unit: 'ekor',
     price: 18000,
+    imageAsset: 'assets/images/ingredients/ikan_kembung.jpeg'
   ),
   GroceryItem(
     id: 'g11',
@@ -3538,6 +3548,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 2,
     unit: 'buah',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/lontong.jpg'
   ),
   GroceryItem(
     id: 'g12',
@@ -3545,6 +3556,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'buah',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/labu_siam.jpeg'
   ),
   GroceryItem(
     id: 'g13',
@@ -3552,15 +3564,17 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'ikat',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/kacang_panjang.jpg'
   ),
-  GroceryItem(id: 'g14', name: 'Tauge', quantity: 250, unit: 'g', price: 4000),
-  GroceryItem(id: 'g15', name: 'Kol', quantity: 500, unit: 'g', price: 6000),
+  GroceryItem(id: 'g14', name: 'Tauge', quantity: 250, unit: 'g', price: 4000, imageAsset: 'assets/images/ingredients/tauge.jpg'),
+  GroceryItem(id: 'g15', name: 'Kol', quantity: 500, unit: 'g', price: 6000, imageAsset: 'assets/images/ingredients/kol.jpeg'),
   GroceryItem(
     id: 'g16',
     name: 'Jagung Manis',
     quantity: 2,
     unit: 'buah',
     price: 8000,
+    imageAsset: 'assets/images/ingredients/jagung_manis.jpeg'
   ),
   GroceryItem(
     id: 'g17',
@@ -3568,6 +3582,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 4500,
+    imageAsset: 'assets/images/ingredients/bawang_putih.jpg'
   ),
   GroceryItem(
     id: 'g18',
@@ -3575,6 +3590,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 6000,
+    imageAsset: 'assets/images/ingredients/bumbu_pecel.jpeg'
   ),
   GroceryItem(
     id: 'g19',
@@ -3582,6 +3598,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 200,
     unit: 'ml',
     price: 7000,
+    imageAsset: 'assets/images/ingredients/santan.png'
   ),
   GroceryItem(
     id: 'g20',
@@ -3589,6 +3606,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/kelapa_parut.jpeg'
   ),
   GroceryItem(
     id: 'g21',
@@ -3596,6 +3614,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'ikat',
     price: 2000,
+    imageAsset: 'assets/images/ingredients/kemangi.jpg'
   ),
   GroceryItem(
     id: 'g22',
@@ -3603,14 +3622,16 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 3000,
+    imageAsset: 'assets/images/ingredients/daun_pisang.jpg'
   ),
-  GroceryItem(id: 'g23', name: 'Kunyit', quantity: 100, unit: 'g', price: 3000),
+  GroceryItem(id: 'g23', name: 'Kunyit', quantity: 100, unit: 'g', price: 3000, imageAsset: 'assets/images/ingredients/kunyit.jpeg'),
   GroceryItem(
     id: 'g24',
     name: 'Jeruk Nipis',
     quantity: 2,
     unit: 'buah',
     price: 3000,
+    imageAsset: 'assets/images/ingredients/jeruk_nipis.png'
   ),
   GroceryItem(
     id: 'g25',
@@ -3618,6 +3639,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'buah',
     price: 12000,
+    imageAsset: 'assets/images/ingredients/nanas.png'
   ),
   GroceryItem(
     id: 'g26',
@@ -3625,22 +3647,25 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 135,
     unit: 'ml',
     price: 8000,
+    imageAsset: 'assets/images/ingredients/kecap_manis.jpeg'
   ),
-  GroceryItem(id: 'g27', name: 'Jahe', quantity: 100, unit: 'g', price: 4000),
+  GroceryItem(id: 'g27', name: 'Jahe', quantity: 100, unit: 'g', price: 4000, imageAsset: 'assets/images/ingredients/jahe.jpeg'),
   GroceryItem(
     id: 'g28',
     name: 'Minyak Goreng',
     quantity: 1,
     unit: 'liter',
     price: 18000,
+    imageAsset: 'assets/images/ingredients/minyak_goreng.jpeg'
   ),
-  GroceryItem(id: 'g29', name: 'Garam', quantity: 250, unit: 'g', price: 3000),
+  GroceryItem(id: 'g29', name: 'Garam', quantity: 250, unit: 'g', price: 3000, imageAsset: 'assets/images/ingredients/garam.jpeg'),
   GroceryItem(
     id: 'g30',
     name: 'Paru Sapi',
     quantity: 250,
     unit: 'g',
     price: 22000,
+    imageAsset: 'assets/images/ingredients/paru_sapi.jpeg'
   ),
   GroceryItem(
     id: 'g31',
@@ -3648,6 +3673,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 500,
     unit: 'g',
     price: 9000,
+    imageAsset: 'assets/images/ingredients/tepung_beras.jpg'
   ),
   GroceryItem(
     id: 'g32',
@@ -3655,6 +3681,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 2000,
+    imageAsset: 'assets/images/ingredients/daun_salam.jpeg'
   ),
   GroceryItem(
     id: 'g33',
@@ -3662,6 +3689,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 500,
     unit: 'g',
     price: 9000,
+    imageAsset: 'assets/images/ingredients/kentang.jpg'
   ),
   GroceryItem(
     id: 'g34',
@@ -3669,6 +3697,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'ikat',
     price: 3000,
+    imageAsset: 'assets/images/ingredients/daun_bawang.png'
   ),
   GroceryItem(
     id: 'g35',
@@ -3676,6 +3705,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 2,
     unit: 'buah',
     price: 6000,
+    imageAsset: 'assets/images/ingredients/terong_ungu.jpg'
   ),
   GroceryItem(
     id: 'g36',
@@ -3683,14 +3713,16 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 6000,
+    imageAsset: 'assets/images/ingredients/cabai_merah.png'
   ),
-  GroceryItem(id: 'g37', name: 'Tomat', quantity: 3, unit: 'buah', price: 6000),
+  GroceryItem(id: 'g37', name: 'Tomat', quantity: 3, unit: 'buah', price: 6000, imageAsset: 'assets/images/ingredients/tomat.jpg'),
   GroceryItem(
     id: 'g38',
     name: 'Sawi Hijau',
     quantity: 1,
     unit: 'ikat',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/sawi_hijau.jpeg'
   ),
   GroceryItem(
     id: 'g39',
@@ -3698,14 +3730,16 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 22000,
+    imageAsset: 'assets/images/ingredients/ikan_nila.jpeg'
   ),
-  GroceryItem(id: 'g40', name: 'Wortel', quantity: 250, unit: 'g', price: 5000),
+  GroceryItem(id: 'g40', name: 'Wortel', quantity: 250, unit: 'g', price: 5000, imageAsset: 'assets/images/ingredients/wortel.jpg'),
   GroceryItem(
     id: 'g41',
     name: 'Saus Tomat',
     quantity: 135,
     unit: 'ml',
     price: 7000,
+    imageAsset: 'assets/images/ingredients/saus_tomat.jpeg'
   ),
   GroceryItem(
     id: 'g42',
@@ -3713,14 +3747,16 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 500,
     unit: 'g',
     price: 9000,
+    imageAsset: 'assets/images/ingredients/gula_pasir.jpeg'
   ),
-  GroceryItem(id: 'g43', name: 'Cuka', quantity: 150, unit: 'ml', price: 5000),
+  GroceryItem(id: 'g43', name: 'Cuka', quantity: 150, unit: 'ml', price: 5000, imageAsset: 'assets/images/ingredients/cuka.jpeg'),
   GroceryItem(
     id: 'g44',
     name: 'Bawang Bombay',
     quantity: 1,
     unit: 'buah',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/bawang_bombay.jpeg'
   ),
   GroceryItem(
     id: 'g45',
@@ -3728,6 +3764,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/tepung_maizena.jpeg'
   ),
   GroceryItem(
     id: 'g46',
@@ -3735,6 +3772,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 25000,
+    imageAsset: 'assets/images/ingredients/daging_kepiting.jpeg'
   ),
   GroceryItem(
     id: 'g47',
@@ -3742,6 +3780,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 10000,
+    imageAsset: 'assets/images/ingredients/kembang_kol.jpeg'
   ),
   GroceryItem(
     id: 'g48',
@@ -3749,6 +3788,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 500,
     unit: 'g',
     price: 20000,
+    imageAsset: 'assets/images/ingredients/paha_ayam.png'
   ),
   GroceryItem(
     id: 'g49',
@@ -3756,6 +3796,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 3000,
+    imageAsset: 'assets/images/ingredients/lengkuas.jpeg'
   ),
   GroceryItem(
     id: 'g50',
@@ -3763,6 +3804,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 2000,
+    imageAsset: 'assets/images/ingredients/ketumbar_bubuk.jpg'
   ),
   GroceryItem(
     id: 'g51',
@@ -3770,6 +3812,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 500,
     unit: 'g',
     price: 7000,
+    imageAsset: 'assets/images/ingredients/tepung_terigu.jpeg'
   ),
   GroceryItem(
     id: 'g52',
@@ -3777,6 +3820,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 2000,
+    imageAsset: 'assets/images/ingredients/daun_jeruk.jpg'
   ),
   GroceryItem(
     id: 'g53',
@@ -3784,6 +3828,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 12000,
+    imageAsset: 'assets/images/ingredients/brokoli.jpeg'
   ),
   GroceryItem(
     id: 'g54',
@@ -3791,6 +3836,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 3,
     unit: 'batang',
     price: 2000,
+    imageAsset: 'assets/images/ingredients/serai.jpg'
   ),
   GroceryItem(
     id: 'g55',
@@ -3798,6 +3844,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 12000,
+    imageAsset: 'assets/images/ingredients/ikan_asin.jpeg'
   ),
   GroceryItem(
     id: 'g56',
@@ -3805,6 +3852,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 25000,
+    imageAsset: 'assets/images/ingredients/udang_kupas.jpg'
   ),
   GroceryItem(
     id: 'g57',
@@ -3812,6 +3860,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 7000,
+    imageAsset: 'assets/images/ingredients/jamur_enoki.jpg'
   ),
   GroceryItem(
     id: 'g58',
@@ -3819,6 +3868,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 3000,
+    imageAsset: 'assets/images/ingredients/pala_bubuk.jpeg'
   ),
   GroceryItem(
     id: 'g59',
@@ -3826,14 +3876,16 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 2000,
+    imageAsset: 'assets/images/ingredients/merica.jpg'
   ),
-  GroceryItem(id: 'g60', name: 'Pete', quantity: 2, unit: 'papan', price: 8000),
+  GroceryItem(id: 'g60', name: 'Pete', quantity: 2, unit: 'papan', price: 8000, imageAsset: 'assets/images/ingredients/pete.jpeg'),
   GroceryItem(
     id: 'g61',
     name: 'Kulit Lumpia',
     quantity: 1,
     unit: 'bungkus',
     price: 7000,
+    imageAsset: 'assets/images/ingredients/kulit_lumpia.jpeg'
   ),
   GroceryItem(
     id: 'g62',
@@ -3841,6 +3893,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'buah',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/bengkuang.jpeg'
   ),
   GroceryItem(
     id: 'g63',
@@ -3848,6 +3901,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'ikat',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/daun_singkong.jpg'
   ),
   GroceryItem(
     id: 'g64',
@@ -3855,6 +3909,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 10000,
+    imageAsset: 'assets/images/ingredients/ikan_teri.png'
   ),
   GroceryItem(
     id: 'g65',
@@ -3862,6 +3917,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 500,
     unit: 'g',
     price: 7000,
+    imageAsset: 'assets/images/ingredients/tepung_tapioka.jpeg'
   ),
   GroceryItem(
     id: 'g66',
@@ -3869,6 +3925,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 8000,
+    imageAsset: 'assets/images/ingredients/kulit_pangsit.jpg'
   ),
   GroceryItem(
     id: 'g67',
@@ -3876,6 +3933,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/bubuk_kari.png'
   ),
   GroceryItem(
     id: 'g68',
@@ -3883,6 +3941,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 10,
     unit: 'buah',
     price: 10000,
+    imageAsset: 'assets/images/ingredients/tahu_sumedang_mentah.jpeg'
   ),
   GroceryItem(
     id: 'g69',
@@ -3890,6 +3949,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/cabai_rawit_hijau.jpg'
   ),
   GroceryItem(
     id: 'g70',
@@ -3897,6 +3957,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/cabai_hijau.png'
   ),
   GroceryItem(
     id: 'g71',
@@ -3904,6 +3965,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'ikat',
     price: 2000,
+    imageAsset: 'assets/images/ingredients/daun_pandan.jpeg'
   ),
   GroceryItem(
     id: 'g72',
@@ -3911,6 +3973,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 135,
     unit: 'ml',
     price: 7000,
+    imageAsset: 'assets/images/ingredients/kecap_asin.jpg'
   ),
   GroceryItem(
     id: 'g73',
@@ -3918,6 +3981,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 6000,
+    imageAsset: 'assets/images/ingredients/mie_telur.png'
   ),
   GroceryItem(
     id: 'g74',
@@ -3925,6 +3989,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 50,
     unit: 'g',
     price: 10000,
+    imageAsset: 'assets/images/ingredients/ebi_kering.jpeg'
   ),
   GroceryItem(
     id: 'g75',
@@ -3932,6 +3997,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 16000,
+    imageAsset: 'assets/images/ingredients/daging_kerang_hijau.jpeg'
   ),
   GroceryItem(
     id: 'g76',
@@ -3939,6 +4005,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 135,
     unit: 'ml',
     price: 9000,
+    imageAsset: 'assets/images/ingredients/saus_tiram.png'
   ),
   GroceryItem(
     id: 'g77',
@@ -3946,6 +4013,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 200,
     unit: 'g',
     price: 8000,
+    imageAsset: 'assets/images/ingredients/tepung_roti.jpeg'
   ),
   GroceryItem(
     id: 'g78',
@@ -3953,14 +4021,16 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 15000,
+    imageAsset: 'assets/images/ingredients/saus_barbeque.jpeg'
   ),
-  GroceryItem(id: 'g79', name: 'Wijen', quantity: 50, unit: 'g', price: 5000),
+  GroceryItem(id: 'g79', name: 'Wijen', quantity: 50, unit: 'g', price: 5000, imageAsset: 'assets/images/ingredients/wijen.jpg'),
   GroceryItem(
     id: 'g80',
     name: 'Melinjo',
     quantity: 100,
     unit: 'g',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/melinjo.jpg'
   ),
   GroceryItem(
     id: 'g81',
@@ -3968,6 +4038,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 3000,
+    imageAsset: 'assets/images/ingredients/daun_melinjo.jpeg'
   ),
   GroceryItem(
     id: 'g82',
@@ -3975,6 +4046,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 3000,
+    imageAsset: 'assets/images/ingredients/asam_jawa.png'
   ),
   GroceryItem(
     id: 'g83',
@@ -3982,6 +4054,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 9000,
+    imageAsset: 'assets/images/ingredients/kacang_tanah.jpg'
   ),
   GroceryItem(
     id: 'g84',
@@ -3989,6 +4062,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 7000,
+    imageAsset: 'assets/images/ingredients/gula_merah.jpeg'
   ),
   GroceryItem(
     id: 'g85',
@@ -3996,6 +4070,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'buah',
     price: 8000,
+    imageAsset: 'assets/images/ingredients/alpukat.jpeg'
   ),
   GroceryItem(
     id: 'g86',
@@ -4003,6 +4078,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 8000,
+    imageAsset: 'assets/images/ingredients/nangka_mentah.png'
   ),
   GroceryItem(
     id: 'g87',
@@ -4010,6 +4086,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'buah',
     price: 10000,
+    imageAsset: 'assets/images/ingredients/kelapa_muda.jpg'
   ),
   GroceryItem(
     id: 'g88',
@@ -4017,6 +4094,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 200,
     unit: 'g',
     price: 9000,
+    imageAsset: 'assets/images/ingredients/susu_kental_manis.jpeg'
   ),
   GroceryItem(
     id: 'g89',
@@ -4024,14 +4102,16 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'ml',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/air_kelapa.jpg'
   ),
-  GroceryItem(id: 'g90', name: 'Es Batu', quantity: 1, unit: 'kg', price: 3000),
+  GroceryItem(id: 'g90', name: 'Es Batu', quantity: 1, unit: 'kg', price: 3000, imageAsset: 'assets/images/ingredients/es_batu.jpeg'),
   GroceryItem(
     id: 'g91',
     name: 'Ubi Ungu',
     quantity: 500,
     unit: 'g',
     price: 8000,
+    imageAsset: 'assets/images/ingredients/ubi_ungu.jpeg'
   ),
   GroceryItem(
     id: 'g92',
@@ -4039,6 +4119,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/agar_agar_bubuk.jpeg'
   ),
   GroceryItem(
     id: 'g93',
@@ -4046,6 +4127,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'botol',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/pasta_pandan.jpeg'
   ),
   GroceryItem(
     id: 'g94',
@@ -4053,6 +4135,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 6000,
+    imageAsset: 'assets/images/ingredients/tape_singkong.jpg'
   ),
   GroceryItem(
     id: 'g95',
@@ -4060,6 +4143,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 5000,
+    imageAsset: 'assets/images/ingredients/tape_ketan_hitam.jpeg'
   ),
   GroceryItem(
     id: 'g96',
@@ -4067,6 +4151,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 500,
     unit: 'g',
     price: 12000,
+    imageAsset: 'assets/images/ingredients/beras_ketan.jpeg'
   ),
   GroceryItem(
     id: 'g97',
@@ -4074,6 +4159,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 3000,
+    imageAsset: 'assets/images/ingredients/kayu_manis.jpg'
   ),
   GroceryItem(
     id: 'g98',
@@ -4081,6 +4167,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/cengkeh.jpg'
   ),
   GroceryItem(
     id: 'g99',
@@ -4088,6 +4175,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 200,
     unit: 'g',
     price: 8000,
+    imageAsset: 'assets/images/ingredients/margarin.jpeg'
   ),
   GroceryItem(
     id: 'g100',
@@ -4095,6 +4183,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 2000,
+    imageAsset: 'assets/images/ingredients/vanilla_bubuk.jpeg'
   ),
   GroceryItem(
     id: 'g101',
@@ -4102,6 +4191,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 6000,
+    imageAsset: 'assets/images/ingredients/kerupuk_kanji.jpeg'
   ),
   GroceryItem(
     id: 'g102',
@@ -4109,6 +4199,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 100,
     unit: 'g',
     price: 4000,
+    imageAsset: 'assets/images/ingredients/kencur.jpg'
   ),
   GroceryItem(
     id: 'g103',
@@ -4116,6 +4207,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 250,
     unit: 'g',
     price: 35000,
+    imageAsset: 'assets/images/ingredients/daging_sapi.jpg'
   ),
   GroceryItem(
     id: 'g104',
@@ -4123,6 +4215,7 @@ const List<GroceryItem> mockGroceryItems = [
     quantity: 1,
     unit: 'bungkus',
     price: 6000,
+    imageAsset: 'assets/images/ingredients/bumbu_rawon.jpeg'
   ),
 ];
 
@@ -4130,6 +4223,7 @@ final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p1',
     name: 'Telur Ayam',
+    imageAsset: 'assets/images/pantries/telur_ayam.jpeg',
     category: 'Protein',
     quantity: 4,
     minQuantity: 6,
@@ -4139,6 +4233,7 @@ final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p2',
     name: 'Tahu Kuning',
+    imageAsset: 'assets/images/pantries/tahu_kuning.jpeg',
     category: 'Protein',
     quantity: 5,
     minQuantity: 2,
@@ -4148,6 +4243,7 @@ final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p3',
     name: 'Bayam Segar',
+    imageAsset: 'assets/images/pantries/bayam.jpg',
     category: 'Sayuran',
     quantity: 1,
     minQuantity: 1,
@@ -4157,6 +4253,7 @@ final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p4',
     name: 'Wortel',
+    imageAsset: 'assets/images/pantries/wortel.jpeg',
     category: 'Sayuran',
     quantity: 3,
     minQuantity: 2,
@@ -4166,6 +4263,7 @@ final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p5',
     name: 'Bawang Putih',
+    imageAsset: 'assets/images/pantries/bawang_putih.png',
     category: 'Bumbu',
     quantity: 50,
     minQuantity: 100,
@@ -4175,6 +4273,7 @@ final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p6',
     name: 'Beras Pulen',
+    imageAsset: 'assets/images/pantries/beras_pulen.jpeg',
     category: 'Pokok',
     quantity: 3,
     minQuantity: 1,
@@ -4184,6 +4283,7 @@ final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p7',
     name: 'Mie Telur',
+    imageAsset: 'assets/images/pantries/mie_telur.jpeg',
     category: 'Pokok',
     quantity: 1,
     minQuantity: 2,
@@ -4193,6 +4293,7 @@ final List<PantryItem> mockPantryItems = [
   PantryItem(
     id: 'p8',
     name: 'Susu UHT Cokelat',
+    imageAsset: 'assets/images/pantries/susu_uht.jpeg',
     category: 'Minuman',
     quantity: 2,
     minQuantity: 1,

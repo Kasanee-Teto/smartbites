@@ -1,0 +1,8 @@
+arb-dir: lib/i18n
+template-arb-file: app_id.arb
+output-dir: lib/i18n/generated
+output-localization-file: app_localizations.dart
+preferred-supported-locales:
+  - id
+nullable-getter: false
+format: true

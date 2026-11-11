@@ -110,8 +110,8 @@ English names below describe the functions. In-app product copy remains Indonesi
 | FR-19 | Low-stock indicators using `LinearProgressIndicator` and labels. | M | Gilbert |
 | FR-20 | Expiry-status badges: Safe, Expiring Soon, and Expired. | M | Gilbert |
 | FR-21 | Adjust stock quantities directly in the row using + and − stepper buttons. | S | Gilbert |
-| FR-22 | Water Tracker: target progress and +150 / +250 / +500 ml buttons. | M | Edbert |
-| FR-23 | Today's water-intake history and target-achieved status. | M | Edbert |
+| FR-22 | Drink tracker: seven quick-add categories, editable portions, and a daily hydration score against the profile goal. | M | Edbert |
+| FR-23 | Today's drink history with edit, delete, and undo. Weekly statistics show signed daily scores, drink-volume breakdown, count, and goal streak. Session-local reminders run while SmartBites is open and support active hours, inactivity intervals, smart mode, sound, browser notifications, and snooze. | M | Edbert |
 | FR-24 | Food Waste: entry form with item, portion, reason, and estimated Rupiah value. | M | Edbert |
 | FR-25 | Food-waste history and total estimated financial loss for the current month. | M | Edbert |
 | FR-26 | Profile: weekly budget and water target controls using `Slider`. | M | Edbert |
@@ -225,7 +225,7 @@ Total: approximately 14–15 screens and sub-screens: Welcome, Onboarding, Home,
 | `Meal` | id, name, category, imageAsset, price, calories, cookTimeMinutes, ingredients, allergens, steps |
 | `GroceryItem` | id, name, quantity, unit, price, isChecked |
 | `PantryItem` | id, name, category, quantity, minQuantity, unit, expiryDate |
-| `WaterRecord` | id, amountMl, time |
+| `WaterRecord` | id, amountMl, time, category (defaults to plain water) |
 | `WasteRecord` | id, itemName, portion, reason, estimatedLoss, date |
 | `DailyLog` | date, waterMl, mealsEaten, wasteLogged, noWasteMarked |
 | `Achievement` | id, title, description, iconAsset, target, progress, isUnlocked |

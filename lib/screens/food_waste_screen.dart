@@ -8,7 +8,6 @@ import 'package:budget_bites/utils/app_colors.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
-import 'package:budget_bites/widgets/sdg_badge.dart';
 import 'package:budget_bites/widgets/status_badge.dart';
 import 'package:budget_bites/widgets/waste_item_tile.dart';
 import 'package:flutter/material.dart';
@@ -231,9 +230,9 @@ class _FoodWasteScreenState extends State<FoodWasteScreen> {
               ],
               decoration: const InputDecoration(
                 labelText: 'Estimasi kerugian (opsional)',
+                labelStyle: TextStyle(fontSize: 14),
                 prefixText: 'Rp ',
               ),
-              // Diubah manual: berhenti menghitung otomatis dari porsi.
               onChanged: (_) => _fullPrice = null,
             ),
             const SizedBox(height: AppConstants.spaceMd),
@@ -339,7 +338,6 @@ class _FoodWasteScreenState extends State<FoodWasteScreen> {
               style: theme.textTheme.bodySmall,
             ),
             const SizedBox(height: AppConstants.spaceSm),
-            const SdgBadge.sdg12(),
           ],
         ),
       ),

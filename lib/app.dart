@@ -1,19 +1,20 @@
 // Owner: Louis | FR: FR-01, FR-03
 
+import 'package:budget_bites/i18n/generated/app_localizations.dart';
 import 'package:budget_bites/screens/welcome_screen.dart';
 import 'package:budget_bites/theme/app_theme.dart';
-import 'package:budget_bites/utils/app_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class SmartBitesApp extends StatefulWidget {
   const SmartBitesApp({
     super.key,
     this.onThemeModeChanged,
     this.initialThemeMode = ThemeMode.system,
+    this.locale = const Locale('id'),
   });
   final ValueChanged<ThemeMode>? onThemeModeChanged;
   final ThemeMode initialThemeMode;
+  final Locale locale;
 
   @override
   State<SmartBitesApp> createState() => _SmartBitesAppState();
@@ -38,11 +39,11 @@ class _SmartBitesAppState extends State<SmartBitesApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: AppConstants.appName,
+      onGenerateTitle: (context) => AppLocalizations.of(context).appName,
       debugShowCheckedModeBanner: false,
-      locale: const Locale('id'),
-      supportedLocales: const [Locale('id'), Locale('en')],
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      locale: widget.locale,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,

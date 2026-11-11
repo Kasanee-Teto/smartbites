@@ -6,6 +6,8 @@ class AppConstants {
   static const String appName = 'SmartBites';
   static const int defaultWeeklyBudget = 300000;
   static const int defaultWaterTargetMl = 2000;
+  static const int minWaterTargetMl = 1000;
+  static const int maxWaterTargetMl = 4000;
 
   // Spacing scale (dp) - Mapped 1:1 from HTML tailwind.config spacing
   static const double spaceXs = 4; // HTML 'space-xs' (0.25rem)

@@ -293,10 +293,10 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-    for (final size in [
-      const Size(360, 740),
-      const Size(700, 900),
-      const Size(1100, 900),
+    for (final (size, expectedGap) in [
+      (const Size(360, 740), 4.0),
+      (const Size(700, 900), 4.0),
+      (const Size(1280, 900), 8.0),
     ]) {
       tester.view.physicalSize = size;
       await tester.pumpWidget(const SizedBox.shrink());
@@ -306,7 +306,34 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Menu & Gizi'), findsOneWidget);
       expect(tester.takeException(), isNull);
-      await _tap(tester, find.byKey(const ValueKey('meal_section_button_1')));
+      final dayBounds = [
+        for (final day in shortDays)
+          tester.getRect(find.widgetWithText(InkWell, day)),
+      ];
+      for (var day = 1; day < dayBounds.length; day++) {
+        expect(
+          dayBounds[day].left - dayBounds[day - 1].right,
+          closeTo(expectedGap, 0.01),
+          reason: 'Day spacing at $size',
+        );
+      }
+      await _tap(tester, find.text('Fokus: Umum'));
+      final selectedTile = find.widgetWithText(ListTile, 'Umum');
+      final nextTile = find.widgetWithText(ListTile, 'Kolesterol');
+      expect(tester.widget<ListTile>(selectedTile).selected, isTrue);
+      expect(
+        tester.getTopLeft(nextTile).dy - tester.getBottomLeft(selectedTile).dy,
+        4.0,
+        reason: 'Focus tile spacing at $size',
+      );
+      await _tap(tester, selectedTile);
+      final nutritionTab = find.byKey(const ValueKey('meal_section_button_1'));
+      await tester.scrollUntilVisible(
+        nutritionTab,
+        -250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await _tap(tester, nutritionTab);
       expect(tester.takeException(), isNull);
       await _tap(tester, find.byKey(const ValueKey('meal_section_button_0')));
       await _tap(tester, find.widgetWithText(ChoiceChip, 'Minggu'));

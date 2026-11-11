@@ -4,6 +4,7 @@ import 'package:budget_bites/models/meal.dart';
 import 'package:budget_bites/models/meal_preferences.dart';
 import 'package:budget_bites/models/planned_meal.dart';
 import 'package:budget_bites/screens/meal_detail_screen.dart';
+import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/meal_planning.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
@@ -111,7 +112,7 @@ class _MealPlanScreenState extends State<MealPlanScreen> {
       SnackBar(
         content: Text(
           replaced == 0
-              ? 'Tidak ada menu beralergen yang perlu diganti.'
+              ? 'Tidak ada menu beralergen yang perlu diganti'
               : '$replaced menu diganti sesuai profil alergi',
         ),
       ),
@@ -343,12 +344,15 @@ class _MealPlanScreenState extends State<MealPlanScreen> {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: AppConstants.spaceXs,
             children: [
-              Text(
-                'Fokus perbandingan gizi',
-                style: Theme.of(context).textTheme.titleLarge,
+              Padding(
+                padding: const EdgeInsets.only(bottom: AppConstants.spaceXs),
+                child: Text(
+                  'Fokus perbandingan gizi',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
               ),
-              const SizedBox(height: 8),
               for (final focus in NutritionFocus.values)
                 ListTile(
                   leading: OptionIcon(
@@ -444,7 +448,7 @@ class _MealPlanScreenState extends State<MealPlanScreen> {
     ),
   );
 
-  Widget _dateBar() => Column(
+  Widget _dateBar({required double daySpacing}) => Column(
     children: [
       Row(
         children: [
@@ -487,6 +491,7 @@ class _MealPlanScreenState extends State<MealPlanScreen> {
       ),
       const SizedBox(height: 4),
       Row(
+        spacing: daySpacing,
         children: [
           for (var i = 0; i < 7; i++)
             Expanded(
@@ -780,9 +785,8 @@ class _MealPlanScreenState extends State<MealPlanScreen> {
 
   Widget _main() => LayoutBuilder(
     builder: (context, constraints) {
-      final gutter = windowSizeFor(constraints.maxWidth) == WindowSize.compact
-          ? 12.0
-          : 16.0;
+      final compact = windowSizeFor(constraints.maxWidth) == WindowSize.compact;
+      final gutter = compact ? 12.0 : 16.0;
       return ListView(
         key: PageStorageKey('meal_section_$_section'),
         padding: EdgeInsets.fromLTRB(gutter, 12, gutter, 32),
@@ -814,7 +818,12 @@ class _MealPlanScreenState extends State<MealPlanScreen> {
                 ],
               ),
             ),
-          if (_section != 2) ...[const SizedBox(height: 8), _dateBar()],
+          if (_section != 2) ...[
+            const SizedBox(height: 8),
+            _dateBar(
+              daySpacing: compact ? AppConstants.spaceXs : AppConstants.spaceSm,
+            ),
+          ],
           const SizedBox(height: 12),
           if (_section == 0) _calendar(),
           if (_section == 1) ...[

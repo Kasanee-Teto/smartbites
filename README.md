@@ -122,6 +122,7 @@ The project groups files by responsibility:
 | Directory | Contents |
 | --- | --- |
 | `lib/data/` | Local mock data shared by the prototype. |
+| `lib/i18n/` | Indonesian, English, and Chinese ARB translation resources; see the [translation guide](lib/i18n/README.md). |
 | `lib/models/` | Meal, grocery, pantry, water, waste, profile, activity, and achievement models. |
 | `lib/screens/` | Welcome, onboarding, dashboard, and feature-level interfaces. |
 | `lib/theme/` | Application theme definitions. |
@@ -302,6 +303,12 @@ Normal and italic variable TrueType files are bundled in `assets/fonts/playfair/
 and declared in `pubspec.yaml`; no runtime font download is needed.
 Playfair is licensed under the SIL Open Font License 1.1; its copyright notice
 and full license are included in [OFL.txt](assets/fonts/playfair/OFL.txt).
+
+### Ingredient photos
+
+Grocery and pantry rows support bundled ingredient photos. Add your files using
+the filenames in the [ingredient image guide](docs/ingredient_images.md).
+Missing photos display fallback icons.
 
 ### Meal preferences
 

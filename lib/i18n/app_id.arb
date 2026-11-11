@@ -1,0 +1,17 @@
+{
+  "@@locale": "id",
+  "appName": "SmartBites",
+  "@appName": {"description": "Application brand name; keep unchanged in every language."},
+  "save": "Simpan",
+  "@save": {"description": "Action to save changes."},
+  "cancel": "Batal",
+  "@cancel": {"description": "Action to cancel without saving."},
+  "undo": "Urungkan",
+  "@undo": {"description": "Action to reverse the most recent change."},
+  "back": "Kembali",
+  "@back": {"description": "Action to return to the previous screen."},
+  "next": "Lanjut",
+  "@next": {"description": "Action to continue to the next step."},
+  "close": "Tutup",
+  "@close": {"description": "Action to dismiss a dialog or sheet."}
+}

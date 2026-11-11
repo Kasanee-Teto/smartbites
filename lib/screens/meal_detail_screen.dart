@@ -5,6 +5,7 @@ import 'package:budget_bites/models/planned_meal.dart';
 import 'package:budget_bites/utils/meal_planning.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
 import 'package:budget_bites/widgets/asset_image.dart';
+import 'package:budget_bites/widgets/list_tile_spacing.dart';
 import 'package:budget_bites/widgets/nutrition_summary.dart';
 import 'package:flutter/material.dart';
 
@@ -52,9 +53,11 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
               ),
               children: [
                 for (final item in meal.ingredients)
-                  ListTile(
-                    leading: const Icon(Icons.check_circle_outline),
-                    title: Text(item, style: const TextStyle(fontSize: 14)),
+                  ListTileSpacing(
+                    child: ListTile(
+                      leading: const Icon(Icons.check_circle_outline),
+                      title: Text(item, style: const TextStyle(fontSize: 14)),
+                    ),
                   ),
                 const SizedBox(height: 15),
               ],
@@ -72,17 +75,19 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
               ),
               children: [
                 for (var i = 0; i < meal.steps.length; i++)
-                  ListTile(
-                    leading: CircleAvatar(
-                      radius: 16,
-                      child: Text(
-                        '${i + 1}',
-                        style: const TextStyle(color: Colors.white),
+                  ListTileSpacing(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 16,
+                        child: Text(
+                          '${i + 1}',
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ),
-                    ),
-                    title: Text(
-                      meal.steps[i],
-                      style: const TextStyle(fontSize: 12),
+                      title: Text(
+                        meal.steps[i],
+                        style: const TextStyle(fontSize: 12),
+                      ),
                     ),
                   ),
                 const SizedBox(height: 15),

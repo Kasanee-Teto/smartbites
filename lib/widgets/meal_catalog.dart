@@ -3,6 +3,7 @@
 import 'package:budget_bites/models/meal.dart';
 import 'package:budget_bites/models/meal_preferences.dart';
 import 'package:budget_bites/utils/meal_planning.dart';
+import 'package:budget_bites/widgets/list_tile_spacing.dart';
 import 'package:budget_bites/widgets/meal_card.dart';
 import 'package:budget_bites/widgets/option_icon.dart';
 import 'package:flutter/material.dart';
@@ -205,28 +206,33 @@ class _MealCatalogState extends State<MealCatalog> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 5),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              minTileHeight: 48,
-              dense: true,
-              title: Text(
-                'Saring pilihan',
-                style: Theme.of(context).textTheme.titleSmall,
+            ListTileSpacing(
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                minTileHeight: 48,
+                dense: true,
+                title: Text(
+                  'Saring pilihan',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                leading: const OptionIcon(
+                  icon: Icons.tune,
+                  color: Colors.blue,
+                  size: 28,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                minLeadingWidth: 28,
+                trailing: Icon(
+                  _showFilters ? Icons.expand_less : Icons.expand_more,
+                ),
+                onTap: () {
+                  setState(() {
+                    _showFilters = !_showFilters;
+                  });
+                },
               ),
-              leading: const OptionIcon(
-                icon: Icons.tune,
-                color: Colors.blue,
-                size: 28,
-              ),
-              minLeadingWidth: 28,
-              trailing: Icon(
-                _showFilters ? Icons.expand_less : Icons.expand_more,
-              ),
-              onTap: () {
-                setState(() {
-                  _showFilters = !_showFilters;
-                });
-              },
             ),
             const SizedBox(height: 8),
             if (_showFilters) ...[

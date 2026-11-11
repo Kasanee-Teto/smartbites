@@ -4,6 +4,7 @@
 import 'package:budget_bites/models/pantry_item.dart';
 import 'package:budget_bites/utils/app_colors.dart';
 import 'package:budget_bites/utils/app_constants.dart';
+import 'package:budget_bites/widgets/asset_image.dart';
 import 'package:flutter/material.dart';
 
 /// Enum representing the freshness status of a pantry item based on expiry
@@ -143,21 +144,6 @@ class PantryItemTile extends StatelessWidget {
     final isLowStock = item.quantity <= item.minQuantity;
     const warningColor = AppColors.alertTerracotta;
 
-    final (Color iconBoxBg, Color iconBoxFg) = switch (status) {
-      ExpiryStatus.expired => (
-        colorScheme.errorContainer.withValues(alpha: 0.6),
-        colorScheme.error,
-      ),
-      ExpiryStatus.expiringSoon => (
-        AppColors.harvestAmberContainer.withValues(alpha: 0.6),
-        AppColors.harvestAmber,
-      ),
-      ExpiryStatus.safe => (
-        colorScheme.primaryContainer.withValues(alpha: 0.4),
-        colorScheme.primary,
-      ),
-    };
-
     return Card(
       elevation: 0,
       color: colorScheme.surfaceContainerLowest,
@@ -178,18 +164,13 @@ class PantryItemTile extends StatelessWidget {
           children: [
             Row(
               children: [
-                // Leading category icon box (40x40 rounded-xl from HTML)
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: iconBoxBg,
+                ExcludeSemantics(
+                  child: AssetImageWithFallback(
+                    assetPath: item.imageAsset,
+                    width: 40,
+                    height: 40,
+                    fallbackIcon: _iconForCategory(item.category),
                     borderRadius: BorderRadius.circular(AppConstants.radiusMd),
-                  ),
-                  child: Icon(
-                    _iconForCategory(item.category),
-                    color: iconBoxFg,
-                    size: 20,
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -306,53 +287,56 @@ class PantryItemTile extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             // Stock gauge & low-stock label (FR-19)
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${_formatQuantity(item.quantity)} ${item.unit}',
-                  style: textTheme.labelSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: isLowStock
-                        ? warningColor
-                        : colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                if (isLowStock) ...[
-                  const SizedBox(width: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: warningColor.withValues(alpha: 0.14),
-                      borderRadius: BorderRadius.circular(
-                        AppConstants.radiusSm,
-                      ),
-                    ),
-                    child: Text(
-                      'Stok menipis',
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 4,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      '${_formatQuantity(item.quantity)} ${item.unit}',
                       style: textTheme.labelSmall?.copyWith(
-                        color: warningColor,
                         fontWeight: FontWeight.w700,
-                        fontSize: 10,
+                        color: isLowStock
+                            ? warningColor
+                            : colorScheme.onSurfaceVariant,
                       ),
                     ),
-                  ),
-                ],
-                const SizedBox(width: 10),
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                      AppConstants.radiusFull,
-                    ),
-                    child: LinearProgressIndicator(
-                      value: progressValue,
-                      minHeight: 6,
-                      backgroundColor: colorScheme.surfaceContainerHighest,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        isLowStock ? warningColor : colorScheme.primary,
+                    if (isLowStock) ...[
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: warningColor.withValues(alpha: 0.14),
+                          borderRadius: BorderRadius.circular(
+                            AppConstants.radiusSm,
+                          ),
+                        ),
+                        child: Text(
+                          'Stok menipis',
+                          style: textTheme.labelSmall?.copyWith(
+                            color: warningColor,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 10,
+                          ),
+                        ),
                       ),
+                    ],
+                  ],
+                ),
+                const SizedBox(height: 6),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(AppConstants.radiusFull),
+                  child: LinearProgressIndicator(
+                    value: progressValue,
+                    minHeight: 6,
+                    backgroundColor: colorScheme.surfaceContainerHighest,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      isLowStock ? warningColor : colorScheme.primary,
                     ),
                   ),
                 ),

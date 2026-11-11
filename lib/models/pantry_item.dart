@@ -9,6 +9,7 @@ class PantryItem {
     required this.minQuantity,
     required this.unit,
     required this.expiryDate,
+    this.imageAsset = '',
   });
   final String id;
   final String name;
@@ -17,6 +18,7 @@ class PantryItem {
   final double minQuantity;
   final String unit;
   final DateTime expiryDate;
+  final String imageAsset;
 
   PantryItem copyWith({
     String? id,
@@ -26,10 +28,12 @@ class PantryItem {
     double? minQuantity,
     String? unit,
     DateTime? expiryDate,
+    String? imageAsset,
   }) {
     return PantryItem(
       id: id ?? this.id,
       name: name ?? this.name,
+      imageAsset: imageAsset ?? this.imageAsset,
       category: category ?? this.category,
       quantity: quantity ?? this.quantity,
       minQuantity: minQuantity ?? this.minQuantity,

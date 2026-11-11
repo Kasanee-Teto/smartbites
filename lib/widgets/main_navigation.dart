@@ -6,6 +6,7 @@ import 'package:budget_bites/data/mock_data.dart';
 import 'package:budget_bites/models/achievement.dart';
 import 'package:budget_bites/models/daily_log.dart';
 import 'package:budget_bites/models/grocery_item.dart';
+import 'package:budget_bites/models/hydration_reminder.dart';
 import 'package:budget_bites/models/meal.dart';
 import 'package:budget_bites/models/meal_preferences.dart';
 import 'package:budget_bites/models/pantry_item.dart';
@@ -25,6 +26,8 @@ import 'package:budget_bites/screens/water_tracker_screen.dart';
 import 'package:budget_bites/utils/badge_rules.dart';
 import 'package:budget_bites/utils/budget_status.dart';
 import 'package:budget_bites/utils/formatters.dart';
+import 'package:budget_bites/utils/hydration.dart';
+import 'package:budget_bites/utils/hydration_notifications.dart';
 import 'package:budget_bites/utils/meal_planning.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
 import 'package:budget_bites/utils/streak_logic.dart';
@@ -33,8 +36,6 @@ import 'package:budget_bites/widgets/quick_log_sheet.dart';
 import 'package:flutter/material.dart';
 
 /// Single source of truth for all shared application data (FR-02).
-/// All shared state lives in [_MainNavigationState] and flows down
-/// via constructors and callbacks.
 class MainNavigation extends StatefulWidget {
   const MainNavigation({
     super.key,
@@ -63,6 +64,14 @@ class _MainNavigationState extends State<MainNavigation> {
   late List<GroceryItem> _grocery;
   late List<PantryItem> _pantry;
   late List<WaterRecord> _waterRecords;
+  int _drinkSequence = 0;
+  HydrationReminder _drinkReminder = const HydrationReminder();
+  Timer? _drinkTimer;
+  late DateTime _reminderAnchor;
+  DateTime? _snoozedUntil;
+  late final VoidCallback _stopDrinkSnoozeListener;
+  ScaffoldFeatureController<MaterialBanner, MaterialBannerClosedReason>?
+  _drinkBanner;
   late List<WasteRecord> _wasteRecords;
   late List<DailyLog> _dailyLogs;
   late List<Achievement> _achievements;
@@ -144,6 +153,15 @@ class _MainNavigationState extends State<MainNavigation> {
     _wasteRecords = List<WasteRecord>.from(mockWasteRecords);
     _dailyLogs = List<DailyLog>.from(mockDailyLogs);
     _achievements = List<Achievement>.from(mockAchievements);
+    _stopDrinkSnoozeListener = listenForDrinkSnooze(_snoozeDrinkReminder);
+  }
+
+  @override
+  void dispose() {
+    _drinkTimer?.cancel();
+    _stopDrinkSnoozeListener();
+    if (_drinkReminder.enabled) clearDrinkNotification();
+    super.dispose();
   }
 
   void _syncMealLog(DateTime date) {
@@ -183,9 +201,7 @@ class _MainNavigationState extends State<MainNavigation> {
   /// (_wasteRecords).
   void _recompute() {
     final today = calendarDay(DateTime.now());
-    final todayWater = _waterRecords
-        .where((w) => sameDay(w.time, today))
-        .fold<int>(0, (sum, w) => sum + w.amountMl);
+    final todayWater = plainWaterMl(drinksOn(_waterRecords, today));
     final todayEatenIds = mealsOnDay(
       _plan,
       today,
@@ -380,6 +396,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
   void _resetData() {
     final previousDarkMode = _profile.darkMode;
+    _setDrinkReminder(const HydrationReminder());
     setState(() {
       _profile = mockUserProfile;
       _meals = List<Meal>.from(mockMeals);
@@ -493,33 +510,173 @@ class _MainNavigationState extends State<MainNavigation> {
   int _lastWaterMl = 250;
 
   void _handleLogWater(int amount) {
-    setState(() => _lastWaterMl = amount);
-    final now = DateTime.now();
-    final waterRecord = WaterRecord(
-      id: 'w_${now.millisecondsSinceEpoch}',
-      amountMl: amount,
-      time: now,
-    );
-
+    if (amount <= 0) return;
+    _lastWaterMl = amount;
     final label = amount == 150
         ? 'Cangkir'
         : (amount == 250 ? 'Gelas' : 'Botol');
-
-    _applyWithUndo(
-      '✓ Minum $amount ml ($label) berhasil dicatat!',
-      () {
-        setState(() {
-          _waterRecords.add(waterRecord);
-          _recompute();
-        });
-      },
-      () {
-        setState(() {
-          _waterRecords.removeWhere((w) => w.id == waterRecord.id);
-          _recompute();
-        });
-      },
+    _addDrink(
+      DrinkCategory.water,
+      amount,
+      message: '✓ Minum $amount ml ($label) berhasil dicatat!',
     );
+  }
+
+  void _addDrink(DrinkCategory category, int amount, {String? message}) {
+    if (amount <= 0) return;
+    final now = DateTime.now();
+    final drink = WaterRecord(
+      id: 'drink_${now.microsecondsSinceEpoch}_${_drinkSequence++}',
+      amountMl: amount,
+      time: now,
+      category: category,
+    );
+    _changeDrink(
+      previous: null,
+      next: drink,
+      message: message ?? '${category.label} $amount ml dicatat',
+    );
+  }
+
+  void _editDrink(WaterRecord updated) {
+    final previous = _waterRecords.where((r) => r.id == updated.id).firstOrNull;
+    if (previous == null || updated.amountMl <= 0) return;
+    _changeDrink(previous: previous, next: updated, message: 'Catatan diubah');
+  }
+
+  void _deleteDrink(String id) {
+    final previous = _waterRecords.where((r) => r.id == id).firstOrNull;
+    if (previous == null) return;
+    _changeDrink(previous: previous, next: null, message: 'Catatan dihapus');
+  }
+
+  void _changeDrink({
+    required WaterRecord? previous,
+    required WaterRecord? next,
+    required String message,
+  }) {
+    final drink = (next ?? previous)!;
+    final changesWater =
+        previous?.category == DrinkCategory.water ||
+        next?.category == DrinkCategory.water;
+    void apply(WaterRecord? record) {
+      setState(() {
+        _waterRecords.removeWhere((r) => r.id == drink.id);
+        if (record != null) _waterRecords.add(record);
+        if (changesWater) _syncPlainWaterLog(drink.time);
+      });
+      if (previous == null && record != null) {
+        _snoozedUntil = null;
+        _clearDrinkReminder();
+      }
+    }
+
+    _applyWithUndo(message, () => apply(next), () => apply(previous));
+  }
+
+  void _syncPlainWaterLog(DateTime day) {
+    final index = _dailyLogs.indexWhere((log) => sameDay(log.date, day));
+    final amount = plainWaterMl(drinksOn(_waterRecords, day));
+    if (index >= 0) {
+      final log = _dailyLogs[index].copyWith(waterMl: amount);
+      if (hasActivity(log)) {
+        _dailyLogs[index] = log;
+      } else {
+        _dailyLogs.removeAt(index);
+      }
+    } else if (amount > 0) {
+      _dailyLogs.add(
+        DailyLog(
+          date: day,
+          waterMl: amount,
+          mealsEaten: const [],
+          wasteLogged: false,
+          noWasteMarked: false,
+        ),
+      );
+    }
+  }
+
+  void _setDrinkReminder(HydrationReminder settings) {
+    setState(() => _drinkReminder = settings);
+    _drinkTimer?.cancel();
+    final now = DateTime.now();
+    _reminderAnchor =
+        drinksOn(_waterRecords, now)
+            .where((record) => !record.time.isAfter(now))
+            .fold<DateTime?>(null, (latest, record) {
+              return latest == null || record.time.isAfter(latest)
+                  ? record.time
+                  : latest;
+            }) ??
+        now;
+    _snoozedUntil = null;
+    _clearDrinkReminder();
+    if (settings.enabled) {
+      _drinkTimer = Timer.periodic(const Duration(seconds: 15), (_) {
+        _checkDrinkReminder();
+      });
+    }
+  }
+
+  void _checkDrinkReminder() {
+    final now = DateTime.now();
+    final settings = _drinkReminder;
+    final score = hydrationScore(drinksOn(_waterRecords, now));
+    final goal = _profile.waterTargetMl;
+    if (_drinkBanner != null &&
+        (!settings.isActiveAt(now) || (settings.smart && score >= goal))) {
+      _clearDrinkReminder();
+    }
+    final anchor = _waterRecords.fold(_reminderAnchor, (latest, drink) {
+      return drink.time.isAfter(latest) && !drink.time.isAfter(now)
+          ? drink.time
+          : latest;
+    });
+    if (!settings.isDue(
+      now: now,
+      anchor: anchor,
+      score: score,
+      goal: goal,
+      snoozedUntil: _snoozedUntil,
+    )) {
+      return;
+    }
+    _snoozedUntil = null;
+    _reminderAnchor = now;
+    _clearDrinkReminder();
+    if (settings.browser) showDrinkNotification();
+    if (settings.sound || settings.alarm) playDrinkSound(alarm: settings.alarm);
+    _drinkBanner = ScaffoldMessenger.of(context).showMaterialBanner(
+      MaterialBanner(
+        leading: const Icon(Icons.notifications_active_outlined),
+        content: const Text('Sudah waktunya mencatat minuman.'),
+        actions: [
+          for (final minutes in [5, 15, 30])
+            TextButton(
+              onPressed: () => _snoozeDrinkReminder(minutes),
+              child: Text('Tunda $minutes mnt'),
+            ),
+          IconButton(
+            onPressed: _clearDrinkReminder,
+            icon: const Icon(Icons.close),
+            tooltip: 'Tutup pengingat',
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _snoozeDrinkReminder(int minutes) {
+    if (!_drinkReminder.enabled) return;
+    _snoozedUntil = DateTime.now().add(Duration(minutes: minutes));
+    _clearDrinkReminder();
+  }
+
+  void _clearDrinkReminder() {
+    _drinkBanner?.close();
+    _drinkBanner = null;
+    clearDrinkNotification();
   }
 
   void _handleQuickMarkMealEaten(PlannedMeal plannedMeal) {
@@ -611,9 +768,7 @@ class _MainNavigationState extends State<MainNavigation> {
     final now = DateTime.now();
     final today = calendarDay(now);
     final todayEntries = mealsOnDay(_plan, today);
-    final todayWater = _waterRecords
-        .where((w) => sameDay(w.time, today))
-        .fold<int>(0, (sum, w) => sum + w.amountMl);
+    final todayWater = plainWaterMl(drinksOn(_waterRecords, today));
 
     unawaited(
       showQuickLogSheet(
@@ -664,9 +819,7 @@ class _MainNavigationState extends State<MainNavigation> {
     final isLoggedToday = todayLog != null && hasActivity(todayLog);
 
     // Current water total for today
-    final todayWater = _waterRecords
-        .where((item) => sameDay(item.time, today))
-        .fold<int>(0, (sum, item) => sum + item.amountMl);
+    final todayWater = plainWaterMl(drinksOn(_waterRecords, today));
 
     // Derive weekly plan cost dynamically from single source of truth (_plan & _meals) (FR-04, FR-13)
     final monday = mondayOf(today);
@@ -808,6 +961,7 @@ class _MainNavigationState extends State<MainNavigation> {
                   (g) => PantryItem(
                     id: 'p_${g.id}_${now.millisecondsSinceEpoch}',
                     name: g.name,
+                    imageAsset: g.imageAsset,
                     category: 'Lainnya',
                     quantity: g.quantity,
                     minQuantity: 0,
@@ -839,33 +993,14 @@ class _MainNavigationState extends State<MainNavigation> {
       _buildAirWaste(
         water: WaterTrackerScreen(
           dailyTargetMl: _profile.waterTargetMl,
-          currentWaterMl: todayWater,
           records: _waterRecords,
-          onAddWater: (amount) {
-            _applyWithUndo(
-              '+$amount ml air berhasil dicatat',
-              () {
-                setState(() {
-                  _waterRecords.add(
-                    WaterRecord(
-                      id: 'w_${DateTime.now().millisecondsSinceEpoch}',
-                      amountMl: amount,
-                      time: DateTime.now(),
-                    ),
-                  );
-                  _recompute();
-                });
-              },
-              () {
-                setState(() {
-                  if (_waterRecords.isNotEmpty) {
-                    _waterRecords.removeLast();
-                  }
-                  _recompute();
-                });
-              },
-            );
-          },
+          onAddDrink: _addDrink,
+          onEditDrink: _editDrink,
+          onDeleteRecord: _deleteDrink,
+          reminder: _drinkReminder,
+          onReminderChanged: _setDrinkReminder,
+          onGoalChanged: (goal) =>
+              _updateProfile(_profile.copyWith(waterTargetMl: goal)),
         ),
         waste: FoodWasteScreen(
           records: _wasteRecords,

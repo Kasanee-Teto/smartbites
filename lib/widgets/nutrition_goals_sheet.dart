@@ -38,6 +38,7 @@ class _NutritionGoalsSheetState extends State<NutritionGoalsSheet> {
       child: Form(
         key: _form,
         child: SingleChildScrollView(
+          padding: const EdgeInsets.only(right: 20),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

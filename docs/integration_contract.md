@@ -24,7 +24,7 @@ Following the PRD principles and the project's technical constraints:
 | **MealDetailScreen** | Jessica | User-supplied recipe/nutrition references and `design.md` | `Meal meal`, `List<String> userAllergies` | optional `void Function(Meal, double) onAddToGrocery`, `void Function(Meal, double) onPlan`, `VoidCallback onBack` | Read-only meal; portion selection stays local |
 | **GroceryScreen** | Gilbert | `smartbites_belanja_pantry/code.html` | `List<GroceryItem> items`, `int weeklyBudget`, optional `Widget? pantryView` | `ValueChanged<String>? onToggleItem`, `ValueChanged<GroceryItem>? onAddItem`, `ValueChanged<String>? onDeleteItem`, `VoidCallback? onClearChecked` | `_grocery`, `_profile.weeklyBudget` |
 | **PantryScreen** | Gilbert | `smartbites_belanja_pantry/code.html` | `List<PantryItem> items` | `ValueChanged<PantryItem>? onAddItem`, `ValueChanged<PantryItem>? onUpdateItem`, `ValueChanged<String>? onDeleteItem` | `_pantry` |
-| **WaterTrackerScreen** | Edbert | `smartbites_air_food_waste/code.html` | `int dailyTargetMl`, `int currentWaterMl`, `List<WaterRecord> records` | `ValueChanged<int>? onAddWater`, `ValueChanged<String>? onDeleteRecord` | `_waterRecords`, `_profile.waterTargetMl` |
+| **WaterTrackerScreen** | Edbert | Supplied hydration gauge and history reference | `int dailyTargetMl`, `List<WaterRecord> records`, `HydrationReminder reminder` | `void Function(DrinkCategory, int)? onAddDrink`, `ValueChanged<WaterRecord>? onEditDrink`, `ValueChanged<String>? onDeleteRecord`, `ValueChanged<HydrationReminder>? onReminderChanged`, `ValueChanged<int>? onGoalChanged` | `_waterRecords`, `_profile.waterTargetMl`, `_drinkReminder` |
 | **FoodWasteScreen** | Edbert | `smartbites_air_food_waste/code.html` | `List<WasteRecord> records`, optional `List<PantryItem> pantryItems`, `List<Meal> recentMeals`, `bool noWasteMarked` | `ValueChanged<WasteRecord>? onAddRecord`, `ValueChanged<String>? onDeleteRecord`, optional `VoidCallback? onMarkNoWaste` | `_wasteRecords`, `_pantry`, `_dailyLogs` |
 | **ProfileScreen** | Edbert | `smartbites_profil_pencapaian/code.html` | `UserProfile profile` | `ValueChanged<UserProfile>? onUpdateProfile`, `VoidCallback? onResetData`, `VoidCallback? onOpenAchievements` | `_profile` |
 | **AchievementsScreen** | Edbert | `smartbites_profil_pencapaian/code.html` | `List<Achievement> achievements`, `int currentStreak` | `VoidCallback? onBack` | `_achievements`, `_dailyLogs` |
@@ -49,6 +49,8 @@ Unified callback signatures wired into `_MainNavigationState`:
 
 Delivered and wired handlers in `_MainNavigationState`:
 - `_handleLogWater`: updates `_waterRecords` and today's `DailyLog.waterMl`, reversible via `_applyWithUndo`.
+- Drink add, edit, and delete operations update the same list by record ID and support undo. Legacy `WaterRecord` instances default to `DrinkCategory.water`. Beranda, Catat Cepat, and the legacy activity log count plain water. Air and its statistics use the signed hydration score from all categories. The score is an application metric based on the requested weights.
+- Air uses the profile's daily goal and passes reminder settings to `_MainNavigationState`. The local timer checks inactivity, active hours, the goal, and snooze. Web delivery uses browser permission and a service worker for notifications and available action buttons. Scheduling runs while the app is open. Drink and reminder state are session-local.
 - `_handleQuickMarkMealEaten`: fully wired to Jessica's `_savePlannedMeal(plannedMeal.copyWith(isEaten: true))`, updating `_plan` and `DailyLog.mealsEaten`.
 - `_handleQuickLogWaste`: logs `WasteRecord` and syncs `DailyLog.wasteLogged = true`, reversible via `_applyWithUndo`.
 - `_handleQuickNoWaste`: sets `DailyLog.noWasteMarked = true` (+1 streak SDG 12.3), reversible via `_applyWithUndo`.
@@ -80,7 +82,7 @@ In Step 7, all placeholder widgets in `HomeScreen` were replaced with the real d
 | **MealCard** | Jessica (Step 6) | `HomeScreen`, `MealPlanScreen` | A meal card with a photo, calories, price, allergen tags, and a checkbox for marking the meal as eaten. |
 | **GroceryItemTile** | Gilbert (Step 7) | `GroceryScreen` | A grocery-list item with a checkbox, quantity, estimated price, and swipe-to-delete interaction. |
 | **PantryItemTile** | Gilbert (Step 7) | `PantryScreen` | A pantry-list item with a visual expiry warning and a restock button. |
-| **WaterProgressCard** | Edbert (Step 8) | `HomeScreen`, `WaterTrackerScreen` | A daily hydration-target visualization with +150 ml, +250 ml, and +500 ml quick-add buttons. |
+| **WaterProgressCard** | Edbert (Step 8) | `HomeScreen` | A daily plain-water visualization with +150 ml, +250 ml, and +500 ml quick-add buttons. |
 | **WasteItemTile** | Edbert (Step 8) | `FoodWasteScreen` | A food-waste history card showing estimated financial loss in Rupiah and the reason for the waste. |
 
 ---
@@ -272,6 +274,25 @@ Vegetarian; untagged meals do not match either dietary filter. 27 listed cook
 recipes have tags. Recipes with ambiguous stock/seasoning and all buy fixtures
 remain untagged. Tags describe sample recipes, not vendor verification,
 certification, allergen safety, or medical suitability.
+
+## Ingredient images (Grocery and Pantry)
+
+`GroceryItem` and `PantryItem` accept an optional `String imageAsset` (default
+`''`). Their `copyWith` methods preserve it when toggling checked state or
+changing quantity. Grocery-to-pantry transfer carries the override into the new
+pantry record; undo restores the original records, including their image paths.
+Shared feature state remains owned by `_MainNavigationState`.
+
+Both tiles resolve empty overrides through `ingredientImageAsset`: lowercase
+item name, replace runs of non-ASCII-alphanumeric characters with underscores,
+trim leading/trailing underscores, then load
+`assets/images/ingredients/<name>.png`. Missing or undecodable assets display a
+fallback icon through the existing `AssetImageWithFallback` widget. Thumbnails
+are decorative; the adjacent item name supplies accessible identification.
+
+See the [ingredient image guide](ingredient_images.md) for
+filenames, overrides, and asset setup. No runtime image selection or uploads are
+introduced, and screen callback signatures are unchanged.
 
 ## 9. Budget Data Consistency and Badge Contract Helpers (FR-04, FR-13, FR-37)
 

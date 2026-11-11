@@ -5,6 +5,7 @@ import 'package:budget_bites/models/user_profile.dart';
 import 'package:budget_bites/utils/app_constants.dart';
 import 'package:budget_bites/utils/formatters.dart';
 import 'package:budget_bites/utils/responsive_breakpoints.dart';
+import 'package:budget_bites/widgets/list_tile_spacing.dart';
 import 'package:budget_bites/widgets/meal_preferences_sheet.dart';
 import 'package:budget_bites/widgets/option_icon.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,8 @@ class ProfileScreen extends StatefulWidget {
   static const int maxBudget = 1000000;
   static const int budgetStep = 10000;
 
-  static const int minWaterMl = 1000;
-  static const int maxWaterMl = 4000;
+  static const int minWaterMl = AppConstants.minWaterTargetMl;
+  static const int maxWaterMl = AppConstants.maxWaterTargetMl;
   static const int waterStepMl = 250;
 
   static const List<String> allergyOptions = [
@@ -328,22 +329,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.emoji_events_outlined),
-            title: const Text('Pencapaian'),
-            subtitle: const Text('Lihat badge dan streak-mu'),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: widget.onOpenAchievements,
+          ListTileSpacing(
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.emoji_events_outlined),
+              title: const Text('Pencapaian'),
+              subtitle: const Text('Lihat badge dan streak-mu'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: widget.onOpenAchievements,
+            ),
           ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text('Mode Gelap'),
-            subtitle: const Text('Ganti tampilan terang atau gelap'),
-            value: profile.darkMode,
-            onChanged: (value) {
-              _update(profile.copyWith(darkMode: value));
-            },
+          ListTileSpacing(
+            child: SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text('Mode Gelap'),
+              subtitle: const Text('Ganti tampilan terang atau gelap'),
+              value: profile.darkMode,
+              onChanged: (value) {
+                _update(profile.copyWith(darkMode: value));
+              },
+            ),
           ),
           const SizedBox(height: AppConstants.spaceSm),
           OutlinedButton.icon(
